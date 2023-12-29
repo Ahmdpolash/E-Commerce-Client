@@ -1,0 +1,53 @@
+import { useState } from "react";
+
+const Home = () => {
+  const [value, setValue] = useState("u");
+  const [values, setValues] = useState("");
+
+  const handleValue = (e) => {
+    setValue(e.target.value);
+  };
+  const handleSeller = (e) => {
+    setValues(e.target.value);
+  };
+
+  console.log(value);
+  console.log(values);
+
+  return (
+    <div>
+      <input
+        onChange={handleValue}
+        type="radio"
+        checked={value === "u"}
+        value="u"
+        name="v"
+        id=""
+      />
+      <input
+        onChange={handleValue}
+        type="radio"
+        checked={value === "s"}
+        value="s"
+        name="v"
+        id=""
+      />
+
+      <br />
+      <label htmlFor="name">Name</label>
+      <input type="text" />
+      <label htmlFor="name">email</label>
+      <input type="text" />
+
+      {value === "s" ? (
+        <input className="border-2" type="text" onChange={handleSeller} />
+      ) : (
+        ""
+      )}
+
+      <button>submit</button>
+    </div>
+  );
+};
+
+export default Home;
