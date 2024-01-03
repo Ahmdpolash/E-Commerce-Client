@@ -2,6 +2,10 @@ import React from "react";
 import Navbar from "../../../Shared/Navbar/Navbar";
 import Banner from "../Banner/Banner";
 import Category from "../Category/Category";
+import Featured from "../Products/Featured";
+import Card from "../Card";
+import Recommended from "../AllProducts/Recommended";
+import Footer from "../../../Shared/Footer/Footer";
 
 // import Card from "./Card";
 
@@ -11,6 +15,10 @@ const Home = () => {
       <Navbar />
       <Banner />
       <Category />
+      <Featured />
+      <Recommended/>
+      <Footer/>
+      {/* <Card/> */}
     </div>
   );
 };

@@ -79,7 +79,7 @@ const Navbar = () => {
               <FaAngleDown />
             </button>
 
-            <div class="absolute left-0   text-[14px]  px-8 text-left py-3 cursor-pointer bg-white border border-gray-300 rounded shadow-md hidden group-hover:block">
+            <div class="absolute left-0  text-[14px]  px-8 text-left py-3 cursor-pointer bg-white border border-gray-300 rounded shadow-md hidden group-hover:block">
               <p class="flex gap-1 mb-2  items-center">
                 <img className="w-[20px]" src={us} alt="" /> English{" "}
               </p>

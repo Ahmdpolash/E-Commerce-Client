@@ -10,16 +10,22 @@ import img2 from "../../../../public/fashion.png";
 import { FaArrowRight } from "react-icons/fa6";
 
 const CustomPrevArrow = ({ onClick }) => (
-    <div className="prev-arrow absolute top-1/2 z-40 transform -translate-y-1/2 left-0" onClick={onClick}>
-      <FiChevronLeft color="red" size={24} />
-    </div>
-  );
-  
-  const CustomNextArrow = ({ onClick }) => (
-    <div className="next-arrow absolute top-1/2 transform -translate-y-1/2 right-3" onClick={onClick}>
-      <FiChevronRight color="red" size={24} />
-    </div>
-  );
+  <div
+    className="prev-arrow absolute top-1/2 z-40 transform -translate-y-1/2 left-0"
+    onClick={onClick}
+  >
+    <FiChevronLeft color="red" size={24} />
+  </div>
+);
+
+const CustomNextArrow = ({ onClick }) => (
+  <div
+    className="next-arrow absolute top-1/2 transform -translate-y-1/2 right-3"
+    onClick={onClick}
+  >
+    <FiChevronRight color="red" size={24} />
+  </div>
+);
 
 const Category = () => {
   const settings = {
@@ -28,6 +34,8 @@ const Category = () => {
     speed: 500,
     slidesToShow: 6, // Set the number of products to show by default
     slidesToScroll: 2,
+    autoplay: false, // Enable autoplay
+    autoplaySpeed: 2000,
 
     autoplaySpeed: 2000,
     responsive: [
@@ -41,6 +49,13 @@ const Category = () => {
       {
         breakpoint: 768, // Adjust breakpoints as needed
         settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 940, // Adjust breakpoints as needed
+        settings: {
           slidesToShow: 4,
           slidesToScroll: 4,
         },
@@ -48,6 +63,13 @@ const Category = () => {
 
       {
         breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+        },
+      },
+      {
+        breakpoint: 1440,
         settings: {
           slidesToShow: 6,
           slidesToScroll: 6,
@@ -61,15 +83,19 @@ const Category = () => {
     <div className="bg-[#F5F0F0] py-4">
       <div className="py-4 px-4 lg:px-16 overflow-hidden">
         {/* <h1 className="font-semibold text-2xl mb-2 uppercase flex gap-2 items-center">Categories <FaArrowRight/> </h1>{" "} */}
-       
+
         <Slider
-          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7"
+          className="grid bg-white px-3 py-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-7"
           {...settings}
         >
           <div>
-            <div className="bg-white hover:border hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
+            <div className="bg-gray-200 hover:border  hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
               <div className="text-center mx-auto">
-                <img className="w-[120px] mx-auto" src={img} alt="" />
+                <img
+                  className="w-[120px] mx-auto duration-300 transition-all hover:scale-110"
+                  src={img}
+                  alt=""
+                />
                 <p className="ml-4 text-gray-600">Mobile & Tablet</p>
               </div>
             </div>
@@ -78,8 +104,14 @@ const Category = () => {
           <div>
             <div className="bg-white hover:border hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
               <div className="text-center mx-auto">
-                <img className="w-[110px]  hover:duration-700 mt-2 mx-auto" src={img2} alt="" />
-                <p className="ml-4 py-2 font-semibold hover:text-red-600 hover:duration-300">Fashion Clothing</p>
+                <img
+                  className="w-[110px]  transition-all hover:scale-110 hover:duration-500 mt-2 mx-auto"
+                  src={img2}
+                  alt=""
+                />
+                <p className="ml-4 py-2 font-semibold hover:text-red-600 hover:duration-300">
+                  Fashion Clothing
+                </p>
               </div>
             </div>
           </div>
@@ -124,12 +156,6 @@ const Category = () => {
             </div>
           </div>
         </Slider>
-        <div className="prev-arrow absolute top-1/2 transform -translate-y-1/2 left-2">
-          <CustomPrevArrow />
-        </div>
-        <div className="next-arrow absolute top-1/2 transform -translate-y-1/2 right-2">
-          <CustomNextArrow />
-        </div>
       </div>
     </div>
   );

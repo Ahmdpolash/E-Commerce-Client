@@ -26,25 +26,17 @@ const Card = ({ defaultImage, hoverImage, productDetails }) => {
           isHovered ? "opacity-2" : "opacity-0"
         } bg-black bg-opacity-70`}
       >
-        {/* Add to Cart icon */}
+        
         <FiShoppingCart className="text-white text-2xl mx-2 cursor-pointer" />
 
-        {/* Add to Bookmarks icon */}
+       
         <FiHeart className="text-white text-2xl mx-2 cursor-pointer" />
 
-        {/* View Details icon */}
         <FiEye className="text-white text-2xl mx-2 cursor-pointer" />
       </div>
 
-      <div className="product-details">
-        {productDetails}
-        {/* Other product details go here */}
-      </div>
+     
 
-      <button type="button" class="bg-indigo-500 ..." disabled>
-        <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>
-        Processing...
-      </button>
     </div>
   );
 };
