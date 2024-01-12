@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Container from "../../Components/Container/Container";
 import { IoMdMenu } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
@@ -30,18 +30,21 @@ const Navbar = () => {
 
   const navList = (
     <>
-      <Link to="/" className="lg:ml-4">
+      <NavLink to="/" className="lg:ml-4">
         Home
-      </Link>
-      <Link to="/about" className="lg:ml-4">
-        About
-      </Link>
-      <Link to="/contact" className="lg:ml-4">
+      </NavLink>
+      <NavLink to="/shop" className="lg:ml-4">
+        Shop
+      </NavLink>
+      <NavLink to="/contact" className="lg:ml-4">
         Contact
-      </Link>
-      <Link to="/services" className="lg:ml-4">
+      </NavLink>
+      <NavLink to="/services" className="lg:ml-4">
         Services
-      </Link>
+      </NavLink>
+      <NavLink to="/services" className="lg:ml-4">
+        Blogs
+      </NavLink>
     </>
   );
 
@@ -55,7 +58,7 @@ const Navbar = () => {
     "Accessories",
   ];
 
-  let user = true;
+  let user = false;
 
   return (
     <div className="">
@@ -149,11 +152,17 @@ const Navbar = () => {
               ) : (
                 <div className="flex items-center gap-2">
                   <FaRegUser className="hover:text-red-400 font-semibold duration-300" />
-                  <Link className="hover:text-red-400 font-semibold duration-300">
+                  <Link
+                    to="/login"
+                    className="hover:text-red-400 font-semibold duration-300"
+                  >
                     Login
                   </Link>
                   <div className="border-r-2  border-gray-300 h-5 flex justify-center items-center mt-2"></div>
-                  <Link className="hover:text-red-400 font-semibold duration-300">
+                  <Link
+                    to="/register"
+                    className="hover:text-red-400 font-semibold duration-300"
+                  >
                     Register
                   </Link>
                 </div>
@@ -201,11 +210,17 @@ const Navbar = () => {
                   <>
                     <FaRegUser className="hover:text-red-400 font-semibold duration-300" />
 
-                    <Link className="hover:text-red-400 font-semibold duration-300">
+                    <Link
+                      to="/login"
+                      className="hover:text-red-400 font-semibold duration-300"
+                    >
                       Login
                     </Link>
                     <div className="border-r-2  border-gray-300 h-5 flex justify-center items-center mt-1"></div>
-                    <Link className="hover:text-red-400 font-semibold duration-300">
+                    <Link
+                      to="/register"
+                      className="hover:text-red-400 font-semibold duration-300"
+                    >
                       Register
                     </Link>
                   </>

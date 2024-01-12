@@ -49,7 +49,7 @@ const Featured = () => {
                     </p>
                   </div>
 
-                  <h3 className="font-semibold text hover:text-red-500 duration-500">
+                  <h3 className="font-semibold  hover:text-red-500 duration-500">
                     Apple AirPods Max Over-Ear Wireless Headphone
                   </h3>
                   <div className="flex items-center gap-1 lg:gap-2 py-1">
@@ -104,7 +104,7 @@ const Featured = () => {
                     </p>
                   </div>
 
-                  <h3 className="font-semibold text hover:text-red-500 duration-500">
+                  <h3 className="font-semibold  hover:text-red-500 duration-500">
                     Apple AirPods Max Over-Ear Wireless Headphone
                   </h3>
                   <div className="flex items-center gap-1 lg:gap-2 py-1">
@@ -159,7 +159,7 @@ const Featured = () => {
                     </p>
                   </div>
 
-                  <h3 className="font-semibold text hover:text-red-500 duration-500">
+                  <h3 className="font-semibold  hover:text-red-500 duration-500">
                     Apple AirPods Max Over-Ear Wireless Headphone
                   </h3>
                   <div className="flex items-center gap-1 lg:gap-2 py-1">
@@ -213,7 +213,7 @@ const Featured = () => {
                     </p>
                   </div>
 
-                  <h3 className="font-semibold text hover:text-red-500 duration-500">
+                  <h3 className="font-semibold  hover:text-red-500 duration-500">
                     Apple AirPods Max Over-Ear Wireless Headphone
                   </h3>
                   <div className="flex items-center gap-1 lg:gap-2 py-1">
@@ -268,7 +268,7 @@ const Featured = () => {
                     </p>
                   </div>
 
-                  <h3 className="font-semibold text hover:text-red-500 duration-500">
+                  <h3 className="font-semibold  hover:text-red-500 duration-500">
                     Apple AirPods Max Over-Ear Wireless Headphone
                   </h3>
                   <div className="flex items-center gap-1 lg:gap-2 py-1">

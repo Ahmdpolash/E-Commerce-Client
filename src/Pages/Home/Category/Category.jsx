@@ -89,7 +89,7 @@ const Category = () => {
           {...settings}
         >
           <div>
-            <div className="bg-gray-200 hover:border  hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
+            <div className="bg-[#f7f0f0] hover:border  hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
               <div className="text-center mx-auto">
                 <img
                   className="w-[120px] mx-auto duration-300 transition-all hover:scale-110"
