@@ -267,7 +267,7 @@ const Navbar = () => {
       </div>
 
       {/* Search menu */}
-      <div className="bg-[#F85606] relative py-2 lg:py-0 text-white">
+      <div className="bg-[#F85606]  lg:block relative py-2 lg:py-0 text-white">
         <div className="flex items-center px-4 lg:px-16 justify-between">
           <div className="hidden md:block lg:block lg:w-3/12">
             <div className="bg-white relative">
@@ -323,7 +323,7 @@ const Navbar = () => {
             />
           </div>
 
-          <div className="flex  lg:hidden items-center gap-2=">
+          <div className="flex lg:hidden items-center gap-2=">
             <input
               type="text"
               className="w-full text-black outline-none placeholder:text-[15px] px-2 py-1"

@@ -8,6 +8,7 @@ import {
   FaArrowRight,
   FaEye,
   FaRegHeart,
+  FaRegStar,
   FaStar,
 } from "react-icons/fa";
 import {
@@ -15,11 +16,13 @@ import {
   FaCartShopping,
   FaCodeCompare,
   FaHeart,
+  FaListUl,
   FaStarHalfStroke,
 } from "react-icons/fa6";
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes } from "react-icons/fa";
 import Slider from "rc-slider";
 import { FaAngleRight } from "react-icons/fa6";
+import { IoGrid } from "react-icons/io5";
 
 import "rc-slider/assets/index.css";
 
@@ -62,15 +65,17 @@ const Shop = () => {
     <div className="bg-[#F6F6F5]">
       <div className="bg-white hidden lg:block h-[250px] my-3 w-full"></div>
       <Container>
-        <div className="grid grid-cols-1 gap-4  lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
           {/* desktop sidebar */}
           <div className="col-span-1 hidden lg:block border-2 bg-white px-5 py-4">
+            {/* categories */}
             <div className="flex justify-between border-b-2 border-gray-200  py-1 items-center">
               <h1 className="text-xl text-gray-600 font-semibold ">
                 Categories
               </h1>
               <h2 className="text-gray-600 font-semibold">Clear</h2>
             </div>
+
             <div className="py-3 space-y-2 pl-1">
               <div className="flex  items-center gap-2">
                 <div>
@@ -202,6 +207,122 @@ const Shop = () => {
                 <h3 className="text-gray-700 text-[17px]">T-Shirt</h3>
               </div>
             </div>
+            {/* categories end*/}
+
+
+            {/* colors */}
+
+            <div className="flex justify-between border-b-2 border-gray-200  py-1 items-center">
+              <h1 className="text-xl text-gray-600 font-semibold ">
+                Colors
+              </h1>
+              <h2 className="text-gray-600 font-semibold">Clear</h2>
+            </div>
+
+            <div className="py-3 space-y-2 pl-1">
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">White</h3>
+              </div>
+              
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Red</h3>
+              </div>
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Blue</h3>
+              </div>
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Green</h3>
+              </div>
+              
+
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Pink</h3>
+              </div>
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Silver</h3>
+              </div>
+            </div>
+
+            {/* colors end */}
+{/* price */}
 
             <h1 className="text-xl mb-3 border-b-2 border-gray-200 py-1 text-[#4b5563] font-semibold">
               Price
@@ -235,23 +356,82 @@ const Shop = () => {
             <button class="px-5 my-3 w-full text-white py-2 text-center rounded bg-[#ef4444] border-gray-400">
               Filter
             </button>
+
+{/* price end */}
+
+{/* rating */}
+            <div>
+              <h1 className="text-xl mb-3 border-b-2 border-gray-200 py-1 text-[#4b5563] font-semibold">
+                Rating
+              </h1>
+              <div className="flex gap-3 mb-2">
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+              </div>
+              <div className="flex gap-3 mb-2">
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+              </div>
+              <div className="flex gap-3 mb-2">
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+              </div>
+              <div className="flex gap-3 mb-2">
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+              </div>
+              <div className="flex gap-3 mb-2">
+                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+              </div>
+              <div className="flex gap-3">
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+              </div>
+            </div>
+
+{/* rating end */}
+
           </div>
           {/* desktop sidebar */}
 
           {/* mobile sidebar */}
           <div className="block relative lg:hidden">
-          <div
-        onClick={handleOpen}
-        className={`bg-[#F85606] cursor-pointer  -left-0 top-[153px] md:top-[172px] z-30 fixed inline hover:bg-black duration-500 px-1 rounded-r-md py-4 text-white ${isOpen ? 'hidden' : ''}`}
-      >
-        <FaAngleRight size={22} />
-      </div>
-      <div
-        onClick={handleClose}
-        className={`bg-[#F85606] cursor-pointer left-[75%] md:left-[360px] top-[153px] md:top-[170px] fixed inline px-1 hover:bg-black duration-500 rounded-r-md py-4 z-50 text-white ${isOpen ? '' : 'hidden'}`}
-      >
-        <FaAngleLeft className="duration-500 ease-in" size={24} />
-      </div>
+            <div
+              onClick={handleOpen}
+              className={`bg-[#F85606] cursor-pointer  -left-0 top-[154px] md:top-[173px] z-30 fixed inline hover:bg-black duration-500 px-1 rounded-r-md py-4 text-white ${
+                isOpen ? "hidden" : ""
+              }`}
+            >
+              <FaAngleRight size={22} />
+            </div>
+
+            <div
+              onClick={handleClose}
+              className={`bg-[#F85606] cursor-pointer left-[75%] md:left-[360px] top-[153px] md:top-[170px] fixed inline px-1 hover:bg-black duration-500 rounded-r-md py-4 z-50 text-white ${
+                isOpen ? "" : "hidden"
+              }`}
+            >
+              <FaAngleLeft className="duration-500 ease-in" size={24} />
+            </div>
 
             <div
               className={`${
@@ -397,18 +577,181 @@ const Shop = () => {
                   <h3 className="text-gray-700 text-[17px]">T-Shirt</h3>
                 </div>
               </div>
+
+
+              <div className="flex justify-between border-b-2 border-gray-200  py-1 items-center">
+              <h1 className="text-xl text-gray-600 font-semibold ">
+                Colors
+              </h1>
+              <h2 className="text-gray-600 font-semibold">Clear</h2>
             </div>
 
+            <div className="py-3 space-y-2 pl-1">
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
 
+                <h3 className="text-gray-700 text-[17px]">White</h3>
+              </div>
+              
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Red</h3>
+              </div>
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Blue</h3>
+              </div>
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Green</h3>
+              </div>
+              
+
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Pink</h3>
+              </div>
+              <div className="flex  items-center gap-2">
+                <div>
+                  <label className="container">
+                    <input type="checkbox" />
+                    <svg className="w-4 h-4" viewBox="0 0 64 64">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+
+                <h3 className="text-gray-700 text-[17px]">Silver</h3>
+              </div>
+            </div>
+
+{/* mobile price */}
+<h1 className="text-xl mb-3 border-b-2 border-gray-200 py-1 text-[#4b5563] font-semibold">
+              Price
+            </h1>
+
+            <div className="px-2 space-y-2 ">
+              <Slider
+                range
+                min={0}
+                max={15500}
+                value={priceRange}
+                onChange={handleSliderChange}
+                className="ml-2"
+                handleStyle={[handleStyle, handleStyle]}
+                trackStyle={[trackStyle, trackStyle]}
+              />
+              <div>
+                <p className="text-gray-500 text-[16px] font-semibold">
+                  Price:{" "}
+                  <span className="text-[#ef4444] font-bold">
+                    {formatPrice(priceRange[0])}
+                  </span>{" "}
+                  to
+                  <span className="text-[#ef4444] font-bold">
+                    {" "}
+                    {formatPrice(priceRange[1])}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <button class="px-5 my-3 w-full text-white py-2 text-center rounded bg-[#ef4444] border-gray-400">
+              Filter
+            </button>
+{/* mobile price end */}
+
+            </div>
           </div>
-          {/* mobile sidebar */}
+          {/* mobile sidebar end */}
 
           <div className="col-span-3 ">
             {/* product header */}
             <div className=" h-[60px] w-full border-2 mb-5 bg-white">
-              <h2 className="font-semibold text-gray-800 text-xl p-4">
-                (13) Products
-              </h2>
+              <div className="flex  items-center px-4 py-3 justify-between">
+                <h2 className="font-semibold text-gray-800 text-[18px] md:text-xl lg:text-xl ">
+                  (13) Products
+                </h2>
+                <div className="flex gap-4 items-center">
+                  <select
+                    className="border outline-none py-1 text-center shadow-md border-gray-300"
+                    name=""
+                  >
+                    <option value="">Sort By</option>
+                    <option value="Hight to Low">Price High to Low</option>
+                    <option value="Low to High">Price Low to High</option>
+                  </select>
+
+                  <span className="bg-gray-200 hidden md:block lg:block border cursor-pointer px-1 py-1">
+                    <IoGrid className=" text-gray-700 text-[21px]" />
+                  </span>
+                  <span className="hidden md:block lg:block cursor-pointer">
+                    <FaListUl className="text-[22px] text-gray-700" />
+                  </span>
+                </div>
+              </div>
             </div>
             {/* product header end */}
 
