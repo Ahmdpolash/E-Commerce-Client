@@ -25,6 +25,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { IoGrid } from "react-icons/io5";
 
 import "rc-slider/assets/index.css";
+import { Link } from "react-router-dom";
 
 const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 15500]); // Initial price range
@@ -63,7 +64,27 @@ const Shop = () => {
 
   return (
     <div className="bg-[#F6F6F5]">
-      <div className="bg-white hidden lg:block h-[250px] my-3 w-full"></div>
+
+      {/* shop banner */}
+      <section className='bg-[url("https://i.ibb.co/cySj5Q2/shop.gif")] h-[150px] md:h-[180px] lg:h-[220px] mt-3 bg-cover bg-no-repeat relative bg-left'>
+        <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
+          <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
+            <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-white">
+              <h2 className="text-3xl font-bold">Shop.my</h2>
+              <div className="flex justify-center items-center gap-2 text-2xl w-full">
+                <Link to="/">Home</Link>
+                <span className="pt-1">
+                  <FaAngleRight />
+                </span>
+                <span>Products</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* shop banner */}
+
       <Container>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
           {/* desktop sidebar */}
@@ -209,13 +230,10 @@ const Shop = () => {
             </div>
             {/* categories end*/}
 
-
             {/* colors */}
 
             <div className="flex justify-between border-b-2 border-gray-200  py-1 items-center">
-              <h1 className="text-xl text-gray-600 font-semibold ">
-                Colors
-              </h1>
+              <h1 className="text-xl text-gray-600 font-semibold ">Colors</h1>
               <h2 className="text-gray-600 font-semibold">Clear</h2>
             </div>
 
@@ -236,7 +254,7 @@ const Shop = () => {
 
                 <h3 className="text-gray-700 text-[17px]">White</h3>
               </div>
-              
+
               <div className="flex  items-center gap-2">
                 <div>
                   <label className="container">
@@ -285,7 +303,6 @@ const Shop = () => {
 
                 <h3 className="text-gray-700 text-[17px]">Green</h3>
               </div>
-              
 
               <div className="flex  items-center gap-2">
                 <div>
@@ -322,7 +339,7 @@ const Shop = () => {
             </div>
 
             {/* colors end */}
-{/* price */}
+            {/* price */}
 
             <h1 className="text-xl mb-3 border-b-2 border-gray-200 py-1 text-[#4b5563] font-semibold">
               Price
@@ -357,59 +374,58 @@ const Shop = () => {
               Filter
             </button>
 
-{/* price end */}
+            {/* price end */}
 
-{/* rating */}
+            {/* rating */}
             <div>
               <h1 className="text-xl mb-3 border-b-2 border-gray-200 py-1 text-[#4b5563] font-semibold">
                 Rating
               </h1>
               <div className="flex gap-3 mb-2">
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
               </div>
               <div className="flex gap-3 mb-2">
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
               <div className="flex gap-3 mb-2">
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
               <div className="flex gap-3 mb-2">
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
               <div className="flex gap-3 mb-2">
-                <FaStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
               <div className="flex gap-3">
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
-                <FaRegStar className="text-[#F6BA00] text-[22px]"/>
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
+                <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
             </div>
 
-{/* rating end */}
-
+            {/* rating end */}
           </div>
           {/* desktop sidebar */}
 
@@ -417,28 +433,29 @@ const Shop = () => {
           <div className="block relative lg:hidden">
             <div
               onClick={handleOpen}
-              className={`bg-[#F85606] cursor-pointer  -left-0 top-[154px] md:top-[173px] z-30 fixed inline hover:bg-black duration-500 px-1 rounded-r-md py-4 text-white ${
+              className={`bg-[#F85606] cursor-pointer  -left-0 top-[180px] md:top-[213px] z-30 fixed inline hover:bg-black duration-500 px-1 rounded-r-md py-4 text-white ${
                 isOpen ? "hidden" : ""
               }`}
             >
               <FaAngleRight size={22} />
             </div>
-
             <div
               onClick={handleClose}
-              className={`bg-[#F85606] cursor-pointer left-[75%] md:left-[360px] top-[153px] md:top-[170px] fixed inline px-1 hover:bg-black duration-500 rounded-r-md py-4 z-50 text-white ${
+              className={`bg-[#F85606] cursor-pointer  left-[75%] md:left-[360px] top-[180px] md:top-[213px] fixed inline px-1 hover:bg-black duration-500 rounded-r-md py-4 z-50 text-white ${
                 isOpen ? "" : "hidden"
               }`}
             >
               <FaAngleLeft className="duration-500 ease-in" size={24} />
             </div>
 
+            
+
             <div
               className={`${
                 isOpen
                   ? "translate-x-0 opacity-100"
                   : "-translate-x-full opacity-0"
-              } top-0 transition-all duration-500 left-0 z-[9999] w-[320px] md:w-[360px] fixed overflow-auto h-full border-r-2 shadow-2xl border-gray-100 p-4 bg-white`}
+              } top-0  transition-all duration-500 left-0 z-[9999] w-[320px] md:w-[360px] fixed overflow-auto h-full border-r-2 shadow-2xl border-gray-100 p-4 bg-white`}
             >
               <div className="flex justify-between border-b-2 border-gray-200  py-1 items-center">
                 <h1 className="text-xl text-gray-600 font-semibold ">
@@ -578,152 +595,151 @@ const Shop = () => {
                 </div>
               </div>
 
-
               <div className="flex justify-between border-b-2 border-gray-200  py-1 items-center">
-              <h1 className="text-xl text-gray-600 font-semibold ">
-                Colors
+                <h1 className="text-xl text-gray-600 font-semibold ">Colors</h1>
+                <h2 className="text-gray-600 font-semibold">Clear</h2>
+              </div>
+
+              <div className="py-3 space-y-2 pl-1">
+                <div className="flex  items-center gap-2">
+                  <div>
+                    <label className="container">
+                      <input type="checkbox" />
+                      <svg className="w-4 h-4" viewBox="0 0 64 64">
+                        <path
+                          d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                          pathLength="575.0541381835938"
+                          class="path"
+                        ></path>
+                      </svg>
+                    </label>
+                  </div>
+
+                  <h3 className="text-gray-700 text-[17px]">White</h3>
+                </div>
+
+                <div className="flex  items-center gap-2">
+                  <div>
+                    <label className="container">
+                      <input type="checkbox" />
+                      <svg className="w-4 h-4" viewBox="0 0 64 64">
+                        <path
+                          d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                          pathLength="575.0541381835938"
+                          class="path"
+                        ></path>
+                      </svg>
+                    </label>
+                  </div>
+
+                  <h3 className="text-gray-700 text-[17px]">Red</h3>
+                </div>
+                <div className="flex  items-center gap-2">
+                  <div>
+                    <label className="container">
+                      <input type="checkbox" />
+                      <svg className="w-4 h-4" viewBox="0 0 64 64">
+                        <path
+                          d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                          pathLength="575.0541381835938"
+                          class="path"
+                        ></path>
+                      </svg>
+                    </label>
+                  </div>
+
+                  <h3 className="text-gray-700 text-[17px]">Blue</h3>
+                </div>
+                <div className="flex  items-center gap-2">
+                  <div>
+                    <label className="container">
+                      <input type="checkbox" />
+                      <svg className="w-4 h-4" viewBox="0 0 64 64">
+                        <path
+                          d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                          pathLength="575.0541381835938"
+                          class="path"
+                        ></path>
+                      </svg>
+                    </label>
+                  </div>
+
+                  <h3 className="text-gray-700 text-[17px]">Green</h3>
+                </div>
+
+                <div className="flex  items-center gap-2">
+                  <div>
+                    <label className="container">
+                      <input type="checkbox" />
+                      <svg className="w-4 h-4" viewBox="0 0 64 64">
+                        <path
+                          d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                          pathLength="575.0541381835938"
+                          class="path"
+                        ></path>
+                      </svg>
+                    </label>
+                  </div>
+
+                  <h3 className="text-gray-700 text-[17px]">Pink</h3>
+                </div>
+                <div className="flex  items-center gap-2">
+                  <div>
+                    <label className="container">
+                      <input type="checkbox" />
+                      <svg className="w-4 h-4" viewBox="0 0 64 64">
+                        <path
+                          d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                          pathLength="575.0541381835938"
+                          class="path"
+                        ></path>
+                      </svg>
+                    </label>
+                  </div>
+
+                  <h3 className="text-gray-700 text-[17px]">Silver</h3>
+                </div>
+              </div>
+
+              {/* mobile price */}
+              <h1 className="text-xl mb-3 border-b-2 border-gray-200 py-1 text-[#4b5563] font-semibold">
+                Price
               </h1>
-              <h2 className="text-gray-600 font-semibold">Clear</h2>
+
+              <div className="px-2 space-y-2 ">
+                <Slider
+                  range
+                  min={0}
+                  max={15500}
+                  value={priceRange}
+                  onChange={handleSliderChange}
+                  className="ml-2"
+                  handleStyle={[handleStyle, handleStyle]}
+                  trackStyle={[trackStyle, trackStyle]}
+                />
+                <div>
+                  <p className="text-gray-500 text-[16px] font-semibold">
+                    Price:{" "}
+                    <span className="text-[#ef4444] font-bold">
+                      {formatPrice(priceRange[0])}
+                    </span>{" "}
+                    to
+                    <span className="text-[#ef4444] font-bold">
+                      {" "}
+                      {formatPrice(priceRange[1])}
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <button class="px-5 my-3 w-full text-white py-2 text-center rounded bg-[#ef4444] border-gray-400">
+                Filter
+              </button>
+              {/* mobile price end */}
             </div>
 
-            <div className="py-3 space-y-2 pl-1">
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
+          
 
-                <h3 className="text-gray-700 text-[17px]">White</h3>
-              </div>
-              
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
 
-                <h3 className="text-gray-700 text-[17px]">Red</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Blue</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Green</h3>
-              </div>
-              
-
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Pink</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Silver</h3>
-              </div>
-            </div>
-
-{/* mobile price */}
-<h1 className="text-xl mb-3 border-b-2 border-gray-200 py-1 text-[#4b5563] font-semibold">
-              Price
-            </h1>
-
-            <div className="px-2 space-y-2 ">
-              <Slider
-                range
-                min={0}
-                max={15500}
-                value={priceRange}
-                onChange={handleSliderChange}
-                className="ml-2"
-                handleStyle={[handleStyle, handleStyle]}
-                trackStyle={[trackStyle, trackStyle]}
-              />
-              <div>
-                <p className="text-gray-500 text-[16px] font-semibold">
-                  Price:{" "}
-                  <span className="text-[#ef4444] font-bold">
-                    {formatPrice(priceRange[0])}
-                  </span>{" "}
-                  to
-                  <span className="text-[#ef4444] font-bold">
-                    {" "}
-                    {formatPrice(priceRange[1])}
-                  </span>
-                </p>
-              </div>
-            </div>
-            <button class="px-5 my-3 w-full text-white py-2 text-center rounded bg-[#ef4444] border-gray-400">
-              Filter
-            </button>
-{/* mobile price end */}
-
-            </div>
           </div>
           {/* mobile sidebar end */}
 
