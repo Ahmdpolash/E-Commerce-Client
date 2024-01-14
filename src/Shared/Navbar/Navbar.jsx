@@ -22,10 +22,20 @@ import logo from "../../../public/logo2.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
 
   const toggleMenu = () => {
     setOpen(!open);
+  };
+
+  const handleOpen = () => {
+    setOpenCart(true);
+    console.log("hello");
+  };
+
+  const handleClose = () => {
+    setOpenCart(false);
   };
 
   const navList = (
@@ -70,9 +80,12 @@ const Navbar = () => {
           </p>
         </div>
         <div className="flex mx-auto md:mx-auto lg:mx-0 gap-2">
-          <p className="flex  gap-1 ml-2  border rounded-full cursor-pointer hover:border-red-500 duration-300 text-[14px] font-semibold items-center  border-gray-400 px-2">
+          <Link
+            to="/sellerLogin"
+            className="flex py-1 gap-1 ml-4  border rounded-full cursor-pointer hover:border-red-500 duration-300 text-[14px] font-semibold items-center  border-gray-400 px-2"
+          >
             <FaRegUser /> Seller Login
-          </p>
+          </Link>
 
           <div className="border-r-2 border-gray-300 h-7 flex justify-center items-center mt-2"></div>
 
@@ -148,7 +161,7 @@ const Navbar = () => {
             </div>
             <div className="hidden lg:block">
               {user ? (
-                "user ase"
+                "user available"
               ) : (
                 <div className="flex items-center gap-2">
                   <FaRegUser className="hover:text-red-400 font-semibold duration-300" />
@@ -241,19 +254,22 @@ const Navbar = () => {
 
             {/* Main menu */}
             <div className="flex gap-5 items-center">
-              <div className="bg-gray-200 hidden relative lg:block px-2 py-2 rounded-full">
+              <div className="bg-gray-200 hidden cursor-pointer relative lg:block px-2 py-2 rounded-full">
                 <FaArrowRightArrowLeft className="text-[21px] text-[#EE5544] font-bold" />
                 <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
                   0
                 </span>
               </div>
-              <div className="bg-gray-200 hidden relative lg:block px-2 py-2 rounded-full">
+              <div className="bg-gray-200 cursor-pointer hidden relative lg:block px-2 py-2 rounded-full">
                 <FaHeart className="text-[22px] text-[#EE5544] font-bold" />
                 <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
                   0
                 </span>
               </div>
-              <div className="bg-gray-200 px-2 py-2 relative rounded-full">
+              <div
+                onClick={handleOpen}
+                className="bg-gray-200 cursor-pointer px-2 py-2 relative rounded-full"
+              >
                 <BsCartCheckFill className="text-[22px]  text-[#EE5544] font-bold" />
 
                 <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
@@ -261,6 +277,48 @@ const Navbar = () => {
                 </span>
               </div>
             </div>
+
+            {/* add to cart drawer */}
+
+            <div
+              className={`${
+                openCart
+                  ? "-translate-x-0 opacity-100"
+                  : "translate-x-full opacity-0"
+              }  transition-all duration-500 z-[9999] border-l-2 border-gray-100 shadow-lg backdrop-blur-sm transform h-full w-[320px] md:w-[390px] bg-white text-black fixed top-0 right-0`}
+            >
+              {/* if length 0 */}
+              <div className="absolute mt-[55%]  left-[28%] ">
+                <img
+                  className="w-[120px] mx-auto"
+                  src="https://img.freepik.com/free-vector/sale-full-shopping-cart-red-pictogram_1284-8505.jpg?size=626&ext=jpg&ga=GA1.1.507178097.1703095808&semt=ais"
+                  alt=""
+                />
+                <p>Your cart is now Empty</p>
+              </div>
+              {/* if length 0 */}
+
+              {/* bottom btn */}
+
+              <div className="absolute bottom-1 w-full flex gap-2">
+                <button className="bg-[#FE2424] text-white w-1/2 rounded-t-md py-2">
+                  Checkout
+                </button>
+                <button className="bg-[#FE2424] text-white w-1/2 rounded-t-md py-2">
+                  View Details
+                </button>
+              </div>
+              {/* bottom btn */}
+
+              <button
+                className="px-4 text-[#FE2424] py-2 text-3xl font-semibold flex absolute left-0 top-1 mt-2"
+                onClick={handleClose}
+              >
+                <RxCross1 />
+              </button>
+            </div>
+            {/* add to cart drawer end*/}
+
             {/* Main menu */}
           </div>
         </div>

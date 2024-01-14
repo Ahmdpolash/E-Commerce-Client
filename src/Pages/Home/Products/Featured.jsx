@@ -15,6 +15,7 @@ import {
   FaStarHalfStroke,
 } from "react-icons/fa6";
 import '../../Shop/shop.css'
+import { Link } from "react-router-dom";
 
 const Featured = () => {
   return (
@@ -32,7 +33,7 @@ const Featured = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
 
-            <div>
+            <Link to='/details'>
               <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
                 <img
                   className="mx-auto w-[160px] md:w-[180px] lg:w-[200px] transition-opacity hover:duration-700 ease-in-out"
@@ -156,7 +157,7 @@ const Featured = () => {
                   <FaCartShopping className="text-red-500 hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
                 </div>
               </div>
-            </div>
+            </Link>
             <div>
               <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
                 <img
