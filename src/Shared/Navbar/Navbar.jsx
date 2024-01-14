@@ -143,7 +143,7 @@ const Navbar = () => {
                     Select Category
                   </option>
                   {category.map((c, i) => (
-                    <option value={c}>{c}</option>
+                    <option key={c} value={c}>{c}</option>
                   ))}
                 </select>
                 <div className="border-r-2 ml-2 border-gray-300 h-7 flex justify-center items-center mt-2"></div>
