@@ -21,6 +21,7 @@ import { FaHeart } from "react-icons/fa";
 import logo from "../../../public/logo2.png";
 
 const Navbar = () => {
+  
   const [open, setOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);

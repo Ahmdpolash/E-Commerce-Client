@@ -13,11 +13,14 @@ import {
 import { IoCartOutline } from "react-icons/io5";
 import { MdVerified } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
+
 import RelatedProduct from "./RelatedProduct";
+import Review from "./Review";
+import Description from "./Description";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
+  const [state, setState] = useState("reviews");
 
   let available = 6;
 
@@ -45,7 +48,7 @@ const ProductDetails = () => {
   const colors = ["primary"];
 
   return (
-    <div className="">
+    <div className=" bg-[#F3F4F6]">
       {/* header */}
       <div className='bg-[url("https://github.com/SheikhFarid99/multi-vendor-ecommerce/blob/main/client/public/images/banner/order.jpg?raw=true")] h-[140px] md:h-[180px] lg:h-[210px]  mt-2 bg-cover bg-no-repeat relative bg-left'>
         <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
@@ -66,7 +69,7 @@ const ProductDetails = () => {
       {/* header */}
 
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-7 mt-6 gap-2 lg:gap-7">
+        <div className="grid bg-white grid-cols-1 p-2 lg:grid-cols-7 mt-6 gap-2 lg:gap-7">
           <div className="col-span-2 ">
             <div className=" h-[210px]  ml-3 lg:ml-0 md:h-[280px] lg:h-[410px]  p-4 w-[440px overflow-hidden  border-2 border-gray-100  rounded-xl">
               <img
@@ -233,7 +236,7 @@ const ProductDetails = () => {
           {/* delivery box */}
 
           <div className="col-span-2 mt-2 lg:mt-0">
-            <div className="py-5 px-5 border-2 shadow-lg rounded-md border-gray-300">
+            <div className="py-5 px-5 border-2 shadow-md rounded-md border-gray-200">
               <p className="text-sm text-slate-500">Delivery</p>
               <ul className="space-y-2 mb-4">
                 <li className="text-base flex  gap-2 items-start">
@@ -255,7 +258,10 @@ const ProductDetails = () => {
                       <circle cx="12" cy="10" r="3"></circle>
                     </svg>
                   </span>{" "}
-                  <span>Kurigram, Kurigram - Rangpur, Bangladesh</span>{" "}
+                  {/* products */}
+                  <span>
+                    Kurigram, Kurigram - Rangpur,Road No. 12 - 19, Bangladesh
+                  </span>{" "}
                 </li>
                 <li className="text-base flex  gap-2 items-start">
                   <span>
@@ -448,41 +454,66 @@ const ProductDetails = () => {
         <div>
           {/* tabs */}
 
-          <div className="flex w-full py-3 lg:py-6 justify-center flex-col">
-            <Tabs aria-label="Options">
-              <Tab key="photos" title="Photos">
-                <Card>
-                  <CardBody>
-                    <h1 className="text-red-500">Hello</h1>
-                  </CardBody>
-                </Card>
-              </Tab>
-              <Tab key="music" title="Music">
-                <Card>
-                  <CardBody>
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                    irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur.
-                  </CardBody>
-                </Card>
-              </Tab>
-              <Tab key="videos" title="Videos">
-                <Card>
-                  <CardBody>
-                    Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                  </CardBody>
-                </Card>
-              </Tab>
-            </Tabs>
-          </div>
+          <section className="my-3 bg-white p-4">
+            <div className="grid grid-cols-2 md:grid-cols-3  lg:grid-cols-3 gap-2">
+              <button
+                onClick={() => setState("reviews")}
+                className={`py-1 hover:text-white font-semibold px-5 hover:bg-green-500 ${
+                  state === "reviews"
+                    ? "bg-green-500 text-white"
+                    : "bg-slate-200 text-slate-700"
+                } rounded-sm`}
+              >
+                Reviews
+              </button>
+
+              <button
+                onClick={() => setState("description")}
+                className={`py-1 px-5 hover:text-white font-semibold hover:bg-green-500 ${
+                  state === "description"
+                    ? "bg-green-500 text-white"
+                    : "bg-slate-200  text-slate-700 font-semibold"
+                } rounded-sm`}
+              >
+                Description
+              </button>
+              <button
+                onClick={() => setState("seller")}
+                className={`py-1 px-5 font-semibold hover:text-white hover:bg-green-500 ${
+                  state === "seller"
+                    ? "bg-green-500 text-white"
+                    : "bg-slate-200 text-slate-700"
+                } rounded-sm`}
+              >
+                Seller
+              </button>
+            </div>
+
+            {state === "reviews" && (
+              <div className="py-3 lg:px-8">
+                <Review />
+              </div>
+            )}
+            {state === "description" && (
+              <div className="py-3">
+                <Description />
+              </div>
+            )}
+            {state === "seller" && (
+              <div className="py-3">
+                <Review />
+              </div>
+            )}
+          </section>
+          {/* tabs */}
 
           {/* related product */}
-          <div className=" ">
-            <h1 className="font-semibold text-2xl px-3 border shadow-md mb-2 py-2">Related Product</h1>
+          <div className=" related_product">
+            <h1 className="font-semibold bg-white text-2xl px-3 border shadow-md mb-2 py-2">
+              Related Product
+            </h1>
 
-            <div className="grid bg-gray-100 grid-cols-2 mt-1 md:grid-cols-3 p-3 lg:grid-cols-5 gap-2">
+            <div>
               <RelatedProduct />
             </div>
           </div>

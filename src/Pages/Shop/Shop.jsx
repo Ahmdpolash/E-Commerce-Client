@@ -26,9 +26,14 @@ import { IoGrid } from "react-icons/io5";
 
 import "rc-slider/assets/index.css";
 import { Link } from "react-router-dom";
+import Pagination from "../../Components/Pagination";
 
 const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 15500]); // Initial price range
+
+  // pagination
+  const [pageNumber, setPageNumber] = useState(1);
+  const [perPage, setPerPage] = useState(3);
 
   const formatPrice = (value) => {
     return `$${value}`;
@@ -53,6 +58,7 @@ const Shop = () => {
   };
 
   const [isOpen, setOpen] = useState(false);
+  const [styles, setStyles] = useState("grid");
 
   const handleOpen = () => {
     setOpen(true);
@@ -64,7 +70,6 @@ const Shop = () => {
 
   return (
     <div className="bg-[#F6F6F5]">
-
       {/* shop banner */}
       <section className='bg-[url("https://i.ibb.co/cySj5Q2/shop.gif")] h-[150px] md:h-[180px] lg:h-[220px] mt-3 bg-cover bg-no-repeat relative bg-left'>
         <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
@@ -448,8 +453,6 @@ const Shop = () => {
               <FaAngleLeft className="duration-500 ease-in" size={24} />
             </div>
 
-            
-
             <div
               className={`${
                 isOpen
@@ -736,21 +739,17 @@ const Shop = () => {
               </button>
               {/* mobile price end */}
             </div>
-
-          
-
-
           </div>
           {/* mobile sidebar end */}
 
           <div className="col-span-3 ">
             {/* product header */}
-            <div className=" h-[60px] w-full border-2 mb-5 bg-white">
+            <div className=" lg:h-[60px] w-full border-2 mb-5 bg-white">
               <div className="flex  items-center px-4 py-3 justify-between">
-                <h2 className="font-semibold text-gray-800 text-[18px] md:text-xl lg:text-xl ">
+                <h2 className="font-semibold text-gray-800 text-[16px] md:text-xl lg:text-xl ">
                   (13) Products
                 </h2>
-                <div className="flex gap-4 items-center">
+                <div className="flex gap-2 lg:gap-4 items-center">
                   <select
                     className="border outline-none py-1 text-center shadow-md border-gray-300"
                     name=""
@@ -760,10 +759,21 @@ const Shop = () => {
                     <option value="Low to High">Price Low to High</option>
                   </select>
 
-                  <span className="bg-gray-200 hidden md:block lg:block border cursor-pointer px-1 py-1">
+                  <span
+                    onClick={() => setStyles("grid")}
+                    className={`p-2 ${
+                      styles === "grid" && "bg-slate-300"
+                    } text-slate-600 hover:bg-slate-300 cursor-pointer rounded-sm`}
+                  >
                     <IoGrid className=" text-gray-700 text-[21px]" />
                   </span>
-                  <span className="hidden md:block lg:block cursor-pointer">
+
+                  <span
+                    onClick={() => setStyles("list")}
+                    className={`p-2 ${
+                      styles === "list" && "bg-slate-300"
+                    } text-slate-600 hover:bg-slate-300 cursor-pointer rounded-sm`}
+                  >
                     <FaListUl className="text-[22px] text-gray-700" />
                   </span>
                 </div>
@@ -771,696 +781,172 @@ const Shop = () => {
             </div>
             {/* product header end */}
 
-            {/* product card */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3   w-full ">
-              <div>
-                <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
-                  <img
-                    className="mx-auto w-[160px] md:w-[180px] lg:w-[200px] transition-opacity hover:duration-700 ease-in-out"
-                    src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/48-home_default/the-adventure-begins-framed-poster.jpg"
-                    alt=""
-                  />
-                  <div className="">
-                    <div className="flex gap-1 lg:gap-2 items-center">
-                      <img
-                        className="w-[32px] h-[32px] border rounded-full"
-                        src="https://www.thepixelfreak.co.uk/wp-content/uploads/2019/05/Entwined-M-Logo.png"
-                        alt=""
-                      />
-                      <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
-                        Gadzet Zone
-                      </p>
-                    </div>
+            {/* products */}
+            <div
+              className={`grid  w-full ${
+                styles === "grid"
+                  ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 "
+                  : "grid-cols-1 "
+              } gap-3   `}
+            >
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((d, i) => (
+                <div>
+                  <div
+                    className={` ${
+                      styles === "grid" ? "flex-col" : "flex"
+                    } hover:-translate-y-2  hover:duration-1000  bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3`}
+                  >
+                    <img
+                      className={`${
+                        styles === "grid"
+                          ? "mx-auto w-[160px] md:w-[180px] lg:w-[200px]"
+                          : "mx-0 w-[160px] md:w-[240px] lg:w-[280px]"
+                      }  transition-opacity hover:duration-700 ease-in-out`}
+                      src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/48-home_default/the-adventure-begins-framed-poster.jpg"
+                      alt=""
+                    />
+                    <div
+                      className={`${
+                        styles === "list" &&
+                        "mt-10 md:mt-16 lg:mt-20 items-center"
+                      }`}
+                    >
+                      <div className="flex gap-1 lg:gap-2 items-center">
+                        <img
+                          className="w-[32px] h-[32px] border rounded-full"
+                          src="https://www.thepixelfreak.co.uk/wp-content/uploads/2019/05/Entwined-M-Logo.png"
+                          alt=""
+                        />
+                        <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
+                          Gadzet Zone
+                        </p>
+                      </div>
 
-                    <h3 className="font-semibold hover:text-red-500 duration-500">
-                      Apple AirPods Max Over-Ear
-                    </h3>
-                    <div className="flex items-center gap-1 lg:gap-2 py-1">
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
+                      <h3 className="font-semibold hover:text-red-500 duration-500">
+                        Apple AirPods Max Over-Ear
+                      </h3>
+                      <div className="flex items-center gap-1 lg:gap-2 py-1">
+                        <FaStar className="text-[#F6BA00]" />
+                        <FaStar className="text-[#F6BA00]" />
+                        <FaStar className="text-[#F6BA00]" />
+                        <FaStar className="text-[#F6BA00]" />
 
-                      <FaStarHalfStroke className="text-[#F6BA00]" />
-                      <p>(1)</p>
-                    </div>
+                        <FaStarHalfStroke className="text-[#F6BA00]" />
+                        <p>(1)</p>
+                      </div>
 
-                    <div className="pb-1 flex items-center justify-between">
-                      <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
-                        <FaBangladeshiTakaSign /> 5600
-                      </p>
-                      <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
-                        {" "}
-                        <FaArrowCircleRight className="text-[21px]" />{" "}
-                      </button>
-                      {/* <button className="group-hover:bg-red-500 text-red-500 bg-gray-50 border-2 rounded-full px-2 lg:px-3 text-[13px] font-semibold py-1 lg:py-2 hidden lg:flex   items-center gap-1 group-hover:text-white duration-500">
-                        Add to Cart <FaArrowRight className="mt-1" />
-                      </button> */}
+                      <div className="pb-1 flex items-center justify-between">
+                        <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
+                          <FaBangladeshiTakaSign /> 5600
+                        </p>
+                        <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
+                          {" "}
+                          <FaArrowCircleRight className="text-[21px]" />{" "}
+                        </button>
 
-                      <div className="button bg-gray-50 hidden lg:block border-2 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
-                        <div className="button-wrapper">
-                          <div className="text flex items-center gap-1">
-                            Add To Cart{" "}
-                            <FaArrowRight className="text-[13px] pt-[2px]" />{" "}
+                        <div className="button bg-gray-50 hidden lg:block border-2 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
+                          <div className="button-wrapper">
+                            <div className="text flex items-center gap-1">
+                              Add To Cart{" "}
+                              <FaArrowRight className="text-[13px] pt-[2px]" />{" "}
+                            </div>
+                            <span className="icon">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="bi bi-cart2"
+                                viewBox="0 0 16 16"
+                              >
+                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+                              </svg>
+                            </span>
                           </div>
-                          <span className="icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              className="bi bi-cart2"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
-                            </svg>
-                          </span>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="absolute top-7  right-3 md:right-4 lg:right-5 opacity-0 group-hover:opacity-100 group-hover:block transition-all group-hover:duration-700 transform space-y-3 translate-x-full group-hover:translate-x-0">
-                    <div class="con-like">
-                      <input
-                        className="like"
-                        type="checkbox"
-                        title="Bookmark"
-                      />
-                      <div className="checkmark">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="outline"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="filled"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="100"
-                          width="100"
-                          className="celebrate"
-                        >
-                          <polygon
-                            className="poly"
-                            points="10,10 20,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="10,50 20,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="20,80 30,70"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,10 80,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,50 80,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="80,80 70,70"
-                          ></polygon>
-                        </svg>
-                      </div>
-                    </div>
-
-                    <FaEye className="text-red-500 text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCodeCompare className="text-red-500 hover:rotate-[360deg] hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCartShopping className="text-red-500 hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
-                  <img
-                    className="mx-auto w-[160px] md:w-[180px] lg:w-[200px] transition-opacity hover:duration-700 ease-in-out"
-                    src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/48-home_default/the-adventure-begins-framed-poster.jpg"
-                    alt=""
-                  />
-                  <div className="">
-                    <div className="flex gap-1 lg:gap-2 items-center">
-                      <img
-                        className="w-[32px] h-[32px] border rounded-full"
-                        src="https://www.thepixelfreak.co.uk/wp-content/uploads/2019/05/Entwined-M-Logo.png"
-                        alt=""
-                      />
-                      <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
-                        Gadzet Zone
-                      </p>
-                    </div>
-
-                    <h3 className="font-semibold hover:text-red-500 duration-500">
-                      Apple AirPods Max Over-Ear
-                    </h3>
-                    <div className="flex items-center gap-1 lg:gap-2 py-1">
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-
-                      <FaStarHalfStroke className="text-[#F6BA00]" />
-                      <p>(1)</p>
-                    </div>
-
-                    <div className="pb-1 flex items-center justify-between">
-                      <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
-                        <FaBangladeshiTakaSign /> 5600
-                      </p>
-                      <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
-                        {" "}
-                        <FaArrowCircleRight className="text-[21px]" />{" "}
-                      </button>
-                      {/* <button className="group-hover:bg-red-500 text-red-500 bg-gray-50 border-2 rounded-full px-2 lg:px-3 text-[13px] font-semibold py-1 lg:py-2 hidden lg:flex   items-center gap-1 group-hover:text-white duration-500">
-                        Add to Cart <FaArrowRight className="mt-1" />
-                      </button> */}
-
-                      <div className="button bg-gray-50 hidden lg:block border-2 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
-                        <div className="button-wrapper">
-                          <div className="text flex items-center gap-1">
-                            Add To Cart{" "}
-                            <FaArrowRight className="text-[13px] pt-[2px]" />{" "}
-                          </div>
-                          <span className="icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              className="bi bi-cart2"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
-                            </svg>
-                          </span>
+                    <div className="absolute top-7  right-3 md:right-4 lg:right-5 opacity-0 group-hover:opacity-100 group-hover:block transition-all group-hover:duration-1000 transform space-y-3 translate-x-full group-hover:translate-x-0">
+                      <div class="con-like">
+                        <input
+                          className="like"
+                          type="checkbox"
+                          title="Bookmark"
+                        />
+                        <div className="checkmark">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="outline"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="filled"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="100"
+                            width="100"
+                            className="celebrate"
+                          >
+                            <polygon
+                              className="poly"
+                              points="10,10 20,20"
+                            ></polygon>
+                            <polygon
+                              className="poly"
+                              points="10,50 20,50"
+                            ></polygon>
+                            <polygon
+                              className="poly"
+                              points="20,80 30,70"
+                            ></polygon>
+                            <polygon
+                              className="poly"
+                              points="90,10 80,20"
+                            ></polygon>
+                            <polygon
+                              className="poly"
+                              points="90,50 80,50"
+                            ></polygon>
+                            <polygon
+                              className="poly"
+                              points="80,80 70,70"
+                            ></polygon>
+                          </svg>
                         </div>
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="absolute top-7  right-3 md:right-4 lg:right-5 opacity-0 group-hover:opacity-100 group-hover:block transition-all group-hover:duration-700 transform space-y-3 translate-x-full group-hover:translate-x-0">
-                    <div class="con-like">
-                      <input
-                        className="like"
-                        type="checkbox"
-                        title="Bookmark"
-                      />
-                      <div className="checkmark">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="outline"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="filled"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="100"
-                          width="100"
-                          className="celebrate"
-                        >
-                          <polygon
-                            className="poly"
-                            points="10,10 20,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="10,50 20,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="20,80 30,70"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,10 80,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,50 80,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="80,80 70,70"
-                          ></polygon>
-                        </svg>
-                      </div>
+                      <FaEye className="text-red-500 text-[20px] md:text-[22px] lg:text-[24px]" />
+                      <FaCodeCompare className="text-red-500 hover:rotate-[360deg] hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
+                      <FaCartShopping className="text-red-500 hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
                     </div>
-
-                    <FaEye className="text-red-500 text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCodeCompare className="text-red-500 hover:rotate-[360deg] hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCartShopping className="text-red-500 hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
                   </div>
                 </div>
-              </div>
-              <div>
-                <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
-                  <img
-                    className="mx-auto w-[160px] md:w-[180px] lg:w-[200px] transition-opacity hover:duration-700 ease-in-out"
-                    src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/48-home_default/the-adventure-begins-framed-poster.jpg"
-                    alt=""
-                  />
-                  <div className="">
-                    <div className="flex gap-1 lg:gap-2 items-center">
-                      <img
-                        className="w-[32px] h-[32px] border rounded-full"
-                        src="https://www.thepixelfreak.co.uk/wp-content/uploads/2019/05/Entwined-M-Logo.png"
-                        alt=""
-                      />
-                      <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
-                        Gadzet Zone
-                      </p>
-                    </div>
-
-                    <h3 className="font-semibold hover:text-red-500 duration-500">
-                      Apple AirPods Max Over-Ear
-                    </h3>
-                    <div className="flex items-center gap-1 lg:gap-2 py-1">
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-
-                      <FaStarHalfStroke className="text-[#F6BA00]" />
-                      <p>(1)</p>
-                    </div>
-
-                    <div className="pb-1 flex items-center justify-between">
-                      <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
-                        <FaBangladeshiTakaSign /> 5600
-                      </p>
-                      <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
-                        {" "}
-                        <FaArrowCircleRight className="text-[21px]" />{" "}
-                      </button>
-                      {/* <button className="group-hover:bg-red-500 text-red-500 bg-gray-50 border-2 rounded-full px-2 lg:px-3 text-[13px] font-semibold py-1 lg:py-2 hidden lg:flex   items-center gap-1 group-hover:text-white duration-500">
-                        Add to Cart <FaArrowRight className="mt-1" />
-                      </button> */}
-
-                      <div className="button bg-gray-50 hidden lg:block border-2 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
-                        <div className="button-wrapper">
-                          <div className="text flex items-center gap-1">
-                            Add To Cart{" "}
-                            <FaArrowRight className="text-[13px] pt-[2px]" />{" "}
-                          </div>
-                          <span className="icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              className="bi bi-cart2"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="absolute top-7  right-3 md:right-4 lg:right-5 opacity-0 group-hover:opacity-100 group-hover:block transition-all group-hover:duration-700 transform space-y-3 translate-x-full group-hover:translate-x-0">
-                    <div class="con-like">
-                      <input
-                        className="like"
-                        type="checkbox"
-                        title="Bookmark"
-                      />
-                      <div className="checkmark">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="outline"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="filled"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="100"
-                          width="100"
-                          className="celebrate"
-                        >
-                          <polygon
-                            className="poly"
-                            points="10,10 20,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="10,50 20,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="20,80 30,70"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,10 80,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,50 80,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="80,80 70,70"
-                          ></polygon>
-                        </svg>
-                      </div>
-                    </div>
-
-                    <FaEye className="text-red-500 text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCodeCompare className="text-red-500 hover:rotate-[360deg] hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCartShopping className="text-red-500 hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
-                  <img
-                    className="mx-auto w-[160px] md:w-[180px] lg:w-[200px] transition-opacity hover:duration-700 ease-in-out"
-                    src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/48-home_default/the-adventure-begins-framed-poster.jpg"
-                    alt=""
-                  />
-                  <div className="">
-                    <div className="flex gap-1 lg:gap-2 items-center">
-                      <img
-                        className="w-[32px] h-[32px] border rounded-full"
-                        src="https://www.thepixelfreak.co.uk/wp-content/uploads/2019/05/Entwined-M-Logo.png"
-                        alt=""
-                      />
-                      <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
-                        Gadzet Zone
-                      </p>
-                    </div>
-
-                    <h3 className="font-semibold hover:text-red-500 duration-500">
-                      Apple AirPods Max Over-Ear
-                    </h3>
-                    <div className="flex items-center gap-1 lg:gap-2 py-1">
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-
-                      <FaStarHalfStroke className="text-[#F6BA00]" />
-                      <p>(1)</p>
-                    </div>
-
-                    <div className="pb-1 flex items-center justify-between">
-                      <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
-                        <FaBangladeshiTakaSign /> 5600
-                      </p>
-                      <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
-                        {" "}
-                        <FaArrowCircleRight className="text-[21px]" />{" "}
-                      </button>
-                      {/* <button className="group-hover:bg-red-500 text-red-500 bg-gray-50 border-2 rounded-full px-2 lg:px-3 text-[13px] font-semibold py-1 lg:py-2 hidden lg:flex   items-center gap-1 group-hover:text-white duration-500">
-                        Add to Cart <FaArrowRight className="mt-1" />
-                      </button> */}
-
-                      <div className="button bg-gray-50 hidden lg:block border-2 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
-                        <div className="button-wrapper">
-                          <div className="text flex items-center gap-1">
-                            Add To Cart{" "}
-                            <FaArrowRight className="text-[13px] pt-[2px]" />{" "}
-                          </div>
-                          <span className="icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              className="bi bi-cart2"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="absolute top-7  right-3 md:right-4 lg:right-5 opacity-0 group-hover:opacity-100 group-hover:block transition-all group-hover:duration-700 transform space-y-3 translate-x-full group-hover:translate-x-0">
-                    <div class="con-like">
-                      <input
-                        className="like"
-                        type="checkbox"
-                        title="Bookmark"
-                      />
-                      <div className="checkmark">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="outline"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="filled"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="100"
-                          width="100"
-                          className="celebrate"
-                        >
-                          <polygon
-                            className="poly"
-                            points="10,10 20,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="10,50 20,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="20,80 30,70"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,10 80,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,50 80,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="80,80 70,70"
-                          ></polygon>
-                        </svg>
-                      </div>
-                    </div>
-
-                    <FaEye className="text-red-500 text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCodeCompare className="text-red-500 hover:rotate-[360deg] hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCartShopping className="text-red-500 hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
-                  <img
-                    className="mx-auto w-[160px] md:w-[180px] lg:w-[200px] transition-opacity hover:duration-700 ease-in-out"
-                    src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/48-home_default/the-adventure-begins-framed-poster.jpg"
-                    alt=""
-                  />
-                  <div className="">
-                    <div className="flex gap-1 lg:gap-2 items-center">
-                      <img
-                        className="w-[32px] h-[32px] border rounded-full"
-                        src="https://www.thepixelfreak.co.uk/wp-content/uploads/2019/05/Entwined-M-Logo.png"
-                        alt=""
-                      />
-                      <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
-                        Gadzet Zone
-                      </p>
-                    </div>
-
-                    <h3 className="font-semibold hover:text-red-500 duration-500">
-                      Apple AirPods Max Over-Ear
-                    </h3>
-                    <div className="flex items-center gap-1 lg:gap-2 py-1">
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-                      <FaStar className="text-[#F6BA00]" />
-
-                      <FaStarHalfStroke className="text-[#F6BA00]" />
-                      <p>(1)</p>
-                    </div>
-
-                    <div className="pb-1 flex items-center justify-between">
-                      <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
-                        <FaBangladeshiTakaSign /> 5600
-                      </p>
-                      <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
-                        {" "}
-                        <FaArrowCircleRight className="text-[21px]" />{" "}
-                      </button>
-                      {/* <button className="group-hover:bg-red-500 text-red-500 bg-gray-50 border-2 rounded-full px-2 lg:px-3 text-[13px] font-semibold py-1 lg:py-2 hidden lg:flex   items-center gap-1 group-hover:text-white duration-500">
-                        Add to Cart <FaArrowRight className="mt-1" />
-                      </button> */}
-
-                      <div className="button bg-gray-50 hidden lg:block border-2 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
-                        <div className="button-wrapper">
-                          <div className="text flex items-center gap-1">
-                            Add To Cart{" "}
-                            <FaArrowRight className="text-[13px] pt-[2px]" />{" "}
-                          </div>
-                          <span className="icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              className="bi bi-cart2"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="absolute top-7  right-3 md:right-4 lg:right-5 opacity-0 group-hover:opacity-100 group-hover:block transition-all group-hover:duration-700 transform space-y-3 translate-x-full group-hover:translate-x-0">
-                    <div class="con-like">
-                      <input
-                        className="like"
-                        type="checkbox"
-                        title="Bookmark"
-                      />
-                      <div className="checkmark">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="outline"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="filled"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="100"
-                          width="100"
-                          className="celebrate"
-                        >
-                          <polygon
-                            className="poly"
-                            points="10,10 20,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="10,50 20,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="20,80 30,70"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,10 80,20"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="90,50 80,50"
-                          ></polygon>
-                          <polygon
-                            className="poly"
-                            points="80,80 70,70"
-                          ></polygon>
-                        </svg>
-                      </div>
-                    </div>
-
-                    <FaEye className="text-red-500 text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCodeCompare className="text-red-500 hover:rotate-[360deg] hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                    <FaCartShopping className="text-red-500 hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
 
-            {/* product card  end*/}
+            {/* products end */}
+
 
             {/* ============================================== */}
 
             {/* pagination */}
 
             <div className="mt-5 mb-4">
-              <div className="flex">
-                <a
-                  href="#"
-                  className="mx-1 px-3 py-2 bg-gray-200 text-gray-500 font-medium rounded-md cursor-not-allowed"
-                >
-                  Previous
-                </a>
-                <a
-                  href="#"
-                  className="mx-1 px-3 py-2 bg-gray-200 text-gray-700 font-medium hover:bg-blue-500 hover:text-gray-200 rounded-md"
-                >
-                  1
-                </a>
-                <a
-                  href="#"
-                  className="mx-1 px-3 py-2 bg-gray-200 text-gray-700 font-medium hover:bg-blue-500 hover:text-gray-200 rounded-md"
-                >
-                  2
-                </a>
-                <a
-                  href="#"
-                  className="mx-1 px-3 py-2 bg-gray-200 text-gray-700 font-medium hover:bg-blue-500 hover:text-gray-200 rounded-md"
-                >
-                  3
-                </a>
-                <a
-                  href="#"
-                  className="mx-1 px-3 py-2 bg-gray-200 text-gray-700 font-medium hover:bg-blue-500 hover:text-gray-200 rounded-md"
-                >
-                  Next
-                </a>
-              </div>
+              <Pagination
+                pageNumber={pageNumber}
+                setPageNumber={setPageNumber}
+                totalItem={20}
+                parPage={perPage}
+                showItem={Math.floor(20 / 3)}
+              />
             </div>
             {/* pagination end */}
           </div>
