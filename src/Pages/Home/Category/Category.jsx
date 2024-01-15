@@ -11,19 +11,19 @@ import { FaArrowRight } from "react-icons/fa6";
 
 const CustomPrevArrow = ({ onClick }) => (
   <div
-    className="prev-arrow absolute top-1/2 z-40 transform -translate-y-1/2 left-0"
+    className="prev-arrow absolute bg-red-500 rounded-full top-1/2 z-40 transform -translate-y-1/2 left-0"
     onClick={onClick}
   >
-    <FiChevronLeft color="red" size={24} />
+    <FiChevronLeft color="white" size={24} />
   </div>
 );
 
 const CustomNextArrow = ({ onClick }) => (
   <div
-    className="next-arrow absolute top-1/2 transform -translate-y-1/2 right-3"
+    className="next-arrow absolute bg-red-500 rounded-full top-1/2 transform -translate-y-1/2 right-3"
     onClick={onClick}
   >
-    <FiChevronRight color="red" size={24} />
+    <FiChevronRight color="white" size={24} />
   </div>
 );
 
@@ -89,7 +89,7 @@ const Category = () => {
           {...settings}
         >
           <div>
-            <div className="bg-[#f7f0f0] hover:border  hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
+            <div className="bg-[#fff] hover:border  hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
               <div className="text-center mx-auto">
                 <img
                   className="w-[120px] mx-auto duration-300 transition-all hover:scale-110"

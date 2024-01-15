@@ -81,10 +81,10 @@ const Navbar = () => {
         </div>
         <div className="flex mx-auto md:mx-auto lg:mx-0 gap-2">
           <Link
-            to="/sellerLogin"
+            to="/sellerRegistration"
             className="flex py-1 gap-1 ml-4  border rounded-full cursor-pointer hover:border-red-500 duration-300 text-[14px] font-semibold items-center  border-gray-400 px-2"
           >
-            <FaRegUser /> Seller Login
+            <FaRegUser /> Seller Registration
           </Link>
 
           <div className="border-r-2 border-gray-300 h-7 flex justify-center items-center mt-2"></div>
@@ -143,7 +143,9 @@ const Navbar = () => {
                     Select Category
                   </option>
                   {category.map((c, i) => (
-                    <option key={c} value={c}>{c}</option>
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
                   ))}
                 </select>
                 <div className="border-r-2 ml-2 border-gray-300 h-7 flex justify-center items-center mt-2"></div>
@@ -245,9 +247,12 @@ const Navbar = () => {
               </ul>
 
               <div className="flex justify-center items-center mx-a">
-                <p className="flex gap-1 ml-2  border rounded-full cursor-pointer hover:border-red-500 duration-300 text-[14px] font-semibold py-3 items-center  border-gray-400 px-4 hover:bg-transparent hover:text-black  bg-black text-white">
-                  <FaRegUser /> Seller Login
-                </p>
+                <Link
+                  to="/sellerRegistration"
+                  className="flex gap-1 ml-2  border rounded-full cursor-pointer hover:border-red-500 duration-300 text-[14px] font-semibold py-3 items-center  border-gray-400 px-4 hover:bg-transparent hover:text-black  bg-black text-white"
+                >
+                  <FaRegUser /> Seller Registration
+                </Link>
               </div>
             </div>
             {/* Mobile menu */}
@@ -255,13 +260,17 @@ const Navbar = () => {
             {/* Main menu */}
             <div className="flex gap-5 items-center">
               <div className="bg-gray-200 hidden cursor-pointer relative lg:block px-2 py-2 rounded-full">
-                <FaArrowRightArrowLeft className="text-[21px] text-[#EE5544] font-bold" />
+                <Link to="/compare">
+                  <FaArrowRightArrowLeft className="text-[21px] text-[#EE5544] font-bold" />
+                </Link>
                 <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
                   0
                 </span>
               </div>
               <div className="bg-gray-200 cursor-pointer hidden relative lg:block px-2 py-2 rounded-full">
-                <FaHeart className="text-[22px] text-[#EE5544] font-bold" />
+                <Link to="/bookmarks">
+                  <FaHeart className="text-[22px] text-[#EE5544] font-bold" />
+                </Link>
                 <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
                   0
                 </span>
@@ -288,7 +297,7 @@ const Navbar = () => {
               }  transition-all duration-500 z-[9999] border-l-2 border-gray-100 shadow-lg backdrop-blur-sm transform h-full w-[320px] md:w-[390px] bg-white text-black fixed top-0 right-0`}
             >
               {/* if length 0 */}
-              <div className="absolute mt-[55%]  left-[28%] ">
+              <div className="absolute mt-[60%] lg:mt-[55%]  left-[28%] ">
                 <img
                   className="w-[120px] mx-auto"
                   src="https://img.freepik.com/free-vector/sale-full-shopping-cart-red-pictogram_1284-8505.jpg?size=626&ext=jpg&ga=GA1.1.507178097.1703095808&semt=ais"
@@ -301,17 +310,17 @@ const Navbar = () => {
               {/* bottom btn */}
 
               <div className="absolute bottom-1 w-full flex gap-2">
-                <button className="bg-[#FE2424] text-white w-1/2 rounded-t-md py-2">
+                <Link to='/cart' className="bg-[#FE2424] text-center text-white w-1/2 rounded-t-md py-3">
+                  View Cart
+                </Link>
+                <Link to='/checkout' className="bg-[#FE2424] text-center text-white w-1/2 rounded-t-md py-3">
                   Checkout
-                </button>
-                <button className="bg-[#FE2424] text-white w-1/2 rounded-t-md py-2">
-                  View Details
-                </button>
+                </Link>
               </div>
               {/* bottom btn */}
 
               <button
-                className="px-4 text-[#FE2424] py-2 text-3xl font-semibold flex absolute left-0 top-1 mt-2"
+                className="px-4 text-[#FE2424] hover:rotate-[180deg] hover:duration-700 transition-all py-2 text-3xl font-semibold flex absolute left-0 top-1 mt-2"
                 onClick={handleClose}
               >
                 <RxCross1 />

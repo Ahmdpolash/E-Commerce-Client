@@ -7,14 +7,17 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
-import SellerLogin from "../Pages/SellerAccount/SellerLogin";
 import SellerRegistration from "../Pages/SellerAccount/SellerRegistration";
+import Bookmarks from "../Pages/Bookmarks/Bookmarks";
+import Compare from "../Pages/Compare/Compare";
+import Cart from "../Pages/Cart/Cart";
+import Checkout from "../Pages/Checkout/Checkout";
 
 const Route = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -29,9 +32,22 @@ const Route = createBrowserRouter([
         element: <ProductDetails />,
       },
       {
-        path: "/sellerLogin",
-        element: <SellerLogin />,
+        path: "/bookmarks",
+        element: <Bookmarks />,
       },
+      {
+        path: "/compare",
+        element: <Compare />,
+      },
+      {
+        path: "/cart",
+        element:<Cart/>
+      },
+      {
+        path: "/checkout",
+        element:<Checkout/>
+      },
+
       {
         path: "/sellerRegistration",
         element: <SellerRegistration />,
@@ -43,7 +59,7 @@ const Route = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/login",
+    path: "/register",
     element: <Register />,
   },
 ]);

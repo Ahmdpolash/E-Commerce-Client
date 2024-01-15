@@ -12,8 +12,9 @@ import {
 } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
 import { MdVerified } from "react-icons/md";
-import { CiTwitter } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
+import RelatedProduct from "./RelatedProduct";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -41,11 +42,12 @@ const ProductDetails = () => {
   ];
 
   const [currentImage, setCurrentImage] = useState(images[0]);
+  const colors = ["primary"];
 
   return (
-    <div>
+    <div className="">
       {/* header */}
-      <div className='bg-[url("https://github.com/SheikhFarid99/multi-vendor-ecommerce/blob/main/client/public/images/banner/order.jpg?raw=true")] h-[120px] md:h-[170px] lg:h-[210px]  mt-2 bg-cover bg-no-repeat relative bg-left'>
+      <div className='bg-[url("https://github.com/SheikhFarid99/multi-vendor-ecommerce/blob/main/client/public/images/banner/order.jpg?raw=true")] h-[140px] md:h-[180px] lg:h-[210px]  mt-2 bg-cover bg-no-repeat relative bg-left'>
         <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
           <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
             <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-white">
@@ -64,9 +66,9 @@ const ProductDetails = () => {
       {/* header */}
 
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-7 mt-6 gap-7">
+        <div className="grid grid-cols-1 lg:grid-cols-7 mt-6 gap-2 lg:gap-7">
           <div className="col-span-2 ">
-            <div className=" h-[210px]  ml-7 lg:ml-0 md:h-[280px] lg:h-[410px]  p-4 w-[440px overflow-hidden  border-2 border-gray-100  rounded-xl">
+            <div className=" h-[210px]  ml-3 lg:ml-0 md:h-[280px] lg:h-[410px]  p-4 w-[440px overflow-hidden  border-2 border-gray-100  rounded-xl">
               <img
                 className="h-full  w-full object-contain "
                 src={currentImage}
@@ -74,7 +76,7 @@ const ProductDetails = () => {
               />
             </div>
 
-            <div className="grid grid-cols-3 ml-7 lg:ml-0 gap-7 lg:gap-3   my-3">
+            <div className="grid grid-cols-3 ml-4 lg:ml-0 gap-4 lg:gap-3   my-3">
               {images?.map((image) => (
                 <button
                   onClick={() => setCurrentImage(image)}
@@ -92,6 +94,7 @@ const ProductDetails = () => {
               ))}
             </div>
           </div>
+
           <div className="col-span-3">
             <div className="space-y-2 border-b-2 py-2 lg:py-4 border-gray-200">
               <h1 className="font-semibold text-xl lg:text-2xl">
@@ -137,7 +140,7 @@ const ProductDetails = () => {
                   <h1 className="font-semibold text-[17px]">Seller/Vendors</h1>
                   <p className="text-[17px] flex items-center gap-1 text-gray-600">
                     Gadget Zone{" "}
-                    <span className="text-green-500 ml-2 mt-1">
+                    <span className="text-green-500 ml-2 lg:mt-1">
                       {" "}
                       <MdVerified className="text-green-600" />{" "}
                     </span>{" "}
@@ -229,7 +232,7 @@ const ProductDetails = () => {
 
           {/* delivery box */}
 
-          <div className="col-span-2">
+          <div className="col-span-2 mt-2 lg:mt-0">
             <div className="py-5 px-5 border-2 shadow-lg rounded-md border-gray-300">
               <p className="text-sm text-slate-500">Delivery</p>
               <ul className="space-y-2 mb-4">
@@ -440,6 +443,49 @@ const ProductDetails = () => {
             </div>
           </div>
           {/* delivery box */}
+        </div>
+
+        <div>
+          {/* tabs */}
+
+          <div className="flex w-full py-3 lg:py-6 justify-center flex-col">
+            <Tabs aria-label="Options">
+              <Tab key="photos" title="Photos">
+                <Card>
+                  <CardBody>
+                    <h1 className="text-red-500">Hello</h1>
+                  </CardBody>
+                </Card>
+              </Tab>
+              <Tab key="music" title="Music">
+                <Card>
+                  <CardBody>
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                    irure dolor in reprehenderit in voluptate velit esse cillum
+                    dolore eu fugiat nulla pariatur.
+                  </CardBody>
+                </Card>
+              </Tab>
+              <Tab key="videos" title="Videos">
+                <Card>
+                  <CardBody>
+                    Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                  </CardBody>
+                </Card>
+              </Tab>
+            </Tabs>
+          </div>
+
+          {/* related product */}
+          <div className=" ">
+            <h1 className="font-semibold text-2xl px-3 border shadow-md mb-2 py-2">Related Product</h1>
+
+            <div className="grid bg-gray-100 grid-cols-2 mt-1 md:grid-cols-3 p-3 lg:grid-cols-5 gap-2">
+              <RelatedProduct />
+            </div>
+          </div>
         </div>
       </Container>
     </div>
