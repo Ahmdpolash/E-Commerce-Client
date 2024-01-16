@@ -1,50 +1,62 @@
 import React, { useState } from "react";
-
 import { FaEye, FaFacebookF } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
 import login from "../../../public/login/login.json";
 import Lottie from "lottie-react";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
 
 const Register = () => {
   const [open, setOpen] = useState(false);
   const [role, setRole] = useState("user");
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    const roleValue = role;
+    const formData = { ...data, role: roleValue };
+    console.log(formData);
+  };
 
   return (
     <div>
       <Helmet>
         <title>Shop.my || Registration</title>
       </Helmet>
-      <div className="bg-[#F1F5F6] flex justify-center  items-center mt-">
-        <div className="w-full justify-center  items-center p-5 lg:p-10">
-          <div className="grid grid-cols-1 items-center relative lg:grid-cols-2  mx-auto bg-white rounded-md">
+      <div className="bg-[#F1F5F6] flex justify-center items-center mt-">
+        <div className="w-full justify-center items-center p-5 lg:p-10">
+          <div className="grid grid-cols-1 items-center relative lg:grid-cols-2 mx-auto bg-white rounded-md">
             <div className="px-8 py-8 ">
               <h2 className="text-center w-full text-2xl text-slate-600 font-bold">
                 Registration{" "}
                 <span className="text-orange-500 font-bold ">Shopp.My</span>
               </h2>
               <div className="relative">
-                <form className="text-slate-600 ">
+                <form
+                  className="text-slate-600"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
                   <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
                     <div className="flex flex-col w-full gap-1 mb-2">
-                      <label htmlFor="email">Name</label>
+                      <label htmlFor="name">Name</label>
                       <input
                         type="text"
                         className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                        id="email"
+                        id="name"
                         name="name"
                         placeholder="Name"
+                        {...register("name", { required: true })}
                       />
                     </div>
                     <div className="flex relative w-full flex-col gap-1 mb-2">
-                      <label htmlFor="password">Image</label>
+                      <label htmlFor="image">Image</label>
                       <input
                         type="file"
-                        className="w-full  px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                        id=""
+                        className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                        id="image"
                         name="image"
+                        {...register("image")}
                       />
                     </div>
                   </div>
@@ -58,16 +70,18 @@ const Register = () => {
                         id="email"
                         name="email"
                         placeholder="email"
+                        {...register("email", { required: true })}
                       />
                     </div>
                     <div className="flex relative w-full flex-col gap-1 mb-2">
                       <label htmlFor="password">Password</label>
                       <input
                         type={open ? "text" : "password"}
-                        className="w-full  px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                        className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                         id="password"
                         name="password"
                         placeholder="password"
+                        {...register("password", { required: true })}
                       />
                       <span
                         onClick={() => setOpen(!open)}
@@ -82,58 +96,62 @@ const Register = () => {
                     <>
                       <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
                         <div className="flex flex-col w-full gap-1 mb-2">
-                          <label htmlFor="email">Shop Name</label>
+                          <label htmlFor="shopName">Shop Name</label>
                           <input
                             type="text"
                             className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                            id="email"
+                            id="shopName"
                             name="shopName"
-                            placeholder="Name"
+                            placeholder="Shop Name"
+                            {...register("shopName", { required: true })}
                           />
                         </div>
                         <div className="flex relative w-full flex-col gap-1 md:gap-2 lg:gap-3 mb-2">
-                          <label htmlFor="password">Shop Logo</label>
+                          <label htmlFor="shopLogo">Shop Logo</label>
                           <input
                             type="file"
-                            className="w-full  px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                            id=""
+                            className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                            id="shopLogo"
                             name="shopLogo"
+                            {...register("shopLogo")}
                           />
                         </div>
                       </div>
                       <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
                         <div className="flex flex-col w-full gap-1 mb-2">
-                          <label htmlFor="email">Address</label>
+                          <label htmlFor="address">Address</label>
                           <input
                             type="text"
                             className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                             id="address"
                             name="address"
-                            placeholder="Name"
+                            placeholder="Address"
+                            {...register("address", { required: true })}
                           />
                         </div>
                         <div className="flex relative w-full flex-col gap-1 mb-2">
-                          <label htmlFor="password">Number</label>
+                          <label htmlFor="number">Number</label>
                           <input
                             type="number"
-                            className="w-full  px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                            id=""
+                            className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                            id="number"
                             name="number"
                             placeholder="+8801XXXXXXXXX"
+                            {...register("number", { required: true })}
                           />
                         </div>
                       </div>
                       <div>
                         <div className="flex relative w-full flex-col gap-1 mb-2">
-                          <label htmlFor="password">Description</label>
+                          <label htmlFor="description">Description</label>
                           <textarea
                             cols="7"
                             rows="7"
                             placeholder="Description"
-                            type="file"
                             className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                            id=""
+                            id="description"
                             name="description"
+                            {...register("description")}
                           />
                         </div>
                       </div>
@@ -147,6 +165,7 @@ const Register = () => {
                         name="role"
                         type="radio"
                         checked={role === "user"}
+                        onChange={() => setRole("user")}
                       />
                       <label
                         className="text-slate-700 font-semibold"
@@ -161,10 +180,11 @@ const Register = () => {
                         name="role"
                         type="radio"
                         checked={role === "seller"}
+                        onChange={() => setRole("seller")}
                       />
                       <label
                         className="text-slate-700 font-semibold"
-                        htmlFor="user"
+                        htmlFor="seller"
                       >
                         I am a seller
                       </label>

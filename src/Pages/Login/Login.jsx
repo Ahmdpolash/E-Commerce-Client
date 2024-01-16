@@ -1,30 +1,40 @@
 import React, { useState } from "react";
-
 import { FaEye, FaFacebookF } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
 import login from "../../../public/login/login.json";
 import Lottie from "lottie-react";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
 
 const Login = () => {
   const [open, setOpen] = useState(false);
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    // Handle form submission logic here
+    console.log(data);
+  };
+
   return (
     <div>
-       <Helmet>
+      <Helmet>
         <title>Shop.my || Login</title>
       </Helmet>
-      <div className="bg-[#F1F5F6] flex  justify-center items-center mt-">
+      <div className="bg-[#F1F5F6] flex justify-center items-center mt-">
         <div className="w-full justify-center items-center p-5 lg:p-10">
           <div className="grid grid-cols-1 relative lg:grid-cols-2 lg:w-[60%] mx-auto bg-white rounded-md">
             <div className="px-8 py-8 ">
               <h2 className="text-center w-full text-2xl text-slate-600 font-bold">
-                Login{" "}
-                <span className="text-orange-500 font-bold ">Shopp.My</span>
+                Login <span className="text-orange-500 font-bold ">Shopp.My</span>
               </h2>
+              
               <div className="relative">
-                <form className="text-slate-600 ">
+                <form
+                  className="text-slate-600"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
                   <div className="flex flex-col gap-1 mb-2">
                     <label htmlFor="email">Email</label>
                     <input
@@ -33,6 +43,7 @@ const Login = () => {
                       id="email"
                       name="email"
                       placeholder="email"
+                      {...register("email", { required: true })}
                     />
                   </div>
                   <div className="flex relative flex-col gap-1 mb-4">
@@ -43,6 +54,7 @@ const Login = () => {
                       id="password"
                       name="password"
                       placeholder="password"
+                      {...register("password", { required: true })}
                     />
                     <span
                       onClick={() => setOpen(!open)}
@@ -81,12 +93,12 @@ const Login = () => {
                   </Link>
                 </p>
               </div>
-              <div className="absolute  lg:block bottom-0 right-0">
-                    <img
-                      src="https://i.ibb.co/bmC91P9/Screenshot-62-removebg-preview.png"
-                      alt=""
-                    />
-                  </div>
+              <div className="absolute lg:block bottom-0 right-0">
+                <img
+                  src="https://i.ibb.co/bmC91P9/Screenshot-62-removebg-preview.png"
+                  alt=""
+                />
+              </div>
             </div>
             <div className="hidden lg:block w-full h-full py-4 pr-4">
               <Lottie className="" animationData={login} />

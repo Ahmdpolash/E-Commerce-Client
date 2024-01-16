@@ -27,6 +27,7 @@ import { IoGrid } from "react-icons/io5";
 import "rc-slider/assets/index.css";
 import { Link } from "react-router-dom";
 import Pagination from "../../Components/Pagination";
+import { Helmet } from "react-helmet";
 
 const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 15500]); // Initial price range
@@ -70,6 +71,9 @@ const Shop = () => {
 
   return (
     <div className="bg-[#F6F6F5]">
+       <Helmet>
+        <title>Shop.my || Shop</title>
+      </Helmet>
       {/* shop banner */}
       <section className='bg-[url("https://i.ibb.co/cySj5Q2/shop.gif")] h-[150px] md:h-[180px] lg:h-[220px] mt-3 bg-cover bg-no-repeat relative bg-left'>
         <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
