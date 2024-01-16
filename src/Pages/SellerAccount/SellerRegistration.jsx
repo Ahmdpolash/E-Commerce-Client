@@ -41,14 +41,16 @@ const SellerRegistration = () => {
         </div>
       </div>
 
-      <Container>
+      <section>
         <div className="bg-[#F1F5F6] flex justify-center items-center mt-">
           <div className="w-full justify-center items-center p-5 lg:p-10">
-            <div className=" relative w-[70%] mx-auto bg-white rounded-md">
-                <h2 className="text-center w-full pt-3 text-2xl text-slate-600 font-bold">
-                  Seller Registration{" "}
-                </h2>
-                  <span className="text-orange-500 text-center mx-auto block font-bold ">Shopp.My</span>
+            <div className=" relative lg:w-[70%] mx-auto bg-white rounded-md">
+              <h2 className="text-center w-full pt-3 text-2xl text-slate-600 font-bold">
+                Seller Registration{" "}
+              </h2>
+              <span className="text-orange-500 text-center mx-auto block font-bold ">
+                Shopp.My
+              </span>
               <div className="px-8 py-4 ">
                 <div className="relative">
                   <form
@@ -164,7 +166,7 @@ const SellerRegistration = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </section>
     </div>
   );
 };

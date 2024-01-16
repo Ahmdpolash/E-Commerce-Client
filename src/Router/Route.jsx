@@ -12,6 +12,9 @@ import Bookmarks from "../Pages/Bookmarks/Bookmarks";
 import Compare from "../Pages/Compare/Compare";
 import Cart from "../Pages/Cart/Cart";
 import Checkout from "../Pages/Checkout/Checkout";
+import Contact from "../Pages/Contact/Contact";
+import Service from "../Pages/Service/Service";
+import Blog from "../Pages/Blog/Blog";
 
 const Route = createBrowserRouter([
   {
@@ -51,6 +54,18 @@ const Route = createBrowserRouter([
       {
         path: "/sellerRegistration",
         element: <SellerRegistration />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/service",
+        element: <Service />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
       },
       {
         path: "/login",
