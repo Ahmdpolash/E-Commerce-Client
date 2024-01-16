@@ -52,16 +52,18 @@ const Route = createBrowserRouter([
         path: "/sellerRegistration",
         element: <SellerRegistration />,
       },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      }
     ],
   },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
+ 
+  ,
 ]);
 
 export default Route;

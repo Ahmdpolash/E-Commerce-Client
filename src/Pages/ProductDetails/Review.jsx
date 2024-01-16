@@ -108,7 +108,7 @@ const Review = () => {
             </div>
             <div className="flex items-center gap-2">
               <img
-                src="https://eshooop.netlify.app/assets/reviewImage2-bef34ef7.jpg"
+                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
                 alt="author/image"
                 class="w-[40px] h-[40px] border rounded-full object-cover"
               />

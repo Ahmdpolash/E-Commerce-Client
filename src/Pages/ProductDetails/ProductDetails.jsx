@@ -17,6 +17,8 @@ import { Link } from "react-router-dom";
 import RelatedProduct from "./RelatedProduct";
 import Review from "./Review";
 import Description from "./Description";
+import SellerInform from "./SellerInform";
+
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -485,7 +487,7 @@ const ProductDetails = () => {
                     : "bg-slate-200 text-slate-700"
                 } rounded-sm`}
               >
-                Seller
+                Seller Information
               </button>
             </div>
 
@@ -501,7 +503,7 @@ const ProductDetails = () => {
             )}
             {state === "seller" && (
               <div className="py-3">
-                <Review />
+                <SellerInform />
               </div>
             )}
           </section>
