@@ -21,7 +21,6 @@ import { FaHeart } from "react-icons/fa";
 import logo from "../../../public/logo2.png";
 
 const Navbar = () => {
-  
   const [open, setOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
@@ -71,6 +70,11 @@ const Navbar = () => {
 
   let user = false;
 
+  const handleNotAvailable = () =>{
+    alert('sorry !! this functionality not added yet 😔');
+  }
+ 
+
   return (
     <div className="">
       {/* Sub Menu */}
@@ -96,12 +100,15 @@ const Navbar = () => {
               <FaAngleDown />
             </button>
 
-            <div class="absolute left-0  text-[14px]  px-8 text-left py-3 cursor-pointer bg-white border border-gray-300 rounded shadow-md hidden group-hover:block">
-              <p class="flex gap-1 mb-2  items-center">
+            <div class="absolute left-0  text-[14px]  w-28 px-2 text-left py-2 h-28 z-[99999999] cursor-pointer bg-white border border-gray-300 rounded shadow-md hidden group-hover:block">
+              <p  onClick={handleNotAvailable} class="flex hover:bg-gray-200 p-1 hover:shadow-md duration-500 gap-2 mb-1 items-center">
                 <img className="w-[20px]" src={us} alt="" /> English{" "}
               </p>
-              <p class="flex gap-1 items-center">
+              <p onClick={handleNotAvailable} class="flex hover:bg-gray-200 p-1 hover:shadow-md duration-500 gap-2 mb-1 items-center">
                 <img className="w-[20px]" src={bd} alt="" /> বাংলা{" "}
+              </p>
+              <p onClick={handleNotAvailable} class="flex hover:bg-gray-200 p-1 hover:shadow-md duration-500 gap-2 mb-1 items-center">
+                <img className="w-[20px]" src={bd} alt="" /> Hindi{" "}
               </p>
             </div>
           </div>
@@ -191,7 +198,7 @@ const Navbar = () => {
                 open
                   ? "translate-x-0 opacity-100"
                   : "-translate-x-full opacity-0"
-              } lg:hidden transition-all duration-500 z-[99999] border border-gray-200 shadow-lg backdrop-blur-sm transform h-full w-[360px] md:w-[390px] bg-white text-black absolute top-0 left-0`}
+              } lg:hidden transition-all duration-500 fixed  z-[99999] border border-gray-200 shadow-lg backdrop-blur-sm transform h-full w-[360px] md:w-[390px] bg-white text-black  top-0 left-0`}
             >
               <div className="flex justify-between">
                 <button
@@ -311,10 +318,16 @@ const Navbar = () => {
               {/* bottom btn */}
 
               <div className="absolute bottom-1 w-full flex gap-2">
-                <Link to='/cart' className="bg-[#FE2424] text-center text-white w-1/2 rounded-t-md py-3">
+                <Link
+                  to="/cart"
+                  className="bg-[#FE2424] text-center text-white w-1/2 rounded-t-md py-3"
+                >
                   View Cart
                 </Link>
-                <Link to='/checkout' className="bg-[#FE2424] text-center text-white w-1/2 rounded-t-md py-3">
+                <Link
+                  to="/checkout"
+                  className="bg-[#FE2424] text-center text-white w-1/2 rounded-t-md py-3"
+                >
                   Checkout
                 </Link>
               </div>
@@ -404,6 +417,24 @@ const Navbar = () => {
         </div>
       </div>
       {/* Search menu */}
+
+      {/* bottom nav */}
+      {/* <div className="fixed block lg:hidden z-50 bottom-0 bg-slate-300 w-full">
+        <div>
+          <ul className="flex items-center justify-between  p-2">
+            <li>
+              <IoMdMenu
+                className="text-3xl cursor-pointer lg:hidden "
+                onClick={toggleMenu}
+              />
+            </li>
+            <li>Home</li>
+            <li>Home</li>
+            <li>Home</li>
+            <li>Home</li>
+          </ul>
+        </div>
+      </div> */}
     </div>
   );
 };

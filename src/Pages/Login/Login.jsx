@@ -22,9 +22,9 @@ const Login = () => {
       <Helmet>
         <title>Shop.my || Login</title>
       </Helmet>
-      <div className="bg-[#F1F5F6] flex justify-center items-center mt-">
+      <div className="bg-[#F1F5F6]   flex justify-center items-center mt-">
         <div className="w-full justify-center items-center p-5 lg:p-10">
-          <div className="grid grid-cols-1 relative lg:grid-cols-2 lg:w-[60%] mx-auto bg-white rounded-md">
+          <div className="grid grid-cols-1 relative lg:grid-cols-2 lg:w-[60%] border shadow-md mx-auto bg-white rounded-md">
             <div className="px-8 py-8 ">
               <h2 className="text-center w-full text-2xl text-slate-600 font-bold">
                 Login <span className="text-orange-500 font-bold ">Shopp.My</span>

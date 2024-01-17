@@ -44,7 +44,7 @@ const SellerRegistration = () => {
       <section>
         <div className="bg-[#F1F5F6] flex justify-center items-center mt-">
           <div className="w-full justify-center items-center p-5 lg:p-10">
-            <div className=" relative lg:w-[70%] mx-auto bg-white rounded-md">
+            <div className=" relative lg:w-[70%] mx-auto border shadow-md bg-white rounded-md">
               <h2 className="text-center w-full pt-3 text-2xl text-slate-600 font-bold">
                 Seller Registration{" "}
               </h2>

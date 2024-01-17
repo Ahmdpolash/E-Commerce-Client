@@ -52,7 +52,7 @@ const ProductDetails = () => {
   return (
     <div className=" bg-[#F3F4F6]">
       {/* header */}
-      <div className='bg-[url("https://github.com/SheikhFarid99/multi-vendor-ecommerce/blob/main/client/public/images/banner/order.jpg?raw=true")] h-[140px] md:h-[180px] lg:h-[210px]  mt-2 bg-cover bg-no-repeat relative bg-left'>
+      <div className='bg-[url("https://github.com/SheikhFarid99/multi-vendor-ecommerce/blob/main/client/public/images/banner/order.jpg?raw=true")] h-[140px] md:h-[180px] lg:h-[240px]  mt-2 bg-cover bg-no-repeat relative bg-left'>
         <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
           <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
             <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-white">
@@ -62,7 +62,7 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      <div className="bg-[#EFF4F9] hidden md:block lg:block h-10 w-full">
+      <div className="bg-[#fff] hidden md:block lg:block h-10 w-full">
         <h2 className="flex gap-2 items-center px-4 py-2 text-gray-500">
           Home <FaAngleRight /> Electronics <FaAngleRight /> LG 22MK600M-B 21.5
           inch IPS Full HD LED Monitor{" "}
