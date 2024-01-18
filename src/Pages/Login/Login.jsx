@@ -14,7 +14,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     // Handle form submission logic here
-    console.log(data);
+    
   };
 
   return (
