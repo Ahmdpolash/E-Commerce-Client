@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Container from "../../Components/Container/Container";
 import {
@@ -48,6 +48,10 @@ const ProductDetails = () => {
 
   const [currentImage, setCurrentImage] = useState(images[0]);
   const colors = ["primary"];
+
+  useEffect(()=>{
+    scroll(0,0)
+  },[])
 
   return (
     <div className=" bg-[#F3F4F6]">

@@ -19,11 +19,13 @@ import us from "../../../public/us.png";
 import { TiSocialFacebook } from "react-icons/ti";
 import { FaHeart } from "react-icons/fa";
 import logo from "../../../public/logo2.png";
+import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
+  const { logOut, user } = useAuth();
 
   const toggleMenu = () => {
     setOpen(!open);
@@ -68,12 +70,15 @@ const Navbar = () => {
     "Accessories",
   ];
 
-  let user = false;
-
-  const handleNotAvailable = () =>{
-    alert('sorry !! this functionality not added yet 😔');
-  }
  
+
+  const handleNotAvailable = () => {
+    alert("sorry !! this functionality not added yet 😔");
+  };
+
+  const handleLogOut =() =>{
+    logOut()
+  }
 
   return (
     <div className="">
@@ -101,13 +106,22 @@ const Navbar = () => {
             </button>
 
             <div class="absolute left-0  text-[14px]  w-28 px-2 text-left py-2 h-28 z-[99999999] cursor-pointer bg-white border border-gray-300 rounded shadow-md hidden group-hover:block">
-              <p  onClick={handleNotAvailable} class="flex hover:bg-gray-200 p-1 hover:shadow-md duration-500 gap-2 mb-1 items-center">
+              <p
+                onClick={handleNotAvailable}
+                class="flex hover:bg-gray-200 p-1 hover:shadow-md duration-500 gap-2 mb-1 items-center"
+              >
                 <img className="w-[20px]" src={us} alt="" /> English{" "}
               </p>
-              <p onClick={handleNotAvailable} class="flex hover:bg-gray-200 p-1 hover:shadow-md duration-500 gap-2 mb-1 items-center">
+              <p
+                onClick={handleNotAvailable}
+                class="flex hover:bg-gray-200 p-1 hover:shadow-md duration-500 gap-2 mb-1 items-center"
+              >
                 <img className="w-[20px]" src={bd} alt="" /> বাংলা{" "}
               </p>
-              <p onClick={handleNotAvailable} class="flex hover:bg-gray-200 p-1 hover:shadow-md duration-500 gap-2 mb-1 items-center">
+              <p
+                onClick={handleNotAvailable}
+                class="flex hover:bg-gray-200 p-1 hover:shadow-md duration-500 gap-2 mb-1 items-center"
+              >
                 <img className="w-[20px]" src={bd} alt="" /> Hindi{" "}
               </p>
             </div>
@@ -171,7 +185,10 @@ const Navbar = () => {
             </div>
             <div className="hidden lg:block">
               {user ? (
-                "user available"
+                <div>
+                  <p className="text-black">{user.displayName}</p>
+                  <p onClick={handleLogOut}>logout</p>
+                </div>
               ) : (
                 <div className="flex items-center gap-2">
                   <FaRegUser className="hover:text-red-400 font-semibold duration-300" />

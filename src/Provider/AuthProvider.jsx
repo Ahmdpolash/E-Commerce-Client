@@ -37,11 +37,11 @@ const AuthProvider = ({ children }) => {
 
   //!updateProfile
 
-  const update = (name, image) => {
+  const update = (image,name) => {
     setLoading(true);
     return updateProfile(auth.currentUser, {
-      displayName: name,
       photoURL: image,
+      displayName: name,
     });
   };
 
@@ -54,6 +54,7 @@ const AuthProvider = ({ children }) => {
   //!observer
   useEffect(() => {
     const subscriber = onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser);
       setUser(currentUser);
       setLoading(false);
     });

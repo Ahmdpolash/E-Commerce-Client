@@ -1,20 +1,48 @@
 import React, { useState } from "react";
 import { FaEye, FaFacebookF } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
 import login from "../../../public/login/login.json";
 import Lottie from "lottie-react";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
   const [open, setOpen] = useState(false);
   const { register, handleSubmit } = useForm();
+  const { loginUser, googleLogin } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const axiosPublic = useAxiosPublic();
 
   const onSubmit = (data) => {
     // Handle form submission logic here
-    
+    const toastId = toast.loading("Logging in...");
+    loginUser(data.email, data.password).then((res) => {
+      toast.success("Login successful", { id: toastId });
+      navigate(location.state ? location.state : "/");
+    });
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin().then((res) => {
+      const userInfo = {
+        email: res.user?.email,
+        name: res.user?.displayName,
+        role: "user",
+      };
+
+      axiosPublic.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          toast.success("Logged In");
+        }
+      });
+      navigate(location.state ? location.state : "/");
+    });
   };
 
   return (
@@ -27,9 +55,10 @@ const Login = () => {
           <div className="grid grid-cols-1 relative lg:grid-cols-2 lg:w-[60%] border shadow-md mx-auto bg-white rounded-md">
             <div className="px-8 py-8 ">
               <h2 className="text-center w-full text-2xl text-slate-600 font-bold">
-                Login <span className="text-orange-500 font-bold ">Shopp.My</span>
+                Login{" "}
+                <span className="text-orange-500 font-bold ">Shopp.My</span>
               </h2>
-              
+
               <div className="relative">
                 <form
                   className="text-slate-600"
@@ -78,7 +107,10 @@ const Login = () => {
                   </span>
                   <span>Login with Facebook</span>
                 </button>
-                <button className="px-8 w-full py-2 bg-orange-500 shadow hover:shadow-orange-500/30 text-white rounded-md flex justify-center items-center gap-2 mb-3">
+                <button
+                  onClick={handleGoogleLogin}
+                  className="px-8 w-full py-2 bg-orange-500 shadow hover:shadow-orange-500/30 text-white rounded-md flex justify-center items-center gap-2 mb-3"
+                >
                   <span>
                     <AiOutlineGoogle />
                   </span>

@@ -1,22 +1,94 @@
 import React, { useState } from "react";
 import { FaEye, FaFacebookF } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
 import login from "../../../public/login/login.json";
 import Lottie from "lottie-react";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
   const [open, setOpen] = useState(false);
   const [role, setRole] = useState("user");
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const { createUser, update } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const roleValue = role;
     const formData = { ...data, role: roleValue };
     console.log(formData);
+    const toastId = toast.loading("Registration Processing...");
+
+    const imgFile = { image: formData.image[0] };
+    console.log(imgFile);
+
+    const res = await axiosPublic.post(image_hosting_api, imgFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    console.log(res.data);
+
+    if (res.data.success) {
+      // If image upload is successful, proceed with user registration
+      const info = {
+        name: formData.name,
+        email: formData.email,
+        image: res.data.data.display_url,
+        role: formData.role,
+        pass: formData.password,
+      };
+
+      if (role === "seller") {
+        info.shop_name = formData.shopName;
+        info.zip = formData.zipCode;
+        info.description = formData.description;
+        info.seller_number = formData.number;
+        info.shop_address = formData.address;
+      }
+
+      // Perform user registration
+      const result = await axiosPublic.post("/users", info);
+
+      if (result.data.insertedId) {
+        createUser(formData.email, formData.password)
+          .then(() => {
+            update(res.data.data.display_url, formData.name)
+              .then((res) => {
+                navigate("/login");
+                reset();
+                toast.success("Registration Success !! Login Now", {
+                  id: toastId,
+                });
+              })
+              .catch((err) => {
+                toast.error(
+                  "Something went wrong !! Please Check your credentials",
+                  { id: toastId }
+                );
+              });
+          })
+          .catch((err) => {
+            toast.error(
+              "Something went wrong !! Please Check your credentials"
+            );
+          });
+      }
+    }
   };
 
   return (
@@ -45,6 +117,7 @@ const Register = () => {
                         className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                         id="name"
                         name="name"
+                        required
                         placeholder="Name"
                         {...register("name", { required: true })}
                       />
@@ -56,7 +129,8 @@ const Register = () => {
                         className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                         id="image"
                         name="image"
-                        {...register("image")}
+                        required
+                        {...register("image", { required: true })}
                       />
                     </div>
                   </div>
@@ -69,6 +143,7 @@ const Register = () => {
                         className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                         id="email"
                         name="email"
+                        required
                         placeholder="email"
                         {...register("email", { required: true })}
                       />
@@ -81,8 +156,24 @@ const Register = () => {
                         id="password"
                         name="password"
                         placeholder="password"
-                        {...register("password", { required: true })}
+                        {...register("password", {
+                          required: true,
+                          minLength: 6,
+                          maxLength: 10,
+                          pattern: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+                          message:
+                            "Password must be at least 6 characters with one uppercase letter and one lowercase letter.",
+                        })}
                       />
+                      {errors.password?.type === "minLength" && (
+                        <p className="text-red-600">Pass must be 6 character</p>
+                      )}
+                      {errors.password?.type === "pattern" && (
+                        <p className="text-red-600">
+                          Minimum six characters, at least one uppercase letter,
+                          one lowercase letter.
+                        </p>
+                      )}
                       <span
                         onClick={() => setOpen(!open)}
                         className="absolute text-xl right-3 top-10"
@@ -106,14 +197,15 @@ const Register = () => {
                             {...register("shopName", { required: true })}
                           />
                         </div>
-                        <div className="flex relative w-full flex-col gap-1 md:gap-2 lg:gap-3 mb-2">
-                          <label htmlFor="shopLogo">Shop Logo</label>
+                        <div className="flex flex-col w-full gap-1 mb-2">
+                          <label htmlFor="shopName">Zip Code</label>
                           <input
-                            type="file"
-                            className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                            id="shopLogo"
-                            name="shopLogo"
-                            {...register("shopLogo")}
+                            type="number"
+                            className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                            id="zip"
+                            name="zipCode"
+                            placeholder="Zip Code"
+                            {...register("zipCode", { required: true })}
                           />
                         </div>
                       </div>

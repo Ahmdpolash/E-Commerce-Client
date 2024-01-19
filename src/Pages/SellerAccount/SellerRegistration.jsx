@@ -1,5 +1,5 @@
 import { FaAngleRight } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../../Components/Container/Container";
 import { useState } from "react";
 import { FaEye, FaFacebookF } from "react-icons/fa";
@@ -8,16 +8,83 @@ import { AiOutlineGoogle } from "react-icons/ai";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const SellerRegistration = () => {
   const [open, setOpen] = useState(false);
   const [role, setRole] = useState("user");
-  const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const { createUser, update } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
     const roleValue = role;
     const formData = { ...data, role: roleValue };
     console.log(formData);
+    const toastId = toast.loading("Registration Processing...");
+
+    const imgFile = { image: formData.shopLogo[0] };
+    console.log(imgFile);
+
+    const res = await axiosPublic.post(image_hosting_api, imgFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    console.log(res.data);
+
+    if (res.data.success) {
+      // If image upload is successful, proceed with user registration
+      const info = {
+        email: formData.email,
+        shop_name: formData.shopName,
+        description: formData.description,
+        seller_number: formData.number,
+        shop_address: formData.address,
+        role:'seller',
+        shop_Logo: res.data.data.display_url
+      };
+
+      // Perform user registration
+      const result = await axiosPublic.post("/users", info);
+
+      if (result.data.insertedId) {
+        createUser(formData.email, formData.password)
+          .then(() => {
+            update(res.data.data.display_url, name)
+              .then((res) => {
+                navigate("/login");
+                reset();
+                toast.success("Registration Success !! Login Now", {
+                  id: toastId,
+                });
+              })
+              .catch((err) => {
+                toast.error(
+                  "Something went wrong !! Please Check your credentials",
+                  { id: toastId }
+                );
+              });
+          })
+          .catch((err) => {
+            toast.error(
+              "Something went wrong !! Please Check your credentials"
+            );
+          });
+      }
+    }
   };
   return (
     <div className="bg-[#F6F6F5]">
@@ -76,9 +143,26 @@ const SellerRegistration = () => {
                           className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                           id="password"
                           name="password"
-                          {...register("password")}
-                          placeholder="password"
+                          {...register("password", {
+                            required: true,
+                            minLength: 6,
+                            maxLength: 10,
+                            pattern: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+                            message:
+                              "Password must be at least 6 characters with one uppercase letter and one lowercase letter.",
+                          })}
                         />
+                        {errors.password?.type === "minLength" && (
+                          <p className="text-red-600">
+                            Pass must be 6 character
+                          </p>
+                        )}
+                        {errors.password?.type === "pattern" && (
+                          <p className="text-red-600">
+                            Minimum six characters, at least one uppercase
+                            letter, one lowercase letter.
+                          </p>
+                        )}
                       </div>
                     </div>
                     <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
