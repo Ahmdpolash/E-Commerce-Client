@@ -18,7 +18,7 @@ const Cart = () => {
         <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
           <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
             <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-white">
-              <h2 className="text-3xl font-bold">Shop.my</h2>
+              <h2 className="text-3xl font-bold">Shopp.my</h2>
               <div className="flex justify-center items-center gap-2 text-2xl w-full">
                 <Link to="/">Home</Link>
                 <span className="pt-1">
@@ -103,7 +103,7 @@ const Cart = () => {
                 </div>
               )}
             </div>
-            <div className="col-span-1 h-[320px] bg-white border shadow-md w-full px-6 py-3">
+            <div className="col-span-1 lg:h-[470px] bg-white border shadow-md w-full px-6 py-3">
               <h2 className="font-bold text-slate-700 py-2 text-2xl">Cart Totals</h2>
               <div>
                 <div className="flex py-1 justify-between item-center">
@@ -123,6 +123,13 @@ const Cart = () => {
                   <p className="text-[16px] font-semibold">$3518</p>
                 </div>
                 <button className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#FA8232] mt-4 rounded-md ">Proceed to Checkout </button>
+              </div>
+
+              <div className="mt-2  bg-white">
+                <h1 className="text-xl text-slate-700 py-2 font-bold">Coupon</h1>
+                <input type="text" placeholder="write here the coupon code" className="border outline-none border-[#fa8232] py-2 lg:py-3 px-3 w-full" />
+                <button className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#FA8232] rounded-md mt-2">Coupon </button>
+
               </div>
               
             </div>

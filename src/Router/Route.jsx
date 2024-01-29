@@ -15,6 +15,7 @@ import Checkout from "../Pages/Checkout/Checkout";
 import Contact from "../Pages/Contact/Contact";
 import Service from "../Pages/Service/Service";
 import Blog from "../Pages/Blog/Blog";
+import DashboardLayout from "../Dashboard/DashboardLayout/DashboardLayout";
 
 const Route = createBrowserRouter([
   {
@@ -44,11 +45,11 @@ const Route = createBrowserRouter([
       },
       {
         path: "/cart",
-        element:<Cart/>
+        element: <Cart />,
       },
       {
         path: "/checkout",
-        element:<Checkout/>
+        element: <Checkout />,
       },
 
       {
@@ -74,11 +75,18 @@ const Route = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
-      }
+      },
     ],
   },
- 
-  ,
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children:[
+      {
+        
+      }
+    ]
+  },
 ]);
 
 export default Route;

@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/firebase.config";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const authContext = createContext(null);
 
@@ -16,6 +17,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
+  const axiosPublic = useAxiosPublic();
 
   //!create account
   const createUser = (email, password) => {
@@ -37,7 +39,7 @@ const AuthProvider = ({ children }) => {
 
   //!updateProfile
 
-  const update = (image,name) => {
+  const update = (image, name) => {
     setLoading(true);
     return updateProfile(auth.currentUser, {
       photoURL: image,
@@ -56,12 +58,26 @@ const AuthProvider = ({ children }) => {
     const subscriber = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
+
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        // set token on localStorage
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access_token", res.data.token);
+          }
+        });
+      } else {
+        localStorage.removeItem("access_token");
+      }
       setLoading(false);
     });
     return () => {
       subscriber();
     };
   }, []);
+
+  useEffect(() => {}, []);
 
   const AuthInfo = {
     user,

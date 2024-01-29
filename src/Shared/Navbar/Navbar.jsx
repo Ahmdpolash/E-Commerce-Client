@@ -70,15 +70,13 @@ const Navbar = () => {
     "Accessories",
   ];
 
- 
-
   const handleNotAvailable = () => {
     alert("sorry !! this functionality not added yet 😔");
   };
 
-  const handleLogOut =() =>{
-    logOut()
-  }
+  const handleLogOut = () => {
+    logOut();
+  };
 
   return (
     <div className="">
@@ -185,10 +183,22 @@ const Navbar = () => {
             </div>
             <div className="hidden lg:block">
               {user ? (
-                <div>
-                  <p className="text-black">{user.displayName}</p>
-                  <p onClick={handleLogOut}>logout</p>
-                </div>
+                <>
+                
+                <Link to='/dashboard'>
+                  <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
+                    <div className="flex gap-2 items-center justify-center">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={user.photoURL}
+                        alt=""
+                      />
+                      <p className="text-black">{user.displayName}</p>
+                    </div>
+                  </div>
+                </Link>
+                <p onClick={handleLogOut}>logout</p>
+                </>
               ) : (
                 <div className="flex items-center gap-2">
                   <FaRegUser className="hover:text-red-400 font-semibold duration-300" />
