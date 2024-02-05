@@ -1,7 +1,10 @@
 import { jwtDecode } from "jwt-decode";
-import UserDashHome from "../UserDashboard/UserDashHome";
-import SellerDashHome from "../SellerDashboard/SellerDashHome";
-import AdminDashHome from "../AdminDashboard/AdminDashHome";
+import { Outlet } from "react-router-dom";
+
+import Navbar from "../../Shared/Navbar/Navbar";
+import UserDashSideBar from "../UserDashboard/UserDashSideBar";
+import SellerDashSidebar from "../SellerDashboard/SellerDashSidebar";
+import AdminDashSidebar from "../AdminDashboard/AdminDashSidebar";
 
 const DashboardLayout = () => {
   const data = localStorage.getItem("access_token");
@@ -11,9 +14,17 @@ const DashboardLayout = () => {
 
   return (
     <div>
-      <div>{token.role === "user" && <UserDashHome />}</div>
-      <div>{token.role === "seller" && <SellerDashHome />}</div>
-      <div>{token.role === "admin" && <AdminDashHome />}</div>
+      <div >
+        <div>
+          <div> {token.role === "user" && <UserDashSideBar />}</div>
+          <div>{token.role === "seller" && <SellerDashSidebar />}</div>
+          <div>{token.role === "admin" && <AdminDashSidebar />}</div>
+        </div>
+
+        {/* <div>
+          <Outlet />
+        </div> */}
+      </div>
     </div>
   );
 };

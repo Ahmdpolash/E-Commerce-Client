@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AdminDashHome = () => {
+const AdminDashSidebar = () => {
     return (
         <div>
             this is admin dashboard
@@ -8,4 +8,4 @@ const AdminDashHome = () => {
     );
 };
 
-export default AdminDashHome;
+export default AdminDashSidebar;
