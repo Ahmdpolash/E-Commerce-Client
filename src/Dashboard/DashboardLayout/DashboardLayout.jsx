@@ -14,17 +14,14 @@ const DashboardLayout = () => {
 
   return (
     <div>
-      <div >
+   
         <div>
           <div> {token.role === "user" && <UserDashSideBar />}</div>
           <div>{token.role === "seller" && <SellerDashSidebar />}</div>
           <div>{token.role === "admin" && <AdminDashSidebar />}</div>
         </div>
 
-        {/* <div>
-          <Outlet />
-        </div> */}
-      </div>
+       
     </div>
   );
 };

@@ -16,7 +16,7 @@ import Contact from "../Pages/Contact/Contact";
 import Service from "../Pages/Service/Service";
 import Blog from "../Pages/Blog/Blog";
 import DashboardLayout from "../Dashboard/DashboardLayout/DashboardLayout";
-import Example from "../Dashboard/UserDashboard/example";
+import UserDashHome from "../Dashboard/UserDashboard/UserDashHome";
 
 const Route = createBrowserRouter([
   {
@@ -84,8 +84,8 @@ const Route = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: "example",
-        element: <Example />,
+        path: "UserDashboardHome",
+        element: <UserDashHome />,
       },
     ],
   },
