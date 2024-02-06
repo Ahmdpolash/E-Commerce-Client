@@ -17,6 +17,11 @@ import Service from "../Pages/Service/Service";
 import Blog from "../Pages/Blog/Blog";
 import DashboardLayout from "../Dashboard/DashboardLayout/DashboardLayout";
 import UserDashHome from "../Dashboard/UserDashboard/UserDashHome";
+import UserOrder from "../Dashboard/UserDashboard/UserOrder";
+import UserDashWishList from "../Dashboard/UserDashboard/UserDashWishList";
+import UserDashChangePass from "../Dashboard/UserDashboard/UserDashChangePass";
+import UserDashNotification from "../Dashboard/UserDashboard/UserDashNotification";
+import UserDashProfile from "../Dashboard/UserDashboard/UserDashProfile";
 
 const Route = createBrowserRouter([
   {
@@ -84,8 +89,28 @@ const Route = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: "UserDashboardHome",
+        path: "my-dashboard",
         element: <UserDashHome />,
+      },
+      {
+        path: "my-orders",
+        element: <UserOrder />,
+      },
+      {
+        path: "my-wishlists",
+        element: <UserDashWishList />,
+      },
+      {
+        path: "change-password",
+        element: <UserDashChangePass />,
+      },
+      {
+        path: "notifications",
+        element: <UserDashNotification />,
+      },
+      {
+        path: "my-profile",
+        element: <UserDashProfile />,
       },
     ],
   },

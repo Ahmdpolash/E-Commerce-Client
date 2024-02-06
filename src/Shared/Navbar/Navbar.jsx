@@ -27,6 +27,7 @@ const Navbar = () => {
   const [categoryShow, setCategoryShow] = useState(true);
   const { logOut, user } = useAuth();
 
+
   const toggleMenu = () => {
     setOpen(!open);
   };
@@ -69,8 +70,6 @@ const Navbar = () => {
     "Accessories",
   ];
 
-
-
   const handleLogOut = () => {
     logOut();
   };
@@ -78,7 +77,6 @@ const Navbar = () => {
   return (
     <div className="">
       {/* Sub Menu */}
-
 
       {/* Sub Menu */}
 
@@ -130,18 +128,19 @@ const Navbar = () => {
             <div className="hidden lg:block">
               {user ? (
                 <>
-                  <Link to="/dashboard">
-                    <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
-                      <div className="flex gap-2 items-center justify-center">
-                        <img
-                          className="h-10 w-10 rounded-full"
-                          src={user.photoURL}
-                          alt=""
-                        />
-                        <p className="text-black">{user.displayName}</p>
+                 
+                    <Link to="/dashboard/my-dashboard">
+                      <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
+                        <div className="flex gap-2 items-center justify-center">
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={user.photoURL}
+                            alt=""
+                          />
+                          <p className="text-black">{user.displayName}</p>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
                   <p onClick={handleLogOut}>logout</p>
                 </>
               ) : (

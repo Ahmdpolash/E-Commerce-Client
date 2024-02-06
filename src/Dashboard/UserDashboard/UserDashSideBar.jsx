@@ -40,13 +40,13 @@ const UserDashSideBar = () => {
       <Navbar />
       <div className="bg-slate-200 ">
         <div className="flex gap-5 px-4 py-4">
-          <div className="bg-white w-[270px] rounded-md">
+          <div className="bg-white hidden lg:block  z-40 w-[270px] rounded-md">
             <ul className="py-2 text-slate-600 px-4">
               <li className="flex justify-start items-center gap-2 py-2">
                 <span className="text-xl">
                   <RxDashboard />
                 </span>
-                <Link to="/dashboard/UserDashboardHome" className="block">
+                <Link to="/dashboard/my-dashboard" className="block">
                   Dashboard
                 </Link>
               </li>
@@ -54,7 +54,7 @@ const UserDashSideBar = () => {
                 <span className="text-xl">
                   <FaRegUserCircle />
                 </span>
-                <Link to="/dashboard" className="block">
+                <Link to="/dashboard/my-profile" className="block">
                   My Profile
                 </Link>
               </li>
@@ -70,7 +70,7 @@ const UserDashSideBar = () => {
                 <span className="text-xl">
                   <BsHeart />
                 </span>
-                <Link to="/dashboard/my-wishlist" className="block">
+                <Link to="/dashboard/my-wishlists" className="block">
                   Wishlist
                 </Link>
               </li>
@@ -86,7 +86,7 @@ const UserDashSideBar = () => {
                 <span className="text-2xl">
                   <MdOutlineNotificationsActive />
                 </span>
-                <Link to="/dashboard/chat" className="block">
+                <Link to="/dashboard/notifications" className="block">
                   Notification
                 </Link>
               </li>
@@ -95,11 +95,14 @@ const UserDashSideBar = () => {
                 <span className="text-xl">
                   <TfiLock />
                 </span>
-                <Link to="/dashboard/chage-password" className="block">
+                <Link to="/dashboard/change-password" className="block">
                   Change Password
                 </Link>
               </li>
-              <li onClick={handleLogOut} className="flex justify-start items-center gap-2 py-2 cursor-pointer">
+              <li
+                onClick={handleLogOut}
+                className="flex justify-start items-center gap-2 py-2 cursor-pointer"
+              >
                 <span className="text-xl">
                   <BiLogInCircle />
                 </span>

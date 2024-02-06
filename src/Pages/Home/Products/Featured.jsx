@@ -198,9 +198,7 @@ const Featured = () => {
                       {" "}
                       <FaArrowCircleRight className="text-[21px]" />{" "}
                     </button>
-                    {/* <button className="group-hover:bg-red-500 text-red-500 bg-gray-50 border-2 rounded-full px-2 lg:px-3 text-[13px] font-semibold py-1 lg:py-2 hidden lg:flex   items-center gap-1 group-hover:text-white duration-500">
-                        Add to Cart <FaArrowRight className="mt-1" />
-                      </button> */}
+                   
 
                     <div className="button bg-gray-50 hidden lg:block border-2 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
                       <div className="button-wrapper">
