@@ -1,0 +1,38 @@
+/* User Dashboard Home */
+
+@media screen and (max-width: 376px) {
+  .example {
+    width: 342px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .example {
+    width: 290px;
+  }
+}
+/* User Dashboard Home */
+
+/* Featured --Home page */
+
+@media screen and (max-width: 320px) {
+  #small-device {
+    display: grid;
+    grid-template-columns: 1fr; /* Define one column with a fraction of available space */
+  }
+}
+/* Featured --Home page */
+
+/* Navbar */
+
+@media screen and (max-width: 320px) {
+  .sm-device {
+    width: 280px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .sm-device {
+    width: 300px;
+  }
+}
+/* Navbar */

@@ -14,6 +14,7 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import { FaAngleDown, FaArrowRightArrowLeft, FaH } from "react-icons/fa6";
+import '../../Responsive/Responsive.css'
 
 import { TiSocialFacebook } from "react-icons/ti";
 import { FaHeart } from "react-icons/fa";
@@ -169,7 +170,7 @@ const Navbar = () => {
                 open
                   ? "translate-x-0 opacity-100"
                   : "-translate-x-full opacity-0"
-              } lg:hidden transition-all duration-500 fixed  z-[99999] border border-gray-200 shadow-lg backdrop-blur-sm transform h-full w-[360px] md:w-[390px] bg-white text-black  top-0 left-0`}
+              } lg:hidden transition-all duration-500 fixed  z-[99999] border border-gray-200 shadow-lg backdrop-blur-sm transform h-full sm-device w-[360px] md:w-[390px] bg-white text-black  top-0 left-0`}
             >
               <div className="flex justify-between">
                 <button

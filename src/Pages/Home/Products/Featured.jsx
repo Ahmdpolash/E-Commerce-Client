@@ -17,6 +17,8 @@ import {
 import '../../Shop/shop.css'
 import { Link } from "react-router-dom";
 
+
+
 const Featured = () => {
   return (
     <div className="bg-[#F1F1F1]">
@@ -31,7 +33,7 @@ const Featured = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+          <div id="small-device" className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
 
             <Link to='/details'>
               <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">

@@ -10,6 +10,7 @@ import {
 import React, { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/firebase.config";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 export const authContext = createContext(null);
 
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
+  // const navigate = useNavigate();
 
   //!create account
   const createUser = (email, password) => {

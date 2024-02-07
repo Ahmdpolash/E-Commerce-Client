@@ -39,6 +39,7 @@ const Category = () => {
 
     autoplaySpeed: 2000,
     responsive: [
+      
       {
         breakpoint: 576, // Adjust breakpoints as needed for mobile screens
         settings: {
@@ -58,6 +59,7 @@ const Category = () => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 4,
+          
         },
       },
 
@@ -85,7 +87,7 @@ const Category = () => {
         {/* <h1 className="font-semibold text-2xl mb-2 uppercase flex gap-2 items-center">Categories <FaArrowRight/> </h1>{" "} */}
 
         <Slider
-          className="grid bg-white px-3 py-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-7"
+          className="grid bg-white px-3 py-6 grid-cols-2  md:grid-cols-4 lg:grid-cols-7"
           {...settings}
         >
           <div>
