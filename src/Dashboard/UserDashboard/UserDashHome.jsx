@@ -8,7 +8,7 @@ import '../../Responsive/Responsive.css';
 const UserDashHome = () => {
   return (
     <div className="">
-      <div className="grid grid-cols-1 flex-wrap md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 flex-wrap md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5">
         <div className="flex justify-center items-center p-4 md:p-5 lg:p-5  bg-white rounded-md gap-4 md:gap-5 lg:gap-5">
           <div className="bg-green-100 w-[47px] h-[47px] rounded-full flex justify-center items-center text-xl ">
             <span className="text-xl text-green-800">

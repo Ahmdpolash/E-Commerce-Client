@@ -4,10 +4,16 @@
   .example {
     width: 342px;
   }
+  .userOrderDash{
+    width: 313px;
+  }
 }
 @media screen and (max-width: 320px) {
   .example {
     width: 290px;
+  }
+  .userOrderDash{
+    width: 260px;
   }
 }
 /* User Dashboard Home */
@@ -32,7 +38,7 @@
 
 @media screen and (max-width: 376px) {
   .sm-device {
-    width: 300px;
+    width: 280px;
   }
 }
 /* Navbar */
