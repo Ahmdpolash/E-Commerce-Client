@@ -9,20 +9,26 @@ import AdminDashSidebar from "../AdminDashboard/AdminDashSidebar";
 const DashboardLayout = () => {
   const data = localStorage.getItem("access_token");
   const navigate = useNavigate();
-  const token = jwtDecode(data);
-  console.log(token.role);
+  console.log("Token from local storage:", data);
+  let token;
+
+  try {
+    token = jwtDecode(data);
+    console.log("Decoded token:", token);
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    // Handle the error if necessary
+    navigate("/login");
+    return null;
+  }
 
   return (
     <div>
-      {token ? (
-        <div>
-          <div> {token.role === "user" && <UserDashSideBar />}</div>
-          <div>{token.role === "seller" && <SellerDashSidebar />}</div>
-          <div>{token.role === "admin" && <AdminDashSidebar />}</div>
-        </div>
-      ) : (
-        navigate("/login")
-      )}
+      <div>
+        <div> {token.role === "user" && <UserDashSideBar />}</div>
+        <div>{token.role === "seller" && <SellerDashSidebar />}</div>
+        <div>{token.role === "admin" && <AdminDashSidebar />}</div>
+      </div>
     </div>
   );
 };

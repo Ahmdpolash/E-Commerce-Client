@@ -22,6 +22,15 @@ import UserDashWishList from "../Dashboard/UserDashboard/UserDashWishList";
 import UserDashChangePass from "../Dashboard/UserDashboard/UserDashChangePass";
 import UserDashNotification from "../Dashboard/UserDashboard/UserDashNotification";
 import UserDashProfile from "../Dashboard/UserDashboard/UserDashProfile";
+import SellerDashHome from "../Dashboard/SellerDashboard/SellerDashHome";
+import AddProduct from "../Dashboard/SellerDashboard/addProduct";
+import SellerDashAllProduct from "../Dashboard/SellerDashboard/SellerDashAllProduct";
+import SellerDashPayments from "../Dashboard/SellerDashboard/SellerDashPayments";
+import SellerProfile from "../Dashboard/SellerDashboard/SellerProfile";
+import SellerDiscount from "../Dashboard/SellerDashboard/SellerDiscount";
+import SellerOrders from "../Dashboard/SellerDashboard/SellerOrders";
+import SellerChatCustomer from "../Dashboard/SellerDashboard/SellerChatCustomer";
+import SellerSupportChat from "../Dashboard/SellerDashboard/SellerSupportChat";
 
 const Route = createBrowserRouter([
   {
@@ -111,6 +120,42 @@ const Route = createBrowserRouter([
       {
         path: "my-profile",
         element: <UserDashProfile />,
+      },
+      {
+        path:'seller-dashboard',
+        element:<SellerDashHome/>
+      },
+      {
+        path:'add-products',
+        element:<AddProduct/>
+      },
+      {
+        path:'all-products',
+        element:<SellerDashAllProduct/>
+      },
+      {
+        path:'payments',
+        element:<SellerDashPayments/>
+      },
+      {
+        path:'my-shop',
+        element:<SellerProfile/>
+      },
+      {
+        path:'discount-price',
+        element:<SellerDiscount/>
+      },
+      {
+        path:'customer-orders',
+        element:<SellerOrders/>
+      },
+      {
+        path:'customer-chat',
+        element:<SellerChatCustomer/>
+      },
+      {
+        path:'support-chat',
+        element:<SellerSupportChat/>
       },
     ],
   },

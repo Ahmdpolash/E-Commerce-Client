@@ -39,8 +39,8 @@ const UserDashSideBar = () => {
     <div>
       <Navbar />
       <div className="bg-slate-200 ">
-        <div onClick={() => setOpen(!open)} className="px-6 block lg:hidden py-1 mt-">
-          <FaList className="text-xl mt-2" />
+        <div onClick={() => setOpen(!open)} className="ml-5 px-3 mt-2 text-white rounded-md bg-indigo-500 inline-block lg:hidden py-2 ">
+          <FaList className="text-xl mt-" />
         </div>
 
         {/* mobile sidebar */}
@@ -125,7 +125,7 @@ const UserDashSideBar = () => {
           >
             <RxCross1 />
           </button>
-          {/* close btn */}C
+          {/* close btn */}
         </div>
 
         {/* mobile sidebar */}

@@ -129,8 +129,8 @@ const Register = () => {
                         className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                         id="image"
                         name="image"
-                        required
-                        {...register("image", { required: true })}
+                        
+                        {...register("image", { required: false })}
                       />
                     </div>
                   </div>

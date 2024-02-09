@@ -14,7 +14,7 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import { FaAngleDown, FaArrowRightArrowLeft, FaH } from "react-icons/fa6";
-import '../../Responsive/Responsive.css'
+import "../../Responsive/Responsive.css";
 
 import { TiSocialFacebook } from "react-icons/ti";
 import { FaHeart } from "react-icons/fa";
@@ -27,7 +27,6 @@ const Navbar = () => {
   const [openCart, setOpenCart] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
   const { logOut, user } = useAuth();
-
 
   const toggleMenu = () => {
     setOpen(!open);
@@ -103,12 +102,11 @@ const Navbar = () => {
                   className="py-3 relative left-3 border-l-2 border-t-2 border-b-2 border-[#FE2424] font-normal outline-none text-[16px]  px-3 border-r-0 w-40 text-black"
                   name=""
                   id=""
+                  defaultValue=""
                 >
-                  <option value="" selected>
-                    Select Category
-                  </option>
+                  <option value="">Select Category</option>
                   {category.map((c, i) => (
-                    <option key={c} value={c}>
+                    <option key={i} value={c}>
                       {c}
                     </option>
                   ))}
@@ -129,19 +127,18 @@ const Navbar = () => {
             <div className="hidden lg:block">
               {user ? (
                 <>
-                 
-                    <Link to="/dashboard/my-dashboard">
-                      <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
-                        <div className="flex gap-2 items-center justify-center">
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src={user.photoURL}
-                            alt=""
-                          />
-                          <p className="text-black">{user.displayName}</p>
-                        </div>
+                  <Link to="/dashboard/my-dashboard">
+                    <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
+                      <div className="flex gap-2 items-center justify-center">
+                        <img
+                          className="h-10 w-10 rounded-full"
+                          src={user.photoURL}
+                          alt=""
+                        />
+                        <p className="text-black">{user.displayName}</p>
                       </div>
-                    </Link>
+                    </div>
+                  </Link>
                   <p onClick={handleLogOut}>logout</p>
                 </>
               ) : (
@@ -197,9 +194,14 @@ const Navbar = () => {
                 {user ? (
                   <div className=" cursor-pointer gap-2">
                     <span className="text-3xl flex items-center justify-center text-red-500">
-                      <FaRegUserCircle />
+                      <Link to="/dashboard/my-dashboard">
+                        {" "}
+                        <FaRegUserCircle />
+                      </Link>
                     </span>
-                    <p className="font-semibold text-[18px]">Polash Ahmed</p>
+                    <p className="font-semibold text-[18px]">
+                      {user.displayName}
+                    </p>
                   </div>
                 ) : (
                   <>
