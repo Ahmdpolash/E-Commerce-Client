@@ -14,9 +14,11 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 const SellerDashSidebar = () => {
   return (
-    <div className="bg-[#E2E8F0] h-screen ">
+    <div className="bg-[#E2E8F0]  ">
       <div className="flex ">
-        <div className="w-[275px] hidden lg:block bg-white h-screen relative border-r-2 border-slate-200 shadow-indigo-600/30">
+        <div className="fixed">
+
+        <div className="w-[275px] hidden h-screen  lg:block bg-white h- relative border-r-2 border-slate-200 shadow-indigo-600/30">
           <div className="logo mx-auto text-center w-[185px] my-2">
             <Link to="/">
               {" "}
@@ -181,8 +183,9 @@ const SellerDashSidebar = () => {
             </ul>
           </div>
         </div>
+        </div>
 
-        <div className="flex-1">
+        <div className="flex-1 lg:pl-[18%]">
           <Outlet />
         </div>
       </div>

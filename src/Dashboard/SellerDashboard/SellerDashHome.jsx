@@ -5,9 +5,9 @@ import { RiProductHuntLine } from "react-icons/ri";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import ReactApexChart from "react-apexcharts";
+import { Link } from "react-router-dom";
 
-
-
+import '../../Responsive/Responsive.css'
 
 const SellerDashHome = () => {
   const state = {
@@ -21,7 +21,7 @@ const SellerDashHome = () => {
         data: [34, 32, 45, 32, 34, 34, 43, 56, 65, 67, 45, 78],
       },
       {
-        name: "Seles",
+        name: "Sales",
         data: [78, 32, 34, 54, 65, 34, 54, 21, 54, 43, 45, 43],
       },
     ],
@@ -99,15 +99,15 @@ const SellerDashHome = () => {
   };
 
   return (
-    <div className="py-3 px-5">
-      {/* headers */}
+    <div className="py-3 px-3 md:px-4 lg:px-5">
+      {/*--------------------- here section start here---------------- */}
       <div className="header bg-white py-1  w-full rounded-md mb-2">
         <div className="flex justify-between items-center p-3">
           <div>
             <input
               type="text"
               placeholder="Search.."
-              className="outline-none border border-gray-300 rounded-md shadow-sm w-11/12 py-2 px-3"
+              className="outline-none hidden lg:block border border-gray-300 rounded-md shadow-sm w-11/12 py-2 px-3"
             />
           </div>
           <div>
@@ -132,10 +132,11 @@ const SellerDashHome = () => {
           </div>
         </div>
       </div>
+      {/* ----------------here section end here------------- */}
 
-      {/* box */}
+      {/* -----------------------the summary box start here---------------------- */}
 
-      <div className="my-5">
+      <section className="my-5">
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4  md:gap-5 lg:gap-6">
           <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-slate-600">
@@ -174,11 +175,11 @@ const SellerDashHome = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
+      {/*------------------ the summary box start here-------------------- */}
 
-      {/* chart */}
-
-      <div>
+      {/*--------------- the bar chart start here-------------------- */}
+      <section>
         <div className="w-full lg:w-7/12 lg:pr-3">
           <div className="w-full bg-white  p-4 rounded-md">
             <ReactApexChart
@@ -189,8 +190,99 @@ const SellerDashHome = () => {
             />
           </div>
         </div>
-      </div>
-      {/* chart */}
+      </section>
+      {/* ----------------the bar chart end here------------------ */}
+
+      {/* -----------------this is the order table start here--------------  */}
+      <section className="mt-3 lg:mt-0" id="Order table">
+        <div className="bg-white p-4 lg:mt-5 rounded-md">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-slate-600">
+              Recent Orders
+            </h2>
+            <h3>View All</h3>
+          </div>
+          <div className="pt-4">
+            <div className="bg-white userOrderDash w-[350px] md:w-[700px] lg:w-full rounded-md">
+              <div className=" overflow-x-auto w-full">
+                <div className="relative overflow-x-auto">
+                  <table className="w-full text-sm text-left  text-gray-500">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-100">
+                      <tr>
+                        <th scope="col" className="px-6 py-2 lg:py-3">
+                          Order Id
+                        </th>
+                        <th scope="col" className="px-6 py-2 lg:py-3">
+                          Price
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-10 md:px-12 lg:px-14 py-2 lg:py-3"
+                        >
+                          Payment status
+                        </th>
+                        <th scope="col" className="px-6 py-2 lg:py-3">
+                          Order status
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-10 md:px-12 lg:px-16 py-2 lg:py-3"
+                        >
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {[1, 2, 3, 4].map((t, i) => (
+                        <tr key={i} className="border-b border-gray-200 ">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium whitespace-nowrap"
+                          >
+                            5444463155446
+                          </td>
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium whitespace-nowrap"
+                          >
+                            $145
+                          </td>
+                          <td
+                            scope="row"
+                            className="px-[73px] py-4 font-medium whitespace-nowrap"
+                          >
+                            Pending
+                          </td>
+                          <td
+                            scope="row"
+                            className="px-10 py-4 font-medium whitespace-nowrap"
+                          >
+                            Pending
+                          </td>
+
+                          <td
+                            scope="row"
+                            className="px-16 flex lg:flex-row flex-col  flex-wrap gap-2 py-4"
+                          >
+                            <Link>
+                              <span className="bg-green-100 text-green-800 text-sm font-normal mr-2 px-2 lg:px-2.5 py-[1px] rounded cursor-pointer block text-center lg:text-left">
+                                view
+                              </span>
+                            </Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------this is the order table end here---------------------  */}
     </div>
   );
 };
