@@ -36,7 +36,7 @@ const Login = () => {
         role: "user",
       };
 
-      axiosPublic.post("/users", userInfo).then((res) => {
+      axiosPublic.post("/users", userInfo,{withCredentials:true}).then((res) => {
         if (res.data.insertedId) {
           toast.success("Logged In");
         }
