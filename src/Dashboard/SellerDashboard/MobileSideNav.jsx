@@ -176,7 +176,6 @@ const MobileSideNav = () => {
               <span>Logout</span>
             </NavLink>
           </li>
-      
         </ul>
       </div>
     </div>

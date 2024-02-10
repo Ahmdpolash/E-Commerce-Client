@@ -241,8 +241,8 @@ const ProductDetails = () => {
 
           {/* delivery box */}
 
-          <div className="col-span-2 mt-2 lg:mt-0">
-            <div className="py-5 px-5 border-2 shadow-md rounded-md border-gray-200">
+          <div className="col-span-2  mt-2 lg:mt-0">
+            <div className="py-5 px-5 border-2  shadow-md rounded-md ">
               <p className="text-sm text-slate-500">Delivery</p>
               <ul className="space-y-2 mb-4">
                 <li className="text-base flex  gap-2 items-start">

@@ -114,7 +114,7 @@ const SellerDashHome = () => {
       ></div>
       {/* screen onclick */}
 
-      {/*--------------------- here section start here---------------- */}
+      {/*--------------------- here header section start here---------------- */}
       <div className="header bg-white mt-2  w-full rounded-md mb-2">
         <div className="flex justify-between items-center p-3">
           <div>
