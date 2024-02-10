@@ -9,12 +9,40 @@ import { Link } from "react-router-dom";
 
 const AddProduct = () => {
   const [cateShow, setCateShow] = useState(false);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState([]);
   const options = [
     { value: "#mobile", label: "#mobile" },
     { value: "#fashion", label: "#fashion" },
     { value: "#electronics", label: "#electronics" },
     { value: "#accessories", label: "#accessories" },
   ];
+  const colors = [
+    { value: "red", label: "red" },
+    { value: "blue", label: "blue" },
+    { value: "black", label: "black" },
+    { value: "white", label: "white" },
+    { value: "silver", label: "silver" },
+  ];
+  const categories = [
+    {
+      id: 1,
+      category: "mobile",
+    },
+    {
+      id: 2,
+      category: "laptop",
+    },
+    {
+      id: 3,
+      category: "fashions",
+    },
+    {
+      id: 4,
+      category: "tablet",
+    },
+  ];
+
   return (
     <div className="px-2 md:px-4 lg:px-5">
       <DashHeaders />
@@ -22,7 +50,7 @@ const AddProduct = () => {
       <div className="bg-white rounded-md mt-4 mb-6">
         <div className="flex px-4 pt-2 font-semibold text-xl justify-between">
           <h2 className="text-slate-600 font-semibold">Add New Product</h2>
-          <Link to='/dashboard/all-products'>
+          <Link to="/dashboard/all-products">
             <button className="cssbuttons-io">
               <span>All Products</span>
             </button>
@@ -67,19 +95,31 @@ const AddProduct = () => {
                 id="category"
               />
               <div
-                className={`absolute top-[101%] bg-slate-200  border mt-2 rounded-md w-full transition-all ${
+                className={`absolute top-[101%] z-40 bg-slate-200  border mt-2 rounded-md w-full transition-all ${
                   cateShow ? "scale-100" : "scale-0"
                 }`}
               >
                 <div className="w-full px-4 py-2 fixed">
                   <input
+                    onChange={(e) => setSearch(e.target.value)}
                     required
                     className="px-3 py-1 mt-1 w-full focus:border-indigo-500 outline-none bg-transparent border border-slate-700 rounded-md text-slate-700 overflow-hidden"
                     type="text"
                     placeholder="search"
                   />
                 </div>
-                <div className="pt-14"></div>
+                <div className="pt-14">
+                  <ul className="px-4 cursor-pointer mb-2">
+                    {categories?.map((c, i) => (
+                      <li onClick={()=> setCategory(c)}
+                        className="py-2 hover:bg-slate-300 rounded-md p-2 hover:text-slate-700"
+                        key={i}
+                      >
+                        {c.category}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
             <div className="flex flex-col w-full gap-1">
@@ -125,13 +165,12 @@ const AddProduct = () => {
           <div className="flex flex-col mb-3 md:flex-row gap-4 w-full text-slate-700">
             <div className="flex flex-col w-full gap-1">
               <label htmlFor="price">Color (optional)</label>
-              <input
-                required
-                className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
-                type="text"
-                placeholder="Color (optional)"
+              <Select
+                className="focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700 "
+                closeMenuOnSelect={false}
+                isMulti
                 name="color"
-                id="color"
+                options={colors}
               />
             </div>
             <div className="flex flex-col w-full gap-1">

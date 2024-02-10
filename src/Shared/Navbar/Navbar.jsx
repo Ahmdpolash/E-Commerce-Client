@@ -231,10 +231,24 @@ const Navbar = () => {
                 {user ? (
                   <div className=" cursor-pointer gap-2">
                     <span className="text-3xl flex items-center justify-center text-red-500">
-                      <Link to="/dashboard/my-dashboard">
-                        {" "}
-                        <FaRegUserCircle />
-                      </Link>
+                      {token.role === "user" && (
+                        <Link to="/dashboard/my-dashboard">
+                          {" "}
+                          <FaRegUserCircle />
+                        </Link>
+                      )}
+                      {token.role === "seller" && (
+                        <Link to="/dashboard/seller-dashboard">
+                          {" "}
+                          <FaRegUserCircle />
+                        </Link>
+                      )}
+                      {token.role === "admin" && (
+                        <Link to="/dashboard/admin-dashboard">
+                          {" "}
+                          <FaRegUserCircle />
+                        </Link>
+                      )}
                     </span>
                     <p className="font-semibold text-[18px]">
                       {user.displayName}
