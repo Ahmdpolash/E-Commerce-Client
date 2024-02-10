@@ -1,9 +1,10 @@
 import React from 'react';
+import SellerDashAllProduct from './SellerDashAllProduct';
 
 const SellerDiscount = () => {
     return (
         <div>
-            this is discount page
+           <SellerDashAllProduct/>
         </div>
     );
 };
