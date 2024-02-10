@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DarkMood from "./darkmood/DarkMood";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { RiProductHuntLine } from "react-icons/ri";
@@ -7,9 +7,13 @@ import { MdPendingActions } from "react-icons/md";
 import ReactApexChart from "react-apexcharts";
 import { Link } from "react-router-dom";
 
-import '../../Responsive/Responsive.css'
+import "../../Responsive/Responsive.css";
+import { FaList } from "react-icons/fa";
+import MobileSideNav from "./MobileSideNav";
 
 const SellerDashHome = () => {
+  const [open, setOpen] = useState(false);
+
   const state = {
     series: [
       {
@@ -99,23 +103,45 @@ const SellerDashHome = () => {
   };
 
   return (
-    <div className="py-3 px-3 md:px-4 lg:px-5">
+    <div className="py- px-2 md:px-4 lg:px-5">
+      {/* screen onclick */}
+
+      <div
+        onClick={() => setOpen(false)}
+        className={`fixed duration-200 ${
+          !open ? "invisible" : "visible"
+        } w-screen h-screen backdrop-blur-sm top-0 left-0 z-10`}
+      ></div>
+      {/* screen onclick */}
+
       {/*--------------------- here section start here---------------- */}
-      <div className="header bg-white py-1  w-full rounded-md mb-2">
+      <div className="header bg-white mt-2  w-full rounded-md mb-2">
         <div className="flex justify-between items-center p-3">
           <div>
+            {/* mobile menu icon */}
+            <div className="block menuIcon lg:hidden">
+              <button
+                onClick={() => setOpen(!open)}
+                className="bg-indigo-500 py-2 px-2 text-white rounded-md text-xl"
+              >
+                <FaList />
+              </button>
+            </div>
+            {/* mobile menu icon */}
+
             <input
               type="text"
               placeholder="Search.."
               className="outline-none hidden lg:block border border-gray-300 rounded-md shadow-sm w-11/12 py-2 px-3"
             />
           </div>
-          <div>
-            <div className="flex items-center gap-4">
-              <div>
+
+          <div className="">
+            <div className="flex  items-center gap-4">
+              <div className="">
                 <DarkMood />
               </div>
-              <div>
+              <div className="sellerInfo">
                 <h1 className="font-semibold">Polash Ahmed</h1>
                 <p className="text-right text-[14px] font-medium text-slate-700">
                   Seller
@@ -125,7 +151,7 @@ const SellerDashHome = () => {
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf3g0kIKYCB-w9U0l4Srnvq3s7KLnR6JnArw&usqp=CAU"
                   alt=""
-                  className="w-[50px] h-[50px] rounded-full"
+                  className="w-[50px] sellerImg h-[50px] rounded-full"
                 />
               </div>
             </div>
@@ -134,10 +160,20 @@ const SellerDashHome = () => {
       </div>
       {/* ----------------here section end here------------- */}
 
+      {/* ----------------------mobile sidebar---------------------- */}
+      <div
+        className={`w-[265px] mobileSideNav lg:hidden md:w-[340px] border-r-2 fixed bg-white top-0 z-[9999] h-full overflow-y-auto transition-all ${
+          open ? "left-0" : "-left-[265px] md:-left-[340px] lg:left-0"
+        }`}
+      >
+        <MobileSideNav />
+      </div>
+      {/*----------------------- mobile sidebar-------------------------- */}
+
       {/* -----------------------the summary box start here---------------------- */}
 
-      <section className="my-5">
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4  md:gap-5 lg:gap-6">
+      <section className="my-5 box">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 res lg:grid-cols-4 gap-4  md:gap-5 lg:gap-6">
           <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-slate-600">
               <h2 className="text-3xl font-bold">$188</h2>
@@ -147,6 +183,7 @@ const SellerDashHome = () => {
               <BsCurrencyDollar className="text-[#28c76f] shadow-lg" />
             </div>
           </div>
+
           <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-slate-600">
               <h2 className="text-3xl font-bold">25</h2>
@@ -156,6 +193,7 @@ const SellerDashHome = () => {
               <RiProductHuntLine className="text-[#cd00e8] shadow-lg" />
             </div>
           </div>
+
           <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-slate-600">
               <h2 className="text-3xl font-bold">14</h2>
@@ -165,6 +203,7 @@ const SellerDashHome = () => {
               <AiOutlineShoppingCart className="text-[#4ec1cc] shadow-lg" />
             </div>
           </div>
+
           <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-slate-600">
               <h2 className="text-3xl font-bold">0</h2>
@@ -181,7 +220,7 @@ const SellerDashHome = () => {
       {/*--------------- the bar chart start here-------------------- */}
       <section>
         <div className="w-full lg:w-7/12 lg:pr-3">
-          <div className="w-full bg-white  p-4 rounded-md">
+          <div className="w-full bg-white sellerBarChart p-4 rounded-md">
             <ReactApexChart
               options={state.options}
               series={state.series}
@@ -194,16 +233,16 @@ const SellerDashHome = () => {
       {/* ----------------the bar chart end here------------------ */}
 
       {/* -----------------this is the order table start here--------------  */}
-      <section className="mt-3 lg:mt-0" id="Order table">
-        <div className="bg-white p-4 lg:mt-5 rounded-md">
-          <div className="flex items-center justify-between">
+      <section className="mt-3  lg:mt-0" id="Order table">
+        <div className="bg-white lg:p-4 lg:mt-5 rounded-md">
+          <div className="flex p-3 items-center justify-between">
             <h2 className="text-lg font-semibold text-slate-600">
               Recent Orders
             </h2>
             <h3>View All</h3>
           </div>
-          <div className="pt-4">
-            <div className="bg-white userOrderDash w-[350px] md:w-[700px] lg:w-full rounded-md">
+          <div className="pt-2 lg:pt-4">
+            <div className="bg-white sellerTable  w-[350px] px-2 lg:px-0 md:w-[700px] lg:w-full rounded-md">
               <div className=" overflow-x-auto w-full">
                 <div className="relative overflow-x-auto">
                   <table className="w-full text-sm text-left  text-gray-500">

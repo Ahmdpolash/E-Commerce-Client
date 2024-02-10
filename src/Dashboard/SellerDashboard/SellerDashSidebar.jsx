@@ -1,13 +1,13 @@
 import React from "react";
 import { RxDashboard } from "react-icons/rx";
 import { TbBrandProducthunt } from "react-icons/tb";
-import { IoCartOutline,IoChatboxOutline } from "react-icons/io5";
+import { IoCartOutline, IoChatboxOutline } from "react-icons/io5";
 import { MdOutlineDiscount, MdOutlinePayment } from "react-icons/md";
 import { BiLogInCircle } from "react-icons/bi";
 
 import { CiChat1, CiChat2 } from "react-icons/ci";
-import { FaRegUserCircle } from "react-icons/fa";
-
+import { FaList, FaRegUserCircle } from "react-icons/fa";
+import "../../Responsive/Responsive.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import logo from "../../../public/logo2.png";
 import { Link, NavLink, Outlet } from "react-router-dom";
@@ -16,9 +16,13 @@ const SellerDashSidebar = () => {
   return (
     <div className="bg-[#E2E8F0]  ">
       <div className="flex ">
-        <div className="fixed">
+        {/* mobile sidebar */}
 
-        <div className="w-[275px] hidden h-screen  lg:block bg-white h- relative border-r-2 border-slate-200 shadow-indigo-600/30">
+        <div className="block lg:hidden"></div>
+
+        {/* mobile sidebar */}
+
+        <div className="w-[275px]  hidden lg:block bg-white h- relative border-r-2 border-slate-200 shadow-indigo-600/30">
           <div className="logo mx-auto text-center w-[185px] my-2">
             <Link to="/">
               {" "}
@@ -160,7 +164,7 @@ const SellerDashSidebar = () => {
                   }
                 >
                   <span className="text-xl">
-                    < FaRegUserCircle/>
+                    <FaRegUserCircle />
                   </span>
                   <span>My Shop</span>
                 </NavLink>
@@ -175,7 +179,7 @@ const SellerDashSidebar = () => {
                   }
                 >
                   <span className="text-xl">
-                    < BiLogInCircle/>
+                    <BiLogInCircle />
                   </span>
                   <span>Log Out</span>
                 </NavLink>
@@ -183,9 +187,8 @@ const SellerDashSidebar = () => {
             </ul>
           </div>
         </div>
-        </div>
 
-        <div className="flex-1 lg:pl-[18%]">
+        <div className="flex-1">
           <Outlet />
         </div>
       </div>

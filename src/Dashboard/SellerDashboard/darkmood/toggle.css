@@ -24,6 +24,12 @@
   --circle-transition: 0.3s cubic-bezier(0, -0.02, 0.35, 1.17);
 }
 
+@media screen and (max-width: 320px) {
+  .theme-switch {
+    --toggle-size: 14px;
+  }
+}
+
 .theme-switch,
 .theme-switch *,
 .theme-switch *::before,

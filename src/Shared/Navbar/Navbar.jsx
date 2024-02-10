@@ -21,6 +21,7 @@ import { FaHeart } from "react-icons/fa";
 import logo from "../../../public/logo2.png";
 import useAuth from "../../Hooks/useAuth";
 import SubHeader from "./SubHeader";
+import { jwtDecode } from "jwt-decode";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -39,6 +40,11 @@ const Navbar = () => {
   const handleClose = () => {
     setOpenCart(false);
   };
+
+  const accessToken = localStorage.getItem("access_token");
+  const token = jwtDecode(accessToken);
+
+  console.log("hello", token.role);
 
   const navList = (
     <>
@@ -125,20 +131,51 @@ const Navbar = () => {
               </div>
             </div>
             <div className="hidden lg:block">
-              {user ? (
+              {user && token ? (
                 <>
-                  <Link to="/dashboard/my-dashboard">
-                    <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
-                      <div className="flex gap-2 items-center justify-center">
-                        <img
-                          className="h-10 w-10 rounded-full"
-                          src={user.photoURL}
-                          alt=""
-                        />
-                        <p className="text-black">{user.displayName}</p>
+                  {token?.role === "user" && (
+                    <Link to="/dashboard/my-dashboard">
+                      <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
+                        <div className="flex gap-2 items-center justify-center">
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={user.photoURL}
+                            alt=""
+                          />
+                          <p className="text-black">{user.displayName}</p>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  )}
+                  {token?.role === "seller" && (
+                    <Link to="/dashboard/seller-dashboard">
+                      <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
+                        <div className="flex gap-2 items-center justify-center">
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={user.photoURL}
+                            alt=""
+                          />
+                          <p className="text-black">{user.displayName}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  )}
+                  {token?.role === "admin" && (
+                    <Link to="/dashboard/admin-dashboard">
+                      <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
+                        <div className="flex gap-2 items-center justify-center">
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={user.photoURL}
+                            alt=""
+                          />
+                          <p className="text-black">{user.displayName}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  )}
+
                   <p onClick={handleLogOut}>logout</p>
                 </>
               ) : (

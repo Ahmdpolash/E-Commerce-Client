@@ -4,7 +4,7 @@
   .example {
     width: 342px;
   }
-  .userOrderDash{
+  .userOrderDash {
     width: 313px;
   }
 }
@@ -12,9 +12,33 @@
   .example {
     width: 290px;
   }
-  .userOrderDash{
+  .userOrderDash {
     width: 250px;
   }
+
+  .sellerTable{
+    width: 295px;
+  }
+  .box{
+    display: none;
+  }
+  .sellerInfo{
+    visibility: hidden;
+  }
+  .sellerImg{
+    height: 44px;
+    width: 44px;
+  }
+  .sellerBarChart{
+    padding: 0 !important;
+  }
+  .menuIcon{
+    margin-right: 15px !important;
+  }
+  .mobileSideNav{
+   width: 230px !important;
+  }
+ 
 }
 /* User Dashboard Home */
 
@@ -42,3 +66,12 @@
   }
 }
 /* Navbar */
+
+@media screen and (max-width: 1024px) {
+  .re {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .responsive-table{
+    width: 707px;
+  }
+}
