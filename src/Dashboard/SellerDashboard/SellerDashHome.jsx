@@ -215,7 +215,7 @@ const SellerDashHome = () => {
           </div>
         </div>
       </section>
-      {/*------------------ the summary box start here-------------------- */}
+      {/*------------------ the summary box end here-------------------- */}
 
       {/*--------------- the bar chart start here-------------------- */}
       <section>
