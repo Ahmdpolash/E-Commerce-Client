@@ -42,9 +42,15 @@ const Navbar = () => {
   };
 
   const accessToken = localStorage.getItem("access_token");
-  const token = jwtDecode(accessToken);
-
-  console.log("hello", token.role);
+  let token;
+  try {
+    token = jwtDecode(accessToken);
+  } catch (error) {
+    // Handle invalid token error
+    console.error("Error decoding token:", error);
+    // You can set token to null or handle it based on your application logic
+    token = null;
+  }
 
   const navList = (
     <>
@@ -131,7 +137,7 @@ const Navbar = () => {
               </div>
             </div>
             <div className="hidden lg:block">
-              {user && token ? (
+              {user  ? (
                 <>
                   {token?.role === "user" && (
                     <Link to="/dashboard/my-dashboard">
@@ -228,22 +234,22 @@ const Navbar = () => {
 
               {/* Login registration */}
               <div className="flex justify-center items-center gap-4">
-                {user ? (
+                {user && token ? (
                   <div className=" cursor-pointer gap-2">
                     <span className="text-3xl flex items-center justify-center text-red-500">
-                      {token.role === "user" && (
+                      {token?.role === "user" && (
                         <Link to="/dashboard/my-dashboard">
                           {" "}
                           <FaRegUserCircle />
                         </Link>
                       )}
-                      {token.role === "seller" && (
+                      {token?.role === "seller" && (
                         <Link to="/dashboard/seller-dashboard">
                           {" "}
                           <FaRegUserCircle />
                         </Link>
                       )}
-                      {token.role === "admin" && (
+                      {token?.role === "admin" && (
                         <Link to="/dashboard/admin-dashboard">
                           {" "}
                           <FaRegUserCircle />

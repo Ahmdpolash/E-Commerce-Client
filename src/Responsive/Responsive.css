@@ -7,6 +7,9 @@
   .userOrderDash {
     width: 313px;
   }
+  .allProducts {
+    width: 355px;
+  }
 }
 @media screen and (max-width: 320px) {
   .example {
@@ -16,29 +19,32 @@
     width: 250px;
   }
 
-  .sellerTable{
+  .sellerTable {
     width: 295px;
   }
-  .box{
+  .box {
     display: none;
   }
-  .sellerInfo{
+  .sellerInfo {
     visibility: hidden;
   }
-  .sellerImg{
+  .sellerImg {
     height: 44px;
     width: 44px;
   }
-  .sellerBarChart{
+  .sellerBarChart {
     padding: 0 !important;
   }
-  .menuIcon{
+  .menuIcon {
     margin-right: 15px !important;
   }
-  .mobileSideNav{
-   width: 230px !important;
+  .mobileSideNav {
+    width: 230px !important;
   }
- 
+
+  .allProducts {
+    width: 300px;
+  }
 }
 /* User Dashboard Home */
 
@@ -71,7 +77,11 @@
   .re {
     grid-template-columns: repeat(3, 1fr);
   }
-  .responsive-table{
+  .responsive-table {
     width: 707px;
   }
 }
+
+
+/* all product route seller-dash */
+

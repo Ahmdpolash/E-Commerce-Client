@@ -6,25 +6,25 @@ import Select from "react-select";
 import { FaPlus } from "react-icons/fa";
 import "./darkmood/AddBtn.css";
 import { Link } from "react-router-dom";
+import { IoCloseSharp } from "react-icons/io5";
+const options = [
+  { value: "#mobile", label: "#mobile" },
+  { value: "#fashion", label: "#fashion" },
+  { value: "#electronics", label: "#electronics" },
+  { value: "#accessories", label: "#accessories" },
+];
+const colors = [
+  { value: "red", label: "red" },
+  { value: "blue", label: "blue" },
+  { value: "black", label: "black" },
+  { value: "white", label: "white" },
+  { value: "silver", label: "silver" },
+];
 
 const AddProduct = () => {
   const [cateShow, setCateShow] = useState(false);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState([]);
-  const options = [
-    { value: "#mobile", label: "#mobile" },
-    { value: "#fashion", label: "#fashion" },
-    { value: "#electronics", label: "#electronics" },
-    { value: "#accessories", label: "#accessories" },
-  ];
-  const colors = [
-    { value: "red", label: "red" },
-    { value: "blue", label: "blue" },
-    { value: "black", label: "black" },
-    { value: "white", label: "white" },
-    { value: "silver", label: "silver" },
-  ];
-  const categories = [
+  const [categories, setCategories] = useState([
     {
       id: 1,
       category: "mobile",
@@ -41,7 +41,52 @@ const AddProduct = () => {
       id: 4,
       category: "tablet",
     },
-  ];
+  ]);
+
+  const [filterData, setFilterData] = useState(categories);
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+
+    if (value) {
+      const searchValue = categories.filter((c) =>
+        c.category.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilterData(searchValue);
+      console.log(searchValue);
+    } else {
+      setFilterData(categories);
+    }
+  };
+  const [images, setImages] = useState([]);
+  const [showImage, setShowImage] = useState([]);
+  const handleImage = (e) => {
+    const files = e.target.files;
+    const length = files.length;
+
+    if (length > 0) {
+      setImages([...images, ...files]);
+      let imgURL = [];
+
+      for (let i = 0; i < length; i++) {
+        imgURL.push({ url: URL.createObjectURL(files[i]) });
+      }
+      setShowImage([...showImage, ...imgURL]);
+    }
+  };
+
+  const removeImage = (i) =>{
+    const image = images.filter((img,index) => index !== i)
+    const filterImgURL = showImage.filter((img,index) => index !== i)
+    setImages(image)
+    setShowImage(filterImgURL)
+  }
+
+ 
+  
+
+  console.log(showImage);
 
   return (
     <div className="px-2 md:px-4 lg:px-5">
@@ -88,6 +133,7 @@ const AddProduct = () => {
               <input
                 required
                 readOnly
+                value={search}
                 onClick={() => setCateShow(!cateShow)}
                 className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
                 type="text"
@@ -101,7 +147,7 @@ const AddProduct = () => {
               >
                 <div className="w-full px-4 py-2 fixed">
                   <input
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={handleSearch}
                     required
                     className="px-3 py-1 mt-1 w-full focus:border-indigo-500 outline-none bg-transparent border border-slate-700 rounded-md text-slate-700 overflow-hidden"
                     type="text"
@@ -110,8 +156,9 @@ const AddProduct = () => {
                 </div>
                 <div className="pt-14">
                   <ul className="px-4 cursor-pointer mb-2">
-                    {categories?.map((c, i) => (
-                      <li onClick={()=> setCategory(c)}
+                    {filterData?.map((c, i) => (
+                      <li
+                        onClick={() => setSearch(c.category)}
                         className="py-2 hover:bg-slate-300 rounded-md p-2 hover:text-slate-700"
                         key={i}
                       >
@@ -210,21 +257,38 @@ const AddProduct = () => {
             ></textarea>
           </div>
 
-          <div>
-            <label
-              className="flex flex-col justify-center items-center h-[170px] cursor-pointer border-2 border-dashed border-slate-500 w-[200px] hover:border-indigo-500"
-              htmlFor="image"
-            >
-              <span>
-                <BsImage />
-              </span>
-              <span className="font-medium">Select Image</span>
-            </label>
-          </div>
+          {/* upload images */}
+          <section>
+            <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 xs:gap-4 gap-3 w-full text-[#d0d2d6] mb-4">
+              {showImage.map((image, i) => (
+                <div className="h-[180px] relative">
+                  <label htmlFor={i}>
+                    <img className="border shadow-md rounded-md border-slate-500" src={image.url} alt="" />
+                  </label>
+                  <span onClick={() => removeImage(i)} className='p-2 z-10 cursor-pointer bg-red-600 hover:shadow-lg hover:shadow-red-600/50 text-white absolute top-1 right-1 rounded-full'><IoCloseSharp /></span>
+                </div>
+              ))}
+            </div>
+            {/* upload images */}
+
+            <div>
+              <label
+                className="flex flex-col justify-center items-center h-[170px] cursor-pointer border-2 border-dashed border-slate-500 w-[200px] hover:border-indigo-500"
+                htmlFor="image"
+              >
+                <span>
+                  <BsImage />
+                </span>
+                <span className="font-medium">Select Image</span>
+              </label>
+            </div>
+          </section>
           <input
             required
             type="file"
             name="image"
+            multiple
+            onChange={handleImage}
             id="image"
             className="hidden"
           />
