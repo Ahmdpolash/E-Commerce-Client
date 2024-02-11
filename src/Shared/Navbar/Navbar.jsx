@@ -23,10 +23,12 @@ import useAuth from "../../Hooks/useAuth";
 // import SubHeader from "./SubHeader";
 import { jwtDecode } from "jwt-decode";
 import BottomNavContent from "../../Components/BottomNavContent";
+import MobileCart from "../../Components/MobileCart";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
+  const [mobileCart, setMobileCart] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
   const { logOut, user } = useAuth();
 
@@ -368,7 +370,7 @@ const Navbar = () => {
       {/* Search menu */}
 
       {/* bottom nav */}
-      <div className="fixed block lg:hidden  h-[42px] z-50 bottom-0 bg-white border-t shadow-md border-slate-300 w-screen">
+      <div className="fixed block lg:hidden h-[42px] z-[999] bottom-0 backdrop-blur-md bg-white bg-opacity-50 border-t shadow-md border-slate-300 w-screen">
         <div>
           <ul className="flex bottom-4 text-xl px-4 relative items-center justify-between p-2">
             <li>
@@ -381,8 +383,13 @@ const Navbar = () => {
                 <IoHomeOutline />
               </Link>
             </li>
-            <li className="bottom-4 relative bg-[#2B38D1] text-white border-4 border-white h-[58px] w-[58px] rounded-full ">
-              <IoCartOutline className="mx-auto mt-[13px] font-semibold text-[25px]" />
+            <li className="bottom-4 relative bg-[#2B38D1] text-white border-4 border-white z-[999] h-[58px] w-[58px] rounded-full ">
+              <button
+                onClick={() => setMobileCart(!mobileCart)}
+                className="ml-3 z-[8999]"
+              >
+                <IoCartOutline className="mx-auto mt-[13px]  font-semibold text-[25px]" />
+              </button>
             </li>
             <li>
               <Link to="/dashboard/my-wishlists">
@@ -420,15 +427,29 @@ const Navbar = () => {
       </div>
       {/* bottom nav */}
 
+      {/* bottom nav content  */}
       <div>
         <div
-          className={`w-[280px] mobileSideNav lg:hidden md:w-[340px] border-r-2 fixed bg-white top-0 z-[9999] h-full overflow-y-auto transition-all ${
+          className={`w-[280px] mobileSideNav lg:hidden md:w-[340px] border-r-2 fixed bg-white top-0 z-[99] h-full overflow-y-auto transition-all ${
             open ? "left-0" : "-left-[280px] md:-left-[340px] lg:left-0"
           }`}
         >
           <BottomNavContent />
         </div>
       </div>
+      {/* bottom nav content  */}
+
+      {/* mobile cart */}
+
+      <div
+        className={`w-full lg:hidden  border-r-2 fixed bg-white h-[94vh] top-0 bottom-5 z-[99]  overflow-y-auto transition-all ${
+          mobileCart ? "-top-full" : "-bottom-full  "
+        }`}
+      >
+     
+       <MobileCart mobileCart={mobileCart} setMobileCart={setMobileCart}/>
+      </div>
+      {/* mobile cart */}
     </div>
   );
 };
