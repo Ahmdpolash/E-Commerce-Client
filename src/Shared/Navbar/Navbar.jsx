@@ -383,7 +383,7 @@ const Navbar = () => {
                 <IoHomeOutline />
               </Link>
             </li>
-            <li className="bottom-4 relative bg-[#2B38D1] text-white border-4 border-white z-[999] h-[58px] w-[58px] rounded-full ">
+            <li className="bottom-4 cursor-pointer relative bg-[#2B38D1] text-white border-4 border-white z-[999] h-[58px] w-[58px] rounded-full ">
               <button
                 onClick={() => setMobileCart(!mobileCart)}
                 className="ml-3 z-[8999]"
@@ -442,12 +442,11 @@ const Navbar = () => {
       {/* mobile cart */}
 
       <div
-        className={`w-full lg:hidden  border-r-2 fixed bg-white h-[94vh] top-0 bottom-5 z-[99]  overflow-y-auto transition-all ${
-          mobileCart ? "-top-full" : "-bottom-full  "
+        className={`w-full lg:hidden  border-r-2 fixed bg-white h-[94vh] top-0 bottom-4  z-[99]  overflow-y-auto transition-all ${
+          mobileCart ? "left-0" : "-left-full  "
         }`}
       >
-     
-       <MobileCart mobileCart={mobileCart} setMobileCart={setMobileCart}/>
+        <MobileCart mobileCart={mobileCart} setMobileCart={setMobileCart} />
       </div>
       {/* mobile cart */}
     </div>

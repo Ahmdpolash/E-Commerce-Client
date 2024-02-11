@@ -31,6 +31,15 @@ import SellerDiscount from "../Dashboard/SellerDashboard/SellerDiscount";
 import SellerOrders from "../Dashboard/SellerDashboard/SellerOrders";
 import SellerChatCustomer from "../Dashboard/SellerDashboard/SellerChatCustomer";
 import SellerSupportChat from "../Dashboard/SellerDashboard/SellerSupportChat";
+import AdminDashHome from "../Dashboard/AdminDashboard/AdminDashHome";
+import AdminDashOrder from "../Dashboard/AdminDashboard/AdminDashOrder";
+import AdminDashCategory from "../Dashboard/AdminDashboard/AdminDashCategory";
+import AdminDashSellers from "../Dashboard/AdminDashboard/AdminDashSellers";
+import AdminDashUsers from "../Dashboard/AdminDashboard/AdminDashUsers";
+import AdminDashPaymentsReq from "../Dashboard/AdminDashboard/AdminDashPaymentsReq";
+import AdminDashDeactiveSeller from "../Dashboard/AdminDashboard/AdminDashDeactiveSeller";
+import AdminDashSellerReq from "../Dashboard/AdminDashboard/AdminDashSellerReq";
+import AdminDashChatSeller from "../Dashboard/AdminDashboard/AdminDashChatSeller";
 
 const Route = createBrowserRouter([
   {
@@ -121,41 +130,83 @@ const Route = createBrowserRouter([
         path: "my-profile",
         element: <UserDashProfile />,
       },
+
+      // seller route start here
+
       {
-        path:'seller-dashboard',
-        element:<SellerDashHome/>
+        path: "seller-dashboard",
+        element: <SellerDashHome />,
       },
       {
-        path:'add-products',
-        element:<AddProduct/>
+        path: "add-products",
+        element: <AddProduct />,
       },
       {
-        path:'all-products',
-        element:<SellerDashAllProduct/>
+        path: "all-products",
+        element: <SellerDashAllProduct />,
       },
       {
-        path:'payments',
-        element:<SellerDashPayments/>
+        path: "payments",
+        element: <SellerDashPayments />,
       },
       {
-        path:'my-shop',
-        element:<SellerProfile/>
+        path: "my-shop",
+        element: <SellerProfile />,
       },
       {
-        path:'discount-price',
-        element:<SellerDiscount/>
+        path: "discount-price",
+        element: <SellerDiscount />,
       },
       {
-        path:'customer-orders',
-        element:<SellerOrders/>
+        path: "customer-orders",
+        element: <SellerOrders />,
       },
       {
-        path:'customer-chat',
-        element:<SellerChatCustomer/>
+        path: "customer-chat",
+        element: <SellerChatCustomer />,
       },
       {
-        path:'support-chat',
-        element:<SellerSupportChat/>
+        path: "support-chat",
+        element: <SellerSupportChat />,
+      },
+
+      // admin route start here
+
+      {
+        path: "admin-dashboard",
+        element: <AdminDashHome />,
+      },
+      {
+        path: "admin-orders",
+        element: <AdminDashOrder />,
+      },
+      {
+        path: "add-category",
+        element: <AdminDashCategory />,
+      },
+      {
+        path: "all-sellers",
+        element: <AdminDashSellers />,
+      },
+      {
+        path: "all-users",
+        element: <AdminDashUsers />,
+      },
+      {
+        path: "payment-requests",
+        element: <AdminDashPaymentsReq />,
+      },
+      {
+        path: "deactivate-sellers",
+        element: <AdminDashDeactiveSeller />,
+      },
+      {
+        path: "seller-requests",
+        element: <AdminDashSellerReq />,
+      },
+      {
+        path: "chat-sellers",
+        element: <AdminDashChatSeller />,
       },
     ],
   },

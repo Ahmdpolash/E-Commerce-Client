@@ -10,10 +10,6 @@ import { Helmet } from "react-helmet";
 // import Card from "./Card";
 
 const Home = () => {
-
-
-
-
   return (
     <div>
       <Helmet>

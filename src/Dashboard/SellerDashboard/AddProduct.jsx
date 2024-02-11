@@ -76,15 +76,12 @@ const AddProduct = () => {
     }
   };
 
-  const removeImage = (i) =>{
-    const image = images.filter((img,index) => index !== i)
-    const filterImgURL = showImage.filter((img,index) => index !== i)
-    setImages(image)
-    setShowImage(filterImgURL)
-  }
-
- 
-  
+  const removeImage = (i) => {
+    const image = images.filter((img, index) => index !== i);
+    const filterImgURL = showImage.filter((img, index) => index !== i);
+    setImages(image);
+    setShowImage(filterImgURL);
+  };
 
   console.log(showImage);
 
@@ -259,13 +256,22 @@ const AddProduct = () => {
 
           {/* upload images */}
           <section>
-            <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 xs:gap-4 gap-3 w-full text-[#d0d2d6] mb-4">
+            <div className="grid lg:grid-cols-4 grid-cols-2 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 xs:gap-4 gap-3 w-full text-[#d0d2d6] mb-4">
               {showImage.map((image, i) => (
-                <div className="h-[180px] relative">
+                <div className="lg:h-[180px] relative">
                   <label htmlFor={i}>
-                    <img className="border shadow-md rounded-md border-slate-500" src={image.url} alt="" />
+                    <img
+                      className="border shadow-md rounded-md border-slate-500"
+                      src={image.url}
+                      alt=""
+                    />
                   </label>
-                  <span onClick={() => removeImage(i)} className='p-2 z-10 cursor-pointer bg-red-600 hover:shadow-lg hover:shadow-red-600/50 text-white absolute top-1 right-1 rounded-full'><IoCloseSharp /></span>
+                  <span
+                    onClick={() => removeImage(i)}
+                    className="p-2 z-10 cursor-pointer bg-red-600 hover:shadow-lg hover:shadow-red-600/50 text-white absolute top-1 right-1 rounded-full"
+                  >
+                    <IoCloseSharp />
+                  </span>
                 </div>
               ))}
             </div>
@@ -273,7 +279,7 @@ const AddProduct = () => {
 
             <div>
               <label
-                className="flex flex-col justify-center items-center h-[170px] cursor-pointer border-2 border-dashed border-slate-500 w-[200px] hover:border-indigo-500"
+                className="flex flex-col justify-center items-center h-[130px] md:h-[160px] lg:h-[170px] cursor-pointer border-2 border-dashed border-slate-500 w-[200px] hover:border-indigo-500"
                 htmlFor="image"
               >
                 <span>

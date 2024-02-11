@@ -2,11 +2,14 @@ import React from "react";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 
-const MobileCart = ({mobileCart,setMobileCart}) => {
+const MobileCart = ({ mobileCart, setMobileCart }) => {
   return (
     <div className="">
       <div className="ml-3 mt-2 ">
-        <h3 onClick={() => setMobileCart(!mobileCart)} className="bg-red-500  text-white hover:shadow-red-400/60 h-7 w-7 rounded-full inline-block">
+        <h3
+          onClick={() => setMobileCart(false)}
+          className="bg-red-500  text-white hover:shadow-red-400/60 h-7 w-7 rounded-full inline-block"
+        >
           <RxCross1 className="mt-[6px]  ml-[6px]" />
         </h3>
       </div>

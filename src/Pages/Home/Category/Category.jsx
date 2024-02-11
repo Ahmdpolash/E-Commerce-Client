@@ -37,9 +37,7 @@ const Category = () => {
     autoplay: false, // Enable autoplay
     autoplaySpeed: 2000,
 
-    autoplaySpeed: 2000,
     responsive: [
-      
       {
         breakpoint: 576, // Adjust breakpoints as needed for mobile screens
         settings: {
@@ -59,7 +57,6 @@ const Category = () => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 4,
-          
         },
       },
 

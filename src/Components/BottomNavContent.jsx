@@ -63,7 +63,9 @@ const BottomNavContent = () => {
           <button
             onClick={() => setState("menu")}
             class={`${
-              state === "menu" ? "border-red-600 text-red-600" : "border-slate-200"
+              state === "menu"
+                ? "border-red-600 text-red-600"
+                : "border-slate-200"
             } w-full py-2 bg-white text-base border-b text-gray-900 `}
           >
             Menu
@@ -81,14 +83,14 @@ const BottomNavContent = () => {
 
         {state === "menu" && (
           <div>
-            <ul className="flex  uppercase flex-col px-4 gap-2 text-[18px]">
+            <ul className="flex  uppercase flex-col px-4 gap-2 text-[16px]">
               {navList}
             </ul>
 
             <div className="flex justify-center items-center mx-a">
               <Link
                 to="/sellerRegistration"
-                className="flex gap-1 ml-2  border rounded-full cursor-pointer mt-8 hover:border-red-500 duration-300 text-[14px] font-semibold py-3 items-center  border-gray-400 px-4 hover:bg-transparent hover:text-black  bg-black text-white"
+                className="flex gap-1 ml-2  border rounded-full cursor-pointer mt-8   hover:border-red-500 duration-300 text-[14px] font-semibold py-3 items-center  border-gray-400 px-4 hover:bg-transparent hover:text-black  bg-black text-white"
               >
                 <FaRegUser /> Become a Seller
               </Link>
@@ -100,7 +102,7 @@ const BottomNavContent = () => {
             <ul className="flex cursor-pointer flex-col w-full">
               {categories?.map((c, i) => (
                 <li
-                  className="hover:bg-red-500 hover:text-white rounded-md py-1 px-3  ml-2 duration-500 mb-2"
+                  className="hover:bg-red-500 hover:text-white rounded-md py-1 px-3 text-[18px] ml-2 duration-500 mb-2"
                   key={i}
                 >
                   {c}
