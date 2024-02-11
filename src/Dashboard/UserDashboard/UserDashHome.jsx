@@ -8,7 +8,6 @@ import "../../Responsive/Responsive.css";
 const UserDashHome = () => {
   return (
     <div className="">
-      
       <div className="grid grid-cols-1 flex-wrap md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5">
         <div className="flex justify-center items-center p-4 md:p-5 lg:p-5  bg-white rounded-md gap-4 md:gap-5 lg:gap-5">
           <div className="bg-green-100 w-[47px] h-[47px] rounded-full flex justify-center items-center text-xl ">
@@ -44,7 +43,7 @@ const UserDashHome = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white p-4 mt-5 example w-[390px] md:w-[740px] lg:w-full rounded-md">
+      <div className="bg-white p-4 mt-5 example h-[56vh] w-[468px] md:w-[740px] lg:w-full rounded-md">
         <h2 className="text-lg font-semibold text-slate-600">Recent Orders</h2>
         <div className="pt-4 overflow-x-auto w-full">
           <div className="relative overflow-x-auto">
@@ -122,7 +121,6 @@ const UserDashHome = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

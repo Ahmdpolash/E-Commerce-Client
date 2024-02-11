@@ -3,31 +3,26 @@ import { Link, NavLink } from "react-router-dom";
 import Container from "../../Components/Container/Container";
 import { IoMdMenu } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
-import { BsCartCheck, BsCartCheckFill, BsTwitterX } from "react-icons/bs";
-import { MdKeyboardArrowDown, MdOutlineMarkEmailUnread } from "react-icons/md";
-import {
-  FaGithub,
-  FaHome,
-  FaLinkedin,
-  FaList,
-  FaRegUser,
-  FaRegUserCircle,
-  FaSearch,
-} from "react-icons/fa";
-import {
-  FaAngleDown,
-  FaArrowRightArrowLeft,
-  FaCartShopping,
-  FaH,
-} from "react-icons/fa6";
+import { BsCartCheckFill } from "react-icons/bs";
+import { CiUser } from "react-icons/ci";
+
+import { AiOutlineMenu } from "react-icons/ai";
+
+import { IoCartOutline } from "react-icons/io5";
+import { IoHomeOutline } from "react-icons/io5";
 import "../../Responsive/Responsive.css";
 
-import { TiSocialFacebook } from "react-icons/ti";
+import { MdKeyboardArrowDown, MdOutlineFavoriteBorder } from "react-icons/md";
+import { FaList, FaRegUser, FaSearch } from "react-icons/fa";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import "../../Responsive/Responsive.css";
+
 import { FaHeart } from "react-icons/fa";
 import logo from "../../../public/logo2.png";
 import useAuth from "../../Hooks/useAuth";
-import SubHeader from "./SubHeader";
+// import SubHeader from "./SubHeader";
 import { jwtDecode } from "jwt-decode";
+import BottomNavContent from "../../Components/BottomNavContent";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -95,7 +90,12 @@ const Navbar = () => {
   return (
     <div className="">
       {/* Sub Menu */}
-
+      <div
+        onClick={() => setOpen(false)}
+        className={`fixed duration-200 ${
+          !open ? "invisible" : "visible"
+        } w-screen h-screen backdrop-blur-sm top-0 left-0 z-10`}
+      ></div>
       {/* Sub Menu */}
 
       <div className="px-5 hidden lg:block lg:px-16">
@@ -368,26 +368,65 @@ const Navbar = () => {
       {/* Search menu */}
 
       {/* bottom nav */}
-      <div className="fixed block lg:hidden z-50 bottom-0 bg-slate-300 w-full">
+      <div className="fixed block lg:hidden  h-[42px] z-50 bottom-0 bg-white border-t shadow-md border-slate-300 w-screen">
         <div>
-          <ul className="flex items-center justify-between p-2">
+          <ul className="flex bottom-4 text-xl px-4 relative items-center justify-between p-2">
             <li>
-              <FaHome />
+              <button onClick={() => setOpen(!open)}>
+                <AiOutlineMenu />
+              </button>
             </li>
             <li>
-              <FaHome />
+              <Link to="/">
+                <IoHomeOutline />
+              </Link>
             </li>
-            <li className="bottom-6 relative bg-green-500 h-12 w-12 rounded-full ">
-              <FaCartShopping className="mx-auto mt-4 text-xl" />
+            <li className="bottom-4 relative bg-[#2B38D1] text-white border-4 border-white h-[58px] w-[58px] rounded-full ">
+              <IoCartOutline className="mx-auto mt-[13px] font-semibold text-[25px]" />
             </li>
             <li>
-              <FaHome />
+              <Link to="/dashboard/my-wishlists">
+                <MdOutlineFavoriteBorder className="text-[23px]" />
+              </Link>
             </li>
 
-            <li>
-              <FaHome />
-            </li>
+            {user ? (
+              <li>
+                {token.role === "user" && (
+                  <Link to="/dashboard/my-dashboard">
+                    <CiUser className="text-[24px]" />
+                  </Link>
+                )}
+                {token.role === "seller" && (
+                  <Link to="/dashboard/seller-dashboard">
+                    <CiUser className="text-[24px]" />
+                  </Link>
+                )}
+                {token.role === "admin" && (
+                  <Link to="/dashboard/admin-dashboard">
+                    <CiUser className="text-[24px]" />
+                  </Link>
+                )}
+              </li>
+            ) : (
+              <li>
+                <Link to="/login">
+                  <CiUser className="text-[24px]" />
+                </Link>
+              </li>
+            )}
           </ul>
+        </div>
+      </div>
+      {/* bottom nav */}
+
+      <div>
+        <div
+          className={`w-[265px] mobileSideNav lg:hidden md:w-[340px] border-r-2 fixed bg-white top-0 z-[9999] h-full overflow-y-auto transition-all ${
+            open ? "left-0" : "-left-[265px] md:-left-[340px] lg:left-0"
+          }`}
+        >
+          <BottomNavContent />
         </div>
       </div>
     </div>

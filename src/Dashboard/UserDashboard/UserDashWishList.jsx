@@ -31,7 +31,7 @@ const UserDashWishList = () => {
             <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
               <img
                 className="mx-auto w-[140px] md:w-[110px] lg:w-[140px] transition-opacity hover:duration-700 ease-in-out"
-                src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/48-home_default/the-adventure-begins-framed-poster.jpg"
+                src="https://raw.githubusercontent.com/SheikhFarid99/multi-vendor-ecommerce/main/client/public/images/products/1.webp"
                 alt=""
               />
               <div className="">

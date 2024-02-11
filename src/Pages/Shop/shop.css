@@ -1,191 +1,117 @@
 .container {
-    cursor: pointer;
-  }
-  
-  .container input {
-    display: none;
-  }
-  
-  .container svg {
-    overflow: visible;
-  }
-  
-  .path {
-    fill: none;
-    stroke: gray;
-    stroke-width: 6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
-    stroke-dasharray: 241 9999999;
-    stroke-dashoffset: 0;
-  }
-  
-  .container input:checked ~ svg .path {
-    stroke-dasharray: 70.5096664428711 9999999;
-    stroke-dashoffset: -262.2723388671875;
-  }
-  
+  cursor: pointer;
+}
+
+.container input {
+  display: none;
+}
+
+.container svg {
+  overflow: visible;
+}
+
+.path {
+  fill: none;
+  stroke: gray;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+  stroke-dasharray: 241 9999999;
+  stroke-dashoffset: 0;
+}
+
+.container input:checked ~ svg .path {
+  stroke-dasharray: 70.5096664428711 9999999;
+  stroke-dashoffset: -262.2723388671875;
+}
+
+/* btn */
 
 
-  /* btn */
+/* love */
 
+.con-like {
+  --red: rgb(255, 50, 50);
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border: none;
+}
 
-  .button {
-    --width: 110px;
-    --height: 35px;
+.con-like .like {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 20;
+  cursor: pointer;
+}
 
-    width: var(--width);
-    height: var(--height);
-    background: #F9FAFB;
-    position: relative;
-    text-align: center;
-  
-    color: red;
+.con-like .checkmark {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    transition: background 0.7s;
-  }
-  
-  
-  
-  
-  .text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .button-wrapper,
-  .text,
-  .icon {
-    overflow: hidden;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    color: red;
-  }
-  
-  .text {
-    top: 0;
-  }
-  
-  .text,
-  .icon {
-    transition: top 0.5s;
-  }
-  
-  .icon {
-    color: #fff;
-    top: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .icon svg {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .button:hover {
-    background: #222;
-  }
-  
-  .button:hover .text {
-    top: -100%;
-  }
-  
-  .button:hover .icon {
-    top: 0;
-  }
-  
+.con-like .outline,
+.con-like .filled {
+  fill: var(--red);
+  position: absolute;
+  outline: none;
+}
 
-  /* love */
+.con-like .filled {
+  animation: kfr-filled 0.5s;
+  display: none;
+}
 
+.con-like .celebrate {
+  position: absolute;
+  animation: kfr-celebrate 0.5s;
+  animation-fill-mode: forwards;
+  display: none;
+}
 
+.con-like .poly {
+  stroke: var(--red);
+  fill: var(--red);
+}
 
-  .con-like {
-    --red: rgb(255, 50, 50);
-    position: relative;
-    width: 22px;
-    height: 22px;
-    border: none;
-  }
-  
-  .con-like .like {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+.con-like .like:checked ~ .checkmark .filled {
+  display: block;
+}
+
+.con-like .like:checked ~ .checkmark .celebrate {
+  display: block;
+}
+
+@keyframes kfr-filled {
+  0% {
     opacity: 0;
-    z-index: 20;
-    cursor: pointer;
+    transform: scale(0);
   }
-  
-  .con-like .checkmark {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
   }
-  
-  .con-like .outline,
-  .con-like .filled {
-    fill: var(--red);
-    position: absolute;
-    outline: none;
+}
+
+@keyframes kfr-celebrate {
+  0% {
+    transform: scale(0);
   }
-  
-  .con-like .filled {
-    animation: kfr-filled 0.5s;
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
     display: none;
   }
-  
-  .con-like .celebrate {
-    position: absolute;
-    animation: kfr-celebrate 0.5s;
-    animation-fill-mode: forwards;
-    display: none;
-  }
-  
-  .con-like .poly {
-    stroke: var(--red);
-    fill: var(--red);
-  }
-  
-  .con-like .like:checked ~ .checkmark .filled {
-    display: block
-  }
-  
-  .con-like .like:checked ~ .checkmark .celebrate {
-    display: block
-  }
-  
-  @keyframes kfr-filled {
-    0% {
-      opacity: 0;
-      transform: scale(0);
-    }
-  
-    50% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-  }
-  
-  @keyframes kfr-celebrate {
-    0% {
-      transform: scale(0);
-    }
-  
-    50% {
-      opacity: 0.8;
-    }
-  
-    100% {
-      transform: scale(1.2);
-      opacity: 0;
-      display: none;
-    }
-  }
+}

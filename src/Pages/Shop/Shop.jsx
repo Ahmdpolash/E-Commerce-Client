@@ -71,7 +71,7 @@ const Shop = () => {
 
   return (
     <div className="bg-[#F6F6F5]">
-       <Helmet>
+      <Helmet>
         <title>Shop.my || Shop</title>
       </Helmet>
       {/* shop banner */}
@@ -806,7 +806,7 @@ const Shop = () => {
                           ? "mx-auto w-[160px] md:w-[180px] lg:w-[200px]"
                           : "mx-0 w-[160px] md:w-[240px] lg:w-[280px]"
                       }  transition-opacity hover:duration-700 ease-in-out`}
-                      src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/48-home_default/the-adventure-begins-framed-poster.jpg"
+                      src="https://raw.githubusercontent.com/SheikhFarid99/multi-vendor-ecommerce/main/client/public/images/products/1.webp"
                       alt=""
                     />
                     <div
@@ -848,25 +848,11 @@ const Shop = () => {
                           <FaArrowCircleRight className="text-[21px]" />{" "}
                         </button>
 
-                        <div className="button bg-gray-50 hidden lg:block border-2 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
-                          <div className="button-wrapper">
-                            <div className="text flex items-center gap-1">
-                              Add To Cart{" "}
-                              <FaArrowRight className="text-[13px] pt-[2px]" />{" "}
-                            </div>
-                            <span className="icon">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                className="bi bi-cart2"
-                                viewBox="0 0 16 16"
-                              >
-                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
-                              </svg>
-                            </span>
-                          </div>
+                        <div className="bg-gray-50 lg:flex hidden items-center gap-2 text-red-500 border border-slate-300 py-[5px]  hover:border hover:duration-500 hover:border-red-500 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
+                          Add To Cart
+                          <span>
+                            <FaArrowRight />
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -937,7 +923,6 @@ const Shop = () => {
             </div>
 
             {/* products end */}
-
 
             {/* ============================================== */}
 
