@@ -422,8 +422,8 @@ const Navbar = () => {
 
       <div>
         <div
-          className={`w-[265px] mobileSideNav lg:hidden md:w-[340px] border-r-2 fixed bg-white top-0 z-[9999] h-full overflow-y-auto transition-all ${
-            open ? "left-0" : "-left-[265px] md:-left-[340px] lg:left-0"
+          className={`w-[280px] mobileSideNav lg:hidden md:w-[340px] border-r-2 fixed bg-white top-0 z-[9999] h-full overflow-y-auto transition-all ${
+            open ? "left-0" : "-left-[280px] md:-left-[340px] lg:left-0"
           }`}
         >
           <BottomNavContent />
