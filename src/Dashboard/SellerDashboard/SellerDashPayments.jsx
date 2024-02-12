@@ -86,7 +86,7 @@ const SellerDashPayments = () => {
 
               <div className="py-1">
                 <table className="overflow-x-auto w-full">
-                  <thead className="w-full text-[15px] font-normal text-slate-800 rounded-md bg-slate-200">
+                  <thead className="w-full text-[15px] h-8 font-normal text-slate-800 rounded-md bg-slate-200">
                     <tr>
                       <th>No</th>
                       <th>Amount</th>
@@ -125,8 +125,8 @@ const SellerDashPayments = () => {
             </h2>
             <div className="py-2">
               <div className="py-1">
-                <table className="overflow-x-auto w-full">
-                  <thead className="w-full text-[15px]  font-normal text-slate-800 rounded-md bg-slate-200">
+                <table className="overflow-x-auto  w-full">
+                  <thead className="w-full text-[15px] h-8 font-normal text-slate-800 rounded-md bg-[#F3F4F6] ">
                     <tr className="">
                       <th>Id</th>
                       <th>Amount</th>

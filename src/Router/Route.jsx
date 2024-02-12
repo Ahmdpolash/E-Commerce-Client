@@ -60,7 +60,7 @@ const Route = createBrowserRouter([
         element: <ProductDetails />,
       },
       {
-        path: "/bookmarks",
+        path: "/my-bookmarks",
         element: <Bookmarks />,
       },
       {

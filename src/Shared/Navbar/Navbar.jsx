@@ -392,7 +392,7 @@ const Navbar = () => {
               </button>
             </li>
             <li>
-              <Link to="/dashboard/my-wishlists">
+              <Link to="/my-bookmarks">
                 <MdOutlineFavoriteBorder className="text-[23px]" />
               </Link>
             </li>
