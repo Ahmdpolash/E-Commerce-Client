@@ -39,7 +39,6 @@ const DashHeaders = () => {
 
           <div className="">
             <div className="flex  items-center gap-4">
-              
               <div className="sellerInfo">
                 <h1 className="font-semibold">Polash Ahmed</h1>
                 <p className="text-right text-[14px] font-medium text-slate-700">

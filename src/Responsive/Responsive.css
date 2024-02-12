@@ -10,6 +10,9 @@
   .allProducts {
     width: 355px;
   }
+  #allSellers {
+    width: 315px;
+  }
 }
 @media screen and (max-width: 320px) {
   .example {
@@ -44,6 +47,12 @@
 
   .allProducts {
     width: 300px;
+  }
+  #allSellers {
+    width: 255px;
+  }
+  #hiddenSelect{
+    display: none
   }
 }
 /* User Dashboard Home */
@@ -81,7 +90,3 @@
     width: 707px;
   }
 }
-
-
-/* all product route seller-dash */
-

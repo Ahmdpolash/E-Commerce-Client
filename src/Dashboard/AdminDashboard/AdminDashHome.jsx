@@ -243,7 +243,7 @@ const AdminDashHome = () => {
             <h3>View All</h3>
           </div>
           <div className="pt-2 lg:pt-4">
-            <div className="bg-white sellerTable  w-[350px] px-2 lg:px-0 md:w-[700px] lg:w-full rounded-md">
+            <div className="bg-white sellerTable  w-[410px] px-2 lg:px-0 md:w-[700px] lg:w-full rounded-md">
               <div className=" overflow-x-auto w-full">
                 <div className="relative overflow-x-auto">
                   <table className="w-full text-sm text-left  text-gray-500">
