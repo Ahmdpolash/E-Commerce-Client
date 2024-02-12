@@ -50,12 +50,17 @@ const AdminDashPaymentsReq = () => {
                     Pending
                   </td>
                   <td className="whitespace-nowrap py-1 pl-10 lg:pl-0 text-slate-700">
-                   Feb 12, 2024
+                    Feb 12, 2024
                   </td>
                   <td className="whitespace-nowrap py-1 pl-6 text-slate-700">
                     <button className="px-3 md:px-5 lg:px-5 py-1 rounded-sm text-white bg-indigo-500">
                       Confirm
                     </button>
+                    {/* <div className="flex items-center gap-3">
+                      <button className="px-3 md:px-5 lg:px-5 py-1 rounded-sm text-white bg-indigo-500">
+                        Confirm
+                      </button>
+                    </div> */}
                   </td>
                 </tr>
               ))}
