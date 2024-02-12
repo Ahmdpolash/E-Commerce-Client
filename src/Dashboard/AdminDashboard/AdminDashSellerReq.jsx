@@ -40,7 +40,7 @@ const AdminDashSellerReq = () => {
                   <th className="py-2 lg:px-2 px-4 font-semibold text-[15px] lg:text-[16px]">
                     No
                   </th>
-                  
+
                   <th className="py-2 lg:px-2 px-8  font-semibold text-[15px] lg:text-[16px]">
                     Name
                   </th>
@@ -54,9 +54,9 @@ const AdminDashSellerReq = () => {
                     Payment Status
                   </th>
                   <th className="py-2 lg:px-2 px-5 font-semibold text-[15px] lg:text-[16px]">
-                   Status
+                    Status
                   </th>
-                 
+
                   <th className="py-2 lg:px-2 px-10 font-semibold text-[16px]">
                     Action{" "}
                   </th>
@@ -67,11 +67,11 @@ const AdminDashSellerReq = () => {
                 {[1, 2, 3, 4, 5, 6, 7].map((p, i) => (
                   <tr key={i} className=" border-slate-300 border-b">
                     <td className="py-1">{i + 1}</td>
-                    
+
                     <td className="whitespace-nowrap py-1  text-slate-700">
                       Polash Ahmed
                     </td>
-                    
+
                     <td className="whitespace-nowrap py-1 pl-10 lg:pl-0 text-slate-700">
                       ahmedpolash732@gmail.com
                     </td>
@@ -81,8 +81,7 @@ const AdminDashSellerReq = () => {
                     <td className="whitespace-nowrap py-1  text-slate-700">
                       Pending
                     </td>
-                    
-                    
+
                     <td className="">
                       <div className="h-[27px] w-[27px] text-center mx-auto text-white rounded-sm bg-green-500">
                         <Link>
