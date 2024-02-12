@@ -13,6 +13,12 @@
   #allSellers {
     width: 315px;
   }
+  #sellerDashTable{
+    width: 395px;
+  }
+  #sellerChart{
+    width: 380px;
+  }
 }
 @media screen and (max-width: 320px) {
   .example {

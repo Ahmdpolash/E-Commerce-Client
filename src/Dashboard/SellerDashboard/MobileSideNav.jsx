@@ -26,7 +26,7 @@ const MobileSideNav = () => {
         <ul className="py- text-slate-700 px-4 ">
           <li className="mb-1">
             <NavLink
-              to="/dashboard/seller-dashboard"
+              to="/dashboard/admin-dashboard"
               className={({ isActive }) =>
                 isActive
                   ? "flex justify-start hover:pl-4 transition-all bg-slate-300 px-2 shadow-indigo-500/50 mb-1 font-semibold border-r-4 duration-500 border-indigo-600 items-center gap-2 py-2"

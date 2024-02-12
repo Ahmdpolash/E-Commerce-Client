@@ -11,7 +11,7 @@ const AdminDashSellers = () => {
       <DashHeaders />
 
       <div className="mt-4">
-        <div className="rounded-md h-[83.8vh] bg-white w-full p-4">
+        <div className="rounded-md lg:h-[83.8vh] pb-8 bg-white w-full p-4">
           <div className="flex items-center justify-between">
             <select
               className="border outline-none border-slate-300 px-3 py-[5px] bg-slate-100 rounded-md"
@@ -70,7 +70,7 @@ const AdminDashSellers = () => {
               <tbody className="text-center ">
                 {[1, 2, 3, 4, 5, 6, 7].map((p, i) => (
                   <tr key={i} className=" border-slate-300 border-b">
-                    <td className="py-1">{i+1}</td>
+                    <td className="py-1">{i + 1}</td>
                     <td className="py-1">
                       <img
                         className="w-[50px] mx-auto rounded-full border h-[50px]"
