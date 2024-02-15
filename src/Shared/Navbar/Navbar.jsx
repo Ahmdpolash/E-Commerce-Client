@@ -370,8 +370,8 @@ const Navbar = () => {
       {/* Search menu */}
 
       {/* bottom nav */}
-      <div className="fixed block lg:hidden h-[42px] z-[999] bottom-0 backdrop-blur-md bg-white bg-opacity-50 border-t shadow-md border-slate-300 w-screen">
-        <div>
+      <div className="fixed  block lg:hidden h-[42px] z-[999] bottom-0 backdrop-blur-md bg-white bg-opacity-50 border-t shadow-md border-slate-300 w-screen">
+        <div className="">
           <ul className="flex bottom-4 text-xl px-4 relative items-center justify-between p-2">
             <li>
               <button onClick={() => setOpen(!open)}>
@@ -399,17 +399,17 @@ const Navbar = () => {
 
             {user ? (
               <li>
-                {token.role === "user" && (
+                {token?.role === "user" && (
                   <Link to="/dashboard/my-dashboard">
                     <CiUser className="text-[24px]" />
                   </Link>
                 )}
-                {token.role === "seller" && (
+                {token?.role === "seller" && (
                   <Link to="/dashboard/seller-dashboard">
                     <CiUser className="text-[24px]" />
                   </Link>
                 )}
-                {token.role === "admin" && (
+                {token?.role === "admin" && (
                   <Link to="/dashboard/admin-dashboard">
                     <CiUser className="text-[24px]" />
                   </Link>
@@ -423,6 +423,10 @@ const Navbar = () => {
               </li>
             )}
           </ul>
+
+          <div className="px-4 bg-indigo-50 w-full text-white py-2 rounded-sm">
+            <button>Logout</button>
+          </div>
         </div>
       </div>
       {/* bottom nav */}

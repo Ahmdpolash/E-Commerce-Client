@@ -37,6 +37,12 @@ const BottomNavContent = () => {
       >
         Blogs
       </NavLink>
+      <NavLink
+        to="/blog"
+        className="hover:bg-red-500 hover:text-white rounded-md py-1 px-3  ml-2 duration-500"
+      >
+        Logout
+      </NavLink>
     </>
   );
 

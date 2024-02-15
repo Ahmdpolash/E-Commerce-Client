@@ -3,7 +3,7 @@ import React from "react";
 const UserDashChangePass = () => {
   return (
     <div>
-      <div className="p-4 h-[350px] rounded-md bg-white">
+      <div className="p-4 h-[69.5vh] rounded-md bg-white">
         <h2 className="text-xl text-slate-600 pb-5 mt-2 text-center font-semibold">
           Change Password
         </h2>
@@ -15,7 +15,7 @@ const UserDashChangePass = () => {
               id="old_password"
               name="old_password"
               placeholder="old password"
-              className="outline-none w-full mt-2 px-3 py-2 border rounded-md text-slate-600"
+              className="outline-none bg-slate-50 w-full mt-2 px-3 py-2 border border-slate-300 rounded-md text-slate-600"
             />
           </div>
           <div className="flex-col w-full gap-1 mb-2">
@@ -25,7 +25,7 @@ const UserDashChangePass = () => {
               id="new_password"
               name="new_password"
               placeholder="new password"
-              className="outline-none px-3 mt-2 w-full py-2 border rounded-md text-slate-600"
+              className="outline-none bg-slate-50 px-3 mt-2 w-full py-2 border border-slate-300 rounded-md text-slate-600"
             />
           </div>
           <div className="w-full mt-2">
