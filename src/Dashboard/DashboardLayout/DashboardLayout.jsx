@@ -5,6 +5,7 @@ import Navbar from "../../Shared/Navbar/Navbar";
 import UserDashSideBar from "../UserDashboard/UserDashSideBar";
 import SellerDashSidebar from "../SellerDashboard/SellerDashSidebar";
 import AdminDashSidebar from "../AdminDashboard/AdminDashSidebar";
+import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = () => {
   const data = localStorage.getItem("access_token");
@@ -28,6 +29,7 @@ const DashboardLayout = () => {
         <div> {token.role === "user" && <UserDashSideBar />}</div>
         <div>{token.role === "seller" && <SellerDashSidebar />}</div>
         <div>{token.role === "admin" && <AdminDashSidebar />}</div>
+        <Toaster />
       </div>
     </div>
   );

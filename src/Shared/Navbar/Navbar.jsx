@@ -149,7 +149,7 @@ const Navbar = () => {
                 <>
                   {token?.role === "user" && (
                     <Link to="/dashboard/my-dashboard">
-                      <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
+                      <div className=" px-2 py-1 cursor-pointer">
                         <div className="flex gap-2 items-center justify-center">
                           <img
                             className="h-10 w-10 rounded-full"
@@ -163,7 +163,7 @@ const Navbar = () => {
                   )}
                   {token?.role === "seller" && (
                     <Link to="/dashboard/seller-dashboard">
-                      <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
+                      <div className=" px-2 py-1 cursor-pointer">
                         <div className="flex gap-2 items-center justify-center">
                           <img
                             className="h-10 w-10 rounded-full"

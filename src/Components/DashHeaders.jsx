@@ -2,9 +2,14 @@ import { useState } from "react";
 import MobileSideNav from "../Dashboard/SellerDashboard/MobileSideNav";
 import "../Responsive/Responsive.css";
 import { FaList } from "react-icons/fa";
+import { jwtDecode } from "jwt-decode";
+import useAuth from "../Hooks/useAuth";
 
 const DashHeaders = () => {
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
+  const accessToken = localStorage.getItem("access_token");
+  const token = jwtDecode(accessToken);
 
   return (
     <div className="">
@@ -41,14 +46,21 @@ const DashHeaders = () => {
             <div className="flex  items-center gap-4">
               <div className="sellerInfo">
                 <h1 className="font-semibold">Polash Ahmed</h1>
-                <p className="text-right text-[14px] font-medium text-slate-700">
-                  Seller
-                </p>
+                {token?.role === "seller" && (
+                  <p className="text-right text-[14px] font-medium text-slate-700">
+                    Seller
+                  </p>
+                )}
+                {token?.role === "admin" && (
+                  <p className="text-right text-[14px] font-medium text-slate-700">
+                    Admin
+                  </p>
+                )}
               </div>
               <div>
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf3g0kIKYCB-w9U0l4Srnvq3s7KLnR6JnArw&usqp=CAU"
-                  alt=""
+                  alt="user image"
                   className="w-[50px] sellerImg h-[50px] rounded-full"
                 />
               </div>

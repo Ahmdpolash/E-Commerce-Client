@@ -10,9 +10,11 @@ import { Link } from "react-router-dom";
 import "../../Responsive/Responsive.css";
 import { FaList } from "react-icons/fa";
 import MobileSideNav from "./MobileSideNav";
+import useAuth from "../../Hooks/useAuth";
 
 const SellerDashHome = () => {
   const [open, setOpen] = useState(false);
+  const { user } = useAuth();
 
   const state = {
     series: [
@@ -142,7 +144,7 @@ const SellerDashHome = () => {
                 <DarkMood />
               </div>
               <div className="sellerInfo">
-                <h1 className="font-semibold">Polash Ahmed</h1>
+                <h1 className="font-semibold">{user?.displayName}</h1>
                 <p className="text-right text-[14px] font-medium text-slate-700">
                   Seller
                 </p>
