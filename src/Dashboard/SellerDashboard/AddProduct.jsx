@@ -16,10 +16,16 @@ const options = [
   { value: "#accessories", label: "#accessories" },
 ];
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
+console.log(image_hosting_key);
+
 const AddProduct = () => {
   const [cateShow, setCateShow] = useState(false);
   const [search, setSearch] = useState("");
   const [images, setImages] = useState([]);
+  console.log(images);
   const [showImage, setShowImage] = useState([]);
   const axiosPublic = useAxiosPublic();
   const [categories, setCategories] = useState([
@@ -40,6 +46,7 @@ const AddProduct = () => {
       category: "tablet",
     },
   ]);
+
   const [value, setValue] = useState([]);
   const [tag, setTags] = useState([]);
 
@@ -90,8 +97,6 @@ const AddProduct = () => {
     { value: "silver", label: "silver" },
   ];
 
-  console.log(value);
-
   const handleCol = (e) => {
     setValue(e.map((col) => col.value));
   };
@@ -102,37 +107,54 @@ const AddProduct = () => {
     const form = e.target;
     const product_name = form.productName.value;
     const brand = form.brand.value;
-    // const image = form.image.files[0];
     const stock = form.stock.value;
     const price = form.price.value;
     const discount = form.discount.value;
     const color = value;
     const tags = tag;
+    const pic = form.photo.value;
     const description = form.description.value;
     const short_description = form.short_description.value;
+    const date = new Date().toJSON().slice(0, 10);
 
     form.reset();
-    const data = {
-      product_name,
 
-      brand,
-      stock,
-      price,
-      discount,
-      color,
-      tags,
-      short_description,
-      description,
-    };
+    const formData =  {image: images }
 
     try {
-      const res = await axiosPublic.post("/products", data);
-      if (res.data.insertedId) {
-        console.log(res.data);
-        toast.success("product added successfully");
+      const res = await axiosPublic.post(image_hosting_api, formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      console.log(res.data);
+
+      if (res.data.success) {
+        const products = {
+          product_name,
+          brand,
+          stock,
+          price,
+          discount,
+          color,
+          tags,
+          short_description,
+          description,
+          images: res.data.data.display_url,
+          date,
+        };
+
+        const productRes = await axiosPublic.post("/products", products);
+        if (productRes.data.insertedId) {
+          console.log(productRes.data);
+          toast.success("Product added successfully");
+        }
+      } else {
+        toast.error("Failed to upload images");
       }
     } catch (err) {
-      toast.error("Failed to add product");
+      console.error("Error uploading images:", err);
+      toast.error("Failed to upload images");
     }
   };
 
@@ -154,7 +176,6 @@ const AddProduct = () => {
             <div className="flex flex-col w-full gap-1">
               <label htmlFor="productName">Product name</label>
               <input
-                required
                 className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
                 type="text"
                 placeholder="Product name"
@@ -165,7 +186,6 @@ const AddProduct = () => {
             <div className="flex flex-col w-full gap-1">
               <label htmlFor="brand">Product brand</label>
               <input
-                required
                 className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
                 type="text"
                 placeholder="Product brand"
@@ -179,7 +199,6 @@ const AddProduct = () => {
             <div className="flex flex-col w-full gap-1 relative">
               <label htmlFor="category">Category</label>
               <input
-                required
                 readOnly
                 value={search}
                 onClick={() => setCateShow(!cateShow)}
@@ -196,7 +215,6 @@ const AddProduct = () => {
                 <div className="w-full px-4 py-2 fixed">
                   <input
                     onChange={handleSearch}
-                    required
                     className="px-3 py-1 mt-1 w-full focus:border-indigo-500 outline-none bg-transparent border border-slate-700 rounded-md text-slate-700 overflow-hidden"
                     type="text"
                     placeholder="search"
@@ -220,7 +238,6 @@ const AddProduct = () => {
             <div className="flex flex-col w-full gap-1">
               <label htmlFor="stock">Availability</label>
               <input
-                required
                 className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
                 type="number"
                 min="0"
@@ -235,7 +252,6 @@ const AddProduct = () => {
             <div className="flex flex-col w-full gap-1">
               <label htmlFor="price">Price</label>
               <input
-                required
                 className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
                 type="number"
                 placeholder="Price"
@@ -246,7 +262,6 @@ const AddProduct = () => {
             <div className="flex flex-col w-full gap-1">
               <label htmlFor="discount">Discount</label>
               <input
-                required
                 min="0"
                 className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
                 type="number"
@@ -287,7 +302,6 @@ const AddProduct = () => {
           <div className="flex flex-col w-full gap-1 text-slate-700 mb-3">
             <label htmlFor="description">Short Description</label>
             <textarea
-              required
               rows={1}
               className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
               placeholder="Short_Description"
@@ -298,7 +312,6 @@ const AddProduct = () => {
           <div className="flex flex-col w-full gap-1 text-slate-700 mb-5">
             <label htmlFor="description">Description</label>
             <textarea
-              required
               rows={4}
               className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
               placeholder="Description"
@@ -342,10 +355,10 @@ const AddProduct = () => {
             </div>
           </section>
           <input
-            
             type="file"
             multiple
             id="image"
+            name="photo"
             onChange={handleImage}
             className="hidden"
           />
