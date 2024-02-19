@@ -102,6 +102,7 @@ const AddProduct = () => {
   };
 
   // add product on database
+  // add product on database
   const handleAddProduct = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -112,24 +113,28 @@ const AddProduct = () => {
     const discount = form.discount.value;
     const color = value;
     const tags = tag;
-    const pic = form.photo.value;
     const description = form.description.value;
     const short_description = form.short_description.value;
     const date = new Date().toJSON().slice(0, 10);
 
-    form.reset();
-
-    const formData =  {image: images }
+    const formData = new FormData();
+    images.forEach((image) => {
+      formData.append("image", image);
+    });
 
     try {
-      const res = await axiosPublic.post(image_hosting_api, formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
+      const res = await fetch(image_hosting_api, {
+        method: "POST",
+        body: formData,
       });
-      console.log(res.data);
+      const result = await res.json();
 
-      if (res.data.success) {
+      if (result.success) {
+        const imageUrls = Array.isArray(result.data)
+          ? result.data.map((imgData) => imgData.display_url)
+          : [];
+        console.log(imageUrls);
+        console.log(result.data);
         const products = {
           product_name,
           brand,
@@ -140,14 +145,14 @@ const AddProduct = () => {
           tags,
           short_description,
           description,
-          images: res.data.data.display_url,
+          images: imageUrls,
           date,
         };
 
         const productRes = await axiosPublic.post("/products", products);
         if (productRes.data.insertedId) {
-          console.log(productRes.data);
           toast.success("Product added successfully");
+          form.reset();
         }
       } else {
         toast.error("Failed to upload images");

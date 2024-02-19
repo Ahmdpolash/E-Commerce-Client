@@ -22,7 +22,7 @@ const SellerDashSidebar = () => {
 
         {/* mobile sidebar */}
 
-        <div className="w-[275px]  hidden lg:block bg-white h-screen relative border-r-2 border-slate-200 shadow-indigo-600/30">
+        <div className="w-[275px]  hidden lg:block bg-white h-screen relative z-[8888] border-r-2 border-slate-200 shadow-indigo-600/30">
           <div className="logo mx-auto text-center w-[185px] my-2">
             <Link to="/">
               {" "}
