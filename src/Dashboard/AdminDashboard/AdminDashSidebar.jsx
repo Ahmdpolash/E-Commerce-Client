@@ -17,6 +17,7 @@ import logo from "../../../public/logo2.png";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const AdminDashSidebar = () => {
   const { logOut } = useAuth();
@@ -24,10 +25,29 @@ const AdminDashSidebar = () => {
 
   const handleLogOut = () => {
     logOut().then(() => {
-      toast.success("Logged out Successfully");
-      navigate("/");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Log Out!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Sign Out!",
+            text: "Your are now Sign out from this Account.",
+            icon: "success",
+          });
+          navigate("/");
+        }
+      });
     });
   };
+
+
+  
   return (
     <div className="bg-[#E2E8F0]  ">
       <div className="flex ">

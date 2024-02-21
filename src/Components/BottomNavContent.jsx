@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import logo from "../../public/logo2.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
+import useAuth from "../Hooks/useAuth";
+import toast from "react-hot-toast";
+
 const BottomNavContent = () => {
   const [state, setState] = useState("menu");
+
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("Logged out");
+      navigate("/");
+    });
+  };
 
   const navList = (
     <>
@@ -37,12 +50,13 @@ const BottomNavContent = () => {
       >
         Blogs
       </NavLink>
-      <NavLink
+      <button
+        onClick={handleLogOut}
         to="/blog"
-        className="hover:bg-red-500 hover:text-white rounded-md py-1 px-3  ml-2 duration-500"
+        className="hover:bg-red-500 hover:text-white text-left rounded-md py-1 px-3  ml-2 duration-500"
       >
-        Logout
-      </NavLink>
+        LOGOUT
+      </button>
     </>
   );
 

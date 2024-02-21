@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { TbBrandProducthunt } from "react-icons/tb";
 import { IoCartOutline, IoChatboxOutline } from "react-icons/io5";
@@ -11,8 +11,19 @@ import { FaRegUserCircle } from "react-icons/fa";
 import "../../Responsive/Responsive.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import logo from "../../../public/logo2.png";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const MobileSideNav = () => {
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("Logged out");
+      navigate("/");
+    });
+  };
   return (
     <div>
       <div className="logo mx-auto text-center pt-1 w-[150px] my-2">
@@ -161,20 +172,14 @@ const MobileSideNav = () => {
               <span>My Shop</span>
             </NavLink>
           </li>
-          <li className="mb-1">
-            <NavLink
-              to="/dashboard/my-shop"
-              className={({ isActive }) =>
-                isActive
-                  ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                  : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-              }
-            >
-              <span className="text-xl">
-                <BiLogInCircle />
-              </span>
-              <span>Logout</span>
-            </NavLink>
+          <li
+            onClick={handleLogOut}
+            className="mb-1 flex items-center cursor-pointer gap-2 pl-1"
+          >
+            <span className="text-xl">
+              <BiLogInCircle className="text-[23px]" />
+            </span>
+            <span className="text-[17px] font-semibold">Logout</span>
           </li>
         </ul>
       </div>

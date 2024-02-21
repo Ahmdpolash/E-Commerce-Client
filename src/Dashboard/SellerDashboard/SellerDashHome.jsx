@@ -11,6 +11,9 @@ import "../../Responsive/Responsive.css";
 import { FaList } from "react-icons/fa";
 import MobileSideNav from "./MobileSideNav";
 import useAuth from "../../Hooks/useAuth";
+import { RxCross2 } from "react-icons/rx";
+import { CiCircleInfo } from "react-icons/ci";
+import SellerPieChart from "./SellerPieChart";
 
 const SellerDashHome = () => {
   const [open, setOpen] = useState(false);
@@ -105,7 +108,7 @@ const SellerDashHome = () => {
   };
 
   return (
-    <div className="py- px-2 md:px-4 lg:px-5">
+    <div className="py- px-2 md:px-4 lg:px-5 mb-6">
       {/* screen onclick */}
 
       <div
@@ -220,7 +223,7 @@ const SellerDashHome = () => {
       {/*------------------ the summary box end here-------------------- */}
 
       {/*--------------- the bar chart start here-------------------- */}
-      <section>
+      <section className="flex flex-col gap-2 lg:flex-row">
         <div className="w-full lg:w-7/12 lg:pr-3">
           <div className="w-full bg-white sellerBarChart p-4 rounded-md">
             <ReactApexChart
@@ -230,6 +233,20 @@ const SellerDashHome = () => {
               height={350}
             />
           </div>
+        </div>
+
+        <div className="w-full flex-1 h-[397px] bg-white rounded-md">
+          <div className="flex justify-between items-center px-4 py-2">
+            <h1 className="text-slate-700 font-medium flex gap-2 items-center text-[18px]">
+              <CiCircleInfo className="text-slate-800" />
+              Sales Overview
+            </h1>
+            <button className="text- cursor-pointer font-medium flex gap-1 items-center text-[16px]">
+              <RxCross2 className="mt-1 text-[19px]" />
+            </button>
+          </div>
+
+          <SellerPieChart />
         </div>
       </section>
       {/* ----------------the bar chart end here------------------ */}

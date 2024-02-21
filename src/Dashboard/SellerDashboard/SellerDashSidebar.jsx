@@ -13,6 +13,7 @@ import logo from "../../../public/logo2.png";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const SellerDashSidebar = () => {
   const { logOut } = useAuth();
@@ -20,8 +21,24 @@ const SellerDashSidebar = () => {
 
   const handleLogOut = () => {
     logOut().then(() => {
-      toast.success("Logged out Successfully");
-      navigate("/");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Log Out!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Sign Out!",
+            text: "Your are now Sign out from this Account.",
+            icon: "success",
+          });
+          navigate("/");
+        }
+      });
     });
   };
   return (
@@ -180,20 +197,14 @@ const SellerDashSidebar = () => {
                   <span>My Shop</span>
                 </NavLink>
               </li>
-              <li onClick={handleLogOut} className="mb-1">
-                <NavLink
-                  to="/dashboard/my-shop"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <BiLogInCircle />
-                  </span>
-                  <span>Logout</span>
-                </NavLink>
+              <li
+                onClick={handleLogOut}
+                className="mb-1 flex items-center cursor-pointer gap-2 pl-1"
+              >
+                <span className="text-xl">
+                  <BiLogInCircle className="text-[23px]" />
+                </span>
+                <span className="text-[17px] font-semibold">Logout</span>
               </li>
               {/* <li className="mb-1 absolute bottom-2  text-red-500  border-t-2 border-slate-200  w-full">
                 <NavLink

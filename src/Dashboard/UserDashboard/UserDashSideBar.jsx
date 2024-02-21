@@ -19,22 +19,25 @@ const UserDashSideBar = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Log Out!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Sign Out!",
-          text: "Your are now Sign out of this Account.",
-          icon: "success",
-        });
-      }
+    logOut().then(() => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Log Out!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Sign Out!",
+            text: "Your are now Sign out from this Account.",
+            icon: "success",
+          });
+          navigate("/");
+        }
+      });
     });
   };
 
