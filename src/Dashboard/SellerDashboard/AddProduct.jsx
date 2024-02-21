@@ -130,10 +130,6 @@ const AddProduct = () => {
       const result = await res.json();
 
       if (result.success) {
-        const imageUrls = Array.isArray(result.data)
-          ? result.data.map((imgData) => imgData.display_url)
-          : [];
-        console.log(imageUrls);
         console.log(result.data);
         const products = {
           product_name,
@@ -145,7 +141,7 @@ const AddProduct = () => {
           tags,
           short_description,
           description,
-          images: imageUrls,
+          images: result.data.data.displayURL,
           date,
         };
 

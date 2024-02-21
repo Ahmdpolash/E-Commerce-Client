@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { RiProductHuntLine } from "react-icons/ri";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { MdPendingActions } from "react-icons/md";
 import ReactApexChart from "react-apexcharts";
 import { Link } from "react-router-dom";
 import { TbUsersGroup } from "react-icons/tb";
 
 import "../../Responsive/Responsive.css";
-import { FaList, FaShoppingCart } from "react-icons/fa";
+import { FaBell, FaList, FaShoppingCart } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
+
 import MobileSideNav from "../SellerDashboard/MobileSideNav";
 import DarkMood from "../SellerDashboard/darkmood/DarkMood";
+import PieChart from "./PieChart";
+import { CiCircleInfo } from "react-icons/ci";
 
 const AdminDashHome = () => {
   const [open, setOpen] = useState(false);
@@ -104,7 +106,7 @@ const AdminDashHome = () => {
   };
 
   return (
-    <div className="py- px-2 md:px-4 lg:px-5">
+    <div className="py- px-2 md:px-4 lg:px-5 mb-5">
       {/* screen onclick */}
 
       <div
@@ -174,44 +176,45 @@ const AdminDashHome = () => {
       {/* -----------------------the summary box start here---------------------- */}
 
       <section className="my-5 box">
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 res lg:grid-cols-4 gap-4  md:gap-5 lg:gap-6">
-          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
+          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3 relative overflow-hidden hover:bg-[#47359f]">
             <div className="flex flex-col justify-start items-start text-slate-600">
-              <h2 className="text-3xl font-bold">$188</h2>
               <span className="text-md font-medium">Total Sales</span>
+              <h2 className="text-3xl font-bold">$188</h2>
             </div>
             <div className="w-[46px] h-[47px] rounded-full bg-[#28c76f1f] flex justify-center items-center text-xl">
               <BsCurrencyDollar className="text-[#28c76f] shadow-lg" />
             </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-[#47359f] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           </div>
 
-          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
+          <div className="flex justify-between items-center bg-white p-5 hover:bg-[#F8617A] rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-slate-600">
-              <h2 className="text-3xl font-bold">25</h2>
               <span className="text-md font-medium">Products</span>
+              <h2 className="text-3xl font-bold">25</h2>
             </div>
             <div className="w-[46px] h-[47px] rounded-full bg-[#e000e81f] flex justify-center items-center text-xl">
               <RiProductHuntLine className="text-[#cd00e8] shadow-lg" />
             </div>
           </div>
 
-          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
+          <div className="flex justify-between items-center bg-white p-5 hover:bg-[#6FFECD] rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-slate-600">
-              <h2 className="text-3xl font-bold">14</h2>
               <span className="text-md font-medium">Sellers</span>
+              <h2 className="text-3xl font-bold">14</h2>
             </div>
             <div className="w-[46px] h-[47px] rounded-full bg-[#46d9ea1f] flex justify-center items-center text-xl">
               <TbUsersGroup className="text-[#4ec1cc] shadow-lg" />
             </div>
           </div>
 
-          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start text-slate-600">
-              <h2 className="text-3xl font-bold">0</h2>
-              <span className="text-md font-medium">Orders</span>
+          <div class="flex justify-between items-center bg-white p-5 rounded-md gap-3 hover:bg-[#3a30ae] duration-700">
+            <div class="flex flex-col justify-start items-start text-slate-600">
+              <span class="text-md font-medium">Orders</span>
+              <h2 class="text-3xl font-bold">0</h2>
             </div>
-            <div className="w-[46px] h-[47px] rounded-full bg-[#7367f01f] flex justify-center items-center text-xl">
-              <FaShoppingCart className="text-[#7367f0] shadow-lg" />
+            <div class="w-[46px] h-[47px] rounded-full bg-[#7367f01f] flex justify-center items-center text-xl">
+              <FaShoppingCart class="text-[#7367f0] shadow-lg" />
             </div>
           </div>
         </div>
@@ -219,7 +222,7 @@ const AdminDashHome = () => {
       {/*------------------ the summary box end here-------------------- */}
 
       {/*--------------- the bar chart start here-------------------- */}
-      <section>
+      <section className="flex flex-col gap-2 lg:flex-row">
         <div className="w-full lg:w-7/12 lg:pr-3">
           <div className="w-full bg-white sellerBarChart p-4 rounded-md">
             <ReactApexChart
@@ -229,6 +232,20 @@ const AdminDashHome = () => {
               height={350}
             />
           </div>
+        </div>
+
+        <div className="w-full flex-1 h-[397px] bg-white rounded-md">
+          <div className="flex justify-between items-center px-4 py-2">
+            <h1 className="text-slate-700 font-medium flex gap-2 items-center text-[18px]">
+              <CiCircleInfo className="text-slate-800" />
+              Sales Overview
+            </h1>
+            <button className="text- cursor-pointer font-medium flex gap-1 items-center text-[16px]">
+              <RxCross2 className="mt-1 text-[19px]" />
+            </button>
+          </div>
+
+          <PieChart />
         </div>
       </section>
       {/* ----------------the bar chart end here------------------ */}

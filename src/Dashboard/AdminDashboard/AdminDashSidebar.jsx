@@ -26,169 +26,170 @@ const AdminDashSidebar = () => {
 
         {/* mobile sidebar */}
 
-        <div className="w-[275px]  hidden lg:block bg-white h-screen relative border-r-2 border-slate-200 shadow-indigo-600/30">
-          <div className="logo mx-auto text-center w-[185px] my-2">
-            <Link to="/">
-              {" "}
-              <img src={logo} alt="" />
-            </Link>
-          </div>
+        <div>
+          <div className="w-[275px] relative z-[888]  hidden lg:block bg-white h-screen  border-r-2 border-slate-200 shadow-indigo-600/30">
+            <div className="logo mx-auto text-center w-[185px] my-2">
+              <Link to="/">
+                {" "}
+                <img src={logo} alt="" />
+              </Link>
+            </div>
 
-          <div>
-            <ul className="py- text-slate-700 px-4 ">
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/admin-dashboard"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 px-2 shadow-indigo-500/50 mb-1 font-semibold border-r-4 duration-500 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <RxDashboard />
-                  </span>
-                  <span>Dashboard</span>
-                </NavLink>
-              </li>
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/admin-orders"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <IoCartOutline />
-                  </span>
-                  <span>Orders</span>
-                </NavLink>
-              </li>
+            <div>
+              <ul className="py- text-slate-700 px-4 ">
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/admin-dashboard"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 px-2 shadow-indigo-500/50 mb-1 font-semibold border-r-4 duration-500 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <RxDashboard />
+                    </span>
+                    <span>Dashboard</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/admin-orders"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <IoCartOutline />
+                    </span>
+                    <span>Orders</span>
+                  </NavLink>
+                </li>
 
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/add-category"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <TbBrandProducthunt />
-                  </span>
-                  <span>Category</span>
-                </NavLink>
-              </li>
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/all-sellers"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <HiOutlineUsers />
-                  </span>
-                  <span>Sellers</span>
-                </NavLink>
-              </li>
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/all-users"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <TbUsersGroup />
-                  </span>
-                  <span>All Users</span>
-                </NavLink>
-              </li>
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/payment-requests"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <MdOutlinePayment />
-                  </span>
-                  <span>Payment Request</span>
-                </NavLink>
-              </li>
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/add-category"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <TbBrandProducthunt />
+                    </span>
+                    <span>Category</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/all-sellers"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <HiOutlineUsers />
+                    </span>
+                    <span>Sellers</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/all-users"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <TbUsersGroup />
+                    </span>
+                    <span>All Users</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/payment-requests"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <MdOutlinePayment />
+                    </span>
+                    <span>Payment Request</span>
+                  </NavLink>
+                </li>
 
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/deactivate-sellers"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <TbSettingsCancel />
-                  </span>
-                  <span>Deactivate Seller</span>
-                </NavLink>
-              </li>
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/seller-requests"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <VscGitPullRequestGoToChanges />
-                  </span>
-                  <span>Seller Request</span>
-                </NavLink>
-              </li>
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/chat-sellers"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <IoChatboxOutline />
-                  </span>
-                  <span>Chat Seller</span>
-                </NavLink>
-              </li>
-              <li className="mb-1">
-                <NavLink
-                  to="/dashboard/my-shop"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                      : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                  }
-                >
-                  <span className="text-xl">
-                    <BiLogInCircle />
-                  </span>
-                  <span>Logout</span>
-                </NavLink>
-              </li>
-              {/* <li className="mb-1 absolute bottom-2  text-red-500  border-t-2 border-slate-200  w-full">
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/deactivate-sellers"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <TbSettingsCancel />
+                    </span>
+                    <span>Deactivate Seller</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/seller-requests"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <VscGitPullRequestGoToChanges />
+                    </span>
+                    <span>Seller Request</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/chat-sellers"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <IoChatboxOutline />
+                    </span>
+                    <span>Chat Seller</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/my-shop"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <BiLogInCircle />
+                    </span>
+                    <span>Logout</span>
+                  </NavLink>
+                </li>
+                {/* <li className="mb-1 absolute bottom-2  text-red-500  border-t-2 border-slate-200  w-full">
                 <NavLink
                   to="/dashboard/my-shop"
                   className={({ isActive }) =>
@@ -203,7 +204,8 @@ const AdminDashSidebar = () => {
                   <span>Log Out</span>
                 </NavLink>
               </li> */}
-            </ul>
+              </ul>
+            </div>
           </div>
         </div>
 
