@@ -4,6 +4,7 @@ import { RiProductHuntLine } from "react-icons/ri";
 import ReactApexChart from "react-apexcharts";
 import { Link } from "react-router-dom";
 import { TbUsersGroup } from "react-icons/tb";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 import "../../Responsive/Responsive.css";
 import { FaBell, FaList, FaShoppingCart } from "react-icons/fa";
@@ -144,6 +145,9 @@ const AdminDashHome = () => {
               <div className="">
                 <DarkMood />
               </div>
+              <div>
+                <IoMdNotificationsOutline className="text-[26px]" />
+              </div>
               <div className="sellerInfo">
                 <h1 className="font-semibold">Polash Ahmed</h1>
                 <p className="text-right text-[14px] font-medium text-slate-700">
@@ -177,44 +181,47 @@ const AdminDashHome = () => {
 
       <section className="my-5 box">
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
-          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3 relative overflow-hidden hover:bg-[#47359f]">
-            <div className="flex flex-col justify-start items-start text-slate-600">
+          <div className="flex justify-between group items-center bg-white p-5 hover:bg-[#35bd8d] duration-700 ease-linear rounded-md gap-3">
+            <div className="flex flex-col justify-start items-start text-slate-600 group-hover:text-white">
               <span className="text-md font-medium">Total Sales</span>
-              <h2 className="text-3xl font-bold">$188</h2>
+              <h2 className="text-3xl font-bold">1445</h2>
             </div>
-            <div className="w-[46px] h-[47px] rounded-full bg-[#28c76f1f] flex justify-center items-center text-xl">
-              <BsCurrencyDollar className="text-[#28c76f] shadow-lg" />
+            <div className="w-[46px] h-[47px] rounded-full group-hover:bg-white bg-[#28c76f1f] flex justify-center items-center text-xl">
+              <BsCurrencyDollar className="text-[#28c76f] group-hover:text-slate-700 shadow-lg" />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-[#47359f] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           </div>
 
-          <div className="flex justify-between items-center bg-white p-5 hover:bg-[#F8617A] rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start text-slate-600">
+          <div className="flex group justify-between items-center bg-white p-5 hover:bg-[#F8617A] duration-500 ease-linear rounded-md gap-3">
+            <div className="flex flex-col justify-start items-start group-hover:text-white text-slate-600">
               <span className="text-md font-medium">Products</span>
               <h2 className="text-3xl font-bold">25</h2>
             </div>
-            <div className="w-[46px] h-[47px] rounded-full bg-[#e000e81f] flex justify-center items-center text-xl">
-              <RiProductHuntLine className="text-[#cd00e8] shadow-lg" />
+            <div className="w-[46px] h-[47px] rounded-full group-hover:bg-white bg-[#e000e81f] flex justify-center items-center text-xl">
+              <RiProductHuntLine className="text-[#cd00e8] group-hover:text-slate-700 shadow-lg" />
             </div>
           </div>
 
-          <div className="flex justify-between items-center bg-white p-5 hover:bg-[#6FFECD] rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start text-slate-600">
+          <div className="flex justify-between group items-center bg-white p-5 hover:bg-[#35bd8d] duration-700 ease-linear rounded-md gap-3">
+            <div className="flex flex-col justify-start items-start text-slate-600 group-hover:text-white">
               <span className="text-md font-medium">Sellers</span>
               <h2 className="text-3xl font-bold">14</h2>
             </div>
-            <div className="w-[46px] h-[47px] rounded-full bg-[#46d9ea1f] flex justify-center items-center text-xl">
-              <TbUsersGroup className="text-[#4ec1cc] shadow-lg" />
+            <div className="w-[46px] h-[47px] rounded-full group-hover:bg-white bg-[#46d9ea1f] flex justify-center items-center text-xl">
+              <TbUsersGroup className="text-[#4ec1cc] group-hover:text-slate-700 shadow-lg" />
             </div>
           </div>
 
-          <div class="flex justify-between items-center bg-white p-5 rounded-md gap-3 hover:bg-[#3a30ae] duration-700">
+          <div class="flex group ease-linear justify-between items-center bg-white p-5 rounded-md gap-3 hover:bg-[#483dc6] duration-700">
             <div class="flex flex-col justify-start items-start text-slate-600">
-              <span class="text-md font-medium">Orders</span>
-              <h2 class="text-3xl font-bold">0</h2>
+              <span class="text-md group-hover:text-white duration-500 font-medium">
+                Orders
+              </span>
+              <h2 class="text-3xl group-hover:text-white duration-500 font-bold">
+                0
+              </h2>
             </div>
-            <div class="w-[46px] h-[47px] rounded-full bg-[#7367f01f] flex justify-center items-center text-xl">
-              <FaShoppingCart class="text-[#7367f0] shadow-lg" />
+            <div class="w-[46px] h-[47px] rounded-full group-hover:bg-white bg-[#7367f01f] flex justify-center items-center text-xl">
+              <FaShoppingCart class="text-[#7367f0]  group-hover:text-slate-700 duration-500 shadow-lg" />
             </div>
           </div>
         </div>

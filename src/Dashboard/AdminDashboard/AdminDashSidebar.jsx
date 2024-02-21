@@ -6,7 +6,7 @@ import { MdOutlineDiscount, MdOutlinePayment } from "react-icons/md";
 import { BiLogInCircle } from "react-icons/bi";
 import { HiOutlineUsers } from "react-icons/hi2";
 
-import { CiChat2 } from "react-icons/ci";
+import { CiChat2, CiImageOn } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import "../../Responsive/Responsive.css";
 import { TbUsersGroup } from "react-icons/tb";
@@ -14,9 +14,20 @@ import { TbSettingsCancel } from "react-icons/tb";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 
 import logo from "../../../public/logo2.png";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const AdminDashSidebar = () => {
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("Logged out Successfully");
+      navigate("/");
+    });
+  };
   return (
     <div className="bg-[#E2E8F0]  ">
       <div className="flex ">
@@ -28,10 +39,10 @@ const AdminDashSidebar = () => {
 
         <div>
           <div className="w-[275px] relative z-[888]  hidden lg:block bg-white h-screen  border-r-2 border-slate-200 shadow-indigo-600/30">
-            <div className="logo mx-auto text-center w-[185px] my-2">
+            <div className="logo mx-auto text-center w-[185px] ">
               <Link to="/">
                 {" "}
-                <img src={logo} alt="" />
+                <img className="py-3 " src={logo} alt="" />
               </Link>
             </div>
 
@@ -161,6 +172,21 @@ const AdminDashSidebar = () => {
                 </li>
                 <li className="mb-1">
                   <NavLink
+                    to="/dashboard/add-banner"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-[22px]">
+                      <CiImageOn />
+                    </span>
+                    <span>Add Banners</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1">
+                  <NavLink
                     to="/dashboard/chat-sellers"
                     className={({ isActive }) =>
                       isActive
@@ -174,7 +200,7 @@ const AdminDashSidebar = () => {
                     <span>Chat Seller</span>
                   </NavLink>
                 </li>
-                <li className="mb-1">
+                <li onClick={handleLogOut} className="mb-1">
                   <NavLink
                     to="/dashboard/my-shop"
                     className={({ isActive }) =>

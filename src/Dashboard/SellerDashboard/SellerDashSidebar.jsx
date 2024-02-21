@@ -10,9 +10,20 @@ import { FaList, FaRegUserCircle } from "react-icons/fa";
 import "../../Responsive/Responsive.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import logo from "../../../public/logo2.png";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const SellerDashSidebar = () => {
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("Logged out Successfully");
+      navigate("/");
+    });
+  };
   return (
     <div className="bg-[#E2E8F0]  ">
       <div className="flex ">
@@ -169,7 +180,7 @@ const SellerDashSidebar = () => {
                   <span>My Shop</span>
                 </NavLink>
               </li>
-              <li className="mb-1">
+              <li onClick={handleLogOut} className="mb-1">
                 <NavLink
                   to="/dashboard/my-shop"
                   className={({ isActive }) =>

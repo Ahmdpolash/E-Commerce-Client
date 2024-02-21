@@ -40,6 +40,7 @@ import AdminDashPaymentsReq from "../Dashboard/AdminDashboard/AdminDashPaymentsR
 import AdminDashDeactiveSeller from "../Dashboard/AdminDashboard/AdminDashDeactiveSeller";
 import AdminDashSellerReq from "../Dashboard/AdminDashboard/AdminDashSellerReq";
 import AdminDashChatSeller from "../Dashboard/AdminDashboard/AdminDashChatSeller";
+import AdminAddBanner from "../Dashboard/AdminDashboard/AdminAddBanner";
 
 const Route = createBrowserRouter([
   {
@@ -207,6 +208,10 @@ const Route = createBrowserRouter([
       {
         path: "chat-sellers",
         element: <AdminDashChatSeller />,
+      },
+      {
+        path: "add-banner",
+        element: <AdminAddBanner />,
       },
     ],
   },

@@ -19,13 +19,11 @@ const options = [
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-console.log(image_hosting_key);
-
 const AddProduct = () => {
   const [cateShow, setCateShow] = useState(false);
   const [search, setSearch] = useState("");
   const [images, setImages] = useState([]);
-  console.log(images);
+  const [loading, setLoading] = useState(false);
   const [showImage, setShowImage] = useState([]);
   const axiosPublic = useAxiosPublic();
   const [categories, setCategories] = useState([
@@ -102,61 +100,84 @@ const AddProduct = () => {
   };
 
   // add product on database
-  // add product on database
   const handleAddProduct = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
-    const product_name = form.productName.value;
-    const brand = form.brand.value;
-    const stock = form.stock.value;
-    const price = form.price.value;
-    const discount = form.discount.value;
-    const color = value;
-    const tags = tag;
-    const description = form.description.value;
-    const short_description = form.short_description.value;
-    const date = new Date().toJSON().slice(0, 10);
 
-    const formData = new FormData();
-    images.forEach((image) => {
-      formData.append("image", image);
-    });
+    // const product_name = form.productName.value;
+    // const brand = form.brand.value;
+    // const stock = form.stock.value;
+    // const price = form.price.value;
+    // const discount = form.discount.value;
+    // const color = value;
+    // const tags = tag;
+    // const description = form.description.value;
+    // const short_description = form.short_description.value;
+    // const date = new Date().toJSON().slice(0, 10);
+    const images = form.photo.files;
 
-    try {
-      const res = await fetch(image_hosting_api, {
-        method: "POST",
-        body: formData,
-      });
-      const result = await res.json();
+    // image uploading process for multiple images
+    const url = [];
+    for (let i = 0; i < images.length; i++) {
+      const formData = new FormData();
+      formData.append("image", images[i]);
 
-      if (result.success) {
-        console.log(result.data);
-        const products = {
-          product_name,
-          brand,
-          stock,
-          price,
-          discount,
-          color,
-          tags,
-          short_description,
-          description,
-          images: result.data.data.displayURL,
-          date,
-        };
+      try {
+        const res = await axiosPublic.post(image_hosting_api, formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        });
+        console.log(res.data);
 
-        const productRes = await axiosPublic.post("/products", products);
-        if (productRes.data.insertedId) {
-          toast.success("Product added successfully");
-          form.reset();
+        if (res.data.success) {
+          url.push(res.data.data.display_url);
         }
-      } else {
-        toast.error("Failed to upload images");
+      } catch (err) {
+        toast.error("Failed to upload image");
       }
-    } catch (err) {
-      console.error("Error uploading images:", err);
-      toast.error("Failed to upload images");
+
+      setLoading(false);
     }
+
+    console.log(url);
+
+    // try {
+    //   const res = await fetch(image_hosting_api, {
+    //     method: "POST",
+    //     body: formData,
+    //   });
+    //   const result = await res.json();
+
+    //   if (result.success) {
+    //     console.log(result.data);
+    //     const products = {
+    //       product_name,
+    //       brand,
+    //       stock,
+    //       price,
+    //       discount,
+    //       color,
+    //       tags,
+    //       short_description,
+    //       description,
+    //       images: result.data.data.displayURL,
+    //       date,
+    //     };
+
+    //     const productRes = await axiosPublic.post("/products", products);
+    //     if (productRes.data.insertedId) {
+    //       toast.success("Product added successfully");
+    //       form.reset();
+    //     }
+    //   } else {
+    //     toast.error("Failed to upload images");
+    //   }
+    // } catch (err) {
+    //   console.error("Error uploading images:", err);
+    //   toast.error("Failed to upload images");
+    // }
   };
 
   return (
@@ -325,10 +346,10 @@ const AddProduct = () => {
           <section>
             <div className="grid lg:grid-cols-4 grid-cols-2 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 xs:gap-4 gap-3 w-full text-[#d0d2d6] mb-4">
               {showImage.map((image, i) => (
-                <div key={i} className="lg:h-[180px] relative">
+                <div key={i} className="lg:h-[120px] relative">
                   <label htmlFor={i}>
                     <img
-                      className="border shadow-md rounded-md border-slate-500"
+                      className="border h-[120px] w-full shadow-md rounded-md border-slate-500"
                       src={image.url}
                       alt=""
                     />
@@ -366,11 +387,13 @@ const AddProduct = () => {
           {/* <button type="submit" className="px-4 md:px-6 lg:px-7 py-2 my-4 text-white bg-red-500">Add Product</button> */}
 
           <button type="submit" class="button">
-            <span className="button__text">Add Product</span>
+            <span className="button__text">Add Product </span>
             <span className="button__icon">
               <FaPlus className="text-white" />
             </span>
           </button>
+
+          {loading && "loading.."}
         </form>
       </div>
     </div>

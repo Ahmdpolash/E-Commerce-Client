@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../../Shared/Navbar/Navbar";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { FaList, FaRegUserCircle } from "react-icons/fa";
 import { RxCross1, RxDashboard } from "react-icons/rx";
 import { RiProductHuntLine } from "react-icons/ri";
@@ -12,8 +12,11 @@ import { MdOutlineNotificationsActive } from "react-icons/md";
 import { IoBagCheckOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
 import logo from "../../../public/logo2.png";
+import useAuth from "../../Hooks/useAuth";
 const UserDashSideBar = () => {
   const [open, setOpen] = useState(false);
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     Swal.fire({
