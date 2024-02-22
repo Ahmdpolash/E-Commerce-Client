@@ -19,7 +19,6 @@ const SellerRegistration = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
-  
   const {
     register,
     handleSubmit,
@@ -27,82 +26,81 @@ const SellerRegistration = () => {
     formState: { errors },
   } = useForm();
 
-  //divisions
+  //division and district fetch request
   useEffect(() => {
     fetch("/json/division.json")
       .then((res) => res.json())
       .then((data) => setDivisions(data));
-  }, []);
 
-  //district
-  useEffect(() => {
     fetch("/json/district.json")
       .then((res) => res.json())
       .then((data) => setDistrict(data));
   }, []);
 
   const [filter, setFilter] = useState("");
-  console.log(filter);
+
   const handleDivisions = (e) => {
     setFilter(e.target.value);
   };
 
   const onSubmit = async (data) => {
-    const toastId = toast.loading("Account creating...");
     setLoading(true);
-    const imgFile = { image: data.shopLogo[0] };
-    console.log(imgFile);
+    const toastId = toast.loading("Account creating...");
 
-    const res = await axiosPublic.post(image_hosting_api, imgFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    console.log(res.data);
+    try {
+      const imgFile = { image: data.shopLogo[0] };
+      const res = await axiosPublic.post(image_hosting_api, imgFile, {
+        headers: { "content-type": "multipart/form-data" },
+      });
 
-    if (res.data.success) {
-      setLoading(false);
-      // If image upload is successful, proceed with user registration
-      const info = {
-        first_name: data.firstName,
-        last_name: data.lastName,
-        email: data.email,
-        shop_name: data.shopName,
-        description: data.description,
-        seller_number: data.number,
-        role: "seller",
-        shop_Logo: res.data.data.display_url,
-        district: data.district,
-        division: data.division,
-      };
+      if (res.data.success) {
+        const info = {
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: data.email,
+          shop_name: data.shopName,
+          description: data.description,
+          seller_number: data.number,
+          role: "seller",
+          shop_Logo: res.data.data.display_url,
+          district: data.district,
+          division: data.division,
+        };
 
-      // Perform user registration
-      const result = await axiosPublic.post("/users", info);
+        const result = await axiosPublic.post("/users", info);
 
-      if (result.data.insertedId) {
-        createUser(data.email, data.password)
-          .then(() => {
-            update(res.data.data.display_url, name)
-              .then((res) => {
-                navigate("/login");
-                reset();
-                toast.success("Registration Success !! Login Now", {
-                  id: toastId,
+        if (result.data.insertedId) {
+          createUser(data.email, data.password)
+            .then(() => {
+              update(res.data.data.display_url, data.firstName)
+                .then(() => {
+                  navigate("/login");
+                  reset();
+                  toast.success("Registration Success !! Login Now", {
+                    id: toastId,
+                  });
+                })
+                .catch(() => {
+                  toast.error("Registration Failure", { id: toastId });
+                  throw new Error(
+                    "Something went wrong updating user information"
+                  );
                 });
-              })
-              .catch((err) => {
-                toast.error(
-                  "Something went wrong !! Please Check your credentials",
-                  { id: toastId }
-                );
-              });
-          })
-          .catch((err) => {
-            toast.error(
-              "Something went wrong !! Please Check your credentials"
-            );
-          });
+            })
+            .catch(() => {
+              toast.error(
+                "Something went wrong, please refresh this page !! and try again !!",
+                { id: toastId }
+              );
+
+              throw new Error("Something went wrong creating user account");
+            });
+        }
       }
+    } catch (error) {
+      toast.error(`Error: ${error.message}`, { id: toastId });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -131,11 +129,11 @@ const SellerRegistration = () => {
       <section>
         <div className="bg-[#F1F5F6] flex justify-center items-center mt-">
           <div className="w-full justify-center items-center p-5 lg:p-10">
-            <div className=" relative lg:w-[70%] mx-auto border shadow-md bg-white rounded-md">
-              <h2 className="text-center w-full pt-3 text-2xl text-slate-600 font-bold">
-                Seller Registration{" "}
+            <div className=" relative lg:w-[70%] hover:border duration-500 hover:border-orange-500 mx-auto border shadow-md bg-white rounded-md">
+              <h2 className="text-center w-full pt-3 text-[26px] text-slate-700 font-bold">
+                Create Seller Account{" "}
               </h2>
-              <span className="text-orange-500 text-center mx-auto block font-bold ">
+              <span className="text-orange-500 text-center text-[18px] mx-auto block font-bold ">
                 Shopp.My
               </span>
               <div className="px-8 py-4 ">
@@ -146,7 +144,7 @@ const SellerRegistration = () => {
                   >
                     <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
                       <div className="flex flex-col w-full gap-1 mb-2">
-                        <label htmlFor="firstName">First Name</label>
+                        <label htmlFor="firstName">First Name </label>
                         <input
                           type="text"
                           className="w-full bg-slate-100 px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"

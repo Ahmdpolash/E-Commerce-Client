@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye, FaFacebookF } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
@@ -17,6 +17,8 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const Register = () => {
   const [open, setOpen] = useState(false);
   const [role, setRole] = useState("user");
+  const [divisions, setDivisions] = useState([]);
+  const [district, setDistrict] = useState([]);
   const {
     register,
     handleSubmit,
@@ -27,80 +29,104 @@ const Register = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetch("/json/division.json")
+      .then((res) => res.json())
+      .then((data) => setDivisions(data));
+
+    fetch("/json/district.json")
+      .then((res) => res.json())
+      .then((data) => setDistrict(data));
+  }, []);
+
+  const [filter, setFilter] = useState("");
+
+  const handleDivisions = (e) => {
+    setFilter(e.target.value);
+  };
+
   const onSubmit = async (data) => {
     const roleValue = role;
     const formData = { ...data, role: roleValue };
     console.log(formData);
     const toastId = toast.loading("Registration Processing...");
 
-    const imgFile = { image: formData.image[0] };
-    console.log(imgFile);
+    let imageUrl = ""; // Initialize imageUrl variable
 
-    const res = await axiosPublic.post(image_hosting_api, imgFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    console.log(res.data);
+    try {
+      if (role === "seller") {
+        const imgFile = { image: formData.shopLogo[0] };
+        console.log(imgFile);
+        // Upload image file
+        const res = await axiosPublic.post(image_hosting_api, imgFile, {
+          headers: { "content-type": "multipart/form-data" },
+        });
+        imageUrl = res.data.data.display_url; // Assign imageUrl upon successful upload
+      }
 
-    if (res.data.success) {
-      // If image upload is successful, proceed with user registration
       const info = {
-        name: formData.name,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
         email: formData.email,
-        image: res.data.data.display_url,
         role: formData.role,
         pass: formData.password,
       };
 
       if (role === "seller") {
         info.shop_name = formData.shopName;
-        info.zip = formData.zipCode;
         info.description = formData.description;
         info.seller_number = formData.number;
-        info.shop_address = formData.address;
+        info.division = formData.division;
+        info.district = formData.district;
+        info.shop_Logo = imageUrl; // Assign the uploaded image URL to info object
       }
 
       // Perform user registration
       const result = await axiosPublic.post("/users", info);
 
       if (result.data.insertedId) {
-        createUser(formData.email, formData.password)
-          .then(() => {
-            update(res.data.data.display_url, formData.name)
-              .then((res) => {
-                navigate("/login");
-                reset();
-                toast.success("Registration Success !! Login Now", {
-                  id: toastId,
-                });
-              })
-              .catch((err) => {
-                toast.error(
-                  "Something went wrong !! Please Check your credentials",
-                  { id: toastId }
-                );
-              });
-          })
-          .catch((err) => {
-            toast.error(
-              "Something went wrong !! Please Check your credentials"
-            );
-          });
+        await createUser(formData.email, formData.password);
+
+        if (role === "seller") {
+          await update(imageUrl, formData.firstName); // Pass imageUrl to update function
+        } else {
+          await update("", formData.firstName);
+        }
+
+        // Redirect to login page upon successful registration
+        navigate("/login");
+        reset();
+        toast.success("Registration Success !! Login Now", { id: toastId });
       }
+    } catch (error) {
+      console.error("Registration Error:", error);
+      toast.error("Registration Failed. Please try again later.", {
+        id: toastId,
+      });
     }
   };
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    if (role === "seller") {
+      setIsExpanded(true);
+    } else {
+      setIsExpanded(false);
+    }
+  }, [role]);
 
   return (
     <div>
       <Helmet>
         <title>Shop.my || Registration</title>
       </Helmet>
+
       <div className="bg-[#F1F5F6] flex justify-center items-center mt-">
         <div className="w-full justify-center items-center p-5 lg:p-10">
           <div className="grid grid-cols-1 items-center relative lg:grid-cols-2 mx-auto bg-white rounded-md">
             <div className="px-8 py-8 ">
-              <h2 className="text-center w-full text-2xl text-slate-600 font-bold">
+              <h2 className="text-center w-full mb-1 text-2xl text-slate-600 font-bold">
                 Registration{" "}
                 <span className="text-orange-500 font-bold ">Shopp.My</span>
               </h2>
@@ -109,28 +135,34 @@ const Register = () => {
                   className="text-slate-600"
                   onSubmit={handleSubmit(onSubmit)}
                 >
+
+                  <div>
+                    
+                  </div>
                   <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
+
+
                     <div className="flex flex-col w-full gap-1 mb-2">
-                      <label htmlFor="name">Name</label>
+                      <label htmlFor="firstName">First Name</label>
                       <input
                         type="text"
-                        className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                        id="name"
-                        name="name"
+                        className="w-full px-3 py-2 border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                        id="firstName"
+                        name="firstName"
                         required
-                        placeholder="Name"
-                        {...register("name", { required: true })}
+                        placeholder="ex : Polash"
+                        {...register("firstName", { required: true })}
                       />
                     </div>
                     <div className="flex relative w-full flex-col gap-1 mb-2">
-                      <label htmlFor="image">Image</label>
+                      <label htmlFor="lastName">Last Name</label>
                       <input
-                        type="file"
-                        className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                        id="image"
-                        name="image"
-                        
-                        {...register("image", { required: false })}
+                        type="text"
+                        className="w-full px-3 py-2 border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                        id="lastName"
+                        name="lastName"
+                        placeholder="ex : Ahmed"
+                        {...register("lastName", { required: false })}
                       />
                     </div>
                   </div>
@@ -140,11 +172,11 @@ const Register = () => {
                       <label htmlFor="email">Email</label>
                       <input
                         type="email"
-                        className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                        className="w-full px-3 py-2 border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                         id="email"
                         name="email"
                         required
-                        placeholder="email"
+                        placeholder="ex : example@gmail.com"
                         {...register("email", { required: true })}
                       />
                     </div>
@@ -152,7 +184,7 @@ const Register = () => {
                       <label htmlFor="password">Password</label>
                       <input
                         type={open ? "text" : "password"}
-                        className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                        className="w-full px-3 py-2 border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                         id="password"
                         name="password"
                         placeholder="password"
@@ -190,7 +222,7 @@ const Register = () => {
                           <label htmlFor="shopName">Shop Name</label>
                           <input
                             type="text"
-                            className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                            className="w-full px-3 py-2 border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                             id="shopName"
                             name="shopName"
                             placeholder="Shop Name"
@@ -198,39 +230,50 @@ const Register = () => {
                           />
                         </div>
                         <div className="flex flex-col w-full gap-1 mb-2">
-                          <label htmlFor="shopName">Zip Code</label>
+                          <label htmlFor="shopLogo">Shop Logo</label>
                           <input
-                            type="number"
-                            className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                            id="zip"
-                            name="zipCode"
-                            placeholder="Zip Code"
-                            {...register("zipCode", { required: true })}
+                            type="file"
+                            className="w-full px-3 py-[6px] border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                            id="shopLogo"
+                            name="shopLogo"
+                            {...register("shopLogo", { required: true })}
                           />
                         </div>
                       </div>
                       <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
                         <div className="flex flex-col w-full gap-1 mb-2">
-                          <label htmlFor="address">Address</label>
-                          <input
-                            type="text"
-                            className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                            id="address"
-                            name="address"
-                            placeholder="Address"
-                            {...register("address", { required: true })}
-                          />
+                          <label htmlFor="division">Division</label>
+                          <select
+                            className="w-full px-3 py-2 border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                            name="division"
+                            id="division"
+                            {...register("division", { required: true })}
+                            onChange={handleDivisions}
+                          >
+                            <option selected>Select Your Division</option>
+                            {divisions.divisions?.map((d, i) => (
+                              <option key={i} value={d.name}>
+                                {d?.name}
+                              </option>
+                            ))}
+                          </select>
                         </div>
-                        <div className="flex relative w-full flex-col gap-1 mb-2">
-                          <label htmlFor="number">Number</label>
-                          <input
-                            type="number"
-                            className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                            id="number"
-                            name="number"
-                            placeholder="+8801XXXXXXXXX"
-                            {...register("number", { required: true })}
-                          />
+
+                        <div className="flex flex-col w-full gap-1 mb-2">
+                          <label htmlFor="district">District</label>
+                          <select
+                            className="w-full px-3 py-2 border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                            id="district"
+                            name="district"
+                            {...register("district", { required: true })}
+                          >
+                            <option selected>Select Your District</option>
+                            {district.districts?.map((distr) => (
+                              <option key={distr.id} value={distr.name}>
+                                {distr?.name}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                       <div>
@@ -240,7 +283,7 @@ const Register = () => {
                             cols="7"
                             rows="7"
                             placeholder="Description"
-                            className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                            className="w-full px-3 py-2 text-sm border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                             id="description"
                             name="description"
                             {...register("description")}
