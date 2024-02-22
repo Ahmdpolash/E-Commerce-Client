@@ -1,12 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Bookmarks = () => {
-    return (
-        <div>
-            this is Favorite page
-        </div>
-    );
+  return <div>this is bookmarks page</div>;
 };
 
 export default Bookmarks;
-

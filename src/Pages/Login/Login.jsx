@@ -36,11 +36,13 @@ const Login = () => {
         role: "user",
       };
 
-      axiosPublic.post("/users", userInfo,{withCredentials:true}).then((res) => {
-        if (res.data.insertedId) {
-          toast.success("Logged In");
-        }
-      });
+      axiosPublic
+        .post("/users", userInfo, { withCredentials: true })
+        .then((res) => {
+          if (res.data.insertedId) {
+            toast.success("Logged In");
+          }
+        });
       navigate(location.state ? location.state : "/");
     });
   };
@@ -50,9 +52,9 @@ const Login = () => {
       <Helmet>
         <title>Shop.my || Login</title>
       </Helmet>
-      <div className="bg-[#F1F5F6]   flex justify-center items-center mt-">
+      <div className="bg-[#F1F5F6]  flex justify-center items-center mt-">
         <div className="w-full justify-center items-center p-5 lg:p-10">
-          <div className="grid grid-cols-1 relative lg:grid-cols-2 lg:w-[60%] border shadow-md mx-auto bg-white rounded-md">
+          <div className="grid grid-cols-1 relative lg:grid-cols-2 lg:w-[60%] border border-slate-300 hover:border-orange-400 duration-500 hover:border shadow-md  mx-auto bg-white rounded-md">
             <div className="px-8 py-8 ">
               <h2 className="text-center w-full text-2xl text-slate-600 font-bold">
                 Login{" "}
@@ -68,10 +70,10 @@ const Login = () => {
                     <label htmlFor="email">Email</label>
                     <input
                       type="email"
-                      className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                      className="w-full px-3 py-2 border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                       id="email"
                       name="email"
-                      placeholder="email"
+                      placeholder="example@gmail.com"
                       {...register("email", { required: true })}
                     />
                   </div>
@@ -79,7 +81,7 @@ const Login = () => {
                     <label htmlFor="password">Password</label>
                     <input
                       type={open ? "text" : "password"}
-                      className="w-full  px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                      className="w-full cursor-pointer px-3 py-2 border bg-slate-100 border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                       id="password"
                       name="password"
                       placeholder="password"

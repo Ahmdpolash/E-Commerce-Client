@@ -180,7 +180,7 @@ const Navbar = () => {
                       <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
                         <div className="flex gap-2 items-center justify-center">
                           <img
-                            className="h-10 w-10 rounded-full"
+                            className="h-10 border border-orange-600 w-10 rounded-full"
                             src={user.photoURL}
                             alt=""
                           />
@@ -189,8 +189,6 @@ const Navbar = () => {
                       </div>
                     </Link>
                   )}
-
-                  <p onClick={handleLogOut}>logout</p>
                 </>
               ) : (
                 <div className="flex items-center gap-2">
@@ -227,7 +225,7 @@ const Navbar = () => {
                 </span>
               </div>
               <div className="bg-gray-200 cursor-pointer hidden relative lg:block px-2 py-2 rounded-full">
-                <Link to="/bookmarks">
+                <Link to="/my-bookmarks">
                   <FaHeart className="text-[22px] text-[#EE5544] font-bold" />
                 </Link>
                 <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
