@@ -13,7 +13,6 @@ import Compare from "../Pages/Compare/Compare";
 import Cart from "../Pages/Cart/Cart";
 import Checkout from "../Pages/Checkout/Checkout";
 import Contact from "../Pages/Contact/Contact";
-import Service from "../Pages/Service/Service";
 import Blog from "../Pages/Blog/Blog";
 import DashboardLayout from "../Dashboard/DashboardLayout/DashboardLayout";
 import UserDashHome from "../Dashboard/UserDashboard/UserDashHome";
@@ -41,6 +40,7 @@ import AdminDashDeactiveSeller from "../Dashboard/AdminDashboard/AdminDashDeacti
 import AdminDashSellerReq from "../Dashboard/AdminDashboard/AdminDashSellerReq";
 import AdminDashChatSeller from "../Dashboard/AdminDashboard/AdminDashChatSeller";
 import AdminAddBanner from "../Dashboard/AdminDashboard/AdminAddBanner";
+import Service from "../Pages/Home/Service/Service";
 
 const Route = createBrowserRouter([
   {

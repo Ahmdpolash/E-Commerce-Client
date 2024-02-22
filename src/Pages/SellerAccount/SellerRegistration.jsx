@@ -1,11 +1,7 @@
 import { FaAngleRight } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "../../Components/Container/Container";
-import { useState } from "react";
-import { FaEye, FaFacebookF } from "react-icons/fa";
-import { AiOutlineGoogle } from "react-icons/ai";
-
-import { FaRegEyeSlash } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -16,26 +12,45 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const SellerRegistration = () => {
-  const [open, setOpen] = useState(false);
-  const [role, setRole] = useState("user");
+  const [loading, setLoading] = useState(false);
+  const [divisions, setDivisions] = useState([]);
+  const [district, setDistrict] = useState([]);
+  const { createUser, update } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
+  
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const { createUser, update } = useAuth();
-  const axiosPublic = useAxiosPublic();
-  const navigate = useNavigate();
+
+  //divisions
+  useEffect(() => {
+    fetch("/json/division.json")
+      .then((res) => res.json())
+      .then((data) => setDivisions(data));
+  }, []);
+
+  //district
+  useEffect(() => {
+    fetch("/json/district.json")
+      .then((res) => res.json())
+      .then((data) => setDistrict(data));
+  }, []);
+
+  const [filter, setFilter] = useState("");
+  console.log(filter);
+  const handleDivisions = (e) => {
+    setFilter(e.target.value);
+  };
 
   const onSubmit = async (data) => {
-    const roleValue = role;
-    const formData = { ...data, role: roleValue };
-    console.log(formData);
-    const toastId = toast.loading("Registration Processing...");
-
-    const imgFile = { image: formData.shopLogo[0] };
+    const toastId = toast.loading("Account creating...");
+    setLoading(true);
+    const imgFile = { image: data.shopLogo[0] };
     console.log(imgFile);
 
     const res = await axiosPublic.post(image_hosting_api, imgFile, {
@@ -46,22 +61,26 @@ const SellerRegistration = () => {
     console.log(res.data);
 
     if (res.data.success) {
+      setLoading(false);
       // If image upload is successful, proceed with user registration
       const info = {
-        email: formData.email,
-        shop_name: formData.shopName,
-        description: formData.description,
-        seller_number: formData.number,
-        shop_address: formData.address,
-        role:'seller',
-        shop_Logo: res.data.data.display_url
+        first_name: data.firstName,
+        last_name: data.lastName,
+        email: data.email,
+        shop_name: data.shopName,
+        description: data.description,
+        seller_number: data.number,
+        role: "seller",
+        shop_Logo: res.data.data.display_url,
+        district: data.district,
+        division: data.division,
       };
 
       // Perform user registration
       const result = await axiosPublic.post("/users", info);
 
       if (result.data.insertedId) {
-        createUser(formData.email, formData.password)
+        createUser(data.email, data.password)
           .then(() => {
             update(res.data.data.display_url, name)
               .then((res) => {
@@ -86,12 +105,13 @@ const SellerRegistration = () => {
       }
     }
   };
+
   return (
     <div className="bg-[#F6F6F5]">
       <Helmet>
         <title>Shop.my || Seller Registration</title>
       </Helmet>
-      <div className='bg-[url("https://github.com/SheikhFarid99/multi-vendor-ecommerce/blob/main/client/public/images/banner/order.jpg?raw=true")] h-[140px] md:h-[180px] lg:h-[210px]  mt-1 bg-cover bg-no-repeat relative bg-left'>
+      <div className='bg-[url("https://github.com/SheikhFarid99/multi-vendor-ecommerce/blob/main/client/public/images/banner/order.jpg?raw=true")] h-[140px] md:h-[180px] lg:h-[200px]  mt-1 bg-cover bg-no-repeat relative bg-left'>
         <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
           <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
             <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-white">
@@ -126,13 +146,38 @@ const SellerRegistration = () => {
                   >
                     <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
                       <div className="flex flex-col w-full gap-1 mb-2">
+                        <label htmlFor="firstName">First Name</label>
+                        <input
+                          type="text"
+                          className="w-full bg-slate-100 px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          id="firstName"
+                          name="firstName"
+                          placeholder="ex : John"
+                          {...register("firstName", { required: true })}
+                        />
+                      </div>
+                      <div className="flex flex-col w-full gap-1 mb-2">
+                        <label htmlFor="firstName">Last Name</label>
+                        <input
+                          type="text"
+                          className="w-full bg-slate-100 px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          id="lastName"
+                          name="lastName"
+                          placeholder="ex : Doe"
+                          {...register("lastName", { required: true })}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
+                      <div className="flex flex-col w-full gap-1 mb-2">
                         <label htmlFor="email">Email</label>
                         <input
                           type="email"
-                          className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          className="w-full bg-slate-100 px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                           id="email"
                           name="email"
-                          placeholder="Email Address"
+                          placeholder="ex : example@gmail.com"
                           {...register("email", { required: true })}
                         />
                       </div>
@@ -140,9 +185,10 @@ const SellerRegistration = () => {
                         <label htmlFor="password">Password</label>
                         <input
                           type="password"
-                          className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          className="w-full bg-slate-100 px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                           id="password"
                           name="password"
+                          placeholder="****"
                           {...register("password", {
                             required: true,
                             minLength: 6,
@@ -165,46 +211,85 @@ const SellerRegistration = () => {
                         )}
                       </div>
                     </div>
+
                     <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
                       <div className="flex flex-col w-full gap-1 mb-2">
                         <label htmlFor="shopName">Shop Name</label>
                         <input
                           type="text"
-                          className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          className="w-full bg-slate-100 px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                           id="shopName"
                           name="shopName"
-                          placeholder="Shop Name"
+                          placeholder="ex : Prism Fashion"
                           {...register("shopName", { required: true })}
                         />
                       </div>
-                      <div className="flex relative w-full flex-col gap-1 md:gap-2 lg:gap-3 mb-2">
+                      <div className="flex relative w-full flex-col gap-1 mb-2">
                         <label htmlFor="shopLogo">Shop Logo</label>
                         <input
                           type="file"
-                          className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                          id="shopLogo"
+                          className="w-full bg-slate-100 px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                           name="shopLogo"
-                          {...register("shopLogo")}
+                          {...register("shopLogo", { required: true })}
                         />
                       </div>
                     </div>
+
                     <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
                       <div className="flex flex-col w-full gap-1 mb-2">
-                        <label htmlFor="address">Address</label>
+                        <label htmlFor="division">Division</label>
+                        <select
+                          className="w-full bg-slate-100 px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          name="division"
+                          {...register("division", { required: true })}
+                          onChange={handleDivisions}
+                        >
+                          <option selected>Select Your Division</option>
+                          {divisions.divisions?.map((d, i) => (
+                            <option key={i} value={d.name}>
+                              {d?.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="flex relative w-full flex-col gap-1 mb-2">
+                        <label htmlFor="district">District</label>
+
+                        <select
+                          className="w-full bg-slate-100 px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          name="District"
+                          {...register("district", { required: true })}
+                        >
+                          <option value="" selected>
+                            Select Your District
+                          </option>
+                          {district.districts?.map((distr) => (
+                            <option key={distr.id} value={distr.name}>
+                              {distr?.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
+                      <div className="flex flex-col w-full gap-1 mb-2">
+                        <label htmlFor="shopName">Shop Name</label>
                         <input
                           type="text"
-                          className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
-                          id="address"
-                          name="address"
-                          placeholder="Address"
-                          {...register("address", { required: true })}
+                          className="w-full bg-slate-100 px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          id="shopName"
+                          name="shopName"
+                          placeholder="ex : Prism Fashion"
+                          {...register("shopName", { required: true })}
                         />
                       </div>
                       <div className="flex relative w-full flex-col gap-1 mb-2">
                         <label htmlFor="number">Number</label>
                         <input
                           type="number"
-                          className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          className="w-full bg-slate-100 px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                           id="number"
                           name="number"
                           placeholder="+8801XXXXXXXXX"
@@ -212,6 +297,7 @@ const SellerRegistration = () => {
                         />
                       </div>
                     </div>
+
                     <div>
                       <div className="flex relative w-full flex-col gap-1 mb-2">
                         <label htmlFor="description">Description</label>
@@ -219,7 +305,7 @@ const SellerRegistration = () => {
                           cols="7"
                           rows="7"
                           placeholder="Description"
-                          className="w-full px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
+                          className="w-full bg-slate-100 px-3 py-2 text-sm border border-slate-200 outline-none focus:border-indigo-500 rounded-md"
                           id="description"
                           name="description"
                           {...register("description")}
@@ -230,6 +316,8 @@ const SellerRegistration = () => {
                     <button className="px-8 w-full py-2 bg-purple-500 shadow-lg hover:shadow-indigo-500/30 text-white rounded-md">
                       Registration
                     </button>
+
+                    {loading && "loading"}
                   </form>
                 </div>
                 <div className="text-center text-slate-600 pt-1">

@@ -25,7 +25,7 @@ const SubHeader = () => {
         <div className="flex mx-auto md:mx-auto lg:mx-0 gap-2">
           <Link
             to="/sellerRegistration"
-            className="flex py-1 gap-1 ml-4  border rounded-full cursor-pointer hover:border-red-500 duration-300 text-[14px] font-semibold items-center  border-gray-400 px-2"
+            className="flex py-1 gap-1 ml-4  cursor-pointer hover:border-red-500 duration-300 text-[14px] font-semibold items-center  border-gray-400 px-2"
           >
             <FaRegUser /> Seller Registration
           </Link>
