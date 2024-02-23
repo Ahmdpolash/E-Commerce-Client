@@ -66,6 +66,7 @@ const SellerRegistration = () => {
           district: data.district,
           division: data.division,
           status: "Pending",
+          join:new Date().toISOString().split('T')[0]
         };
 
         const result = await axiosPublic.post("/users", info);

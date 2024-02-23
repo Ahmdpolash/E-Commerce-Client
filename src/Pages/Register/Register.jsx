@@ -70,6 +70,7 @@ const Register = () => {
         email: formData.email,
         role: formData.role,
         pass: formData.password,
+        join: new Date().toISOString().split("T")[0],
       };
 
       if (role === "seller") {
@@ -80,6 +81,7 @@ const Register = () => {
         info.district = formData.district;
         info.status = "Pending";
         info.shop_Logo = imageUrl; // Assign the uploaded image URL to info object
+        info.join = new Date().toISOString().split("T")[0];
       }
 
       // Perform user registration
