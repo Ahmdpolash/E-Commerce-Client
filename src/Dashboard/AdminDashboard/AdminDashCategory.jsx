@@ -19,6 +19,7 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import CateUpdateModal from "../../Components/CateUpdateModal";
 
 //img hosting api
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -101,6 +102,31 @@ const AdminDashCategory = () => {
     });
   };
 
+  //update categories
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const category = form.category.value;
+    const data = { category };
+
+    axiosPublic.put(`/categories/update/${singleCategory._id}`, data).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        toast.success("Category Updated successfully");
+      }
+    });
+    console.log(data);
+  };
+
+  const [singleCategory, setSingleCategory] = useState([]);
+  const handleUpdate = async (id) => {
+    onOpen();
+    const result = await axiosPublic.get(`/category/single/${id}`);
+    setSingleCategory(result.data);
+    console.log(result.data);
+  };
+
   //modal
 
   return (
@@ -161,7 +187,7 @@ const AdminDashCategory = () => {
                         <div className="flex justify-center gap-3 items-center">
                           {" "}
                           <span
-                            onClick={() => onOpen(category._id)}
+                            onClick={() => handleUpdate(category._id)}
                             className="h-[27px] w-[27px] text-white rounded-sm bg-yellow-500"
                           >
                             <button>
@@ -257,26 +283,64 @@ const AdminDashCategory = () => {
       </div>
 
       {/* modal */}
-      <Modal backdrop="opaque" isOpen={isOpen} onClose={onClose}>
+      <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {category._id}
+                Update Category
               </ModalHeader>
               <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
+                <form onSubmit={handleEdit}>
+                  <div className="flex flex-col mb-">
+                    <label
+                      className="py-2 font-medium text-slate-600"
+                      htmlFor="category"
+                    >
+                      Category Name
+                    </label>
+                    <input
+                      className="outline-none border rounded-md border-slate-300 bg-slate-50 py-2  px-4"
+                      type="text"
+                      defaultValue={singleCategory.category}
+                      name="category"
+                      placeholder="Category name.."
+                      id="category"
+                    />
+                  </div>
+
+                  <div className="flex flex-col mb-2">
+                    <label
+                      className="py-2 font-medium text-slate-600"
+                      htmlFor="image"
+                    >
+                      Image
+                    </label>
+                    <input
+                      className="outline-none hover:cursor-not-allowed border rounded-md border-slate-300 bg-slate-50 py-2  px-4"
+                      type="file"
+                      name="image"
+                      id="image"
+                      disabled
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="bg-red-500 text-white w-full py-2 rounded-md mt-2"
+                  >
+                    Update
+                  </button>
+                </form>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button
+                  className="bg-slate-200 font-semibold"
+                  color="danger"
+                  variant="light"
+                  onPress={onClose}
+                >
                   Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
                 </Button>
               </ModalFooter>
             </>
