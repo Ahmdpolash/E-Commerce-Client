@@ -162,21 +162,6 @@ const AdminDashSidebar = () => {
 
                 <li className="mb-1">
                   <NavLink
-                    to="/dashboard/deactivate-sellers"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
-                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
-                    }
-                  >
-                    <span className="text-xl">
-                      <TbSettingsCancel />
-                    </span>
-                    <span>Deactivate Seller</span>
-                  </NavLink>
-                </li>
-                <li className="mb-1">
-                  <NavLink
                     to="/dashboard/seller-requests"
                     className={({ isActive }) =>
                       isActive
@@ -190,6 +175,27 @@ const AdminDashSidebar = () => {
                     <span>Seller Request</span>
                   </NavLink>
                 </li>
+
+                
+                <li className="mb-1">
+                  <NavLink
+                    to="/dashboard/deactivate-sellers"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex justify-start hover:pl-4 transition-all bg-slate-300 shadow-indigo-500/50 px-2 mb-1 font-semibold border-r-4 duration-200 border-indigo-600 items-center gap-2 py-2"
+                        : "flex justify-start hover:pl-4 transition-all duration-500 items-center px-2 gap-2 py-2 font-medium"
+                    }
+                  >
+                    <span className="text-xl">
+                      <TbSettingsCancel />
+                    </span>
+                    <span>Deactivate Seller</span>
+                  </NavLink>
+                </li>
+
+               
+
+
                 <li className="mb-1">
                   <NavLink
                     to="/dashboard/add-banner"

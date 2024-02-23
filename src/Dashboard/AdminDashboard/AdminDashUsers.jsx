@@ -4,8 +4,12 @@ import "../../Responsive/Responsive.css";
 import cat from "../../../public/download.png";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useUsers from "../../Hooks/useUsers";
 
 const AdminDashUsers = () => {
+  const { data } = useUsers();
+  console.log("data", data);
+
   return (
     <div className="py- px-2 md:px-4 lg:px-5">
       <DashHeaders />
@@ -68,30 +72,34 @@ const AdminDashUsers = () => {
               </thead>
 
               <tbody className="text-center ">
-                {[1, 2, 3, 4, 5, 6, 7].map((p, i) => (
-                  <tr key={i} className=" border-slate-300 border-b">
+                {data?.map((user, i) => (
+                  <tr key={user?._id} className=" border-slate-300 border-b">
                     <td className="py-1">{i + 1}</td>
                     <td className="py-1">
                       <img
                         className="w-[50px] mx-auto rounded-full border h-[50px]"
-                        src={cat}
+                        src={
+                          user?.image
+                            ? user?.image
+                            : "https://img.freepik.com/premium-photo/man-with-glasses-shirt-that-says-i-m-happy-man_745528-2521.jpg?w=740"
+                        }
                         alt=""
                       />
                     </td>
                     <td className="whitespace-nowrap py-1  text-slate-700">
-                      Polash Ahmed
+                      {user?.first_name + " " + user?.last_name}
                     </td>
                     <td className="whitespace-nowrap py-1 pl-10 lg:pl-0 text-slate-700">
-                      ahmedpolash732@gmail.com
+                      {user?.email}
                     </td>
                     <td className="whitespace-nowrap py-1  text-slate-700">
                       Pending
                     </td>
                     <td className="whitespace-nowrap py-1  text-slate-700">
-                      Rangpur
+                      {user?.division ? user?.division : "N/A"}
                     </td>
                     <td className="whitespace-nowrap py-1  text-slate-700">
-                      Kurigram
+                      {user?.district ? user?.district : "N/A"}
                     </td>
                     <td className="">
                       <div className="h-[27px] w-[27px] text-center mx-auto text-white rounded-sm bg-green-500">

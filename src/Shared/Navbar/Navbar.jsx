@@ -153,7 +153,7 @@ const Navbar = () => {
                         <div className="flex gap-2 items-center justify-center">
                           <img
                             className="h-10 w-10 rounded-full"
-                            src={user.photoURL}
+                            src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?t=st=1708688040~exp=1708691640~hmac=fd515ef5e0c8ca3f67090e638fff7a76b3ff2d46fab17a96ed729f8cc6cf4e02&w=740"
                             alt=""
                           />
                           <p className="text-black">{user.displayName}</p>

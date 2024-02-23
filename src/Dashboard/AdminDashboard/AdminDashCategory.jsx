@@ -110,12 +110,14 @@ const AdminDashCategory = () => {
     const category = form.category.value;
     const data = { category };
 
-    axiosPublic.put(`/categories/update/${singleCategory._id}`, data).then((res) => {
-      if (res.data.modifiedCount > 0) {
-        refetch();
-        toast.success("Category Updated successfully");
-      }
-    });
+    axiosPublic
+      .put(`/categories/update/${singleCategory._id}`, data)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          toast.success("Category Updated successfully");
+        }
+      });
     console.log(data);
   };
 
@@ -210,7 +212,7 @@ const AdminDashCategory = () => {
               </table>
             </div>
           </div>
-          <div className="col-span-2 rounded-md h-[83.8vh] bg-white p-4 w-full">
+          <div className="col-span-2  rounded-md h-[83.8vh] bg-white p-4 w-full">
             <h1 className="text-center text-slate-700 font-semibold text-xl">
               Add New Category
             </h1>
@@ -282,7 +284,8 @@ const AdminDashCategory = () => {
         </div>
       </div>
 
-      {/* modal */}
+      {/*================= modal======================= */}
+
       <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
         <ModalContent>
           {(onClose) => (
@@ -347,6 +350,7 @@ const AdminDashCategory = () => {
           )}
         </ModalContent>
       </Modal>
+      {/*================= modal======================= */}
     </div>
   );
 };

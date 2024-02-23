@@ -180,7 +180,7 @@ const AdminDashHome = () => {
       {/* -----------------------the summary box start here---------------------- */}
 
       <section className="my-5 box">
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
+        <div className="w-full cursor-pointer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
           <div className="flex justify-between group items-center bg-white p-5 hover:bg-[#35bd8d] duration-700 ease-linear rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-slate-600 group-hover:text-white">
               <span className="text-md font-medium">Total Sales</span>

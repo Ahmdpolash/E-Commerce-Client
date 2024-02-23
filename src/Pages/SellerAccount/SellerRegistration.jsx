@@ -65,6 +65,7 @@ const SellerRegistration = () => {
           shop_Logo: res.data.data.display_url,
           district: data.district,
           division: data.division,
+          status: "Pending",
         };
 
         const result = await axiosPublic.post("/users", info);
@@ -242,7 +243,9 @@ const SellerRegistration = () => {
                           {...register("division", { required: true })}
                           onChange={handleDivisions}
                         >
-                          <option selected>Select Your Division</option>
+                          <option value="" selected>
+                            Select Your Division
+                          </option>
                           {divisions.divisions?.map((d, i) => (
                             <option key={i} value={d.name}>
                               {d?.name}
@@ -271,7 +274,7 @@ const SellerRegistration = () => {
                       </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
+                    {/* <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
                       <div className="flex flex-col w-full gap-1 mb-2">
                         <label htmlFor="shopName">Shop Name</label>
                         <input
@@ -294,7 +297,7 @@ const SellerRegistration = () => {
                           {...register("number", { required: true })}
                         />
                       </div>
-                    </div>
+                    </div> */}
 
                     <div>
                       <div className="flex relative w-full flex-col gap-1 mb-2">
@@ -311,11 +314,15 @@ const SellerRegistration = () => {
                       </div>
                     </div>
 
-                    <button className="px-8 w-full py-2 bg-purple-500 shadow-lg hover:shadow-indigo-500/30 text-white rounded-md">
-                      Registration
-                    </button>
-
-                    {loading && "loading"}
+                    {loading ? (
+                      <button className="px-8 w-full py-2 bg-purple-500 shadow-lg hover:shadow-indigo-500/30 text-white rounded-md">
+                        Registration
+                      </button>
+                    ) : (
+                      <button className="px-8 w-full py-2 bg-purple-500 shadow-lg hover:shadow-indigo-500/30 text-white rounded-md">
+                        Loading...
+                      </button>
+                    )}
                   </form>
                 </div>
                 <div className="text-center text-slate-600 pt-1">

@@ -78,6 +78,7 @@ const Register = () => {
         info.seller_number = formData.number;
         info.division = formData.division;
         info.district = formData.district;
+        info.status = "Pending";
         info.shop_Logo = imageUrl; // Assign the uploaded image URL to info object
       }
 
@@ -135,13 +136,8 @@ const Register = () => {
                   className="text-slate-600"
                   onSubmit={handleSubmit(onSubmit)}
                 >
-
-                  <div>
-                    
-                  </div>
+                  <div></div>
                   <div className="flex flex-col md:flex-row lg:flex-row gap-1 md:gap-2 lg:gap-3">
-
-
                     <div className="flex flex-col w-full gap-1 mb-2">
                       <label htmlFor="firstName">First Name</label>
                       <input
