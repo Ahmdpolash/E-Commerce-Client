@@ -24,6 +24,9 @@ import useAuth from "../../Hooks/useAuth";
 import { jwtDecode } from "jwt-decode";
 import BottomNavContent from "../../Components/BottomNavContent";
 import MobileCart from "../../Components/MobileCart";
+import useCategory from "../../Hooks/useCategory";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import CategoryMap from "../../Components/CategoryMap";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -31,6 +34,14 @@ const Navbar = () => {
   const [mobileCart, setMobileCart] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
   const { logOut, user } = useAuth();
+
+  const axiosPublic = useAxiosPublic();
+  const res = axiosPublic.get("/categories");
+  console.log("hello", res.data);
+
+  const { data, refetch } = useCategory();
+  console.log("hello",data);
+
 
   const toggleMenu = () => {
     setOpen(!open);
@@ -85,9 +96,7 @@ const Navbar = () => {
     "Accessories",
   ];
 
-  const handleLogOut = () => {
-    logOut();
-  };
+  // category fetch
 
   return (
     <div className="">
@@ -120,17 +129,17 @@ const Navbar = () => {
               <div className="flex">
                 <select
                   className="py-3 relative left-3 border-l-2 border-t-2 border-b-2 border-[#FE2424] font-normal outline-none text-[16px]  px-3 border-r-0 w-40 text-black"
-                  name=""
+                  name="category"
                   id=""
-                  defaultValue=""
                 >
                   <option value="">Select Category</option>
-                  {category.map((c, i) => (
+                  {category?.map((c, i) => (
                     <option key={i} value={c}>
                       {c}
                     </option>
                   ))}
                 </select>
+
                 <div className="border-r-2 ml-2 border-gray-300 h-7 flex justify-center items-center mt-2"></div>
                 <div className="w-[75%]">
                   <input
@@ -318,23 +327,9 @@ const Navbar = () => {
                   categoryShow ? "h-0" : "h-[350px] md:h-[300px] lg:h-[400px]"
                 } overflow-hidden transition-all duration-500 shadow-md w-full absolute z-[99999] bg-white border-x`}
               >
-                <ul className="text-slate-600 py-2 font-medium">
-                  {category?.map((c, i) => {
-                    return (
-                      <li
-                        className="flex hover:bg-gray-200 transition ease-linear  duration-500 cursor-pointer  justify-start items-center gap-2 px-[24px] py-2"
-                        key={i}
-                      >
-                        <img
-                          className="w-[25px]"
-                          src="https://cdn.shopify.com/s/files/1/1706/9177/products/NEWAppleMacbookProwithM1ProChip14InchLaptop2021ModelMKGQ3LL_A_16GB_1TBSSD_custommacbd.jpg?v=1659592838"
-                          alt=""
-                        />
-                        {c}
-                      </li>
-                    );
-                  })}
-                </ul>
+                <div>
+                  <CategoryMap />
+                </div>
               </div>
             </div>
           </div>

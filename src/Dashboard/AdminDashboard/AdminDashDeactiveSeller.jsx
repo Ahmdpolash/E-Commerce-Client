@@ -20,6 +20,8 @@ const AdminDashDeactiveSeller = () => {
           refetch();
           if (status === "Active") {
             toast.success("Seller Active Success !! ✅✅✅");
+          } else if (status === "Pending") {
+            toast.success("Seller Pending Success !! 🚫🚫");
           } else {
             toast.success("Seller Deactivated Success !! 🚫🚫");
           }
@@ -124,6 +126,7 @@ const AdminDashDeactiveSeller = () => {
                         <option selected>Select Action</option>
                         <option value="Deactivate">Deactivate</option>
                         <option value="Active">Active</option>
+                        <option value="Pending">Pending</option>
                       </select>
                     </td>
                   </tr>

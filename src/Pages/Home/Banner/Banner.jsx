@@ -13,6 +13,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const Banner = () => {
   const [banner, setBanner] = useState([]);
+
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
@@ -37,13 +38,11 @@ const Banner = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide className="relative w-max">
-          <img
-            className="lg:h-full h-[220px] w-full "
-            src="http://ps.magentech.com/themes/sp_goldmart/modules/sphomeslider/images/9fbaaa7be5f8595e4d778dac0286cb6a2a168d3b_sample-1.jpg"
-            alt=""
-          />
-        </SwiperSlide>
+        {banner[0]?.images.map((b, i) => (
+          <SwiperSlide key={i} className="relative w-max">
+            <img className="lg:h-full h-[220px] w-full " src={b} alt="" />
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       <div className="px-4 hidden lg:block bg-[#FFE8DE] mt-2 lg:px-16 py-3 ">

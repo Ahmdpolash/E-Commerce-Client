@@ -19,6 +19,9 @@ const Register = () => {
   const [role, setRole] = useState("user");
   const [divisions, setDivisions] = useState([]);
   const [district, setDistrict] = useState([]);
+
+  const { logOut } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -97,6 +100,7 @@ const Register = () => {
         }
 
         // Redirect to login page upon successful registration
+        logOut();
         navigate("/login");
         reset();
         toast.success("Registration Success !! Login Now", { id: toastId });
