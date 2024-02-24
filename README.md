@@ -4,5 +4,3 @@
 # Features
 * 
 
-
-`git clone https://github.com/`
