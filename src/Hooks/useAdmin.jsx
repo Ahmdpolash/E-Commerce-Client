@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const useAdmin = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  const axiosPublic = useAxiosPublic();
+  return <div></div>;
 };
 
 export default useAdmin;
