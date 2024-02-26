@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { RiProductHuntLine } from "react-icons/ri";
 import ReactApexChart from "react-apexcharts";
@@ -17,6 +17,26 @@ import { CiCircleInfo } from "react-icons/ci";
 
 const AdminDashHome = () => {
   const [open, setOpen] = useState(false);
+  //!dark mode
+  const [toggle, setToggle] = useState(
+    JSON.parse(localStorage.getItem("theme"))
+      ? JSON.parse(localStorage.getItem("theme"))
+      : false
+  );
+
+  const element = document.documentElement;
+
+  localStorage.setItem("theme", JSON.stringify(toggle));
+
+  useEffect(() => {
+    if (toggle) {
+      element.classList.add("dark");
+    } else {
+      element.classList.remove("dark");
+    }
+  }, [toggle]);
+
+  //!dark mode
 
   const state = {
     series: [
@@ -40,7 +60,7 @@ const AdminDashHome = () => {
       },
       chart: {
         background: "transparent",
-        foreColor: "#111",
+        foreColor: toggle ? "#fff" : "#111",
       },
       dataLabels: {
         enabled: false,
@@ -54,6 +74,9 @@ const AdminDashHome = () => {
         dashArray: 0,
       },
       xaxis: {
+        style: {
+          color: toggle ? "#fff" : "#111", // Change label color based on toggle
+        },
         categories: [
           "Jan",
           "Feb",
@@ -107,7 +130,7 @@ const AdminDashHome = () => {
   };
 
   return (
-    <div className="py- px-2 md:px-4 lg:px-5 mb-5">
+    <div className="py- dark:bg-[#131E31] px-2 md:px-4 lg:px-5 mb-5">
       {/* screen onclick */}
 
       <div
@@ -119,7 +142,7 @@ const AdminDashHome = () => {
       {/* screen onclick */}
 
       {/*--------------------- here header section start here---------------- */}
-      <div className="header bg-white mt-2  w-full rounded-md mb-2">
+      <div className="header dark:bg-[#253145] dark:text-white bg-white mt-2  w-full rounded-md mb-2">
         <div className="flex justify-between items-center p-3">
           <div>
             {/* mobile menu icon */}
@@ -136,21 +159,21 @@ const AdminDashHome = () => {
             <input
               type="text"
               placeholder="Search.."
-              className="outline-none hidden lg:block border border-gray-300 rounded-md shadow-sm w-11/12 py-2 px-3"
+              className="outline-none hidden lg:block border dark:bg-slate-800 border-gray-300 rounded-md shadow-sm w-11/12 py-2 px-3"
             />
           </div>
 
           <div className="">
             <div className="flex  items-center gap-4">
               <div className="">
-                <DarkMood />
+                <DarkMood toggle={toggle} setToggle={setToggle} />
               </div>
               <div>
                 <IoMdNotificationsOutline className="text-[26px]" />
               </div>
               <div className="sellerInfo">
                 <h1 className="font-semibold">Polash Ahmed</h1>
-                <p className="text-right text-[14px] font-medium text-slate-700">
+                <p className="text-right text-[14px] dark:text-white font-medium text-slate-700">
                   Admin
                 </p>
               </div>
@@ -169,7 +192,7 @@ const AdminDashHome = () => {
 
       {/* ----------------------mobile sidebar---------------------- */}
       <div
-        className={`w-[265px] mobileSideNav lg:hidden md:w-[340px] border-r-2 fixed bg-white top-0 z-[9999] h-full overflow-y-auto transition-all ${
+        className={`w-[265px] mobileSideNav lg:hidden md:w-[340px]  border-r-2 fixed bg-white top-0 z-[9999] h-full overflow-y-auto transition-all ${
           open ? "left-0" : "-left-[265px] md:-left-[340px] lg:left-0"
         }`}
       >
@@ -181,8 +204,8 @@ const AdminDashHome = () => {
 
       <section className="my-5 box">
         <div className="w-full cursor-pointer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
-          <div className="flex justify-between group items-center bg-white p-5 hover:bg-[#35bd8d] duration-700 ease-linear rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start text-slate-600 group-hover:text-white">
+          <div className="flex justify-between group items-center dark:bg-[#253145] dark:text-white bg-white p-5 hover:bg-[#35bd8d] duration-700 ease-linear rounded-md gap-3">
+            <div className="flex flex-col justify-start items-start dark:text-white text-slate-600 group-hover:text-white">
               <span className="text-md font-medium">Total Sales</span>
               <h2 className="text-3xl font-bold">1445</h2>
             </div>
@@ -191,8 +214,8 @@ const AdminDashHome = () => {
             </div>
           </div>
 
-          <div className="flex group justify-between items-center bg-white p-5 hover:bg-[#F8617A] duration-500 ease-linear rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start group-hover:text-white text-slate-600">
+          <div className="flex group justify-between items-center dark:bg-[#253145] dark:text-white bg-white p-5 hover:bg-[#F8617A] duration-500 ease-linear rounded-md gap-3">
+            <div className="flex flex-col justify-start items-start dark:text-white group-hover:text-white text-slate-600">
               <span className="text-md font-medium">Products</span>
               <h2 className="text-3xl font-bold">25</h2>
             </div>
@@ -201,8 +224,8 @@ const AdminDashHome = () => {
             </div>
           </div>
 
-          <div className="flex justify-between group items-center bg-white p-5 hover:bg-[#35bd8d] duration-700 ease-linear rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start text-slate-600 group-hover:text-white">
+          <div className="flex justify-between group items-center dark:bg-[#253145] dark:text-white bg-white p-5 hover:bg-[#35bd8d] duration-700 ease-linear rounded-md gap-3">
+            <div className="flex flex-col justify-start items-start dark:text-white text-slate-600 group-hover:text-white">
               <span className="text-md font-medium">Sellers</span>
               <h2 className="text-3xl font-bold">14</h2>
             </div>
@@ -211,8 +234,8 @@ const AdminDashHome = () => {
             </div>
           </div>
 
-          <div class="flex group ease-linear justify-between items-center bg-white p-5 rounded-md gap-3 hover:bg-[#483dc6] duration-700">
-            <div class="flex flex-col justify-start items-start text-slate-600">
+          <div class="flex group ease-linear justify-between items-center dark:bg-[#253145] dark:text-white bg-white p-5 rounded-md gap-3 hover:bg-[#483dc6] duration-700">
+            <div class="flex flex-col justify-start items-start dark:text-white text-slate-600">
               <span class="text-md group-hover:text-white duration-500 font-medium">
                 Orders
               </span>
@@ -231,7 +254,7 @@ const AdminDashHome = () => {
       {/*--------------- the bar chart start here-------------------- */}
       <section className="flex flex-col gap-2 lg:flex-row">
         <div className="w-full lg:w-7/12 lg:pr-3">
-          <div className="w-full bg-white sellerBarChart p-4 rounded-md">
+          <div className="w-full dark:bg-[#253145] dark:teh bg-white sellerBarChart p-4 rounded-md">
             <ReactApexChart
               options={state.options}
               series={state.series}
@@ -241,10 +264,10 @@ const AdminDashHome = () => {
           </div>
         </div>
 
-        <div className="w-full flex-1 h-[397px] bg-white rounded-md">
+        <div className="w-full dark:bg-[#253145] flex-1 h-[397px] bg-white rounded-md">
           <div className="flex justify-between items-center px-4 py-2">
-            <h1 className="text-slate-700 font-medium flex gap-2 items-center text-[18px]">
-              <CiCircleInfo className="text-slate-800" />
+            <h1 className="text-slate-700 dark:text-white font-medium flex gap-2 items-center text-[18px]">
+              <CiCircleInfo className="text-slate-800 " />
               Sales Overview
             </h1>
             <button className="text- cursor-pointer font-medium flex gap-1 items-center text-[16px]">
@@ -259,19 +282,19 @@ const AdminDashHome = () => {
 
       {/* -----------------this is the order table start here--------------  */}
       <section className="mt-3  lg:mt-0" id="Order table">
-        <div className="bg-white lg:p-4 lg:mt-5 rounded-md">
+        <div className="bg-white dark:bg-[#253145] dark:text-white lg:p-4 lg:mt-5 rounded-md">
           <div className="flex p-3 items-center justify-between">
-            <h2 className="text-lg font-semibold text-slate-600">
+            <h2 className="text-lg  dark:text-white font-semibold text-slate-600">
               Recent Orders
             </h2>
             <h3>View All</h3>
           </div>
           <div className="pt-2 lg:pt-4">
-            <div className="bg-white sellerTable  w-[410px] px-2 lg:px-0 md:w-[700px] lg:w-full rounded-md">
+            <div className="bg-white dark:bg-[#253145] dark:text-white sellerTable  w-[410px] px-2 lg:px-0 md:w-[700px] lg:w-full rounded-md">
               <div className=" overflow-x-auto w-full">
                 <div className="relative overflow-x-auto">
                   <table className="w-full text-sm text-left  text-gray-500">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-100">
+                    <thead className="text-xs text-gray-700 dark:bg-[#253145] dark:text-white uppercase bg-gray-100">
                       <tr>
                         <th scope="col" className="px-6 py-2 lg:py-3">
                           Order Id
@@ -297,7 +320,7 @@ const AdminDashHome = () => {
                       </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody className=" dark:text-white">
                       {[1, 2, 3, 4].map((t, i) => (
                         <tr key={i} className="border-b border-gray-200 ">
                           <td

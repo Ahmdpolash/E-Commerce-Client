@@ -19,7 +19,7 @@ import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
-const AdminDashSidebar = () => {
+const AdminDashSidebar = ({ toggle }) => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
 
@@ -46,17 +46,9 @@ const AdminDashSidebar = () => {
     });
   };
 
-
-  
   return (
-    <div className="bg-[#E2E8F0]  ">
+    <div className={`bg-${toggle ? "gray-900" : "white"} dark:bg-[#253145]`}>
       <div className="flex ">
-        {/* mobile sidebar */}
-
-        <div className="block lg:hidden"></div>
-
-        {/* mobile sidebar */}
-
         <div>
           <div className="w-[275px] relative z-[888]  hidden lg:block bg-white h-screen  border-r-2 border-slate-200 shadow-indigo-600/30">
             <div className="logo mx-auto text-center w-[185px] ">
@@ -176,7 +168,6 @@ const AdminDashSidebar = () => {
                   </NavLink>
                 </li>
 
-                
                 <li className="mb-1">
                   <NavLink
                     to="/dashboard/deactivate-sellers"
@@ -192,9 +183,6 @@ const AdminDashSidebar = () => {
                     <span>Deactivate Seller</span>
                   </NavLink>
                 </li>
-
-               
-
 
                 <li className="mb-1">
                   <NavLink

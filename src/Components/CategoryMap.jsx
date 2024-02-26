@@ -21,7 +21,7 @@ const CategoryMap = () => {
         })}
       </ul>
     </div>
-  );
+  );a
 };
 
 export default CategoryMap;

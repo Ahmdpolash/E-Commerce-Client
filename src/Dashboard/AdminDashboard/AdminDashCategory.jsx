@@ -19,7 +19,6 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-import CateUpdateModal from "../../Components/CateUpdateModal";
 
 //img hosting api
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;

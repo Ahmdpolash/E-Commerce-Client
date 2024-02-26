@@ -1,11 +1,18 @@
 import React from "react";
 import "./toggle.css";
+import { BsFillMoonFill, BsSun } from "react-icons/bs";
 
-
-const DarkMood = () => {
+const DarkMood = ({ toggle, setToggle }) => {
   return (
     <div>
-      <label className="theme-switch">
+      <h3 onClick={() => setToggle(!toggle)}>
+        {toggle ? (
+          <BsFillMoonFill className="font-bold text-[22px]"></BsFillMoonFill>
+        ) : (
+          <BsSun className="font-bold text-2xl"></BsSun>
+        )}
+      </h3>
+      {/* <label className="theme-switch">
         <input type="checkbox" className="theme-switch__checkbox" />
         <div className="theme-switch__container">
           <div className="theme-switch__clouds"></div>
@@ -33,7 +40,7 @@ const DarkMood = () => {
             </div>
           </div>
         </div>
-      </label>
+      </label> */}
     </div>
   );
 };
