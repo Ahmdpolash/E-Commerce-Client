@@ -10,6 +10,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import Lottie from "lottie-react";
+import useCategory from "../../Hooks/useCategory";
 const options = [
   { value: "#mobile", label: "#mobile" },
   { value: "#fashion", label: "#fashion" },
@@ -28,29 +29,13 @@ const AddProduct = () => {
   const [showImage, setShowImage] = useState([]);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  const [categories, setCategories] = useState([
-    {
-      id: 1,
-      category: "mobile",
-    },
-    {
-      id: 2,
-      category: "laptop",
-    },
-    {
-      id: 3,
-      category: "fashions",
-    },
-    {
-      id: 4,
-      category: "tablet",
-    },
-  ]);
+
+  const { data } = useCategory();
 
   const [value, setValue] = useState([]);
   const [tag, setTags] = useState([]);
 
-  const [filterData, setFilterData] = useState(categories);
+  const [filterData, setFilterData] = useState(data);
 
   const handleSearch = (e) => {
     const value = e.target.value;

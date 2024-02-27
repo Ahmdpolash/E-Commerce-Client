@@ -16,8 +16,14 @@ import {
 } from "react-icons/fa6";
 import "../../Shop/shop.css";
 import { Link } from "react-router-dom";
+import useProducts from "../../../Hooks/useProducts";
 
 const Featured = () => {
+  const { data, isLoading } = useProducts();
+  console.log(data);
+
+
+  
   return (
     <div className="bg-[#F1F1F1]">
       <Container>
@@ -35,13 +41,13 @@ const Featured = () => {
             id="small-device"
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2"
           >
-            {[1, 2, 3, 4, 5].map((p, i) => (
+            {data?.map((product, i) => (
               <Link key={i} to="/details">
                 <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
                   <img
-                    className="mx-auto w-[160px] md:w-[180px] lg:w-[200px] transition-opacity hover:duration-700 ease-in-out"
-                    src="https://raw.githubusercontent.com/SheikhFarid99/multi-vendor-ecommerce/main/client/public/images/products/1.webp"
-                    alt=""
+                    className="mx-auto w-[160px] h-[220px] md:w-[180px] lg:w-full 200 rounded-md transition-opacity hover:duration-700 ease-in-out"
+                    src={product?.images[0]}
+                    alt="Product image"
                   />
                   <div className="">
                     <div className="flex gap-1 lg:gap-2 items-center">
@@ -55,8 +61,8 @@ const Featured = () => {
                       </p>
                     </div>
 
-                    <h3 className="font-semibold hover:text-red-500 duration-500">
-                      Apple AirPods Max Over-Ear
+                    <h3 className="font-semibold text-slate-700 hover:text-red-500 duration-500">
+                      {product?.product_name.slice(0,29)}
                     </h3>
                     <div className="flex items-center gap-1 lg:gap-2 py-1">
                       <FaStar className="text-[#F6BA00]" />
@@ -70,7 +76,7 @@ const Featured = () => {
 
                     <div className="pb-1 flex items-center justify-between">
                       <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
-                        <FaBangladeshiTakaSign /> 5600
+                        <FaBangladeshiTakaSign /> {product?.price}
                       </p>
                       <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
                         {" "}

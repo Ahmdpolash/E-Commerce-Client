@@ -40,7 +40,7 @@ const Banner = () => {
       >
         {banner[0]?.images.map((b, i) => (
           <SwiperSlide key={i} className="relative w-max">
-            <img className="lg:h-full h-[220px] w-full " src={b} alt="" />
+            <img className="lg:h-[430px] h-[220px] w-full " src={b} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>

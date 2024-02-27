@@ -19,7 +19,7 @@ import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
-const AdminDashSidebar = ({ toggle }) => {
+const AdminDashSidebar = () => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const AdminDashSidebar = ({ toggle }) => {
   };
 
   return (
-    <div className={`bg-${toggle ? "gray-900" : "white"} dark:bg-[#253145]`}>
+    <div className="bg-[#E2E8F0]  dark:bg-[#253145]">
       <div className="flex ">
         <div>
           <div className="w-[275px] relative z-[888]  hidden lg:block bg-white h-screen  border-r-2 border-slate-200 shadow-indigo-600/30">
