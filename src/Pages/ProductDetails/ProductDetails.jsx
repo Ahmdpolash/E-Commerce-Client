@@ -18,15 +18,11 @@ import RelatedProduct from "./RelatedProduct";
 import Review from "./Review";
 import Description from "./Description";
 import SellerInform from "./SellerInform";
-import useProducts from "../../Hooks/useProducts";
+
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [state, setState] = useState("reviews");
-  const { data, isLoading } = useProducts();
-  console.log(data);
-
-
 
   let available = 6;
 
@@ -44,18 +40,18 @@ const ProductDetails = () => {
     }
   };
 
-  // const images = [
-  //   "https://i.ibb.co/jk2wM6d/r10-id1-364x364.jpghttps://i.ibb.co/0FNNTZD/r10-id1-364x364-removebg-preview.png",
-  //   "https://i.ibb.co/m51Zw6b/nexg-n70-id3-364x364.jpg",
-  //   "https://i.ibb.co/2PXWWNh/h660d-01-500x500.webp",
-  // ];
+  const images = [
+    "https://i.ibb.co/jk2wM6d/r10-id1-364x364.jpghttps://i.ibb.co/0FNNTZD/r10-id1-364x364-removebg-preview.png",
+    "https://i.ibb.co/m51Zw6b/nexg-n70-id3-364x364.jpg",
+    "https://i.ibb.co/2PXWWNh/h660d-01-500x500.webp",
+  ];
 
-  const [currentImage, setCurrentImage] = useState(data?.images.map(p,i => p[0]));
+  const [currentImage, setCurrentImage] = useState(images[0]);
   const colors = ["primary"];
 
-  useEffect(() => {
-    scroll(0, 0);
-  }, []);
+  useEffect(()=>{
+    scroll(0,0)
+  },[])
 
   return (
     <div className=" bg-[#F3F4F6]">
@@ -90,7 +86,7 @@ const ProductDetails = () => {
             </div>
 
             <div className="grid grid-cols-3 ml-4 lg:ml-0 gap-4 lg:gap-3   my-3">
-              {data?.images?.map((image) => (
+              {images?.map((image) => (
                 <button
                   onClick={() => setCurrentImage(image)}
                   className={`w-full border  ${
