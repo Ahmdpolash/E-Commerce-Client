@@ -29,6 +29,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import CategoryMap from "../../Components/CategoryMap";
 
 const Navbar = () => {
+  
   const [open, setOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [mobileCart, setMobileCart] = useState(false);

@@ -11,6 +11,8 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import Lottie from "lottie-react";
 import useCategory from "../../Hooks/useCategory";
+import useAuth from "../../Hooks/useAuth";
+import useSeller from "../../Hooks/useSeller";
 const options = [
   { value: "#mobile", label: "#mobile" },
   { value: "#fashion", label: "#fashion" },
@@ -36,21 +38,6 @@ const AddProduct = () => {
   const [tag, setTags] = useState([]);
 
   const [filterData, setFilterData] = useState(data);
-
-  const handleSearch = (e) => {
-    const value = e.target.value;
-    setSearch(value);
-
-    if (value) {
-      const searchValue = categories.filter((c) =>
-        c.category.toLowerCase().includes(search.toLowerCase())
-      );
-      setFilterData(searchValue);
-      console.log(searchValue);
-    } else {
-      setFilterData(categories);
-    }
-  };
 
   const handleImage = (e) => {
     const files = e.target.files;
@@ -85,6 +72,14 @@ const AddProduct = () => {
   const handleCol = (e) => {
     setValue(e.map((col) => col.value));
   };
+
+  //seller finding
+  const { user } = useAuth();
+  const { data: sellers } = useSeller();
+
+  const findingSeller = sellers?.find((seller) => seller.email === user?.email);
+
+  console.log("this is seller email", findingSeller);
 
   // add product on database
   const handleAddProduct = async (e) => {
@@ -142,6 +137,9 @@ const AddProduct = () => {
       description,
       images: url,
       date,
+      email: findingSeller.email,
+      shopName: findingSeller.shop_name,
+      shopLogo: findingSeller.shop_Logo,
     };
 
     try {
@@ -218,7 +216,6 @@ const AddProduct = () => {
                 >
                   <div className="w-full px-4 py-2 fixed">
                     <input
-                      onChange={handleSearch}
                       className="px-3 py-1 mt-1 w-full focus:border-indigo-500 outline-none bg-transparent border border-slate-700 rounded-md text-slate-700 overflow-hidden"
                       type="text"
                       placeholder="search"

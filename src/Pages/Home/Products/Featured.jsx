@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import useProducts from "../../../Hooks/useProducts";
 
 const Featured = () => {
+  
   const { data, isLoading } = useProducts();
   console.log(data);
 

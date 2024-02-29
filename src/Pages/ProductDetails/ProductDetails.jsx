@@ -19,7 +19,6 @@ import Review from "./Review";
 import Description from "./Description";
 import SellerInform from "./SellerInform";
 
-
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [state, setState] = useState("reviews");
@@ -49,9 +48,9 @@ const ProductDetails = () => {
   const [currentImage, setCurrentImage] = useState(images[0]);
   const colors = ["primary"];
 
-  useEffect(()=>{
-    scroll(0,0)
-  },[])
+  useEffect(() => {
+    scroll(0, 0);
+  }, []);
 
   return (
     <div className=" bg-[#F3F4F6]">

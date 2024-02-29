@@ -22,7 +22,7 @@ import UserDashChangePass from "../Dashboard/UserDashboard/UserDashChangePass";
 import UserDashNotification from "../Dashboard/UserDashboard/UserDashNotification";
 import UserDashProfile from "../Dashboard/UserDashboard/UserDashProfile";
 import SellerDashHome from "../Dashboard/SellerDashboard/SellerDashHome";
-import AddProduct from "../Dashboard/SellerDashboard/addProduct";
+// import AddProduct from "../Dashboard/SellerDashboard/addProduct";
 import SellerDashAllProduct from "../Dashboard/SellerDashboard/SellerDashAllProduct";
 import SellerDashPayments from "../Dashboard/SellerDashboard/SellerDashPayments";
 import SellerProfile from "../Dashboard/SellerDashboard/SellerProfile";
@@ -41,6 +41,7 @@ import AdminDashSellerReq from "../Dashboard/AdminDashboard/AdminDashSellerReq";
 import AdminDashChatSeller from "../Dashboard/AdminDashboard/AdminDashChatSeller";
 import AdminAddBanner from "../Dashboard/AdminDashboard/AdminAddBanner";
 import Service from "../Pages/Home/Service/Service";
+import AddProduct from "../Dashboard/SellerDashboard/AddProduct";
 
 const Route = createBrowserRouter([
   {
