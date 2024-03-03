@@ -27,6 +27,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddProduct = () => {
   const [cateShow, setCateShow] = useState(false);
   const [search, setSearch] = useState("");
+  console.log("search", search);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showImage, setShowImage] = useState([]);
@@ -90,6 +91,7 @@ const AddProduct = () => {
 
     const product_name = form.productName.value;
     const brand = form.brand.value;
+    const category = search;
     const stock = form.stock.value;
     const price = form.price.value;
     const discount = form.discount.value;
@@ -137,6 +139,7 @@ const AddProduct = () => {
       const products = {
         product_name,
         brand,
+        category,
         stock,
         price,
         discount,

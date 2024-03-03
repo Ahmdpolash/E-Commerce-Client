@@ -19,6 +19,7 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import useCategory from "../../Hooks/useCategory";
 
 //img hosting api
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -87,7 +88,8 @@ const AdminDashCategory = () => {
 
   // get data from hook
 
-  const { data, refetch } = useCategories();
+  // const { data, refetch } = useCategories();
+  const { data, refetch } = useCategory();
 
   //delete categories
   const handleDelete = (id) => {
