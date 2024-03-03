@@ -19,12 +19,9 @@ import { Link } from "react-router-dom";
 import useProducts from "../../../Hooks/useProducts";
 
 const Featured = () => {
-  
   const { data, isLoading } = useProducts();
   console.log(data);
 
-
-  
   return (
     <div className="bg-[#F1F1F1]">
       <Container>
@@ -40,13 +37,13 @@ const Featured = () => {
 
           <div
             id="small-device"
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 lg:gap-3"
           >
-            {data?.map((product, i) => (
+            {data?.slice(0, 5)?.map((product, i) => (
               <Link key={i} to="/details">
-                <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
+                <div className="card lg:h-[390px] bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
                   <img
-                    className="mx-auto w-[160px] h-[220px] md:w-[180px] lg:w-full 200 rounded-md transition-opacity hover:duration-700 ease-in-out"
+                    className="mx-auto w-[160px] h-[220px] lg:h-[210px] md:w-[180px] lg:w-full  rounded-md transition-opacity hover:duration-700 ease-in-out"
                     src={product?.images[0]}
                     alt="Product image"
                   />
@@ -54,16 +51,16 @@ const Featured = () => {
                     <div className="flex gap-1 lg:gap-2 items-center">
                       <img
                         className="w-[32px] h-[32px] border rounded-full"
-                        src="https://www.thepixelfreak.co.uk/wp-content/uploads/2019/05/Entwined-M-Logo.png"
-                        alt=""
+                        src={product?.shopLogo}
+                        alt={product?.shopName}
                       />
                       <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
-                        Gadzet Zone
+                        {product?.shopName}
                       </p>
                     </div>
 
                     <h3 className="font-semibold text-slate-700 hover:text-red-500 duration-500">
-                      {product?.product_name.slice(0,29)}
+                      {product?.product_name.slice(0, 29)}
                     </h3>
                     <div className="flex items-center gap-1 lg:gap-2 py-1">
                       <FaStar className="text-[#F6BA00]" />

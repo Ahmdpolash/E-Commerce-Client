@@ -1,12 +1,8 @@
-import React from 'react';
-import SellerDashAllProduct from './SellerDashAllProduct';
+import React from "react";
+import SellerDashAllProduct from "./SellerDashAllProduct";
 
 const SellerDiscount = () => {
-    return (
-        <div>
-           <SellerDashAllProduct/>
-        </div>
-    );
+  return <div>{/* <SellerDashAllProduct/> */}</div>;
 };
 
 export default SellerDiscount;

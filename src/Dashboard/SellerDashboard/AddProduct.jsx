@@ -18,6 +18,7 @@ const options = [
   { value: "#fashion", label: "#fashion" },
   { value: "#electronics", label: "#electronics" },
   { value: "#accessories", label: "#accessories" },
+  { value: "#smart_watch", label: "#smart_watch" },
 ];
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -100,10 +101,9 @@ const AddProduct = () => {
     const images = form.photo.files;
 
     // image uploading process for multiple images
-    const url = [];
-    for (let i = 0; i < images.length; i++) {
+    const uploadPromises = Array.from(images).map(async (image) => {
       const formData = new FormData();
-      formData.append("image", images[i]);
+      formData.append("image", image);
 
       try {
         const res = await axiosPublic.post(image_hosting_api, formData, {
@@ -111,38 +111,46 @@ const AddProduct = () => {
             "content-type": "multipart/form-data",
           },
         });
-        console.log(res.data);
 
         if (res.data.success) {
-          url.push(res.data.data.display_url);
+          return res.data.data.display_url;
+        } else {
+          throw new Error("Failed to upload image");
         }
       } catch (err) {
         toast.error("Failed to upload image");
+        return null; // Return null for failed uploads
       }
-
-      setLoading(false);
-    }
-
-    console.log(url);
-
-    const products = {
-      product_name,
-      brand,
-      stock,
-      price,
-      discount,
-      color,
-      tags,
-      short_description,
-      description,
-      images: url,
-      date,
-      email: findingSeller.email,
-      shopName: findingSeller.shop_name,
-      shopLogo: findingSeller.shop_Logo,
-    };
+    });
 
     try {
+      const urls = await Promise.all(uploadPromises);
+      console.log(urls);
+
+      // Check if any upload failed
+      if (urls.includes(null)) {
+        toast.error("Some images failed to upload. Please try again.");
+        setLoading(false); // Reset loading state
+        return; // Don't proceed with database insertion
+      }
+
+      const products = {
+        product_name,
+        brand,
+        stock,
+        price,
+        discount,
+        color,
+        tags,
+        short_description,
+        description,
+        images: urls.filter((url) => url), // filter out any null URLs
+        date,
+        email: findingSeller.email,
+        shopName: findingSeller.shop_name,
+        shopLogo: findingSeller.shop_Logo,
+      };
+
       const productRes = await axiosPublic.post("/products", products);
       if (productRes.data.insertedId) {
         toast.success("Product added successfully");
@@ -152,6 +160,8 @@ const AddProduct = () => {
     } catch (err) {
       toast.error("Something went Wrong !! Product added failed");
     }
+
+    setLoading(false); // Reset loading state
   };
 
   return (
