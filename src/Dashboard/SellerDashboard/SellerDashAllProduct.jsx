@@ -92,34 +92,34 @@ const SellerDashAllProduct = () => {
                             className="py-1 px-4 font-medium whitespace-nowrap"
                           >
                             <img
-                              className="w-[45px] h-[45px]"
-                              src="https://diamu.com.bd/wp-content/uploads/2023/05/Fabrilife-Mens-Premium-Designer-Edition-T-Shirt-Signature.jpg"
-                              alt=""
+                              className="w-[45px] h-[45px] rounded-md"
+                              src={item?.images[0]}
+                              alt={item?.product_name.slice(0, 30)}
                             />
                           </td>
                           <td
                             scope="row"
                             className="py-1 px-4 font-medium whitespace-nowrap"
                           >
-                            <span>{item?.product_name}</span>
+                            <span>{item?.product_name.slice(0, 30)}...</span>
                           </td>
                           <td
                             scope="row"
                             className="py-1 px-6 font-medium whitespace-nowrap"
                           >
-                            <span>Fashion</span>
+                            <span>{item?.category}</span>
                           </td>
                           <td
                             scope="row"
                             className="py-1 px-6 font-medium whitespace-nowrap"
                           >
-                            <span>Fresh</span>
+                            <span>{item?.brand}</span>
                           </td>
                           <td
                             scope="row"
                             className="py-1 px-4 font-medium whitespace-nowrap"
                           >
-                            <span>$542</span>
+                            <span>${item?.price}</span>
                           </td>
                           <td
                             scope="row"
@@ -130,13 +130,17 @@ const SellerDashAllProduct = () => {
                   ) : (
                     <span>${d.discount}%</span>
                   )} */}
-                            <span>$5%</span>
+                            <span>
+                              %{item?.discount ? item?.discount : "0"}
+                            </span>
                           </td>
                           <td
                             scope="row"
                             className="py-1 px-8 font-medium whitespace-nowrap"
                           >
-                            <span>25</span>
+                            <span>
+                              {item?.stock ? item?.stock : "Stocked Out"}
+                            </span>
                           </td>
                           <td
                             scope="row"
