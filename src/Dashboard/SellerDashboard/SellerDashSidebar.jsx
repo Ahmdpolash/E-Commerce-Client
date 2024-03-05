@@ -4,9 +4,9 @@ import { TbBrandProducthunt } from "react-icons/tb";
 import { IoCartOutline, IoChatboxOutline } from "react-icons/io5";
 import { MdOutlineDiscount, MdOutlinePayment } from "react-icons/md";
 import { BiLogInCircle } from "react-icons/bi";
-
-import { CiChat1, CiChat2 } from "react-icons/ci";
-import { FaList, FaRegUserCircle } from "react-icons/fa";
+import "../../Responsive/Responsive.css";
+import { CiChat2 } from "react-icons/ci";
+import { FaRegUserCircle } from "react-icons/fa";
 import "../../Responsive/Responsive.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import logo from "../../../public/logo2.png";
@@ -46,11 +46,12 @@ const SellerDashSidebar = () => {
       <div className="flex ">
         {/* mobile sidebar */}
 
-        <div className="block lg:hidden"></div>
-
         {/* mobile sidebar */}
 
-        <div className="w-[275px]  hidden lg:block bg-white h-screen relative z-[8888] border-r-2 border-slate-200 shadow-indigo-600/30">
+        <div
+          id="laptopScreenSellerDash"
+          className="w-[275px]  hidden lg:block bg-white h-screen relative z-[8888] border-r-2 border-slate-200 shadow-indigo-600/30"
+        >
           <div className="logo mx-auto text-center w-[185px] my-2">
             <Link to="/">
               {" "}

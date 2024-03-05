@@ -13,10 +13,10 @@
   #allSellers {
     width: 315px;
   }
-  #sellerDashTable{
+  #sellerDashTable {
     width: 395px;
   }
-  #sellerChart{
+  #sellerChart {
     width: 380px;
   }
 }
@@ -57,8 +57,8 @@
   #allSellers {
     width: 255px;
   }
-  #hiddenSelect{
-    display: none
+  #hiddenSelect {
+    display: none;
   }
 }
 /* User Dashboard Home */
@@ -94,5 +94,13 @@
   }
   .responsive-table {
     width: 707px;
+  }
+  #laptopScreenSellerDash {
+    width: 80% !important;
+  }
+}
+@media screen and (max-width: 1920px) {
+  #laptopScreenSellerDash {
+    width: 18% !important;
   }
 }
