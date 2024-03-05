@@ -25,21 +25,18 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddProduct = () => {
-  const [cateShow, setCateShow] = useState(false);
-  const [search, setSearch] = useState("");
-  console.log("search", search);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showImage, setShowImage] = useState([]);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-
+  const [categories, setCategories] = useState();
+  console.log('cat', categories);
   const { data } = useCategory();
+  console.log("category come", data);
 
   const [value, setValue] = useState([]);
   const [tag, setTags] = useState([]);
-
-  const [filterData, setFilterData] = useState(data);
 
   const handleImage = (e) => {
     const files = e.target.files;
@@ -69,6 +66,7 @@ const AddProduct = () => {
     { value: "black", label: "black" },
     { value: "white", label: "white" },
     { value: "silver", label: "silver" },
+    { value: "purple", label: "purple" },
   ];
 
   const handleCol = (e) => {
@@ -81,8 +79,6 @@ const AddProduct = () => {
 
   const findingSeller = sellers?.find((seller) => seller.email === user?.email);
 
-  console.log("this is seller email", findingSeller);
-
   // add product on database
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -91,7 +87,7 @@ const AddProduct = () => {
 
     const product_name = form.productName.value;
     const brand = form.brand.value;
-    const category = search;
+    const category = categories;
     const stock = form.stock.value;
     const price = form.price.value;
     const discount = form.discount.value;
@@ -213,41 +209,14 @@ const AddProduct = () => {
             <div className="flex flex-col mb-3 md:flex-row gap-4 w-full text-slate-700">
               <div className="flex flex-col w-full gap-1 relative">
                 <label htmlFor="category">Category</label>
-                <input
-                  readOnly
-                  value={search}
-                  onClick={() => setCateShow(!cateShow)}
-                  className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
-                  type="text"
-                  placeholder="Select Category"
-                  id="category"
-                />
-                <div
-                  className={`absolute top-[101%] z-40 bg-slate-200  border mt-2 rounded-md w-full transition-all ${
-                    cateShow ? "scale-100" : "scale-0"
-                  }`}
-                >
-                  <div className="w-full px-4 py-2 fixed">
-                    <input
-                      className="px-3 py-1 mt-1 w-full focus:border-indigo-500 outline-none bg-transparent border border-slate-700 rounded-md text-slate-700 overflow-hidden"
-                      type="text"
-                      placeholder="search"
-                    />
-                  </div>
-                  <div className="pt-14">
-                    <ul className="px-4 cursor-pointer mb-2">
-                      {filterData?.map((c, i) => (
-                        <li
-                          onClick={() => setSearch(c.category)}
-                          className="py-2 hover:bg-slate-300 rounded-md p-2 hover:text-slate-700"
-                          key={i}
-                        >
-                          {c.category}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                <select onChange={(e) => setCategories(e.target.value)} className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700">
+                  <option>Select Category</option>
+                  {data?.map((c, i) => (
+                    <option value={c.category} key={i}>
+                      {c?.category}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="flex flex-col w-full gap-1">
                 <label htmlFor="stock">Availability</label>

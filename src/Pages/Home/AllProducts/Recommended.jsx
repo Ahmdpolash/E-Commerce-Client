@@ -14,37 +14,41 @@ import {
   FaStarHalfStroke,
 } from "react-icons/fa6";
 import "../../Shop/shop.css";
+import useProducts from "../../../Hooks/useProducts";
+import { Link } from "react-router-dom";
 
 const Recommended = () => {
+  const { data } = useProducts();
+  console.log(data);
   return (
     <div className="bg-[#F1F1F1]">
       <Container>
         <div className="bg-white px-3 py-2 lg:py-6 shadow-md border mt-2">
-          <h1 className="text-2xl font-semibold ">Recommended To You</h1>
+          <h1 className="text-2xl font-semibold mb-2">Recommended To You</h1>
 
           <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3 lg:gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p, i) => (
-              <div key={i}>
-                <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
+            {data?.slice(5)?.map((product, i) => (
+              <Link key={i} to="/details">
+                <div className="card lg:h-[390px] bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
                   <img
-                    className="mx-auto w-[160px] md:w-[180px] lg:w-[200px] transition-opacity hover:duration-700 ease-in-out"
-                    src="https://raw.githubusercontent.com/SheikhFarid99/multi-vendor-ecommerce/main/client/public/images/products/1.webp"
-                    alt=""
+                    className="mx-auto w-[160px] h-[140px] md:h-[170px] lg:h-[210px] md:w-full lg:w-full  rounded-md transition-opacity hover:duration-700 ease-in-out"
+                    src={product?.images[0]}
+                    alt="Product image"
                   />
                   <div className="">
                     <div className="flex gap-1 lg:gap-2 items-center">
                       <img
                         className="w-[32px] h-[32px] border rounded-full"
-                        src="https://www.thepixelfreak.co.uk/wp-content/uploads/2019/05/Entwined-M-Logo.png"
-                        alt=""
+                        src={product?.shopLogo}
+                        alt={product?.shopName}
                       />
                       <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
-                        Gadzet Zone
+                        {product?.shopName}
                       </p>
                     </div>
 
-                    <h3 className="font-semibold hover:text-red-500 duration-500">
-                      Apple AirPods Max Over-Ear
+                    <h3 className="font-semibold text-slate-700 hover:text-red-500 duration-500">
+                      {product?.product_name.slice(0, 29)}
                     </h3>
                     <div className="flex items-center gap-1 lg:gap-2 py-1">
                       <FaStar className="text-[#F6BA00]" />
@@ -58,7 +62,7 @@ const Recommended = () => {
 
                     <div className="pb-1 flex items-center justify-between">
                       <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
-                        <FaBangladeshiTakaSign /> 5600
+                        <FaBangladeshiTakaSign /> {product?.price}
                       </p>
                       <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
                         {" "}
@@ -138,7 +142,7 @@ const Recommended = () => {
                     <FaCartShopping className="text-red-500 hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

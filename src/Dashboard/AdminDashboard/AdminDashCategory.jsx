@@ -8,7 +8,6 @@ import { BsImage } from "react-icons/bs";
 import { IoCloseSharp } from "react-icons/io5";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-import useCategories from "../../Hooks/useCategories";
 
 import {
   Modal,

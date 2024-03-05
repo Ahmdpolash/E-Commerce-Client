@@ -43,7 +43,7 @@ const Featured = () => {
               <Link key={i} to="/details">
                 <div className="card lg:h-[390px] bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
                   <img
-                    className="mx-auto w-[160px] h-[220px] lg:h-[210px] md:w-[180px] lg:w-full  rounded-md transition-opacity hover:duration-700 ease-in-out"
+                    className="mx-auto w-[160px] h-[140px] md:h-[170px] lg:h-[210px] md:w-full lg:w-full  rounded-md transition-opacity hover:duration-700 ease-in-out"
                     src={product?.images[0]}
                     alt="Product image"
                   />
