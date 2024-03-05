@@ -22,8 +22,8 @@ const SellerDashAllProduct = () => {
       <section className="">
         <div className="bg-white  h-[83vh] mt-3 allProducts  w-[407px] px-3 lg:px-0 md:w-[733px] lg:w-full rounded-md">
           {data?.length === 0 ? (
-            <div>
-              <span>No Product Added Yet..!</span>
+            <div className="flex items-center justify-center h-[calc(100%-10px)]">
+              <span className="font-semibold text-2xl">No Product Upload Yet..! <Link to='/dashboard/add-products' className="text-blue-600 font-bold underline">Upload Now</Link> </span>
             </div>
           ) : (
             <>

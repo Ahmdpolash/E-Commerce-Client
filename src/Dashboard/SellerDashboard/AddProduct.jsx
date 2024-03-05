@@ -65,7 +65,7 @@ const AddProduct = () => {
     { value: "blue", label: "blue" },
     { value: "black", label: "black" },
     { value: "white", label: "white" },
-    { value: "silver", label: "silver" },
+    { value: "yellow", label: "yellow" },
     { value: "purple", label: "purple" },
   ];
 
