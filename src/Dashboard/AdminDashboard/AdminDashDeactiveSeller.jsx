@@ -98,7 +98,7 @@ const AdminDashDeactiveSeller = () => {
                         src={
                           user?.image
                             ? user?.image
-                            : "https://img.freepik.com/premium-photo/man-with-glasses-shirt-that-says-i-m-happy-man_745528-2521.jpg?w=740"
+                            : "https://static-00.iconduck.com/assets.00/user-icon-1024x1024-dtzturco.png"
                         }
                         alt=""
                       />

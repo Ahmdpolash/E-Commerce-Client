@@ -14,10 +14,19 @@ import useAuth from "../../Hooks/useAuth";
 import { RxCross2 } from "react-icons/rx";
 import { CiCircleInfo } from "react-icons/ci";
 import SellerPieChart from "./SellerPieChart";
+import useSellerProduct from "../../Hooks/useSellerProduct";
+import useSeller from "../../Hooks/useSeller";
+import PendingAccount from "../../Components/PendingAccount";
 
 const SellerDashHome = () => {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
+  const { data } = useSellerProduct();
+
+  // check if seller status is pending then not access any dashboard routes
+  const { data: seller } = useSeller();
+
+  const sellerStatus = seller?.find((s) => s?.email === user?.email);
 
   const state = {
     series: [
@@ -173,172 +182,180 @@ const SellerDashHome = () => {
       >
         <MobileSideNav />
       </div>
-      {/*----------------------- mobile sidebar-------------------------- */}
+      {/*----------------------- mobile sidebar end-------------------------- */}
 
       {/* -----------------------the summary box start here---------------------- */}
 
-      <section className="my-5 box">
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 res lg:grid-cols-4 gap-4  md:gap-5 lg:gap-6">
-          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start text-slate-600">
-              <h2 className="text-3xl font-bold">$188</h2>
-              <span className="text-md font-medium">Total Sales</span>
-            </div>
-            <div className="w-[46px] h-[47px] rounded-full bg-[#28c76f1f] flex justify-center items-center text-xl">
-              <BsCurrencyDollar className="text-[#28c76f] shadow-lg" />
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start text-slate-600">
-              <h2 className="text-3xl font-bold">25</h2>
-              <span className="text-md font-medium">Products</span>
-            </div>
-            <div className="w-[46px] h-[47px] rounded-full bg-[#e000e81f] flex justify-center items-center text-xl">
-              <RiProductHuntLine className="text-[#cd00e8] shadow-lg" />
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start text-slate-600">
-              <h2 className="text-3xl font-bold">14</h2>
-              <span className="text-md font-medium">Orders</span>
-            </div>
-            <div className="w-[46px] h-[47px] rounded-full bg-[#46d9ea1f] flex justify-center items-center text-xl">
-              <AiOutlineShoppingCart className="text-[#4ec1cc] shadow-lg" />
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
-            <div className="flex flex-col justify-start items-start text-slate-600">
-              <h2 className="text-3xl font-bold">0</h2>
-              <span className="text-md font-medium">Pending orders</span>
-            </div>
-            <div className="w-[46px] h-[47px] rounded-full bg-[#7367f01f] flex justify-center items-center text-xl">
-              <MdPendingActions className="text-[#7367f0] shadow-lg" />
-            </div>
-          </div>
+      {sellerStatus?.status === "Pending" ? (
+        <div>
+          <PendingAccount />
         </div>
-      </section>
-      {/*------------------ the summary box end here-------------------- */}
+      ) : (
+        <>
+          <section className="my-5 box">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 res lg:grid-cols-4 gap-4  md:gap-5 lg:gap-6">
+              <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
+                <div className="flex flex-col justify-start items-start text-slate-600">
+                  <h2 className="text-3xl font-bold">$188</h2>
+                  <span className="text-md font-medium">Total Sales</span>
+                </div>
+                <div className="w-[46px] h-[47px] rounded-full bg-[#28c76f1f] flex justify-center items-center text-xl">
+                  <BsCurrencyDollar className="text-[#28c76f] shadow-lg" />
+                </div>
+              </div>
 
-      {/*--------------- the bar chart start here-------------------- */}
-      <section className="flex flex-col gap-2 lg:flex-row">
-        <div className="w-full lg:w-7/12 lg:pr-3">
-          <div className="w-full bg-white sellerBarChart p-4 rounded-md">
-            <ReactApexChart
-              options={state.options}
-              series={state.series}
-              type="bar"
-              height={350}
-            />
-          </div>
-        </div>
+              <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
+                <div className="flex flex-col justify-start items-start text-slate-600">
+                  <h2 className="text-3xl font-bold">{data?.length}</h2>
+                  <span className="text-md font-medium">Products</span>
+                </div>
+                <div className="w-[46px] h-[47px] rounded-full bg-[#e000e81f] flex justify-center items-center text-xl">
+                  <RiProductHuntLine className="text-[#cd00e8] shadow-lg" />
+                </div>
+              </div>
 
-        <div className="w-full flex-1 h-[397px] bg-white rounded-md">
-          <div className="flex justify-between items-center px-4 py-2">
-            <h1 className="text-slate-700 font-medium flex gap-2 items-center text-[18px]">
-              <CiCircleInfo className="text-slate-800" />
-              Sales Overview
-            </h1>
-            <button className="text- cursor-pointer font-medium flex gap-1 items-center text-[16px]">
-              <RxCross2 className="mt-1 text-[19px]" />
-            </button>
-          </div>
+              <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
+                <div className="flex flex-col justify-start items-start text-slate-600">
+                  <h2 className="text-3xl font-bold">14</h2>
+                  <span className="text-md font-medium">Orders</span>
+                </div>
+                <div className="w-[46px] h-[47px] rounded-full bg-[#46d9ea1f] flex justify-center items-center text-xl">
+                  <AiOutlineShoppingCart className="text-[#4ec1cc] shadow-lg" />
+                </div>
+              </div>
 
-          <SellerPieChart />
-        </div>
-      </section>
-      {/* ----------------the bar chart end here------------------ */}
-
-      {/* -----------------this is the order table start here--------------  */}
-      <section className="mt-3  lg:mt-0" id="Order table">
-        <div className="bg-white lg:p-4 lg:mt-5 rounded-md">
-          <div className="flex p-3 items-center justify-between">
-            <h2 className="text-lg font-semibold text-slate-600">
-              Recent Orders
-            </h2>
-            <h3>View All</h3>
-          </div>
-          <div className="pt-2 lg:pt-4">
-            <div className="bg-white sellerTable  w-[350px] px-2 lg:px-0 md:w-[700px] lg:w-full rounded-md">
-              <div className=" overflow-x-auto w-full">
-                <div className="relative overflow-x-auto">
-                  <table className="w-full text-sm text-left  text-gray-500">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-100">
-                      <tr>
-                        <th scope="col" className="px-6 py-2 lg:py-3">
-                          Order Id
-                        </th>
-                        <th scope="col" className="px-6 py-2 lg:py-3">
-                          Price
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-10 md:px-12 lg:px-14 py-2 lg:py-3"
-                        >
-                          Payment status
-                        </th>
-                        <th scope="col" className="px-6 py-2 lg:py-3">
-                          Order status
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-10 md:px-12 lg:px-16 py-2 lg:py-3"
-                        >
-                          Action
-                        </th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      {[1, 2, 3, 4].map((t, i) => (
-                        <tr key={i} className="border-b border-gray-200 ">
-                          <td
-                            scope="row"
-                            className="px-6 py-4 font-medium whitespace-nowrap"
-                          >
-                            5444463155446
-                          </td>
-                          <td
-                            scope="row"
-                            className="px-6 py-4 font-medium whitespace-nowrap"
-                          >
-                            $145
-                          </td>
-                          <td
-                            scope="row"
-                            className="px-[73px] py-4 font-medium whitespace-nowrap"
-                          >
-                            Pending
-                          </td>
-                          <td
-                            scope="row"
-                            className="px-10 py-4 font-medium whitespace-nowrap"
-                          >
-                            Pending
-                          </td>
-
-                          <td
-                            scope="row"
-                            className="px-16 flex lg:flex-row flex-col  flex-wrap gap-2 py-4"
-                          >
-                            <Link>
-                              <span className="bg-green-100 text-green-800 text-sm font-normal mr-2 px-2 lg:px-2.5 py-[1px] rounded cursor-pointer block text-center lg:text-left">
-                                view
-                              </span>
-                            </Link>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+              <div className="flex justify-between items-center p-5 bg-white rounded-md gap-3">
+                <div className="flex flex-col justify-start items-start text-slate-600">
+                  <h2 className="text-3xl font-bold">0</h2>
+                  <span className="text-md font-medium">Pending orders</span>
+                </div>
+                <div className="w-[46px] h-[47px] rounded-full bg-[#7367f01f] flex justify-center items-center text-xl">
+                  <MdPendingActions className="text-[#7367f0] shadow-lg" />
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+          {/*------------------ the summary box end here-------------------- */}
+
+          {/*--------------- the bar chart start here-------------------- */}
+          <section className="flex flex-col gap-2 lg:flex-row">
+            <div className="w-full lg:w-7/12 lg:pr-3">
+              <div className="w-full bg-white sellerBarChart p-4 rounded-md">
+                <ReactApexChart
+                  options={state.options}
+                  series={state.series}
+                  type="bar"
+                  height={350}
+                />
+              </div>
+            </div>
+
+            <div className="w-full flex-1 h-[397px] bg-white rounded-md">
+              <div className="flex justify-between items-center px-4 py-2">
+                <h1 className="text-slate-700 font-medium flex gap-2 items-center text-[18px]">
+                  <CiCircleInfo className="text-slate-800" />
+                  Sales Overview
+                </h1>
+                <button className="text- cursor-pointer font-medium flex gap-1 items-center text-[16px]">
+                  <RxCross2 className="mt-1 text-[19px]" />
+                </button>
+              </div>
+
+              <SellerPieChart />
+            </div>
+          </section>
+          {/* ----------------the bar chart end here------------------ */}
+
+          {/* -----------------this is the order table start here--------------  */}
+          <section className="mt-3  lg:mt-0" id="Order table">
+            <div className="bg-white lg:p-4 lg:mt-5 rounded-md">
+              <div className="flex p-3 items-center justify-between">
+                <h2 className="text-lg font-semibold text-slate-600">
+                  Recent Orders
+                </h2>
+                <h3>View All</h3>
+              </div>
+              <div className="pt-2 lg:pt-4">
+                <div className="bg-white sellerTable  w-[350px] px-2 lg:px-0 md:w-[700px] lg:w-full rounded-md">
+                  <div className=" overflow-x-auto w-full">
+                    <div className="relative overflow-x-auto">
+                      <table className="w-full text-sm text-left  text-gray-500">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-100">
+                          <tr>
+                            <th scope="col" className="px-6 py-2 lg:py-3">
+                              Order Id
+                            </th>
+                            <th scope="col" className="px-6 py-2 lg:py-3">
+                              Price
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-10 md:px-12 lg:px-14 py-2 lg:py-3"
+                            >
+                              Payment status
+                            </th>
+                            <th scope="col" className="px-6 py-2 lg:py-3">
+                              Order status
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-10 md:px-12 lg:px-16 py-2 lg:py-3"
+                            >
+                              Action
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {[1, 2, 3, 4].map((t, i) => (
+                            <tr key={i} className="border-b border-gray-200 ">
+                              <td
+                                scope="row"
+                                className="px-6 py-4 font-medium whitespace-nowrap"
+                              >
+                                5444463155446
+                              </td>
+                              <td
+                                scope="row"
+                                className="px-6 py-4 font-medium whitespace-nowrap"
+                              >
+                                $145
+                              </td>
+                              <td
+                                scope="row"
+                                className="px-[73px] py-4 font-medium whitespace-nowrap"
+                              >
+                                Pending
+                              </td>
+                              <td
+                                scope="row"
+                                className="px-10 py-4 font-medium whitespace-nowrap"
+                              >
+                                Pending
+                              </td>
+
+                              <td
+                                scope="row"
+                                className="px-16 flex lg:flex-row flex-col  flex-wrap gap-2 py-4"
+                              >
+                                <Link>
+                                  <span className="bg-green-100 text-green-800 text-sm font-normal mr-2 px-2 lg:px-2.5 py-[1px] rounded cursor-pointer block text-center lg:text-left">
+                                    view
+                                  </span>
+                                </Link>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
 
       {/* ------------------------this is the order table end here---------------------  */}
     </div>

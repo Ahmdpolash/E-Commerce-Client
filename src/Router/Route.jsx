@@ -42,6 +42,7 @@ import AdminDashChatSeller from "../Dashboard/AdminDashboard/AdminDashChatSeller
 import AdminAddBanner from "../Dashboard/AdminDashboard/AdminAddBanner";
 import Service from "../Pages/Home/Service/Service";
 import AddProduct from "../Dashboard/SellerDashboard/AddProduct";
+import SecureSeller from "./SecureSeller";
 
 const Route = createBrowserRouter([
   {
@@ -143,15 +144,28 @@ const Route = createBrowserRouter([
       },
       {
         path: "add-products",
-        element: <AddProduct />,
+        element: (
+          <SecureSeller>
+            {" "}
+            <AddProduct />
+          </SecureSeller>
+        ),
       },
       {
         path: "all-products",
-        element: <SellerDashAllProduct />,
+        element: (
+          <SecureSeller>
+            <SellerDashAllProduct />
+          </SecureSeller>
+        ),
       },
       {
         path: "payments",
-        element: <SellerDashPayments />,
+        element: (
+          <SecureSeller>
+            <SellerDashPayments />
+          </SecureSeller>
+        ),
       },
       {
         path: "my-shop",
@@ -159,15 +173,27 @@ const Route = createBrowserRouter([
       },
       {
         path: "discount-price",
-        element: <SellerDiscount />,
+        element: (
+          <SecureSeller>
+            <SellerDiscount />
+          </SecureSeller>
+        ),
       },
       {
         path: "customer-orders",
-        element: <SellerOrders />,
+        element: (
+          <SecureSeller>
+            <SellerOrders />
+          </SecureSeller>
+        ),
       },
       {
         path: "customer-chat",
-        element: <SellerChatCustomer />,
+        element: (
+          <SecureSeller>
+            <SellerDashPayments />
+          </SecureSeller>
+        ),
       },
       {
         path: "support-chat",
