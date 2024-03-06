@@ -7,7 +7,6 @@ import { BiLogInCircle } from "react-icons/bi";
 import { HiOutlineUsers } from "react-icons/hi2";
 
 import { CiChat2, CiImageOn } from "react-icons/ci";
-import { FaRegUserCircle } from "react-icons/fa";
 import "../../Responsive/Responsive.css";
 import { TbUsersGroup } from "react-icons/tb";
 import { TbSettingsCancel } from "react-icons/tb";

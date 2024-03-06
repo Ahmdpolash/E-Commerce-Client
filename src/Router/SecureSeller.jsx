@@ -8,19 +8,19 @@ const SecureSeller = ({ children }) => {
   const { data } = useSeller();
   const location = useLocation();
 
-  const checkPending = data?.filter((seller) => seller?.email === user.email);
+  const checkPending = data?.find((seller) => seller?.email === user?.email);
   console.log(checkPending);
 
-  if (!checkPending?.status === "pending") {
+  if (checkPending?.status === "Pending") {
+    return (
+      <Navigate
+        state={location.pathname}
+        to="/dashboard/seller-dashboard"
+      ></Navigate>
+    );
+  } else {
     return children;
   }
-
-  return (
-    <Navigate
-      state={location.pathname}
-      to="/dashboard/seller-dashboard"
-    ></Navigate>
-  );
 };
 
 export default SecureSeller;
