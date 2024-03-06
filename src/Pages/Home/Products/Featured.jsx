@@ -41,26 +41,26 @@ const Featured = () => {
           >
             {data?.slice(0, 5)?.map((product, i) => (
               <Link key={i} to="/details">
-                <div className="card lg:h-[390px] bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
+                <div className="card lg:h-[365px] bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
                   <img
                     className="mx-auto w-[160px] h-[140px] md:h-[170px] lg:h-[210px] md:w-full lg:w-full  rounded-md transition-opacity hover:duration-700 ease-in-out"
                     src={product?.images[0]}
                     alt="Product image"
                   />
                   <div className="">
-                    <div className="flex gap-1 lg:gap-2 items-center">
-                      <img
-                        className="w-[32px] h-[32px] border rounded-full"
-                        src={product?.shopLogo}
-                        alt={product?.shopName}
-                      />
-                      <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
-                        {product?.shopName}
-                      </p>
-                    </div>
+                    {/* <div className="flex gap-1 lg:gap-2 items-center">
+                     <img
+                       className="w-[32px] h-[32px] border rounded-full"
+                       src={product?.shopLogo}
+                       alt={product?.shopName}
+                     />
+                     <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
+                       {product?.shopName}
+                     </p>
+                   </div> */}
 
-                    <h3 className="font-semibold text-slate-700 hover:text-red-500 duration-500">
-                      {product?.product_name.slice(0, 29)}
+                    <h3 className="font-medium text-slate-800 my-1 mt-1 hover:text-red-500 duration-500">
+                      {product?.product_name.slice(0, 50)}..
                     </h3>
                     <div className="flex items-center gap-1 lg:gap-2 py-1">
                       <FaStar className="text-[#F6BA00]" />
@@ -81,8 +81,8 @@ const Featured = () => {
                         <FaArrowCircleRight className="text-[21px]" />{" "}
                       </button>
                       {/* <button className="group-hover:bg-red-500 text-red-500 bg-gray-50 border-2 rounded-full px-2 lg:px-3 text-[13px] font-semibold py-1 lg:py-2 hidden lg:flex   items-center gap-1 group-hover:text-white duration-500">
-                      Add to Cart <FaArrowRight className="mt-1" />
-                    </button> */}
+                     Add to Cart <FaArrowRight className="mt-1" />
+                   </button> */}
 
                       <div className="bg-gray-50 lg:flex hidden items-center gap-2 text-red-500 border border-slate-300 py-[5px]  hover:border hover:duration-500 hover:border-red-500 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
                         Add To Cart
@@ -156,6 +156,24 @@ const Featured = () => {
                 </div>
               </Link>
             ))}
+
+            {isLoading && (
+              <>
+                {[1, 2, 3, 4, 5].map((j, i) => (
+                  <div className="bg-white shadow-md border h-[240px] w-full p-3 rounded-md">
+                    <div className="animate-pulse infinite delay-1000">
+                      <div className="bg-gray-300 h-[120px] w-full rounded-lg"></div>
+                      <div className="h-3 w-full bg-gray-300 my-3  rounded-lg"></div>
+                      <div className="h-3 w-1/2 bg-gray-300 my-3  rounded-lg"></div>
+                      <div className="flex mt-3 items-center gap-3 rounded-lg">
+                        <div className="h-3 bg-gray-300 w-1/2  rounded-lg"></div>
+                        <div className="h-3 bg-gray-300 w-1/2  rounded-lg"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </Container>

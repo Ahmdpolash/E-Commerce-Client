@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "../Banner/Banner";
 import Category from "../Category/Category";
 import Featured from "../Products/Featured";
@@ -10,6 +10,9 @@ import { Helmet } from "react-helmet";
 // import Card from "./Card";
 
 const Home = () => {
+  useEffect(() => {
+    scroll(0, 0);
+  }, []);
   return (
     <div>
       <Helmet>

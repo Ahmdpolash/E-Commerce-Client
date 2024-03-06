@@ -364,17 +364,17 @@ const Navbar = () => {
       {/* Search menu */}
 
       {/* bottom nav */}
-      <div className="fixed  block lg:hidden h-[42px] z-[999] bottom-0 backdrop-blur-md bg-white bg-opacity-50 border-t shadow-md border-slate-300 w-screen">
+      <div className="fixed  block lg:hidden h-[43px] z-[999] bottom-0 backdrop-blur-md bg-white bg-opacity-50 border-t shadow-md border-slate-300 w-screen">
         <div className="">
-          <ul className="flex bottom-4 text-xl px-4 relative items-center justify-between p-2">
+          <ul className="flex bottom-4 text-xl text-slate-800 px-4 relative items-center justify-between p-2">
             <li>
               <button onClick={() => setOpen(!open)}>
-                <AiOutlineMenu />
+                <AiOutlineMenu className="text-[24px]" />
               </button>
             </li>
             <li>
               <Link to="/">
-                <IoHomeOutline />
+                <IoHomeOutline className="text-[24px]"/>
               </Link>
             </li>
             <li className="bottom-4 cursor-pointer relative bg-[#2B38D1] text-white border-4 border-white z-[999] h-[58px] w-[58px] rounded-full ">
@@ -382,12 +382,12 @@ const Navbar = () => {
                 onClick={() => setMobileCart(!mobileCart)}
                 className="ml-3 z-[8999]"
               >
-                <IoCartOutline className="mx-auto mt-[13px]  font-semibold text-[25px]" />
+                <IoCartOutline className="mx-auto mt-[13px]  font-semibold text-[26px]" />
               </button>
             </li>
             <li>
               <Link to="/my-bookmarks">
-                <MdOutlineFavoriteBorder className="text-[23px]" />
+                <MdOutlineFavoriteBorder className="text-[25px]" />
               </Link>
             </li>
 

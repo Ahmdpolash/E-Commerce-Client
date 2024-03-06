@@ -17,7 +17,9 @@ const options = [
   { value: "#mobile", label: "#mobile" },
   { value: "#fashion", label: "#fashion" },
   { value: "#electronics", label: "#electronics" },
+  { value: "#TShirt", label: "#TShirt" },
   { value: "#accessories", label: "#accessories" },
+  { value: "#laptop", label: "#laptop" },
   { value: "#smart_watch", label: "#smart_watch" },
 ];
 
@@ -31,7 +33,7 @@ const AddProduct = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const [categories, setCategories] = useState();
-  console.log('cat', categories);
+  console.log("cat", categories);
   const { data } = useCategory();
   console.log("category come", data);
 
@@ -67,6 +69,7 @@ const AddProduct = () => {
     { value: "white", label: "white" },
     { value: "yellow", label: "yellow" },
     { value: "purple", label: "purple" },
+    { value: "silver", label: "silver" },
   ];
 
   const handleCol = (e) => {
@@ -96,6 +99,7 @@ const AddProduct = () => {
     const description = form.description.value;
     const short_description = form.short_description.value;
     const date = new Date().toJSON().slice(0, 10);
+    const review = 0;
     const images = form.photo.files;
 
     // image uploading process for multiple images
@@ -140,6 +144,7 @@ const AddProduct = () => {
         price,
         discount,
         color,
+        review,
         tags,
         short_description,
         description,
@@ -209,7 +214,10 @@ const AddProduct = () => {
             <div className="flex flex-col mb-3 md:flex-row gap-4 w-full text-slate-700">
               <div className="flex flex-col w-full gap-1 relative">
                 <label htmlFor="category">Category</label>
-                <select onChange={(e) => setCategories(e.target.value)} className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700">
+                <select
+                  onChange={(e) => setCategories(e.target.value)}
+                  className="px-4 py-2 focus:border-indigo-500 outline-none bg-white border border-slate-700 rounded-md text-slate-700"
+                >
                   <option>Select Category</option>
                   {data?.map((c, i) => (
                     <option value={c.category} key={i}>

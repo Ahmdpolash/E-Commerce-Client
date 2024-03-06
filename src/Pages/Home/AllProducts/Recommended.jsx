@@ -18,7 +18,7 @@ import useProducts from "../../../Hooks/useProducts";
 import { Link } from "react-router-dom";
 
 const Recommended = () => {
-  const { data } = useProducts();
+  const { data, isLoading } = useProducts();
   console.log(data);
   return (
     <div className="bg-[#F1F1F1]">
@@ -26,17 +26,17 @@ const Recommended = () => {
         <div className="bg-white px-3 py-2 lg:py-6 shadow-md border mt-2">
           <h1 className="text-2xl font-semibold mb-2">Recommended To You</h1>
 
-          <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-4">
+          <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3 lg:gap-4">
             {data?.slice(5)?.map((product, i) => (
               <Link key={i} to="/details">
-                <div className="card lg:h-[390px] bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
+                <div className="card lg:h-[365px] bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
                   <img
                     className="mx-auto w-[160px] h-[140px] md:h-[170px] lg:h-[210px] md:w-full lg:w-full  rounded-md transition-opacity hover:duration-700 ease-in-out"
                     src={product?.images[0]}
                     alt="Product image"
                   />
                   <div className="">
-                    <div className="flex gap-1 lg:gap-2 items-center">
+                    {/* <div className="flex gap-1 lg:gap-2 items-center">
                       <img
                         className="w-[32px] h-[32px] border rounded-full"
                         src={product?.shopLogo}
@@ -45,10 +45,10 @@ const Recommended = () => {
                       <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
                         {product?.shopName}
                       </p>
-                    </div>
+                    </div> */}
 
-                    <h3 className="font-semibold text-slate-700 hover:text-red-500 duration-500">
-                      {product?.product_name.slice(0, 29)}
+                    <h3 className="font-medium text-slate-800 my-1 mt-1 hover:text-red-500 duration-500">
+                      {product?.product_name.slice(0, 50)}..
                     </h3>
                     <div className="flex items-center gap-1 lg:gap-2 py-1">
                       <FaStar className="text-[#F6BA00]" />
@@ -144,6 +144,24 @@ const Recommended = () => {
                 </div>
               </Link>
             ))}
+
+            {isLoading && (
+              <>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((j, i) => (
+                  <div className="bg-white shadow-md border h-[240px] w-full p-3 rounded-md">
+                    <div className="animate-pulse infinite delay-1000">
+                      <div className="bg-gray-300 h-[120px] w-full rounded-lg"></div>
+                      <div className="h-3 w-full bg-gray-300 my-3  rounded-lg"></div>
+                      <div className="h-3 w-1/2 bg-gray-300 my-3  rounded-lg"></div>
+                      <div className="flex mt-3 items-center gap-3 rounded-lg">
+                        <div className="h-3 bg-gray-300 w-1/2  rounded-lg"></div>
+                        <div className="h-3 bg-gray-300 w-1/2  rounded-lg"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
 

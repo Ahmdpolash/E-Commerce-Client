@@ -37,8 +37,6 @@ const SellerRegistration = () => {
       .then((data) => setDistrict(data));
   }, []);
 
-  const [filter, setFilter] = useState("");
-
   const handleDivisions = (e) => {
     setFilter(e.target.value);
   };
@@ -58,6 +56,7 @@ const SellerRegistration = () => {
           first_name: data.firstName,
           last_name: data.lastName,
           email: data.email,
+          password: data.password,
           shop_name: data.shopName,
           description: data.description,
           seller_number: data.number,
@@ -66,7 +65,7 @@ const SellerRegistration = () => {
           district: data.district,
           division: data.division,
           status: "Pending",
-          join:new Date().toISOString().split('T')[0]
+          join: new Date().toISOString().split("T")[0],
         };
 
         const result = await axiosPublic.post("/users", info);
