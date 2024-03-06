@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
 import { MdVerified } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData, useLocation, useParams } from "react-router-dom";
 
 import RelatedProduct from "./RelatedProduct";
 import Review from "./Review";
@@ -22,6 +22,12 @@ import SellerInform from "./SellerInform";
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [state, setState] = useState("reviews");
+
+  const data = useLoaderData();
+  const { description } = data;
+
+  const location = useLocation();
+  console.log("location", location);
 
   let available = 6;
 
@@ -39,13 +45,7 @@ const ProductDetails = () => {
     }
   };
 
-  const images = [
-    "https://i.ibb.co/jk2wM6d/r10-id1-364x364.jpghttps://i.ibb.co/0FNNTZD/r10-id1-364x364-removebg-preview.png",
-    "https://i.ibb.co/m51Zw6b/nexg-n70-id3-364x364.jpg",
-    "https://i.ibb.co/2PXWWNh/h660d-01-500x500.webp",
-  ];
-
-  const [currentImage, setCurrentImage] = useState(images[0]);
+  const [currentImage, setCurrentImage] = useState(data?.images[0]);
   const colors = ["primary"];
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const ProductDetails = () => {
             </div>
 
             <div className="grid grid-cols-3 ml-4 lg:ml-0 gap-4 lg:gap-3   my-3">
-              {images?.map((image) => (
+              {data?.images?.map((image) => (
                 <button
                   onClick={() => setCurrentImage(image)}
                   className={`w-full border  ${
@@ -106,7 +106,7 @@ const ProductDetails = () => {
           <div className="col-span-3">
             <div className="space-y-2 border-b-2 py-2 lg:py-4 border-gray-200">
               <h1 className="font-semibold text-xl lg:text-2xl">
-                LG 22MK600M-B 21.5 inch IPS Full HD LED Monitor
+                {data?.product_name}
               </h1>
               <div className="flex justify-center md:justify-start lg:justify-start item-center gap-1">
                 <FaStar className="text-[18px] lg:text-[20px] text-yellow-400" />
@@ -117,7 +117,7 @@ const ProductDetails = () => {
                 <span className="h-[20px] bg-gray-300 w-[1px]"></span>
                 <div className="-mt-[4px] lg:-mt-[2px] px-1">
                   <p className="text-gray-500 cursor-pointer font-normal">
-                    (5) reviews
+                    ({data?.review}) reviews
                   </p>
                 </div>
                 <span className="h-[20px] bg-gray-400 w-[1px]"></span>
@@ -127,27 +127,26 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="py-2 lg:py-3 space-y-1">
-              <h1 className="font-bold text-2xl text-gray-800">Price : $100</h1>
-              <p className="text-gray-700">
-                1 cross button function two left and right 3D joystick functions
-                8 numeric keys 4 function keys. With 7 channels of LED
-                indication.The device is built with a Glass front (Gorilla Glass
-                Victus), a glass back (Gorilla Glass), and an aluminum frame.
-              </p>
+              <h1 className="font-bold text-2xl text-gray-800">
+                Price : ${data?.price}
+              </h1>
+              <p className="text-gray-700">{data?.short_description}</p>
 
               <div className="py-2 l:py-3">
                 <div className="flex gap-16">
                   <h1 className="font-semibold  text-[17px]">Category</h1>
-                  <p className="text-[17px] text-gray-600">Electronics</p>
+                  <p className="text-[17px] text-gray-600">{data?.category}</p>
                 </div>
                 <div className="flex gap-14">
                   <h1 className="font-semibold text-[17]">Availability</h1>
-                  <p className="text-[17px] text-green-600">In stock(6)</p>
+                  <p className="text-[17px] text-green-600">
+                    In stock({data?.stock})
+                  </p>
                 </div>
                 <div className="flex items-center gap-6">
                   <h1 className="font-semibold text-[17px]">Seller/Vendors</h1>
                   <p className="text-[17px] flex items-center gap-1 text-gray-600">
-                    Gadget Zone{" "}
+                    {data?.shopName}
                     <span className="text-green-500 ml-2 lg:mt-1">
                       {" "}
                       <MdVerified className="text-green-600" />{" "}
@@ -501,7 +500,7 @@ const ProductDetails = () => {
             )}
             {state === "description" && (
               <div className="py-3">
-                <Description />
+                <Description description={description} />
               </div>
             )}
             {state === "seller" && (

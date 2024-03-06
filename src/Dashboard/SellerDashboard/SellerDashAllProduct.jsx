@@ -113,7 +113,7 @@ const SellerDashAllProduct = () => {
                             scope="row"
                             className="py-1 px-6 font-medium whitespace-nowrap"
                           >
-                            <span>{item?.brand}</span>
+                            <span>{item?.brand ? item?.brand : 'No Brand'}</span>
                           </td>
                           <td
                             scope="row"

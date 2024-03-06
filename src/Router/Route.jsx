@@ -58,8 +58,10 @@ const Route = createBrowserRouter([
         element: <Shop />,
       },
       {
-        path: "/details",
+        path: "/details/:id",
         element: <ProductDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/details/${params.id}`),
       },
       {
         path: "/my-bookmarks",
