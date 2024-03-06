@@ -6,6 +6,7 @@ import Featured from "../Products/Featured";
 import Recommended from "../AllProducts/Recommended";
 import Faq from "../Faq/Faq";
 import { Helmet } from "react-helmet";
+import Advertisement from "../Advertisement/Advertisement";
 
 // import Card from "./Card";
 
@@ -22,6 +23,7 @@ const Home = () => {
       <Category />
       <Featured />
       <Recommended />
+      <Advertisement />
       {/* <Faq /> */}
     </div>
   );

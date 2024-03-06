@@ -20,7 +20,6 @@ import useProducts from "../../../Hooks/useProducts";
 
 const Featured = () => {
   const { data, isLoading } = useProducts();
-  console.log(data);
 
   return (
     <div className="bg-[#F1F1F1]">

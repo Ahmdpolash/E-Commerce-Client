@@ -37,6 +37,8 @@ const SellerRegistration = () => {
       .then((data) => setDistrict(data));
   }, []);
 
+  const [filter, setFilter] = useState("");
+
   const handleDivisions = (e) => {
     setFilter(e.target.value);
   };

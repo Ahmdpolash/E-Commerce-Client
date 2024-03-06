@@ -19,7 +19,6 @@ import { Link } from "react-router-dom";
 
 const Recommended = () => {
   const { data, isLoading } = useProducts();
-  console.log(data);
   return (
     <div className="bg-[#F1F1F1]">
       <Container>
@@ -149,7 +148,7 @@ const Recommended = () => {
               <>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((j, i) => (
                   <div className="bg-white shadow-md border h-[240px] w-full p-3 rounded-md">
-                    <div className="animate-pulse infinite delay-1000">
+                    <div className="animate-pulse delay-1000">
                       <div className="bg-gray-300 h-[120px] w-full rounded-lg"></div>
                       <div className="h-3 w-full bg-gray-300 my-3  rounded-lg"></div>
                       <div className="h-3 w-1/2 bg-gray-300 my-3  rounded-lg"></div>
