@@ -27,9 +27,9 @@ import MobileCart from "../../Components/MobileCart";
 import useCategory from "../../Hooks/useCategory";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import CategoryMap from "../../Components/CategoryMap";
+import useCart from "../../Hooks/useCart";
 
 const Navbar = () => {
-  
   const [open, setOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [mobileCart, setMobileCart] = useState(false);
@@ -41,8 +41,7 @@ const Navbar = () => {
   console.log("hello", res.data);
 
   const { data, refetch } = useCategory();
-  console.log("hello",data);
-
+  console.log("hello", data);
 
   const toggleMenu = () => {
     setOpen(!open);
@@ -97,7 +96,8 @@ const Navbar = () => {
     "Accessories",
   ];
 
-  // category fetch
+  //cart data get
+  const { data: cart } = useCart();
 
   return (
     <div className="">
@@ -238,9 +238,11 @@ const Navbar = () => {
                 <Link to="/my-bookmarks">
                   <FaHeart className="text-[22px] text-[#EE5544] font-bold" />
                 </Link>
-                <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
-                  0
-                </span>
+                {cart?.length !== 0 && (
+                  <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
+                    {cart?.length}
+                  </span>
+                )}
               </div>
               <div
                 onClick={handleOpen}
@@ -248,9 +250,13 @@ const Navbar = () => {
               >
                 <BsCartCheckFill className="text-[22px]  text-[#EE5544] font-bold" />
 
-                <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
-                  2
-                </span>
+                {cart?.length !== 0 ? (
+                  <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
+                    {cart?.length}
+                  </span>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
 
@@ -374,7 +380,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="/">
-                <IoHomeOutline className="text-[24px]"/>
+                <IoHomeOutline className="text-[24px]" />
               </Link>
             </li>
             <li className="bottom-4 cursor-pointer relative bg-[#2B38D1] text-white border-4 border-white z-[999] h-[58px] w-[58px] rounded-full ">

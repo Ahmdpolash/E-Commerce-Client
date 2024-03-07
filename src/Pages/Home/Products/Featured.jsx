@@ -13,12 +13,13 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useCart from "../../../Hooks/useCart";
 
 const Featured = () => {
-  const { data, isLoading, refetch } = useProducts();
+  const { data, isLoading } = useProducts();
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
-
+  const { refetch } = useCart();
   const navigate = useNavigate();
 
   const handleAddToCart = (product) => {

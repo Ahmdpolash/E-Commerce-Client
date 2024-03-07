@@ -12,9 +12,10 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useCart from "../../../Hooks/useCart";
 
 const Recommended = () => {
-  const { data, isLoading, refetch } = useProducts();
+  const { data, isLoading } = useProducts();
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
@@ -65,6 +66,8 @@ const Recommended = () => {
       });
     }
   };
+
+  const { refetch } = useCart();
 
   const handleAddToWishlist = (product) => {
     console.log(product);
