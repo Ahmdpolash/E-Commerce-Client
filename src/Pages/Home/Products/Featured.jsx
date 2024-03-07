@@ -6,12 +6,68 @@ import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { AiFillHeart, AiOutlineShoppingCart } from "react-icons/ai";
 
 import "../../Shop/shop.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useProducts from "../../../Hooks/useProducts";
 import Ratings from "../../../Components/Ratings";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAuth from "../../../Hooks/useAuth";
 
 const Featured = () => {
-  const { data, isLoading } = useProducts();
+  const { data, isLoading, refetch } = useProducts();
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleAddToCart = (product) => {
+    console.log(product);
+
+    if (user) {
+      const cartItem = {
+        productId: product?._id,
+        email: user.email,
+        images: product?.images,
+        brand: product?.brand,
+        shop_name: product?.shopName,
+        price: product?.price,
+        stock: product?.stock,
+        shop_logo: product?.shopLogo,
+      };
+
+      axiosPublic
+        .post("/carts", cartItem)
+
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${product?.product_name.slice(0, 15)} added to your cart`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            refetch();
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "You are not logged In",
+        text: "Please Login to add to the cart !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
 
   return (
     <div className="bg-[#F1F1F1]">
@@ -31,7 +87,10 @@ const Featured = () => {
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 lg:gap-3"
           >
             {data?.slice(0, 5)?.map((product, i) => (
-              <div key={product?._id} className="card lg:h-[365px] bg-white  cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
+              <div
+                key={product?._id}
+                className="card lg:h-[365px] bg-white  cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3"
+              >
                 <div className="relative overflow-hidden">
                   {product?.discount ? (
                     <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2">
@@ -57,7 +116,10 @@ const Featured = () => {
                     >
                       <FaEye className="text-[18px]" />
                     </Link>
-                    <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center shadow-md border rounded-full hover:bg-violet-500 hover:text-white hover:rotate-[360deg] transition-all">
+                    <li
+                      onClick={() => handleAddToCart(product)}
+                      className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center shadow-md border rounded-full hover:bg-violet-500 hover:text-white hover:rotate-[360deg] transition-all"
+                    >
                       <AiOutlineShoppingCart className="text-[20px]" />
                     </li>
                     {/* <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all">
@@ -102,7 +164,10 @@ const Featured = () => {
             {isLoading && (
               <>
                 {[1, 2, 3, 4, 5].map((j, i) => (
-                  <div key={i} className="bg-white shadow-md border h-[240px] w-full p-3 rounded-md">
+                  <div
+                    key={i}
+                    className="bg-white shadow-md border h-[240px] w-full p-3 rounded-md"
+                  >
                     <div className="animate-pulse infinite delay-1000">
                       <div className="bg-gray-300 h-[120px] w-full rounded-lg"></div>
                       <div className="h-3 w-full bg-gray-300 my-3  rounded-lg"></div>

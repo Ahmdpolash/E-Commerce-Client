@@ -12,18 +12,30 @@ import {
 } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
 import { MdVerified } from "react-icons/md";
-import { Link, useLoaderData, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 import RelatedProduct from "./RelatedProduct";
 import Review from "./Review";
 import Description from "./Description";
 import SellerInform from "./SellerInform";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [state, setState] = useState("reviews");
-
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const data = useLoaderData();
+  const { user } = useAuth();
+
   const { description } = data;
 
   const location = useLocation();
@@ -46,11 +58,58 @@ const ProductDetails = () => {
   };
 
   const [currentImage, setCurrentImage] = useState(data?.images[0]);
-  const colors = ["primary"];
 
   useEffect(() => {
     scroll(0, 0);
   }, []);
+
+  // add to cart
+  const handleAddToCart = (data) => {
+    if (user) {
+      const cartItem = {
+        productId: data?._id,
+        email: user.email,
+        images: data?.images,
+        brand: data?.brand,
+        shop_name: data?.shopName,
+        price: data?.price,
+        stock: data?.stock,
+        shop_logo: data?.shopLogo,
+      };
+
+      axiosPublic
+        .post("/carts", cartItem)
+
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${data?.product_name.slice(0, 15)} added to your cart`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            // refetch();
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "You are not logged In",
+        text: "Please Login to add to the cart !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
 
   return (
     <div className=" bg-[#F3F4F6]">
@@ -114,6 +173,8 @@ const ProductDetails = () => {
                 <FaStar className="text-[18px] lg:text-[20px] text-yellow-400" />
                 <FaStar className="text-[18px] lg:text-[20px] text-yellow-400" />
                 <FaStar className="text-[18px] lg:text-[20px] text-yellow-400" />
+                {/* <Ratings ratings={data?.review} /> */}
+
                 <span className="h-[20px] bg-gray-300 w-[1px]"></span>
                 <div className="-mt-[4px] lg:-mt-[2px] px-1">
                   <p className="text-gray-500 cursor-pointer font-normal">
@@ -177,7 +238,10 @@ const ProductDetails = () => {
                   </p>
                 </div>
 
-                <button className="bg-violet-500 flex cursor-pointer  gap-1 items-center py-2 lg:py-3 text-white px-6 rounded-sm">
+                <button
+                  onClick={() => handleAddToCart(data)}
+                  className="bg-violet-500 flex cursor-pointer  gap-1 items-center py-2 lg:py-3 text-white px-6 rounded-sm"
+                >
                   Add to Cart <IoCartOutline className="text-[22px]" />
                 </button>
 
