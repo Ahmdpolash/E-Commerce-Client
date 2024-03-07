@@ -85,7 +85,9 @@ const ProductDetails = () => {
 
         .then((res) => {
           console.log(res.data);
-          if (res.data.insertedId) {
+          if (res.data.message === "Product already added") {
+            toast.error(`This Product already in your cart 🙄`);
+          } else {
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -135,7 +137,9 @@ const ProductDetails = () => {
         .then((res) => {
           console.log(res.data);
           if (res.data.insertedId) {
-            toast.success("Wishlist Added Successfully");
+            toast.error(`This Product already in your Wishlist 🙄`);
+          } else {
+            toast.success("Wishlist Added Successfully ✅✅");
           }
         });
     } else {

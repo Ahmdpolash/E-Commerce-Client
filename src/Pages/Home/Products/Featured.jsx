@@ -43,16 +43,12 @@ const Featured = () => {
 
         .then((res) => {
           console.log(res.data);
-          if (res.data.insertedId) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: `${product?.product_name.slice(0, 15)} added to your cart`,
-              showConfirmButton: false,
-              timer: 1500,
-            });
-
+          if (res.data.message === "Product already added") {
+            toast.error(`This Product already in your cart 🙄`);
+          } else {
             refetch();
+
+            toast.success("Product Added successfully..✅");
           }
         });
     } else {
@@ -95,8 +91,10 @@ const Featured = () => {
 
         .then((res) => {
           console.log(res.data);
-          if (res.data.insertedId) {
-            toast.success("Wishlist Added Successfully");
+          if (res.data.message === "Product already added") {
+            toast.error(`This Product already in your Wishlist 🙄`);
+          } else {
+            toast.success("Wishlist Added Successfully 😊");
           }
         });
     } else {
@@ -200,7 +198,10 @@ const Featured = () => {
                       <FaArrowCircleRight className="text-[21px]" />{" "}
                     </button>
 
-                    <div onClick={() => handleAddToCart(product)} className="bg-gray-50 lg:flex hidden items-center gap-2 text-red-500 border border-slate-300 py-[5px]  hover:border hover:duration-500 hover:border-red-500 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
+                    <div
+                      onClick={() => handleAddToCart(product)}
+                      className="bg-gray-50 lg:flex hidden items-center gap-2 text-red-500 border border-slate-300 py-[5px]  hover:border hover:duration-500 hover:border-red-500 rounded-full px-2 lg:px-4 text-[13px] font-semibold"
+                    >
                       Add To Cart
                       <span>
                         <FaArrowRight />

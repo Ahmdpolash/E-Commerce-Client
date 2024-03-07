@@ -25,10 +25,9 @@ const Recommended = () => {
     if (user) {
       const cartItem = {
         productId: product?._id,
-        product_name: product?.product_name,
         email: user.email,
+        product_name: product?.product_name,
         discount: product?.discount,
-
         images: product?.images,
         brand: product?.brand,
         shop_name: product?.shopName,
@@ -42,16 +41,12 @@ const Recommended = () => {
 
         .then((res) => {
           console.log(res.data);
-          if (res.data.insertedId) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: `${product?.product_name.slice(0, 15)} added to your cart`,
-              showConfirmButton: false,
-              timer: 1500,
-            });
-
+          if (res.data.message === "Product already added") {
+            toast.error(`This Product already in your cart 🙄`);
+          } else {
             refetch();
+
+            toast.success("Product Added successfully..✅");
           }
         });
     } else {
@@ -94,10 +89,10 @@ const Recommended = () => {
 
         .then((res) => {
           console.log(res.data);
-          if (res.data.insertedId) {
-            toast.success("Wishlist Added Successfully");
-
-            refetch();
+          if (res.data.message === "Product already added") {
+            toast.error(`This Product already in your Wishlist 🙄`);
+          } else {
+            toast.success("Wishlist Added Successfully 😊");
           }
         });
     } else {
