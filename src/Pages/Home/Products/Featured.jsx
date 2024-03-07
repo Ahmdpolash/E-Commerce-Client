@@ -1,19 +1,7 @@
 import React, { useState } from "react";
 import Container from "../../../Components/Container/Container";
-import {
-  FaArrowCircleRight,
-  FaArrowRight,
-  FaEye,
-  FaRegHeart,
-  FaStar,
-} from "react-icons/fa";
-import {
-  FaBangladeshiTakaSign,
-  FaCartShopping,
-  FaCodeCompare,
-  FaHeart,
-  FaStarHalfStroke,
-} from "react-icons/fa6";
+import { FaArrowCircleRight, FaArrowRight, FaEye } from "react-icons/fa";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 import { AiFillHeart, AiOutlineShoppingCart } from "react-icons/ai";
 
@@ -43,7 +31,7 @@ const Featured = () => {
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 lg:gap-3"
           >
             {data?.slice(0, 5)?.map((product, i) => (
-              <div className="card lg:h-[365px] bg-white  cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
+              <div key={product?._id} className="card lg:h-[365px] bg-white  cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
                 <div className="relative overflow-hidden">
                   {product?.discount ? (
                     <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2">
@@ -59,19 +47,22 @@ const Featured = () => {
                     alt="Product image"
                   />
 
-                  <ul className="flex gap-3 h-[120px] bg-slate-100 bg-opacity-90 opacity-0 group-hover:opacity-100 transition-all duration-700 -bottom-10 justify-center items-center  absolute w-full group-hover:bottom-0">
+                  <ul className="flex gap-3 h-[75px] lg:h-[120px] bg-slate-100 bg-opacity-90 opacity-0 group-hover:opacity-100 transition-all duration-700 -bottom-10 justify-center items-center  absolute w-full group-hover:bottom-0">
                     <li className="w-[38px] shadow-md border h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all">
-                      <AiFillHeart  className="text-[20px]" />
+                      <AiFillHeart className="text-[20px]" />
                     </li>
-                    <Link className="w-[38px] shadow-md border h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-500 hover:text-white hover:rotate-[360deg] transition-all">
-                      <FaEye className="text-[18px]"/>
+                    <Link
+                      to={`/details/${product?._id}`}
+                      className="w-[38px] shadow-md border h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-500 hover:text-white hover:rotate-[360deg] transition-all"
+                    >
+                      <FaEye className="text-[18px]" />
                     </Link>
                     <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center shadow-md border rounded-full hover:bg-violet-500 hover:text-white hover:rotate-[360deg] transition-all">
-                      <AiOutlineShoppingCart  className="text-[20px]"/>
+                      <AiOutlineShoppingCart className="text-[20px]" />
                     </li>
                     {/* <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all">
-                      <AiOutlineShoppingCart  className="text-[20px]"/>
-                    </li> */}
+                   <AiOutlineShoppingCart  className="text-[20px]"/>
+                 </li> */}
                   </ul>
                   {/* <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-all duration-700"></div> */}
                 </div>
@@ -85,7 +76,7 @@ const Featured = () => {
                   </Link>
 
                   <div className="flex">
-                    <Ratings ratings={product?.rating} />
+                    <Ratings ratings={product?.review} /> ({product?.review})
                   </div>
 
                   <div className="pb-1 flex items-center justify-between">
@@ -111,7 +102,7 @@ const Featured = () => {
             {isLoading && (
               <>
                 {[1, 2, 3, 4, 5].map((j, i) => (
-                  <div className="bg-white shadow-md border h-[240px] w-full p-3 rounded-md">
+                  <div key={i} className="bg-white shadow-md border h-[240px] w-full p-3 rounded-md">
                     <div className="animate-pulse infinite delay-1000">
                       <div className="bg-gray-300 h-[120px] w-full rounded-lg"></div>
                       <div className="h-3 w-full bg-gray-300 my-3  rounded-lg"></div>

@@ -11,9 +11,9 @@ import Advertisement from "../Advertisement/Advertisement";
 // import Card from "./Card";
 
 const Home = () => {
-  useEffect(() => {
-    scroll(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   scroll(0, 0);
+  // }, []);
   return (
     <div>
       <Helmet>

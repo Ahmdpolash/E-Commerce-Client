@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye, FaFacebookF } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
@@ -19,6 +19,10 @@ const Login = () => {
   const location = useLocation();
   const axiosPublic = useAxiosPublic();
 
+  useEffect(() => {
+    scroll(0, 0);
+  }, []);
+
   const onSubmit = (data) => {
     // Handle form submission logic here
     const toastId = toast.loading("Logging in...");
@@ -32,7 +36,7 @@ const Login = () => {
     googleLogin().then((res) => {
       const userInfo = {
         email: res.user?.email,
-        name: res.user?.displayName, 
+        name: res.user?.displayName,
         role: "user",
       };
 
