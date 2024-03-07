@@ -27,6 +27,7 @@ import SellerInform from "./SellerInform";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -39,7 +40,6 @@ const ProductDetails = () => {
   const { description } = data;
 
   const location = useLocation();
-  console.log("location", location);
 
   let available = 6;
 
@@ -92,6 +92,44 @@ const ProductDetails = () => {
             });
 
             // refetch();
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "You are not logged In",
+        text: "Please Login to add to the cart !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
+  const handleAddToWishlist = (data) => {
+    if (user) {
+      const cartItem = {
+        productId: data?._id,
+        email: user.email,
+        images: data?.images,
+        brand: data?.brand,
+        price: data?.price,
+        stock: data?.stock,
+        shop_logo: data?.shopLogo,
+      };
+
+      axiosPublic
+        .post("/wishlists", cartItem)
+
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.insertedId) {
+            toast.success("Wishlist Added Successfully");
           }
         });
     } else {
@@ -183,7 +221,7 @@ const ProductDetails = () => {
                 </div>
                 <span className="h-[20px] bg-gray-400 w-[1px]"></span>
                 <div className="-mt-[4px] lg:-mt-[2px] px-1">
-                  <p className="text-gray-500 cursor-pointer">write review</p>
+                  <p className="text-gray-500 cursor-pointer hover:underline decoration-green-600 py-1"><a href="#review">write review</a></p>
                 </div>
               </div>
             </div>
@@ -245,7 +283,10 @@ const ProductDetails = () => {
                   Add to Cart <IoCartOutline className="text-[22px]" />
                 </button>
 
-                <div className="py-3 lg:py-4  px-3 lg:px-4 flex justify-center items-center cursor-pointer hover:shadow-lg hover:shadow-cyan-500/40 bg-cyan-500 text-white">
+                <div
+                  onClick={() => handleAddToWishlist(data)}
+                  className="py-3 lg:py-4  px-3 lg:px-4 flex justify-center items-center cursor-pointer hover:shadow-lg hover:shadow-cyan-500/40 bg-cyan-500 text-white"
+                >
                   <FaHeart />
                 </div>
               </div>
@@ -558,7 +599,7 @@ const ProductDetails = () => {
             </div>
 
             {state === "reviews" && (
-              <div className="py-3 lg:px-8">
+              <div id="review" className="py-3 lg:px-8">
                 <Review />
               </div>
             )}

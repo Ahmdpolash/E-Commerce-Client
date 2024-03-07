@@ -12,6 +12,7 @@ import Ratings from "../../../Components/Ratings";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Featured = () => {
   const { data, isLoading, refetch } = useProducts();
@@ -69,6 +70,47 @@ const Featured = () => {
     }
   };
 
+  const handleAddToWishlist = (product) => {
+    console.log(product);
+
+    if (user) {
+      const cartItem = {
+        productId: product?._id,
+        email: user.email,
+        images: product?.images,
+        brand: product?.brand,
+        shop_name: product?.shopName,
+        price: product?.price,
+        stock: product?.stock,
+        shop_logo: product?.shopLogo,
+      };
+
+      axiosPublic
+        .post("/wishlists", cartItem)
+
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.insertedId) {
+            toast.success("Wishlist Added Successfully");
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "You are not logged In",
+        text: "Please Login to add to the cart !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
   return (
     <div className="bg-[#F1F1F1]">
       <Container>
@@ -107,7 +149,10 @@ const Featured = () => {
                   />
 
                   <ul className="flex gap-3 h-[75px] lg:h-[120px] bg-slate-100 bg-opacity-90 opacity-0 group-hover:opacity-100 transition-all duration-700 -bottom-10 justify-center items-center  absolute w-full group-hover:bottom-0">
-                    <li className="w-[38px] shadow-md border h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all">
+                    <li
+                      onClick={() => handleAddToWishlist(product)}
+                      className="w-[38px] shadow-md border h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all"
+                    >
                       <AiFillHeart className="text-[20px]" />
                     </li>
                     <Link
