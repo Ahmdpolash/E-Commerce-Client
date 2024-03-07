@@ -25,7 +25,10 @@ const Recommended = () => {
     if (user) {
       const cartItem = {
         productId: product?._id,
+        product_name: product?.product_name,
         email: user.email,
+        discount: product?.discount,
+
         images: product?.images,
         brand: product?.brand,
         shop_name: product?.shopName,
@@ -75,6 +78,9 @@ const Recommended = () => {
       const cartItem = {
         productId: product?._id,
         email: user.email,
+        product_name: product?.product_name,
+        discount: product?.discount,
+
         images: product?.images,
         brand: product?.brand,
         shop_name: product?.shopName,

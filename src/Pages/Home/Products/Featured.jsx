@@ -28,6 +28,8 @@ const Featured = () => {
       const cartItem = {
         productId: product?._id,
         email: user.email,
+        product_name: product?.product_name,
+        discount: product?.discount,
         images: product?.images,
         brand: product?.brand,
         shop_name: product?.shopName,
@@ -77,6 +79,9 @@ const Featured = () => {
       const cartItem = {
         productId: product?._id,
         email: user.email,
+        product_name: product?.product_name,
+        discount: product?.discount,
+
         images: product?.images,
         brand: product?.brand,
         shop_name: product?.shopName,
@@ -195,7 +200,7 @@ const Featured = () => {
                       <FaArrowCircleRight className="text-[21px]" />{" "}
                     </button>
 
-                    <div className="bg-gray-50 lg:flex hidden items-center gap-2 text-red-500 border border-slate-300 py-[5px]  hover:border hover:duration-500 hover:border-red-500 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
+                    <div onClick={() => handleAddToCart(product)} className="bg-gray-50 lg:flex hidden items-center gap-2 text-red-500 border border-slate-300 py-[5px]  hover:border hover:duration-500 hover:border-red-500 rounded-full px-2 lg:px-4 text-[13px] font-semibold">
                       Add To Cart
                       <span>
                         <FaArrowRight />

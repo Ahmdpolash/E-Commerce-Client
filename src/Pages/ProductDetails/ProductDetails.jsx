@@ -69,6 +69,9 @@ const ProductDetails = () => {
       const cartItem = {
         productId: data?._id,
         email: user.email,
+        product_name: data?.product_name,
+        discount: data?.discount,
+
         images: data?.images,
         brand: data?.brand,
         shop_name: data?.shopName,
@@ -116,6 +119,9 @@ const ProductDetails = () => {
       const cartItem = {
         productId: data?._id,
         email: user.email,
+        product_name: data?.product_name,
+        discount: data?.discount,
+
         images: data?.images,
         brand: data?.brand,
         price: data?.price,
@@ -221,7 +227,9 @@ const ProductDetails = () => {
                 </div>
                 <span className="h-[20px] bg-gray-400 w-[1px]"></span>
                 <div className="-mt-[4px] lg:-mt-[2px] px-1">
-                  <p className="text-gray-500 cursor-pointer hover:underline decoration-green-600 py-1"><a href="#review">write review</a></p>
+                  <p className="text-gray-500 cursor-pointer hover:underline decoration-green-600 py-1">
+                    <a href="#review">write review</a>
+                  </p>
                 </div>
               </div>
             </div>

@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import Container from "../../Components/Container/Container";
 // import banner from '../../../public/banner/card.jpg'
 import toast from "react-hot-toast";
+import useCart from "../../Hooks/useCart";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
 
   let [total, setTotal] = useState(320);
+
   let available = [
     {
       id: 1,
@@ -42,8 +44,19 @@ const Cart = () => {
     }
   };
 
-  const product = [1, 2];
-  const outOfStockProduct = [1];
+  // cart
+
+  const { data } = useCart();
+  const groupedProducts = data?.reduce((acc, product) => {
+    const { shop_name } = product;
+    acc[shop_name] = acc[shop_name] || [];
+    acc[shop_name].push(product);
+    return acc;
+  }, {});
+
+  
+  console.log("ddddd", groupedProducts);
+
   return (
     <div>
       <Helmet>
@@ -71,74 +84,84 @@ const Cart = () => {
         <Container>
           <div className="grid grid-cols-1 py-4 lg:grid-cols-4 gap- lg:gap-4">
             <div className="col-span-3  w-full ">
-              {product.length > 0 || outOfStockProduct.length > 0 ? (
+              {data?.length > 0 ? (
                 <div>
                   <div className="bg-white py-3 px-4 mb-3">
                     <h2 className="text-md text-green-500 font-semibold">
-                      Stock Products {product.length - outOfStockProduct.length}
+                      Stock Products {data?.length}
                     </h2>
                   </div>
 
-                  {product.map((p, i) => (
-                    <div className="bg-white p-4 mb-3">
-                      <div className="px-2">
-                        <h2>Polash Ahmed</h2>
-                      </div>
-
-                      {[1, 2].map((product, idx) => (
-                        <div className="w-full ">
-                          <div className="flex flex-wrap  gap-2 border-b-2 py-1 mb-2 justify-between items-center">
-                            <div className="flex flex-wrap items-center">
-                              <img
-                                className="w-[80px] h-[80px]"
-                                src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/29-cart_default/hummingbird-printed-t-shirt.jpg"
-                                alt="product image"
-                              />
-                              <div className="pr-4 text-slate-600">
-                                <h2 className="text-md">
-                                  Apple AirPods Max Over-Ear Wireless Headphone
-                                </h2>
-                                <span className="hidden lg:block text-sm">
-                                  Brand: Apple
-                                </span>
-                              </div>
-                            </div>
-
-                            <div>
-                              <div className="pl-4 sm:pl-0">
-                                <h2 className="text-lg text-orange-500">
-                                  $500
-                                </h2>
-                                <p className="line-through">$1200</p>
-                                <p>-10%</p>
-                              </div>
-                            </div>
-
-                            <div className="flex gap-2 flex-col">
-                              <div className="flex bg-slate-200 h-[30px] justify-center items-center text-xl">
-                                <div
-                                  onClick={() => handleDecrease(1)}
-                                  className="px-3 cursor-pointer"
-                                >
-                                  -
-                                </div>
-                                <div className="px-3">{quantity}</div>
-                                <div
-                                  onClick={() => handleAddition(1)}
-                                  className="px-3 cursor-pointer"
-                                >
-                                  +
-                                </div>
-                              </div>
-                              <button className="px-5 py-[3px] bg-red-500 text-white">
-                                Delete
-                              </button>
-                            </div>
+                  {groupedProducts &&
+                    Object?.entries(groupedProducts)?.map(
+                      ([shop_name, products]) => (
+                        <div className="bg-white p-4 mb-3">
+                          <div className="p-2">
+                            <h2 className="font-semibold text-slate-700 text-xl">
+                              {shop_name}{" "}
+                            </h2>
                           </div>
+
+                          {products?.map((item, idx) => (
+                            <div key={item._id} className="w-full ">
+                              <div className="flex flex-wrap  gap-2 border-b-2 py-1 mb-2 justify-between items-center">
+                                <div className="flex gap-2 flex-wrap items-center">
+                                  <img
+                                    className="w-[70px] h-[70px] rounded-md"
+                                    src={item?.images[0]}
+                                    alt="product image"
+                                  />
+                                  <div className="pr-4 text-slate-600">
+                                    <h2 className="text-md">
+                                      {item?.product_name.slice(0, 36)}..
+                                    </h2>
+                                    <span className="hidden lg:block text-sm">
+                                      Brand: {item?.brand}
+                                    </span>
+                                    <span className="hidden lg:block text-sm">
+                                      Stock: {item?.stock}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <div className="pl-4 sm:pl-0">
+                                    <h2 className="text-lg text-orange-500">
+                                      $500
+                                    </h2>
+                                    <p className="line-through">$1200</p>
+                                    <p>
+                                      -{item?.discount ? item?.discount : 0}%
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div className="flex gap-2 flex-col">
+                                  <div className="flex bg-slate-200 h-[30px] justify-center items-center text-xl">
+                                    <div
+                                      onClick={() => handleDecrease(1)}
+                                      className="px-3 cursor-pointer"
+                                    >
+                                      -
+                                    </div>
+                                    <div className="px-3">{quantity}</div>
+                                    <div
+                                      onClick={() => handleAddition(1)}
+                                      className="px-3 cursor-pointer"
+                                    >
+                                      +
+                                    </div>
+                                  </div>
+                                  <button className="px-5 py-[3px] bg-red-500 text-white">
+                                    Delete
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  ))}
+                      )
+                    )}
                 </div>
               ) : (
                 <div>

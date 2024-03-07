@@ -11,7 +11,7 @@ const PendingAccount = () => {
         functionalities. Thank you for your patience.
       </p>
       <div className="pt-3">
-        <Link to='/dashboard/support-chat'>
+        <Link to="/dashboard/support-chat">
           {" "}
           <button className="bg-violet-600 px-5 py-[10px] rounded-md text-white hover:duration-700 font-medium delay-1000">
             Chat With Support

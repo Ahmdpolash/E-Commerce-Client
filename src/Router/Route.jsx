@@ -146,7 +146,6 @@ const Route = createBrowserRouter([
         path: "add-products",
         element: (
           <SecureSeller>
-            {" "}
             <AddProduct />
           </SecureSeller>
         ),
@@ -191,7 +190,7 @@ const Route = createBrowserRouter([
         path: "customer-chat",
         element: (
           <SecureSeller>
-            <SellerDashPayments />
+            <SellerChatCustomer />
           </SecureSeller>
         ),
       },
