@@ -114,7 +114,7 @@ const Recommended = () => {
       });
     }
   };
-
+ 
   return (
     <div className="bg-[#F1F1F1]">
       <Container>

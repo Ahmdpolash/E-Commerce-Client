@@ -6,47 +6,14 @@ import Container from "../../Components/Container/Container";
 // import banner from '../../../public/banner/card.jpg'
 import toast from "react-hot-toast";
 import useCart from "../../Hooks/useCart";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Cart = () => {
-  const [quantity, setQuantity] = useState(1);
-
-  let [total, setTotal] = useState(320);
-
-  let available = [
-    {
-      id: 1,
-      quantity: 2,
-      price: 500,
-    },
-    {
-      id: 2,
-      quantity: 3,
-    },
-  ];
-
-  const handleAddition = (id) => {
-    let quan = available.find((available) => available.id === id);
-    console.log(quan);
-    if (quantity < quan.quantity) {
-      setQuantity(quantity + 1);
-      setTotal(total + quan.price);
-    } else {
-      toast.error("Product limit exceeded");
-    }
-  };
-
-  const handleDecrease = (id) => {
-    let quan = available.find((available) => available.id === id);
-
-    if (1 < quantity) {
-      setQuantity(quantity - 1);
-      setTotal(total - quan?.price);
-    }
-  };
+  const axiosPublic = useAxiosPublic();
 
   // cart
 
-  const { data } = useCart();
+  const { data, refetch } = useCart();
   const groupedProducts = data?.reduce((acc, product) => {
     const { shop_name } = product;
     acc[shop_name] = acc[shop_name] || [];
@@ -54,8 +21,16 @@ const Cart = () => {
     return acc;
   }, {});
 
-  
-  console.log("ddddd", groupedProducts);
+  const handleDelete = (id) => {
+    axiosPublic.delete(`/carts/items/${id}`).then((res) => {
+      if (res.data.deletedCount > 0) {
+        toast.success("Cart Items deleted successfully");
+        refetch();
+      } else {
+        toast.error("Failed to delete Cart Items ");
+      }
+    });
+  };
 
   return (
     <div>
@@ -83,7 +58,7 @@ const Cart = () => {
       <section className="bg-[#eeeeee]">
         <Container>
           <div className="grid grid-cols-1 py-4 lg:grid-cols-4 gap- lg:gap-4">
-            <div className="col-span-3  w-full ">
+            <div className="col-span-3 bgw w-full ">
               {data?.length > 0 ? (
                 <div>
                   <div className="bg-white py-3 px-4 mb-3">
@@ -104,7 +79,7 @@ const Cart = () => {
 
                           {products?.map((item, idx) => (
                             <div key={item._id} className="w-full ">
-                              <div className="flex flex-wrap  gap-2 border-b-2 py-1 mb-2 justify-between items-center">
+                              <div className="flex flex-wrap  gap-2 border-b border-slate-300 py-1 mb-2 justify-between items-center">
                                 <div className="flex gap-2 flex-wrap items-center">
                                   <img
                                     className="w-[70px] h-[70px] rounded-md"
@@ -138,21 +113,14 @@ const Cart = () => {
 
                                 <div className="flex gap-2 flex-col">
                                   <div className="flex bg-slate-200 h-[30px] justify-center items-center text-xl">
-                                    <div
-                                      onClick={() => handleDecrease(1)}
-                                      className="px-3 cursor-pointer"
-                                    >
-                                      -
-                                    </div>
-                                    <div className="px-3">{quantity}</div>
-                                    <div
-                                      onClick={() => handleAddition(1)}
-                                      className="px-3 cursor-pointer"
-                                    >
-                                      +
-                                    </div>
+                                    <div className="px-3 cursor-pointer">-</div>
+                                    <div className="px-3"></div>
+                                    <div className="px-3 cursor-pointer">+</div>
                                   </div>
-                                  <button className="px-5 py-[3px] bg-red-500 text-white">
+                                  <button
+                                    onClick={() => handleDelete(item?._id)}
+                                    className="px-5 py-[3px] bg-[#F85606] text-white"
+                                  >
                                     Delete
                                   </button>
                                 </div>
@@ -164,13 +132,27 @@ const Cart = () => {
                     )}
                 </div>
               ) : (
-                <div>
-                  <Link
-                    className="px-4 py-1 bg-indigo-500 text-white"
-                    to="/shops"
-                  >
-                    Shop Now
-                  </Link>
+                <div className="flex  items-center justify-center mb-10 lg:mb-0 mt-2 lg:mt-20">
+                  <div>
+                    <img
+                      className="w-[120px] lg:w-[250px] mx-auto animate-bounce delay-700"
+                      src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png"
+                      alt="cart"
+                    />
+                    <p className="text-[#e66b2e text-center text-slate-700 font-semibold text-[17px]">
+                      Looks like your cart is empty 😔. Browse our products and
+                      add something!
+                    </p>
+                    <p className="text-center text-slate-700 font-semibold">To Continue Shopping..</p>
+                    <div className="mx-auto text-center mt-4">
+                      <Link
+                        className="px-7 rounded-md bg-[#F85606] py-2   text-white"
+                        to="/shop"
+                      >
+                        Shop Now
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -183,7 +165,7 @@ const Cart = () => {
                   <p className="text-[#5F6C72] font-normal text-[18px]">
                     Sub-Total
                   </p>
-                  <p className="text-[16px] font-semibold">${total}</p>
+                  <p className="text-[16px] font-semibold">$</p>
                 </div>
                 <div className="flex py-1 justify-between item-center">
                   <p className="text-[#5F6C72] font-normal text-[18px]">
@@ -203,7 +185,7 @@ const Cart = () => {
                   </p>
                   <p className="text-[16px] font-semibold">$1520</p>
                 </div>
-                <button className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#FA8232] mt-4 rounded-md ">
+                <button className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#F85606] mt-4 rounded-md ">
                   Proceed to Checkout{" "}
                 </button>
               </div>
@@ -217,7 +199,7 @@ const Cart = () => {
                   placeholder="write here the coupon code"
                   className="border outline-none border-[#fa8232] py-2 lg:py-3 px-3 w-full"
                 />
-                <button className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#FA8232] rounded-md mt-2">
+                <button className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#F85606] rounded-md mt-2">
                   Coupon{" "}
                 </button>
               </div>
