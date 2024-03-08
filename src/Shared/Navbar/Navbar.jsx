@@ -44,7 +44,6 @@ const Navbar = () => {
   const res = axiosPublic.get("/categories");
 
   const { data, refetch } = useCategory();
-  console.log("hello", data);
 
   const toggleMenu = () => {
     setOpen(!open);
@@ -106,9 +105,14 @@ const Navbar = () => {
     "Accessories",
   ];
 
-  //cart data get
+  //cart && wishlist data get
   const { data: cart } = useCart();
   const { data: wishlist } = useWishlist();
+
+  const cartTotal = cart?.reduce(
+    (total, item) => total + parseFloat(item.price),
+    0
+  );
 
   return (
     <div className="">
@@ -241,9 +245,9 @@ const Navbar = () => {
                 <Link to="/compare">
                   <FaArrowRightArrowLeft className="text-[21px] text-[#EE5544] font-bold" />
                 </Link>
-                <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
+                {/* <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
                   0
-                </span>
+                </span> */}
               </div>
 
               {/* wishlist */}
@@ -291,6 +295,7 @@ const Navbar = () => {
                   ""
                 )}
               </div>
+
               <div
                 className={`${
                   openCart
@@ -299,6 +304,15 @@ const Navbar = () => {
                 }  transition-all duration-500 z-[99999999999999] border-l-2 border-gray-100 shadow-lg backdrop-blur-sm transform h-full w-[320px] md:w-[390px] bg-white text-black fixed top-0 right-0`}
               >
                 <CartSlider handleClose={handleClose} />
+              </div>
+
+              <div>
+                <p className="text-slate-700 text-[14px] font-normal">
+                  Your Cart{" "}
+                </p>
+                <p className="text-slate-700 text-[13px] font-medium text-center">
+                  ${cartTotal.toFixed(2)}
+                </p>
               </div>
               {/* cart */}
             </div>
@@ -346,7 +360,7 @@ const Navbar = () => {
           <div className="hidden shadow-lg lg:block">
             <img
               className="w-[260px] absolute right-8 h-[57px] -top-2 z-40"
-              src="http://ps.magentech.com/themes/sp_goldmart/img//deals.png"
+              src="https://i.ibb.co/NF5ttzj/deals.png"
               alt=""
             />
           </div>

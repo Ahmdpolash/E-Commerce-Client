@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { FaAngleRight } from "react-icons/fa";
+import { FaAngleRight, FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Container from "../../Components/Container/Container";
 // import banner from '../../../public/banner/card.jpg'
@@ -75,16 +75,33 @@ const Cart = () => {
                     Object?.entries(groupedProducts)?.map(
                       ([shop_name, products]) => (
                         <div className="bg-white p-4 mb-3">
-                          <div className="p-2">
-                            <h2 className="font-semibold text-slate-700 text-xl">
-                              {shop_name}{" "}
-                            </h2>
+                          <div className="flex items-center gap-x-1 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              className="h-4 w-4 cursor-pointer"
+                              name=""
+                              id=""
+                            />
+                            <div className="p-2 flex items-center gap-1">
+                              <h2 className="font-normal  text-black text-[19px]">
+                                {shop_name}.
+                              </h2>
+                              <span>
+                                <FaChevronRight className="mt-[6px]" />
+                              </span>
+                            </div>
                           </div>
 
                           {products?.map((item, idx) => (
                             <div key={item._id} className="w-full ">
                               <div className="flex flex-wrap  gap-2 border-b border-slate-300 py-1 mb-2 justify-between items-center">
                                 <div className="flex gap-2 flex-wrap items-center">
+                                  <input
+                                    type="checkbox"
+                                    className="h-4 w-4 cursor-pointer"
+                                    name=""
+                                    id=""
+                                  />
                                   <img
                                     className="w-[70px] h-[70px] rounded-md"
                                     src={item?.images[0]}
@@ -95,10 +112,11 @@ const Cart = () => {
                                       {item?.product_name.slice(0, 36)}..
                                     </h2>
                                     <span className="hidden lg:block text-sm">
-                                      Brand: {item?.brand}
+                                      Brand:{" "}
+                                      {item?.brand ? item?.brand : "No Brand"}
                                     </span>
                                     <span className="hidden lg:block text-sm">
-                                      Stock: {item?.stock}
+                                      only {item?.stock} items (s) in stock
                                     </span>
                                   </div>
                                 </div>
