@@ -1,109 +1,125 @@
 import React from "react";
 
-import {
-  FaArrowCircleRight,
-  FaArrowRight,
-  FaEye,
-  FaRegHeart,
-  FaStar,
-} from "react-icons/fa";
-import {
-  FaBangladeshiTakaSign,
-  FaCartShopping,
-  FaCodeCompare,
-  FaHeart,
-  FaStarHalfStroke,
-} from "react-icons/fa6";
+import { FaEye } from "react-icons/fa";
+
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 
 import "../../Pages/Shop/shop.css";
+import useWishlist from "../../Hooks/useWishlist";
+import Ratings from "../../Components/Ratings";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
+import useCart from "../../Hooks/useCart";
 
 const UserDashWishList = () => {
+  const { data } = useWishlist();
+  const axiosPublic = useAxiosPublic();
+  const { refetch } = useCart();
+  const { user } = useAuth();
+
+  const handleAddToCart = (items) => {
+    console.log(items);
+    const cartItem = {
+      productId: items?._id,
+      email: user?.email,
+      product_name: items?.product_name,
+      discount: items?.discount,
+      images: items?.images,
+      brand: items?.brand,
+      shop_name: items?.shopName,
+      price: items?.price,
+      stock: items?.stock,
+      shop_logo: items?.shopLogo,
+      review: items?.review,
+    };
+
+    axiosPublic
+      .post("/carts", cartItem)
+
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.message === "Product already added") {
+          toast.error(`This Product already in your cart 🙄`);
+        } else {
+          refetch();
+
+          toast.success("Product Added successfully..✅");
+        }
+      });
+  };
+
   return (
     <div>
-        <div className="bg-white py-3 px-4 rounded-md mb-2">
-            <h2 className="font-semibold text-slate-600">
-                My Wishlist (6)
-            </h2>
-        </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {[1, 2, 3, 4,5,6].map((p, i) => (
-          <div>
-            <div className="card bg-white relative cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3">
-              <img
-                className="mx-auto w-[140px] md:w-[110px] lg:w-[140px] transition-opacity hover:duration-700 ease-in-out"
-                src="https://raw.githubusercontent.com/SheikhFarid99/multi-vendor-ecommerce/main/client/public/images/products/1.webp"
-                alt=""
-              />
-              <div className="">
-                <div className="flex gap-1 lg:gap-2 items-center">
+      <div className="bg-white py-3 px-4 rounded-md mb-2">
+        <h2 className="font-semibold text-slate-600">
+          My Wishlist ({data?.length})
+        </h2>
+      </div>
+
+      {data?.length === 0 ? (
+        <h2 className="text-center font-semibold text-slate-700 mt-20">No Wishlist Added Yet</h2>
+      ) : (
+        <div className="grid grid-cols-2 mb-16 lg:mb-0 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          {data?.map((items, i) => (
+            <div>
+              <div
+                key={items?._id}
+                className="card lg:h-[280px] bg-white  cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3"
+              >
+                <div className="relative overflow-hidden">
+                  {items?.discount ? (
+                    <div className="flex justify-center items-center absolute text-white w-[35px] md:w-[38px] lg:w-[38px] h-[35px] md:h-[38px] lg:h-[38px] rounded-full bg-red-500 font-semibold text-xs left-1 lg:left-2 top-1 lg:top-2">
+                      -{items?.discount}%
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
                   <img
-                    className="w-[32px] h-[32px] border rounded-full"
-                    src="https://www.thepixelfreak.co.uk/wp-content/uploads/2019/05/Entwined-M-Logo.png"
-                    alt=""
+                    className="mx-auto group-hover: w-[160px] h-[130px] md:h-[170px] lg:h-[160px] md:w-full lg:w-full  rounded-md transition-opacity hover:duration-700 ease-in-out"
+                    src={items?.images[0]}
+                    alt="items image"
                   />
-                  <p className="font-semibold text-[16px] text-gray-600 hover:text-red-500 duration-500">
-                    Gadzet Zone
-                  </p>
+
+                  <ul className="flex gap-3 h-[60px] lg:h-[80px] bg-slate-100 bg-opacity-90 opacity-0 group-hover:opacity-100 transition-all duration-700 -bottom-10 justify-center items-center  absolute w-full group-hover:bottom-0">
+                    <li className="w-[38px] shadow-md border h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all">
+                      <FaArrowRightArrowLeft className="text-[20px]" />
+                    </li>
+                    <Link
+                      to={`/details/${items?.productId}`}
+                      className="w-[38px] shadow-md border h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-500 hover:text-white hover:rotate-[360deg] transition-all"
+                    >
+                      <FaEye className="text-[18px]" />
+                    </Link>
+                    <li
+                      onClick={() => handleAddToCart(items)}
+                      className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center shadow-md border rounded-full hover:bg-violet-500 hover:text-white hover:rotate-[360deg] transition-all"
+                    >
+                      <AiOutlineShoppingCart className="text-[20px]" />
+                    </li>
+                  </ul>
                 </div>
 
-                <h3 className="font-semibold hover:text-red-500 duration-500">
-                  Apple AirPods Max Over-Ear
-                </h3>
-                <div className="flex items-center gap-1 lg:gap-2 py-1">
-                  <FaStar className="text-[#F6BA00]" />
-                  <FaStar className="text-[#F6BA00]" />
-                  <FaStar className="text-[#F6BA00]" />
-                  <FaStar className="text-[#F6BA00]" />
+                <div className="">
+                  <Link to={`/details/${items._id}`}>
+                    {" "}
+                    <h3 className="font-medium text-slate-800 my-1 mt-1 hover:text-red-500 duration-500">
+                      {items?.product_name.slice(0, 30)}..
+                    </h3>
+                  </Link>
 
-                  <FaStarHalfStroke className="text-[#F6BA00]" />
-                  <p>(1)</p>
-                </div>
-
-                
-              </div>
-
-              <div className="absolute top-7  right-3 md:right-4 lg:right-5 opacity-0 group-hover:opacity-100 group-hover:block transition-all group-hover:duration-700 transform space-y-3 translate-x-full group-hover:translate-x-0">
-                <div class="con-like">
-                  <input className="like" type="checkbox" title="Bookmark" />
-                  <div className="checkmark">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="outline"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="filled"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="100"
-                      width="100"
-                      className="celebrate"
-                    >
-                      <polygon className="poly" points="10,10 20,20"></polygon>
-                      <polygon className="poly" points="10,50 20,50"></polygon>
-                      <polygon className="poly" points="20,80 30,70"></polygon>
-                      <polygon className="poly" points="90,10 80,20"></polygon>
-                      <polygon className="poly" points="90,50 80,50"></polygon>
-                      <polygon className="poly" points="80,80 70,70"></polygon>
-                    </svg>
+                  <div className="flex items-center">
+                    <Ratings ratings={items?.review} /> ( {items?.review} )
                   </div>
                 </div>
-
-                <FaEye className="text-red-500 text-[20px] md:text-[22px] lg:text-[24px]" />
-                <FaCodeCompare className="text-red-500 hover:rotate-[360deg] hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
-                <FaCartShopping className="text-red-500 hover:duration-700 transition-all text-[20px] md:text-[22px] lg:text-[24px]" />
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -177,11 +177,22 @@ const Navbar = () => {
                       <div className=" px-2 py-1 cursor-pointer">
                         <div className="flex gap-2 items-center justify-center">
                           <img
-                            className="h-10 w-10 rounded-full"
-                            src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?t=st=1708688040~exp=1708691640~hmac=fd515ef5e0c8ca3f67090e638fff7a76b3ff2d46fab17a96ed729f8cc6cf4e02&w=740"
+                            className="h-9 w-9 rounded-full"
+                            src={
+                              user?.photoURL
+                                ? user.photoURL
+                                : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?t=st=1708688040~exp=1708691640~hmac=fd515ef5e0c8ca3f67090e638fff7a76b3ff2d46fab17a96ed729f8cc6cf4e02&w=740"
+                            }
                             alt=""
                           />
-                          <p className="text-black">{user.displayName}</p>
+                          <div>
+                            <h4 className="text-[13px] flex items-center font-normal">
+                              Hello,{user?.email.slice(0, 13)}...
+                            </h4>
+                            <p className="font-medium text-[16px]">
+                              Orders & Account
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </Link>
@@ -191,25 +202,45 @@ const Navbar = () => {
                       <div className=" px-2 py-1 cursor-pointer">
                         <div className="flex gap-2 items-center justify-center">
                           <img
-                            className="h-10 w-10 rounded-full"
-                            src={user.photoURL}
+                            className="h-9 w-9 border rounded-full"
+                            src={
+                              user?.photoURL
+                                ? user.photoURL
+                                : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?t=st=1708688040~exp=1708691640~hmac=fd515ef5e0c8ca3f67090e638fff7a76b3ff2d46fab17a96ed729f8cc6cf4e02&w=740"
+                            }
                             alt=""
                           />
-                          <p className="text-black">{user.displayName}</p>
+                          <div>
+                            <h4 className="text-[13px] flex items-center font-normal">
+                              Hello, {user?.email.slice(0, 16)}...
+                            </h4>
+                            <p className="font-medium text-[16px]">Dashboard & Products</p>
+                          </div>
                         </div>
                       </div>
                     </Link>
                   )}
                   {token?.role === "admin" && (
                     <Link to="/dashboard/admin-dashboard">
-                      <div className="border rounded-full border-violet-500 px-2 py-1 cursor-pointer">
+                      <div className=" px-2 py-1 cursor-pointer">
                         <div className="flex gap-2 items-center justify-center">
                           <img
-                            className="h-10 border border-orange-600 w-10 rounded-full"
-                            src={user.photoURL}
+                            className="h-9 w-9 rounded-full"
+                            src={
+                              user?.photoURL
+                                ? user.photoURL
+                                : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?t=st=1708688040~exp=1708691640~hmac=fd515ef5e0c8ca3f67090e638fff7a76b3ff2d46fab17a96ed729f8cc6cf4e02&w=740"
+                            }
                             alt=""
                           />
-                          <p className="text-black">{user.displayName}</p>
+                          <div>
+                            <h4 className="text-[13px] flex items-center font-normal">
+                              Hello,Admin
+                            </h4>
+                            <p className="font-medium text-[16px]">
+                              Go Dashboard
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </Link>
@@ -311,7 +342,7 @@ const Navbar = () => {
                   Your Cart{" "}
                 </p>
                 <p className="text-slate-700 text-[13px] font-medium text-center">
-                  ${cartTotal.toFixed(2)}
+                  ${cartTotal?.toFixed(2)}
                 </p>
               </div>
               {/* cart */}
