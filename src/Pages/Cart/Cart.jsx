@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -31,6 +31,10 @@ const Cart = () => {
       }
     });
   };
+
+  useEffect(() => {
+    scroll(0, 0);
+  }, []);
 
   return (
     <div>
@@ -143,7 +147,9 @@ const Cart = () => {
                       Looks like your cart is empty 😔. Browse our products and
                       add something!
                     </p>
-                    <p className="text-center text-slate-700 font-semibold">To Continue Shopping..</p>
+                    <p className="text-center text-slate-700 font-semibold">
+                      To Continue Shopping..
+                    </p>
                     <div className="mx-auto text-center mt-4">
                       <Link
                         className="px-7 rounded-md bg-[#F85606] py-2   text-white"

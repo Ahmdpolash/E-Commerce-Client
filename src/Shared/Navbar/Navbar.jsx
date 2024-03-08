@@ -28,17 +28,20 @@ import useCategory from "../../Hooks/useCategory";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import CategoryMap from "../../Components/CategoryMap";
 import useCart from "../../Hooks/useCart";
+import CartSlider from "../../Components/cartSlider";
+import WishlistSlider from "../../Components/WishlistSlider";
+import useWishlist from "../../Hooks/useWishlist";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
+  const [openWishlist, setOpenWishlist] = useState(false);
   const [mobileCart, setMobileCart] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
   const { logOut, user } = useAuth();
 
   const axiosPublic = useAxiosPublic();
   const res = axiosPublic.get("/categories");
-  console.log("hello", res.data);
 
   const { data, refetch } = useCategory();
   console.log("hello", data);
@@ -51,8 +54,15 @@ const Navbar = () => {
     setOpenCart(true);
   };
 
+  const handleWishlist = () => {
+    setOpenWishlist(true);
+  };
+
   const handleClose = () => {
     setOpenCart(false);
+  };
+  const wishlistClose = () => {
+    setOpenWishlist(false);
   };
 
   const accessToken = localStorage.getItem("access_token");
@@ -98,6 +108,7 @@ const Navbar = () => {
 
   //cart data get
   const { data: cart } = useCart();
+  const { data: wishlist } = useWishlist();
 
   return (
     <div className="">
@@ -234,16 +245,38 @@ const Navbar = () => {
                   0
                 </span>
               </div>
-              <div className="bg-gray-200 cursor-pointer hidden relative lg:block px-2 py-2 rounded-full">
-                <Link to="/my-bookmarks">
-                  <FaHeart className="text-[22px] text-[#EE5544] font-bold" />
-                </Link>
-                {cart?.length !== 0 && (
+
+              {/* wishlist */}
+
+              <div
+                onClick={handleWishlist}
+                className="bg-gray-200 cursor-pointer px-2 py-2 relative rounded-full"
+              >
+                <FaHeart className="text-[22px] text-[#EE5544] font-bold" />
+
+                {wishlist?.length !== 0 ? (
                   <span className="absolute -top-1 -right-2 rounded-full w-6 pt-1 h-6 top right m-0 p-0 font-mono text-white font-semibold leading-tight text-[14px] bg-[#3bc177] text-center">
-                    {cart?.length}
+                    {wishlist?.length}
                   </span>
+                ) : (
+                  ""
                 )}
               </div>
+
+              <div
+                className={`${
+                  openWishlist
+                    ? "-translate-x-0  opacity-100"
+                    : "translate-x-full overflow-y-auto   opacity-0"
+                }  transition-all duration-500 z-[99999999999999] border-l-2 border-gray-100 shadow-lg backdrop-blur-sm transform h-full w-[320px] md:w-[390px] bg-white text-black fixed top-0 right-0`}
+              >
+                <WishlistSlider wishlistClose={wishlistClose} />
+              </div>
+
+              {/* wishlist */}
+
+              {/* cart */}
+
               <div
                 onClick={handleOpen}
                 className="bg-gray-200 cursor-pointer px-2 py-2 relative rounded-full"
@@ -258,54 +291,17 @@ const Navbar = () => {
                   ""
                 )}
               </div>
-            </div>
-
-            {/* add to cart drawer */}
-
-            <div
-              className={`${
-                openCart
-                  ? "-translate-x-0 opacity-100"
-                  : "translate-x-full opacity-0"
-              }  transition-all duration-500 z-[9999] border-l-2 border-gray-100 shadow-lg backdrop-blur-sm transform h-full w-[320px] md:w-[390px] bg-white text-black fixed top-0 right-0`}
-            >
-              {/* if length 0 */}
-              <div className="absolute mt-[60%] lg:mt-[55%]  left-[28%] ">
-                <img
-                  className="w-[120px] mx-auto"
-                  src="https://img.freepik.com/free-vector/sale-full-shopping-cart-red-pictogram_1284-8505.jpg?size=626&ext=jpg&ga=GA1.1.507178097.1703095808&semt=ais"
-                  alt=""
-                />
-                <p>Your cart is now Empty</p>
-              </div>
-              {/* if length 0 */}
-
-              {/* bottom btn */}
-
-              <div className="absolute bottom-1 w-full flex gap-2">
-                <Link
-                  to="/cart"
-                  className="bg-[#FE2424] text-center text-white w-1/2 rounded-t-md py-3"
-                >
-                  View Cart
-                </Link>
-                <Link
-                  to="/checkout"
-                  className="bg-[#FE2424] text-center text-white w-1/2 rounded-t-md py-3"
-                >
-                  Checkout
-                </Link>
-              </div>
-              {/* bottom btn */}
-
-              <button
-                className="px-4 text-[#FE2424] hover:rotate-[180deg] hover:duration-700 transition-all py-2 text-3xl font-semibold flex absolute left-0 top-1 mt-2"
-                onClick={handleClose}
+              <div
+                className={`${
+                  openCart
+                    ? "-translate-x-0  opacity-100"
+                    : "translate-x-full overflow-y-auto   opacity-0"
+                }  transition-all duration-500 z-[99999999999999] border-l-2 border-gray-100 shadow-lg backdrop-blur-sm transform h-full w-[320px] md:w-[390px] bg-white text-black fixed top-0 right-0`}
               >
-                <RxCross1 />
-              </button>
+                <CartSlider handleClose={handleClose} />
+              </div>
+              {/* cart */}
             </div>
-            {/* add to cart drawer end*/}
 
             {/* Main menu */}
           </div>

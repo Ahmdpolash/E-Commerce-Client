@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useCart from "../../../Hooks/useCart";
+import useWishlist from "../../../Hooks/useWishlist";
 
 const Recommended = () => {
   const { data, isLoading } = useProducts();
@@ -68,6 +69,7 @@ const Recommended = () => {
   };
 
   const { refetch } = useCart();
+  const { refetch: reload } = useWishlist();
 
   const handleAddToWishlist = (product) => {
     console.log(product);
@@ -95,6 +97,7 @@ const Recommended = () => {
           if (res.data.message === "Product already added") {
             toast.error(`This Product already in your Wishlist 🙄`);
           } else {
+            reload()
             toast.success("Wishlist Added Successfully 😊");
           }
         });
@@ -114,7 +117,7 @@ const Recommended = () => {
       });
     }
   };
- 
+
   return (
     <div className="bg-[#F1F1F1]">
       <Container>

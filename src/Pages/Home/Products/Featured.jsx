@@ -14,12 +14,14 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useCart from "../../../Hooks/useCart";
+import useWishlist from "../../../Hooks/useWishlist";
 
 const Featured = () => {
   const { data, isLoading } = useProducts();
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const { refetch } = useCart();
+  const { refetch: reload } = useWishlist();
   const navigate = useNavigate();
 
   const handleAddToCart = (product) => {
@@ -78,7 +80,6 @@ const Featured = () => {
         email: user.email,
         product_name: product?.product_name,
         discount: product?.discount,
-
         images: product?.images,
         brand: product?.brand,
         shop_name: product?.shopName,
@@ -95,13 +96,14 @@ const Featured = () => {
           if (res.data.message === "Product already added") {
             toast.error(`This Product already in your Wishlist 🙄`);
           } else {
-            toast.success("Wishlist Added Successfully 😊");
+            reload();
+            toast.success("Product Added successfully..✅");
           }
         });
     } else {
       Swal.fire({
         title: "You are not logged In",
-        text: "Please Login to add to the cart !",
+        text: "Please Login to add to the Wislist !",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
