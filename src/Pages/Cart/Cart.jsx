@@ -11,15 +11,72 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Cart = () => {
   const axiosPublic = useAxiosPublic();
 
-  // cart
-
   const { data, refetch } = useCart();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setProducts(data);
+    }
+  }, [data]);
+
   const groupedProducts = data?.reduce((acc, product) => {
     const { shop_name } = product;
     acc[shop_name] = acc[shop_name] || [];
     acc[shop_name].push(product);
     return acc;
   }, {});
+
+  // const [quantity, setQuantity] = useState(1);
+
+  // const handleIncrease = (id) => {
+  //   const find = data.find((item) => item._id === id);
+  //   console.log(find);
+
+  //   if (find?.stock > quantity) {
+  //     find.quantity = 2;
+  //   } else {
+  //     toast.error("stock limit exceeded ");
+  //   }
+  // };
+
+  const handleIncrease = (productId) => {
+    const productIndex = products.findIndex(
+      (product) => product._id === productId
+    );
+
+    if (productIndex !== -1) {
+      const updatedProducts = [...products];
+      if (
+        updatedProducts[productIndex].stock <=
+        updatedProducts[productIndex].quantity
+      ) {
+        return toast.error("Product limit exceeded");
+      }
+      updatedProducts[productIndex].quantity++;
+
+      setProducts(updatedProducts);
+    }
+  };
+
+  const handleDecrease = (productId) => {
+    const productIndex = products.findIndex(
+      (product) => product._id === productId
+    );
+
+    if (productIndex !== -1) {
+      const updatedProducts = [...products];
+
+      if (updatedProducts[productIndex].quantity < 2) {
+        return toast.error("Product Quantity Must be greater than 0");
+      }
+
+      updatedProducts[productIndex].quantity--;
+      setProducts(updatedProducts);
+    }
+  };
+
+  // cart
 
   const handleDelete = (id) => {
     axiosPublic.delete(`/carts/items/${id}`).then((res) => {
@@ -135,9 +192,21 @@ const Cart = () => {
 
                                 <div className="flex gap-2 flex-col">
                                   <div className="flex bg-slate-200 h-[30px] justify-center items-center text-xl">
-                                    <div className="px-3 cursor-pointer">-</div>
-                                    <div className="px-3"></div>
-                                    <div className="px-3 cursor-pointer">+</div>
+                                    <div
+                                      onClick={() => handleDecrease(item._id)}
+                                      className="px-3 cursor-pointer"
+                                    >
+                                      -
+                                    </div>
+
+                                    <div className="px-3">{item?.quantity}</div>
+
+                                    <div
+                                      onClick={() => handleIncrease(item._id)}
+                                      className="px-3 cursor-pointer"
+                                    >
+                                      +
+                                    </div>
                                   </div>
                                   <button
                                     onClick={() => handleDelete(item?._id)}

@@ -31,6 +31,7 @@ const Featured = () => {
       const cartItem = {
         productId: product?._id,
         email: user.email,
+        quantity: 1,
         product_name: product?.product_name,
         discount: product?.discount,
         images: product?.images,

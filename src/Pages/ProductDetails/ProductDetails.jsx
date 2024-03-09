@@ -71,6 +71,7 @@ const ProductDetails = () => {
         email: user.email,
         product_name: data?.product_name,
         discount: data?.discount,
+        quantity: 1,
 
         images: data?.images,
         brand: data?.brand,

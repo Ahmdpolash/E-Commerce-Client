@@ -230,6 +230,7 @@ const UserDashSideBar = () => {
             <Outlet />
           </div>
         </div>
+        
       </div>
       {/* <Footer /> */}
     </div>

@@ -79,16 +79,16 @@ const Category = () => {
     nextArrow: <CustomNextArrow />,
   };
   return (
-    <div className="bg-[#F5F0F0] py-4">
+    <div className="bg-gray-100 py-4">
       <div className="py-4 px-4 lg:px-16 overflow-hidden">
         {/* <h1 className="font-semibold text-2xl mb-2 uppercase flex gap-2 items-center">Categories <FaArrowRight/> </h1>{" "} */}
 
         <Slider
-          className="grid bg-white px-3 py-6 grid-cols-2  md:grid-cols-4 lg:grid-cols-7"
+          className="grid bg-gray-200 px-3 py-6 grid-cols-2  md:grid-cols-4 lg:grid-cols-7"
           {...settings}
         >
           <div>
-            <div className="bg-[#fff] hover:border  hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
+            <div className="bg-[#fff] shadow-lg hover:border  hover:shadow-none hover:border-red-400 hover:duration-300  border relative h-[160px] w-[180px] rounded-md">
               <div className="text-center mx-auto">
                 <img
                   className="w-[120px] mx-auto duration-300 transition-all hover:scale-110"

@@ -28,6 +28,7 @@ const Recommended = () => {
       const cartItem = {
         productId: product?._id,
         email: user.email,
+        quantity: 1,
         product_name: product?.product_name,
         discount: product?.discount,
         images: product?.images,
@@ -97,7 +98,7 @@ const Recommended = () => {
           if (res.data.message === "Product already added") {
             toast.error(`This Product already in your Wishlist 🙄`);
           } else {
-            reload()
+            reload();
             toast.success("Wishlist Added Successfully 😊");
           }
         });

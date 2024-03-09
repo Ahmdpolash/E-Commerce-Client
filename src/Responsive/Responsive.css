@@ -104,3 +104,10 @@
     width: 18% !important;
   }
 }
+
+/* .svg {
+  background-image: url("path/to/your/svg/file.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+} */
