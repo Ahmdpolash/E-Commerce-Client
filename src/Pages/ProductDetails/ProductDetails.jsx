@@ -183,7 +183,7 @@ const ProductDetails = () => {
       <Container>
         <div className="grid bg-white grid-cols-1 p-2 lg:grid-cols-7 mt-6 gap-2 lg:gap-7">
           <div className="col-span-2 ">
-            <div className=" h-[210px]  ml-3 lg:ml-0 md:h-[280px] lg:h-[410px]  p-4 w-[440px overflow-hidden  border-2 border-gray-100  rounded-xl">
+            <div className=" h-[210px] w-full  ml-3 lg:ml-0 md:h-[280px] lg:h-[410px]  p-4 overflow-hidden  border-2 border-gray-100  rounded-xl">
               <img
                 className="h-full  w-full object-contain "
                 src={currentImage}

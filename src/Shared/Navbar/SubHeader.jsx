@@ -27,7 +27,7 @@ const SubHeader = () => {
             to="/sellerRegistration"
             className="flex py-1 gap-1 ml-4  cursor-pointer hover:border-red-500 duration-300 text-[14px] font-semibold items-center  border-gray-400 px-2"
           >
-            <FaRegUser /> Seller Registration
+            <FaRegUser /> Become a Seller
           </Link>
 
           <div className="border-r-2 border-gray-300 h-7 flex justify-center items-center mt-2"></div>

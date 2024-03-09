@@ -214,7 +214,9 @@ const Navbar = () => {
                             <h4 className="text-[13px] flex items-center font-normal">
                               Hello, {user?.email.slice(0, 16)}...
                             </h4>
-                            <p className="font-medium text-[16px]">Dashboard & Products</p>
+                            <p className="font-medium text-[16px]">
+                              Dashboard & Products
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -433,7 +435,7 @@ const Navbar = () => {
               </button>
             </li>
             <li>
-              <Link to="/my-bookmarks">
+              <Link to="/dashboard/my-wishlists">
                 <MdOutlineFavoriteBorder className="text-[25px]" />
               </Link>
             </li>
