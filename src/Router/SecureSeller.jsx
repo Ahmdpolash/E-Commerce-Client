@@ -9,7 +9,6 @@ const SecureSeller = ({ children }) => {
   const location = useLocation();
 
   const checkPending = data?.find((seller) => seller?.email === user?.email);
-  console.log(checkPending);
 
   if (checkPending?.status === "Pending") {
     return (

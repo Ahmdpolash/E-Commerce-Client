@@ -43,6 +43,8 @@ import AdminAddBanner from "../Dashboard/AdminDashboard/AdminAddBanner";
 import Service from "../Pages/Home/Service/Service";
 import AddProduct from "../Dashboard/SellerDashboard/AddProduct";
 import SecureSeller from "./SecureSeller";
+import UpdateProduct from "../Dashboard/SellerDashboard/UpdateProduct";
+import DiscountUpdate from "../Dashboard/SellerDashboard/DiscountUpdate";
 
 const Route = createBrowserRouter([
   {
@@ -179,6 +181,16 @@ const Route = createBrowserRouter([
         ),
       },
       {
+        path: "update-discount/:id",
+        element: (
+          <SecureSeller>
+            <DiscountUpdate />
+          </SecureSeller>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.id}`),
+      },
+      {
         path: "customer-orders",
         element: (
           <SecureSeller>
@@ -197,6 +209,12 @@ const Route = createBrowserRouter([
       {
         path: "support-chat",
         element: <SellerSupportChat />,
+      },
+      {
+        path: "update-product/:id",
+        element: <UpdateProduct />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.id}`),
       },
 
       // admin route start here

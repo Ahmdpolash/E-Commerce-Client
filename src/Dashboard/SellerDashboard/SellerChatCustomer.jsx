@@ -21,8 +21,8 @@ const SellerChatCustomer = () => {
                 show ? "-left-[16px]" : "-left-[336px]"
               } md:left-0 md:relative transition-all`}
             >
-              <div className="w-full h-[calc(100vh-177px)] bg-[#252b3b] md:bg-transparent overflow-y-auto">
-                <div className="flex text-xl justify-between items-center p-4 md:p-0 md:px-3 md:pb-3 text-white">
+              <div className="w-full border-r border-r-slate-300 pr-3 shadow-lg h-[calc(100vh-128px)] bg-[#252b3b] md:bg-transparent overflow-y-auto">
+                <div className="flex text-xl justify-between items-center p-4 md:p-0 md:px-3 md:pb-3 text-slate-700">
                   <h2>Customers</h2>
                   <span
                     onClick={() => setShow(!show)}
@@ -35,7 +35,7 @@ const SellerChatCustomer = () => {
                 {[1, 2, 3, 4].map((item, i) => (
                   <Link
                     //   to={`/seller/dashboard/chat-customer/${c.fdId}`}
-                    className={`h-[60px] mb-2 flex justify-start gap-2 items-center text-white px-2 py-2 rounded-sm cursor-pointer bg-slate-700`}
+                    className={`h-[60px] mb-2 flex justify-start border shadow-md gap-2 items-center text-slate-700 px-2 py-2 rounded-sm cursor-pointer bg-white`}
                   >
                     <div className="relative">
                       <img
@@ -95,9 +95,21 @@ const SellerChatCustomer = () => {
                   <div
                     // ref={scrollRef}
                     // key={i}
-                    className="w-full flex justify-start items-center"
+                    className="w-full flex justify-between items-start"
                   >
                     <div className="flex justify-start items-start gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]">
+                      <div>
+                        <img
+                          className="w-[38px] h-[38px] border-2 border-white rounded-full max-w-[38px] p-[3px]"
+                          src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="flex justify-center items-start flex-col w-full bg-orange-500 shadow-lg shadow-orange-500/50 text-white py-1 px-2 rounded-sm">
+                        <span>Hello</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-end gap-2 md:px-3 py-2 mt-5 lg:mt-8 max-w-full lg:max-w-[85%]">
                       <div>
                         <img
                           className="w-[38px] h-[38px] border-2 border-white rounded-full max-w-[38px] p-[3px]"
@@ -151,11 +163,11 @@ const SellerChatCustomer = () => {
                   //   value={text}
                   className="w-full flex justify-between px-2 border border-slate-700 items-center py-[5px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6]"
                   type="text"
-                  placeholder="input your message"
+                  placeholder="Type your message"
                 />
                 <button
                   //   disabled={customerId ? false : true}
-                  className="shadow-lg bg-cyan-500 hover:shadow-cyan-500/50 text-semibold w-[75px] h-[35px] rounded-md text-white flex justify-center items-center"
+                  className="shadow-lg bg-violet-500 hover:shadow-cyan-500/50 text-semibold w-[75px] h-[35px] rounded-md text-white flex justify-center items-center"
                 >
                   Send
                 </button>

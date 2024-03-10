@@ -4,13 +4,29 @@ import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "../../Responsive/Responsive.css";
 import useSellerProduct from "../../Hooks/useSellerProduct";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const SellerDashAllProduct = () => {
-  const { data } = useSellerProduct();
+  const { data, refetch } = useSellerProduct();
+  const axiosPublic = useAxiosPublic();
   console.log(data);
   useEffect(() => {
     // Fetch data when component mounts
   }, []);
+
+  //product delete
+
+  const handleDelete = (id) => {
+    axiosPublic.delete(`/product/delete/${id}`).then((res) => {
+      if (res.data.deletedCount > 0) {
+        toast.success("Item deleted successfully");
+        refetch();
+      } else {
+        toast.error("Failed to delete Product ");
+      }
+    });
+  };
 
   return (
     <div className="px-2 md:px-4 lg:px-5">
@@ -23,7 +39,15 @@ const SellerDashAllProduct = () => {
         <div className="bg-white  h-[83vh] mt-3 allProducts  w-[407px] px-3 lg:px-0 md:w-[733px] lg:w-full rounded-md">
           {data?.length === 0 ? (
             <div className="flex items-center justify-center h-[calc(100%-10px)]">
-              <span className="font-semibold text-2xl">No Product Upload Yet..! <Link to='/dashboard/add-products' className="text-blue-600 font-bold underline">Upload Now</Link> </span>
+              <span className="font-semibold text-2xl">
+                No Product Upload Yet..!{" "}
+                <Link
+                  to="/dashboard/add-products"
+                  className="text-blue-600 font-bold underline"
+                >
+                  Upload Now
+                </Link>{" "}
+              </span>
             </div>
           ) : (
             <>
@@ -113,7 +137,9 @@ const SellerDashAllProduct = () => {
                             scope="row"
                             className="py-1 px-6 font-medium whitespace-nowrap"
                           >
-                            <span>{item?.brand ? item?.brand : 'No Brand'}</span>
+                            <span>
+                              {item?.brand ? item?.brand : "No Brand"}
+                            </span>
                           </td>
                           <td
                             scope="row"
@@ -147,13 +173,22 @@ const SellerDashAllProduct = () => {
                             className="py-1 px-4 font-medium whitespace-nowrap"
                           >
                             <div className="flex justify-start items-center gap-4">
-                              <Link className="p-[6px] bg-yellow-300 rounded hover:shadow-lg hover:shadow-yellow-300/50">
+                              <Link
+                                to={`/dashboard/update-product/${item._id}`}
+                                className="p-[6px] bg-yellow-300 rounded hover:shadow-lg hover:shadow-yellow-300/50"
+                              >
                                 <FaEdit />
                               </Link>
-                              <Link className="p-[6px] bg-green-400  rounded hover:shadow-lg hover:shadow-green-400/50">
+                              <Link
+                                to={`/details/${item._id}`}
+                                className="p-[6px] bg-green-400  rounded hover:shadow-lg hover:shadow-green-400/50"
+                              >
                                 <FaEye />
                               </Link>
-                              <button className="p-[6px] bg-red-500 text-white rounded hover:shadow-lg hover:shadow-red-500/50">
+                              <button
+                                onClick={() => handleDelete(item._id)}
+                                className="p-[6px] bg-red-500 text-white rounded hover:shadow-lg hover:shadow-red-500/50"
+                              >
                                 <FaTrash />
                               </button>
                             </div>

@@ -14,11 +14,13 @@ const Cart = () => {
   const { data, refetch } = useCart();
   const [products, setProducts] = useState([]);
 
+  //get total price of cart items
   const subTotal = products?.reduce(
     (total, item) => total + parseFloat(item.price) * parseFloat(item.quantity),
     0
   );
 
+  //get discount price
   const totalDiscount = products?.reduce((total, item) => {
     if (!isNaN(parseFloat(item.discount))) {
       return total + parseFloat(item.discount);
@@ -27,12 +29,14 @@ const Cart = () => {
     }
   }, 0);
 
-
+  //store context data to a state variable
   useEffect(() => {
     if (data) {
       setProducts(data);
     }
   }, [data]);
+
+  //grouping product and make dividing different vendor product
 
   const groupedProducts = data?.reduce((acc, product) => {
     const { shop_name } = product;
@@ -40,6 +44,8 @@ const Cart = () => {
     acc[shop_name].push(product);
     return acc;
   }, {});
+
+  //cart quantity increment
 
   const handleIncrease = (productId) => {
     const productIndex = products.findIndex(
@@ -60,6 +66,8 @@ const Cart = () => {
     }
   };
 
+  //cart quantity decrease
+
   const handleDecrease = (productId) => {
     const productIndex = products.findIndex(
       (product) => product._id === productId
@@ -77,7 +85,7 @@ const Cart = () => {
     }
   };
 
-  // cart
+  // cart item deletion
 
   const handleDelete = (id) => {
     axiosPublic.delete(`/carts/items/${id}`).then((res) => {
@@ -89,6 +97,8 @@ const Cart = () => {
       }
     });
   };
+
+  //scroll to to of page
 
   useEffect(() => {
     scroll(0, 0);
@@ -287,7 +297,9 @@ const Cart = () => {
                   <p className="text-[#5F6C72] font-semibold text-[18px]">
                     Total
                   </p>
-                  <p className="text-[16px] font-semibold">${subTotal - (subTotal / 100) * totalDiscount}</p>
+                  <p className="text-[16px] font-semibold">
+                    ${subTotal - (subTotal / 100) * totalDiscount}
+                  </p>
                 </div>
                 <button className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#F85606] mt-4 rounded-md ">
                   Proceed to Checkout{" "}
