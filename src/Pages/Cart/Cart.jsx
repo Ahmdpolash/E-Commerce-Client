@@ -14,6 +14,20 @@ const Cart = () => {
   const { data, refetch } = useCart();
   const [products, setProducts] = useState([]);
 
+  const subTotal = products?.reduce(
+    (total, item) => total + parseFloat(item.price) * parseFloat(item.quantity),
+    0
+  );
+
+  const totalDiscount = products?.reduce((total, item) => {
+    if (!isNaN(parseFloat(item.discount))) {
+      return total + parseFloat(item.discount);
+    } else {
+      return total;
+    }
+  }, 0);
+
+
   useEffect(() => {
     if (data) {
       setProducts(data);
@@ -26,19 +40,6 @@ const Cart = () => {
     acc[shop_name].push(product);
     return acc;
   }, {});
-
-  // const [quantity, setQuantity] = useState(1);
-
-  // const handleIncrease = (id) => {
-  //   const find = data.find((item) => item._id === id);
-  //   console.log(find);
-
-  //   if (find?.stock > quantity) {
-  //     find.quantity = 2;
-  //   } else {
-  //     toast.error("stock limit exceeded ");
-  //   }
-  // };
 
   const handleIncrease = (productId) => {
     const productIndex = products.findIndex(
@@ -181,11 +182,20 @@ const Cart = () => {
                                 <div>
                                   <div className="pl-4 sm:pl-0">
                                     <h2 className="text-lg text-orange-500">
-                                      $500
+                                      $
+                                      {item.price -
+                                        (
+                                          (item.price / 100) *
+                                          item.discount
+                                        ).toFixed(2)}
                                     </h2>
-                                    <p className="line-through">$1200</p>
+                                    <p className="line-through">
+                                      ${item?.price}
+                                    </p>
                                     <p>
-                                      -{item?.discount ? item?.discount : 0}%
+                                      {item?.discount
+                                        ? `-${item?.discount}%`
+                                        : ""}
                                     </p>
                                   </div>
                                 </div>
@@ -249,6 +259,7 @@ const Cart = () => {
                 </div>
               )}
             </div>
+
             <div className="col-span-1 lg:h-[470px] bg-white border shadow-md w-full px-6 py-3">
               <h2 className="font-bold text-slate-700 py-2 text-2xl">
                 Cart Totals
@@ -258,7 +269,7 @@ const Cart = () => {
                   <p className="text-[#5F6C72] font-normal text-[18px]">
                     Sub-Total
                   </p>
-                  <p className="text-[16px] font-semibold">$</p>
+                  <p className="text-[16px] font-semibold">${subTotal}</p>
                 </div>
                 <div className="flex py-1 justify-between item-center">
                   <p className="text-[#5F6C72] font-normal text-[18px]">
@@ -270,13 +281,13 @@ const Cart = () => {
                   <p className="text-[#5F6C72] font-normal text-[18px]">
                     Discount
                   </p>
-                  <p className="text-[16px] font-semibold">$24</p>
+                  <p className="text-[16px] font-semibold">${totalDiscount}</p>
                 </div>
                 <div className="flex py-1 justify-between item-center">
                   <p className="text-[#5F6C72] font-semibold text-[18px]">
                     Total
                   </p>
-                  <p className="text-[16px] font-semibold">$1520</p>
+                  <p className="text-[16px] font-semibold">${subTotal - (subTotal / 100) * totalDiscount}</p>
                 </div>
                 <button className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#F85606] mt-4 rounded-md ">
                   Proceed to Checkout{" "}
