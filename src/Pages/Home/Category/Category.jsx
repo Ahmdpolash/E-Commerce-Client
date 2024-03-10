@@ -5,9 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi"; // Import your icon library
 
-import img from "../../../../public/download.png";
-import img2 from "../../../../public/fashion.png";
-import { FaArrowRight } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+
 import useCategory from "../../../Hooks/useCategory";
 
 const CustomPrevArrow = ({ onClick }) => (
@@ -81,8 +80,9 @@ const Category = () => {
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
   };
+
   return (
-    <div className="bg-gray-100 py-">
+    <div className="bg-gra-100 py-">
       <div className="py-4 px-4 lg:px-16 overflow-hidden">
         {/* <h1 className="font-semibold text-2xl mb-2 uppercase flex gap-2 items-center">Categories <FaArrowRight/> </h1>{" "} */}
 
@@ -91,18 +91,22 @@ const Category = () => {
           {...settings}
         >
           {data?.map((category, idx) => (
-            <div key={idx}>
-              <div className="bg-[#fff] relative shadow-md  hover:border hover:border-red-400 hover:duration-300  border h-[140px] w-[90%] rounded-md">
-                <div className="text-center  mx-auto p- w-[90]">
-                  <img
-                    className="w-[130px] opacity-90 hover:opacity-100 h-[110px] object-cover rounded-md mt-3 mx-auto hover:duration-700 transition-all hover:scale-110"
-                    src={category?.image}
-                    alt=""
-                  />
+            <Link to={`/shop?category=${category?.category}`}>
+              <div key={idx}>
+                <div className="bg-[#fff] relative shadow-md  hover:border hover:border-red-400 hover:duration-300  border h-[140px] w-[90%] rounded-md">
+                  <div className="text-center  mx-auto p- w-[90]">
+                    <img
+                      className="w-[130px] opacity-90 hover:opacity-100 h-[110px] object-cover rounded-md mt-3 mx-auto hover:duration-700 transition-all hover:scale-110"
+                      src={category?.image}
+                      alt=""
+                    />
+                  </div>
                 </div>
+                <p className="text-center font-medium mt-1">
+                  {category?.category} (5){" "}
+                </p>
               </div>
-              <p className="text-center font-medium mt-1">{category?.category} (5) </p>
-            </div>
+            </Link>
           ))}
         </Slider>
       </div>

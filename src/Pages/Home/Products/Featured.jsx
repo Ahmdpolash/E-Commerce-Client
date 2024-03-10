@@ -119,16 +119,12 @@ const Featured = () => {
   };
 
   return (
-    <div className="bg-[#F1F1F1]">
+    <div className="bg-[#F1F1F1">
       <Container>
-        <div className="py-2 lg:py-6 bg-white px-3">
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl lg:text-2xl mb-2 font-semibold">
-              Featured Collection
-            </h1>
-            <span>
-              <FaArrowRight />
-            </span>
+        <div className="py-2 lg:py-3 bg-whte px-3">
+          <div className=" flex text-center items-center justify-center flex-col text-2xl text-slate-600 font-bold relative pb-[25px]">
+            <h2>Featured Products</h2>
+            <div className="w-[100px]  h-[4px] bg-[#EF4444] mt-2"></div>
           </div>
 
           <div

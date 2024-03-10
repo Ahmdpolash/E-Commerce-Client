@@ -120,10 +120,13 @@ const Recommended = () => {
   };
 
   return (
-    <div className="bg-[#F1F1F1]">
+    <div className="bg-[#F1F1F1">
       <Container>
-        <div className="bg-white px-3 py-2 lg:py-6 shadow-md border mt-2">
-          <h1 className="text-2xl font-semibold mb-2">Recommended To You</h1>
+        <div className="bg-whie px-3 py-2 lg:py-6 shadow-d borer mt-2">
+          <div className="flex text-center items-center justify-center flex-col text-2xl text-slate-600 font-bold relative pb-[25px]">
+            <h2>Recommended Products</h2>
+            <div className="w-[100px]  h-[4px] bg-[#EF4444] mt-2"></div>
+          </div>
 
           <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3 lg:gap-4">
             {data?.slice(5)?.map((product, i) => (
