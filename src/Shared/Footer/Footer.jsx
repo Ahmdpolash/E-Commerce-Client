@@ -12,10 +12,10 @@ import "../../Responsive/Responsive.css";
 const Footer = () => {
   return (
     <div>
-      <div className="bg-[#F3F6Fa] svg mt-10">
+      <div className="bg-[#F3F6Fa] svg mt-5">
         <Container>
-          <div className="w-[%] flex flex-wrap mx-auto border-b py-16 md-lg:pb-10 sm:pb-6">
-            <div className="w-6/12 lg:w-4/12 sm:w-full">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto border-b py-6 lg:py-8 lg:pb-8">
+            <div className="lg:pl-8 mb-2 lg:mb-0">
               <div className="flex flex-col gap-3">
                 <img className="w-[190px] h-[70x]" src={logo} alt="logo" />
                 <ul className="flex flex-col gap-2 text-slate-600">
@@ -25,7 +25,7 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-            <div className="w-6/12 lg:w-4/12 sm:w-full">
+            <div className=" mb-2 lg:mb-0">
               <div className="flex lg:justify-cener sm:justify-start sm:mt-6 w-full">
                 <div>
                   <h2 className="font-bold text-lg mb-2">Useful links</h2>
@@ -68,7 +68,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            <div className="w-12 lg:w-4/12 lg:mt-6">
+            <div className="">
               <div className="w-full flex flex-col justify-start gap-5">
                 <h2 className="font-bold text-lg mb-">
                   Join Our Newsletter Now

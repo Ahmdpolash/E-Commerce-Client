@@ -8,6 +8,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi"; // Import your i
 import img from "../../../../public/download.png";
 import img2 from "../../../../public/fashion.png";
 import { FaArrowRight } from "react-icons/fa6";
+import useCategory from "../../../Hooks/useCategory";
 
 const CustomPrevArrow = ({ onClick }) => (
   <div
@@ -28,11 +29,13 @@ const CustomNextArrow = ({ onClick }) => (
 );
 
 const Category = () => {
+  const { data, isLoading } = useCategory();
+
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 6, // Set the number of products to show by default
+    slidesToShow: 7, // Set the number of products to show by default
     slidesToScroll: 2,
     autoplay: false, // Enable autoplay
     autoplaySpeed: 2000,
@@ -79,81 +82,28 @@ const Category = () => {
     nextArrow: <CustomNextArrow />,
   };
   return (
-    <div className="bg-gray-100 py-4">
+    <div className="bg-gray-100 py-">
       <div className="py-4 px-4 lg:px-16 overflow-hidden">
         {/* <h1 className="font-semibold text-2xl mb-2 uppercase flex gap-2 items-center">Categories <FaArrowRight/> </h1>{" "} */}
 
         <Slider
-          className="grid bg-gray-200 px-3 py-6 grid-cols-2  md:grid-cols-4 lg:grid-cols-7"
+          className="grid bg-gay-200 px-3 py-6 grid-cols-2  md:grid-cols-4 lg:grid-cols-7"
           {...settings}
         >
-          <div>
-            <div className="bg-[#fff] shadow-lg hover:border  hover:shadow-none hover:border-red-400 hover:duration-300  border relative h-[160px] w-[180px] rounded-md">
-              <div className="text-center mx-auto">
-                <img
-                  className="w-[120px] mx-auto duration-300 transition-all hover:scale-110"
-                  src={img}
-                  alt=""
-                />
-                <p className="ml-4 text-gray-600">Mobile & Tablet</p>
+          {data?.map((category, idx) => (
+            <div key={idx}>
+              <div className="bg-[#fff] relative shadow-md  hover:border hover:border-red-400 hover:duration-300  border h-[140px] w-[90%] rounded-md">
+                <div className="text-center  mx-auto p- w-[90]">
+                  <img
+                    className="w-[130px] opacity-90 hover:opacity-100 h-[110px] object-cover rounded-md mt-3 mx-auto hover:duration-700 transition-all hover:scale-110"
+                    src={category?.image}
+                    alt=""
+                  />
+                </div>
               </div>
+              <p className="text-center font-medium mt-1">{category?.category} (5) </p>
             </div>
-          </div>
-
-          <div>
-            <div className="bg-white hover:border hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
-              <div className="text-center mx-auto">
-                <img
-                  className="w-[110px]  transition-all hover:scale-110 hover:duration-500 mt-2 mx-auto"
-                  src={img2}
-                  alt=""
-                />
-                <p className="ml-4 py-2 font-semibold hover:text-red-600 hover:duration-300">
-                  Fashion Clothing
-                </p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-white hover:border hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
-              <div className="text-center mx-auto">
-                <img className="w-[120px] mx-auto" src={img} alt="" />
-                <p className="ml-4">Mobile</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-white hover:border hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
-              <div className="text-center mx-auto">
-                <img className="w-[120px] mx-auto" src={img} alt="" />
-                <p className="ml-4">Mobile</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-white hover:border hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
-              <div className="text-center mx-auto">
-                <img className="w-[120px] mx-auto" src={img} alt="" />
-                <p className="ml-4">Mobile</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-white hover:border hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
-              <div className="text-center mx-auto">
-                <img className="w-[120px] mx-auto" src={img} alt="" />
-                <p className="ml-4">Mobile</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-white hover:border hover:shadow-none hover:border-red-400 hover:duration-300 shadow border relative h-[160px] w-[180px] rounded-md">
-              <div className="text-center mx-auto">
-                <img className="w-[120px] mx-auto" src={img} alt="" />
-                <p className="ml-4">Mobile</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </Slider>
       </div>
     </div>
