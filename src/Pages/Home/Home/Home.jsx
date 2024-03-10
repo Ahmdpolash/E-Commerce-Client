@@ -8,6 +8,7 @@ import Faq from "../Faq/Faq";
 import { Helmet } from "react-helmet";
 import Advertisement from "../Advertisement/Advertisement";
 import DiscountCard from "../DiscountCard/DiscountCard";
+import GridProduct from "../../GridProduct/GridProduct";
 
 // import Card from "./Card";
 
@@ -23,9 +24,10 @@ const Home = () => {
       <Banner />
       <Category />
       <Featured />
-      <DiscountCard/>
+      <DiscountCard />
       <Recommended />
       <Advertisement />
+      <GridProduct />
       {/* <Faq /> */}
     </div>
   );

@@ -33,9 +33,7 @@ const AddProduct = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const [categories, setCategories] = useState();
-  console.log("cat", categories);
   const { data } = useCategory();
-  console.log("category come", data);
 
   const [value, setValue] = useState([]);
   const [tag, setTags] = useState([]);

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FaList } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { ChatItem, MessageBox } from "react-chat-elements";
 
 import { BsEmojiSmile } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -58,7 +59,7 @@ const SellerChatCustomer = () => {
             </div>
 
             {/* chat */}
-            <div className="w-full md:w-[calc(100%-200px)] md:pl-4">
+            <div className="w-full  md:w-[calc(100%-200px)] md:pl-4">
               <div className="flex justify-between items-center">
                 {/* {customerId && ( */}
                 <div className="flex bg-slate-50 shadow-md w-full p-2 border-b-2 border-x border-slate-100 justify-start items-center gap-3">
@@ -74,7 +75,9 @@ const SellerChatCustomer = () => {
                         <div className="w-[10px] h-[10px] bg-green-500 rounded-full absolute right-0 bottom-0"></div>
                       )} */}
                   </div>
-                  <h2 className="text-base text-slate-700 font-semibold">John</h2>
+                  <h2 className="text-base text-slate-700 font-semibold">
+                    John
+                  </h2>
                 </div>
                 {/* )} */}
                 <div
@@ -86,89 +89,39 @@ const SellerChatCustomer = () => {
                   </span>
                 </div>
               </div>
+
               <div className="py-4">
-                <div className="bg-white text-slate-800 h-[calc(100vh-290px)] rounded-md p-3 overflow-y-auto">
-                  {/* {customerId ? (
-                    messages.map((m, i) => {
-                      if (m.senderId === customerId) {
-                        return ( */}
-                  <div
-                    // ref={scrollRef}
-                    // key={i}
-                    className="w-full flex justify-between items-start"
-                  >
-                    <div className="flex justify-start items-start gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]">
-                      <div>
-                        <img
-                          className="w-[38px] h-[38px] border-2 border-white rounded-full max-w-[38px] p-[3px]"
-                          src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="flex justify-center items-start flex-col w-full bg-orange-500 shadow-lg shadow-orange-500/50 text-white py-1 px-2 rounded-sm">
-                        <span>Hello</span>
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-end gap-2 md:px-3 py-2 mt-5 lg:mt-8 max-w-full lg:max-w-[85%]">
-                      <div>
-                        <img
-                          className="w-[38px] h-[38px] border-2 border-white rounded-full max-w-[38px] p-[3px]"
-                          src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="flex justify-center items-start flex-col w-full bg-orange-500 shadow-lg shadow-orange-500/50 text-white py-1 px-2 rounded-sm">
-                        <span>Hello</span>
-                      </div>
-                    </div>
-                  </div>
-                  {/* );
-                      } else {
-                        return (
-                          <div
-                            // ref={scrollRef}
-                            key={i}
-                            className="w-full flex justify-end items-center"
-                          >
-                            <div className="flex justify-start items-start gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]">
-                              <div className="flex justify-center items-start flex-col w-full bg-blue-500 shadow-lg shadow-blue-500/50 text-white py-1 px-2 rounded-sm">
-                                <span>{m.message}</span>
-                              </div>
-                              <div>
-                                <img
-                                  className="w-[38px] h-[38px] border-2 border-white rounded-full max-w-[38px] p-[3px]"
-                                  src="http://localhost:3001/images/admin.jpg"
-                                  alt=""
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      }
-                    })
-                  ) : ( */}
-                  {/* <div className="w-full h-full flex justify-center items-center flex-col gap-2 text-white">
-                    <span>
-                      <BsEmojiSmile />
-                    </span>
-                    <span>Select Customer</span>
-                  </div> */}
-                  {/* )} */}
+                <div
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(rgba(0, 5, 0, 0.6), rgba(0, 0, 7, 0.6)), url("https://www.shutterstock.com/image-vector/social-media-sketch-vector-seamless-600nw-1660950727.jpg")',
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                  }}
+                  className="bg-whit bg-blend-darken text-slate-800 h-[calc(100vh-290px)] rounded-md p-3 overflow-y-auto"
+                >
+
+                  
+
+
+
+
+
+
+
                 </div>
               </div>
+
+
+
+
               <form className="flex gap-3">
                 <input
-                  //   readOnly={customerId ? false : true}
-                  //   onChange={(e) => setText(e.target.value)}
-                  //   value={text}
                   className="w-full flex justify-between px-2 border border-slate-700 items-center py-[5px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6]"
                   type="text"
                   placeholder="Type your message"
                 />
-                <button
-                  //   disabled={customerId ? false : true}
-                  className="shadow-lg bg-violet-500 hover:shadow-cyan-500/50 text-semibold w-[75px] h-[35px] rounded-md text-white flex justify-center items-center"
-                >
+                <button className="shadow-lg bg-violet-500 hover:shadow-cyan-500/50 text-semibold w-[75px] h-[35px] rounded-md text-white flex justify-center items-center">
                   Send
                 </button>
               </form>

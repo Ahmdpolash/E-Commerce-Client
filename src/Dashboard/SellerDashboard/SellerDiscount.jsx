@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 
 const SellerDiscount = () => {
   const { data, refetch } = useSellerProduct();
+
   const axiosPublic = useAxiosPublic();
-  console.log(data);
   useEffect(() => {
     // Fetch data when component mounts
   }, []);
