@@ -11,9 +11,10 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import useProducts from "../../Hooks/useProducts";
 import { SwiperBtn } from "../../Components/SwiperBtn";
+import GridSlideSkeleton from "../../Components/Skeleton/GridSlideSkeleton";
 
 const GridProduct = () => {
-  const { data } = useProducts();
+  const { data, isLoading } = useProducts();
 
   return (
     <div className="bg-[#F1F1F1]">
@@ -38,6 +39,9 @@ const GridProduct = () => {
 
                         <SwiperBtn />
                       </div>
+
+                      <GridSlideSkeleton isLoading={isLoading} />
+
                       {data?.slice(0, 4).map((p, i) => (
                         <div key={i} className="mb-3 flex gap-3 border-b pb-2">
                           <img
@@ -66,8 +70,11 @@ const GridProduct = () => {
 
                         <SwiperBtn />
                       </div>
+
+                      <GridSlideSkeleton isLoading={isLoading} />
+
                       {data?.slice(5, 9).map((p, i) => (
-                        <div className="mb-3 flex gap-3 border-b pb-2">
+                        <div key={i} className="mb-3 flex gap-3 border-b pb-2">
                           <img
                             className="w-[100px] rounded-md"
                             src={p?.images[0]}
@@ -108,8 +115,10 @@ const GridProduct = () => {
 
                         <SwiperBtn />
                       </div>
-                      {data?.slice(8,12).map((p, i) => (
-                        <div className="mb-3 flex gap-3 border-b pb-2">
+                      <GridSlideSkeleton isLoading={isLoading}/>
+
+                      {data?.slice(8, 12).map((p, i) => (
+                        <div key={i} className="mb-3 flex gap-3 border-b pb-2">
                           <img
                             className="w-[100px] rounded-md"
                             src={p?.images[0]}
@@ -136,8 +145,10 @@ const GridProduct = () => {
 
                         <SwiperBtn />
                       </div>
+                      <GridSlideSkeleton isLoading={isLoading}/>
+
                       {data?.slice(8, 12).map((p, i) => (
-                        <div className="mb-3 flex gap-3 border-b pb-2">
+                        <div key={i} className="mb-3 flex gap-3 border-b pb-2">
                           <img
                             className="w-[100px] rounded-md"
                             src={p?.images[0]}
@@ -159,7 +170,6 @@ const GridProduct = () => {
                 </div>
               </Swiper>
             </div>
-
 
             <div className="bg-white px-4 py-2 rounded-md">
               <Swiper
@@ -179,8 +189,10 @@ const GridProduct = () => {
 
                         <SwiperBtn />
                       </div>
-                      {data?.slice(2,6).map((p, i) => (
-                        <div className="mb-3 flex gap-3 border-b pb-2">
+                      <GridSlideSkeleton isLoading={isLoading}/>
+
+                      {data?.slice(2, 6).map((p, i) => (
+                        <div key={i} className="mb-3 flex gap-3 border-b pb-2">
                           <img
                             className="w-[100px] rounded-md"
                             src={p?.images[0]}
@@ -202,13 +214,15 @@ const GridProduct = () => {
                     <SwiperSlide className="relative w-max flex flex-col">
                       <div className="flex mb-4 border-slate-300 border-b justify-between">
                         <h1 className="pb-2 text-slate-700 text-[18px] font-semibold">
-                        Discount Product
+                          Discount Product
                         </h1>
 
                         <SwiperBtn />
                       </div>
+                      <GridSlideSkeleton isLoading={isLoading}/>
+
                       {data?.slice(7, 11).map((p, i) => (
-                        <div className="mb-3 flex gap-3 border-b pb-2">
+                        <div key={i} className="mb-3 flex gap-3 border-b pb-2">
                           <img
                             className="w-[100px] rounded-md"
                             src={p?.images[0]}
@@ -230,9 +244,6 @@ const GridProduct = () => {
                 </div>
               </Swiper>
             </div>
-
-
-
           </div>
         </Container>
       </div>

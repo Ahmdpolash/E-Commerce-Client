@@ -31,6 +31,7 @@ import Pagination from "../../Components/Pagination";
 import { Helmet } from "react-helmet";
 import useProducts from "../../Hooks/useProducts";
 import Ratings from "../../Components/Ratings";
+import useCategory from "../../Hooks/useCategory";
 
 const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 15500]); // Initial price range
@@ -72,9 +73,9 @@ const Shop = () => {
     setOpen(false);
   };
 
-  //!filtering================================================
+  //!================================================filtering================================================
+  const { data, isLoading } = useProducts([]);
   const [products, setProducts] = useState([]);
-  const { data, isLoading } = useProducts();
 
   const location = useLocation();
   const category = new URLSearchParams(location.search).get("category");
@@ -88,7 +89,57 @@ const Shop = () => {
     } else {
       setProducts(data);
     }
-  }, [category, data]);
+  }, [category,data]);
+
+  //! category filtering
+  const { data: categoryItem } = useCategory();
+
+  // const [cateFilter, setCateFilter] = useState("");
+
+  // useEffect(() => {
+  //   if (cateFilter) {
+  //     const filterProduct = data?.filter(
+  //       (product) => product?.category === cateFilter
+  //     );
+  //     console.log("ff", filterProduct);
+  //     setProducts(filterProduct);
+  //   } else {
+  //     setProducts(data);
+  //   }
+  // }, [cateFilter, data]);
+
+  //!color filtering
+
+  const colors = [
+    "White",
+    "Black",
+    "Red",
+    "Green",
+    "Blue",
+    "Silver",
+    "Yellow",
+    "Purple",
+    "Gray",
+  ];
+
+  const [color, setColor] = useState("");
+  // console.log(color);
+  // useEffect(() => {
+  //   if (color) {
+  //     const filterProduct = data?.filter((product) => product?.color === color);
+  //     setProducts(filterProduct);
+  //   } else {
+  //     setProducts(data);
+  //   }
+  // }, [color, data]);
+
+  const handleClear = () => {
+    // setProducts(data);
+  };
+
+  useEffect(() => {
+    scroll(0, 0);
+  }, []);
 
   return (
     <div className="bg-[#F6F6F5]">
@@ -124,248 +175,75 @@ const Shop = () => {
               <h1 className="text-xl text-gray-600 font-semibold ">
                 Categories
               </h1>
-              <h2 className="text-gray-600 font-semibold">Clear</h2>
+              <h2
+                onClick={handleClear}
+                className="cursor-pointer text-gray-600 font-semibold"
+              >
+                Clear
+              </h2>
             </div>
 
-            <div className="py-3 space-y-2 pl-1">
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
+            {/* <div className="py-3 space-y-2 pl-1">
+              {categorItem?.map((cate, idx) => (
+                <div key={idx} className="flex  items-center gap-2">
+                  <div>
+                    <label className="container">
+                      <input
+                        // onChange={(e) => setCateFilter(e.target.value)}
+                        value={cate?.category}
+                        type="checkbox"
+                      />
+                      <svg className="w-4 h-4" viewBox="0 0 64 64">
+                        <path
+                          d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                          pathLength="575.0541381835938"
+                          class="path"
+                        ></path>
+                      </svg>
+                    </label>
+                  </div>
+
+                  <h3 className="text-gray-700 text-[17px]">{cate.category}</h3>
                 </div>
-
-                <h3 className="text-gray-700 text-[17px]">Phones</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Tablet</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Laptops</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Shoes</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Watches</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Clothing</h3>
-              </div>
-
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Pants</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">T-Shirt</h3>
-              </div>
-            </div>
+              ))}
+            </div> */}
             {/* categories end*/}
 
             {/* colors */}
 
             <div className="flex justify-between border-b-2 border-gray-200  py-1 items-center">
               <h1 className="text-xl text-gray-600 font-semibold ">Colors</h1>
-              <h2 className="text-gray-600 font-semibold">Clear</h2>
+              <h2
+                onClick={handleClear}
+                className="text-gray-600 cursor-pointer font-semibold"
+              >
+                Clear
+              </h2>
             </div>
 
             <div className="py-3 space-y-2 pl-1">
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
+              {colors?.map((item, idx) => (
+                <div key={idx} className="flex  items-center gap-2">
+                  <div>
+                    <label className="container">
+                      <input
+                        // onChange={(e) => setColor(e.target.value)}
+                        value={item}
+                        type="checkbox"
+                      />
+                      <svg className="w-4 h-4" viewBox="0 0 64 64">
+                        <path
+                          d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                          pathLength="575.0541381835938"
+                          class="path"
+                        ></path>
+                      </svg>
+                    </label>
+                  </div>
+
+                  <h3 className="text-gray-700 text-[17px]">{item}</h3>
                 </div>
-
-                <h3 className="text-gray-700 text-[17px]">White</h3>
-              </div>
-
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Red</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Blue</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Green</h3>
-              </div>
-
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Pink</h3>
-              </div>
-              <div className="flex  items-center gap-2">
-                <div>
-                  <label className="container">
-                    <input type="checkbox" />
-                    <svg className="w-4 h-4" viewBox="0 0 64 64">
-                      <path
-                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                        pathLength="575.0541381835938"
-                        class="path"
-                      ></path>
-                    </svg>
-                  </label>
-                </div>
-
-                <h3 className="text-gray-700 text-[17px]">Silver</h3>
-              </div>
+              ))}
             </div>
 
             {/* colors end */}

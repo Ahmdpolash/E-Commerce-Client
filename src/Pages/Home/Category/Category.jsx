@@ -8,6 +8,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi"; // Import your i
 import { Link } from "react-router-dom";
 
 import useCategory from "../../../Hooks/useCategory";
+import CategorySkeleton from "../../../Components/Skeleton/CategorySkeleton";
 
 const CustomPrevArrow = ({ onClick }) => (
   <div
@@ -86,12 +87,17 @@ const Category = () => {
       <div className="py-4 px-4 lg:px-16 overflow-hidden">
         {/* <h1 className="font-semibold text-2xl mb-2 uppercase flex gap-2 items-center">Categories <FaArrowRight/> </h1>{" "} */}
 
+        <CategorySkeleton isLoading={isLoading} />
         <Slider
           className="grid bg-gay-200 px-3 py-6 grid-cols-2  md:grid-cols-4 lg:grid-cols-7"
           {...settings}
         >
+          
           {data?.map((category, idx) => (
-            <Link to={`/shop?category=${category?.category}`}>
+            <Link key={idx}
+              className="bg-slate-100 p-4"
+              to={`/shop?category=${category?.category}`}
+            >
               <div key={idx}>
                 <div className="bg-[#fff] relative shadow-md  hover:border hover:border-red-400 hover:duration-300  border h-[140px] w-[90%] rounded-md">
                   <div className="text-center  mx-auto p- w-[90]">
@@ -103,7 +109,7 @@ const Category = () => {
                   </div>
                 </div>
                 <p className="text-center font-medium mt-1">
-                  {category?.category} (5){" "}
+                  {category?.category}
                 </p>
               </div>
             </Link>
