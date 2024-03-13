@@ -75,10 +75,13 @@ const Shop = () => {
 
   //!================================================filtering================================================
   const { data, isLoading } = useProducts([]);
+  const { data: categoryItem } = useCategory();
+
   const [products, setProducts] = useState([]);
 
   const location = useLocation();
   const category = new URLSearchParams(location.search).get("category");
+  const [cateFilter, setCateFilter] = useState("");
 
   useEffect(() => {
     if (category) {
@@ -89,24 +92,25 @@ const Shop = () => {
     } else {
       setProducts(data);
     }
-  }, [category,data]);
+  }, [category, data]);
 
-  //! category filtering
-  const { data: categoryItem } = useCategory();
-
-  // const [cateFilter, setCateFilter] = useState("");
 
   // useEffect(() => {
   //   if (cateFilter) {
   //     const filterProduct = data?.filter(
   //       (product) => product?.category === cateFilter
   //     );
-  //     console.log("ff", filterProduct);
-  //     setProducts(filterProduct);
+  //     setProducts(...filterProduct);
   //   } else {
   //     setProducts(data);
   //   }
   // }, [cateFilter, data]);
+
+
+
+
+
+  //! category filtering
 
   //!color filtering
 
@@ -134,7 +138,7 @@ const Shop = () => {
   // }, [color, data]);
 
   const handleClear = () => {
-    // setProducts(data);
+    setProducts(data);
   };
 
   useEffect(() => {
@@ -183,13 +187,13 @@ const Shop = () => {
               </h2>
             </div>
 
-            {/* <div className="py-3 space-y-2 pl-1">
-              {categorItem?.map((cate, idx) => (
+            <div className="py-3 space-y-2 pl-1">
+              {categoryItem?.map((cate, idx) => (
                 <div key={idx} className="flex  items-center gap-2">
                   <div>
                     <label className="container">
                       <input
-                        // onChange={(e) => setCateFilter(e.target.value)}
+                        onChange={(e) => setCateFilter(e.target.value)}
                         value={cate?.category}
                         type="checkbox"
                       />
@@ -206,7 +210,7 @@ const Shop = () => {
                   <h3 className="text-gray-700 text-[17px]">{cate.category}</h3>
                 </div>
               ))}
-            </div> */}
+            </div>
             {/* categories end*/}
 
             {/* colors */}
