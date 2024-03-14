@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { FaAngleRight, FaChevronRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../../Components/Container/Container";
 // import banner from '../../../public/banner/card.jpg'
 import toast from "react-hot-toast";
@@ -103,6 +103,19 @@ const Cart = () => {
   useEffect(() => {
     scroll(0, 0);
   }, []);
+
+  //redirect to checkout page :
+  const navigate = useNavigate();
+  const redirectCheckout = () => {
+    navigate("/checkout", {
+      state: {
+        products: [],
+        price: 500,
+        shipping: 450,
+        items: 4,
+      },
+    });
+  };
 
   return (
     <div>
@@ -301,7 +314,10 @@ const Cart = () => {
                     ${subTotal - (subTotal / 100) * totalDiscount}
                   </p>
                 </div>
-                <button className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#F85606] mt-4 rounded-md ">
+                <button
+                  onClick={redirectCheckout}
+                  className="py-2 lg:py-3 w-full text-[15px] text-white font-semibold cursor-pointer uppercase bg-[#F85606] mt-4 rounded-md "
+                >
                   Proceed to Checkout{" "}
                 </button>
               </div>

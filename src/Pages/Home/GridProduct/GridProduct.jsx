@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "../../Components/Container/Container";
+import Container from "../../../Components/Container/Container";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -9,9 +9,9 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import useProducts from "../../Hooks/useProducts";
-import { SwiperBtn } from "../../Components/SwiperBtn";
-import GridSlideSkeleton from "../../Components/Skeleton/GridSlideSkeleton";
+import useProducts from "../../../Hooks/useProducts";
+import { SwiperBtn } from "../../../Components/SwiperBtn";
+import GridSlideSkeleton from "../../../Components/Skeleton/GridSlideSkeleton";
 
 const GridProduct = () => {
   const { data, isLoading } = useProducts();

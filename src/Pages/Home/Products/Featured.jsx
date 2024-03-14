@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Container from "../../../Components/Container/Container";
 import { FaArrowCircleRight, FaArrowRight, FaEye } from "react-icons/fa";
-import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { FaBangladeshiTakaSign, FaPlus } from "react-icons/fa6";
 
 import { AiFillHeart, AiOutlineShoppingCart } from "react-icons/ai";
 
@@ -134,7 +134,7 @@ const Featured = () => {
             {data?.slice(0, 5)?.map((product, i) => (
               <div
                 key={product?._id}
-                className="card lg:h-[365px] bg-white  cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3"
+                className="card lg:h-[365px] bg-white  hover:-translate-y-2 duration-400 cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3"
               >
                 <div className="relative overflow-hidden">
                   {product?.discount ? (
@@ -190,7 +190,7 @@ const Featured = () => {
                   </div>
 
                   <div className="pb-1 flex items-center justify-between">
-                    <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
+                    <p className="font-semibold flex items-center gap-1 text-red-500  pb-2 transition-all duration-500 lg:mt-2">
                       <FaBangladeshiTakaSign /> {product?.price}
                     </p>
                     <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
@@ -200,12 +200,9 @@ const Featured = () => {
 
                     <div
                       onClick={() => handleAddToCart(product)}
-                      className="bg-gray-50 lg:flex hidden items-center gap-2 text-red-500 border border-slate-300 py-[5px]  hover:border hover:duration-500 hover:border-red-500 rounded-full px-2 lg:px-4 text-[13px] font-semibold"
+                      className="bg-gray-50 lg:flex hidden items-center hover:bg-red-600 hover:text-white duration-700 justify-center gap-2 text-red-500 border border-red-400  hover:border hover:duration-500 hover:border-red-500 shadow-md rounded-md h-6 shadow-red-400/50 w-6  text-[13px] font-semibold"
                     >
-                      Add To Cart
-                      <span>
-                        <FaArrowRight />
-                      </span>
+                      <FaPlus className="text-[18xpx]" />
                     </div>
                   </div>
                 </div>

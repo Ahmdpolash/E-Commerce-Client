@@ -8,7 +8,6 @@ import Register from "../Pages/Register/Register";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import SellerRegistration from "../Pages/SellerAccount/SellerRegistration";
-import Bookmarks from "../Pages/Bookmarks/Bookmarks";
 import Compare from "../Pages/Compare/Compare";
 import Cart from "../Pages/Cart/Cart";
 import Checkout from "../Pages/Checkout/Checkout";
@@ -65,11 +64,9 @@ const Route = createBrowserRouter([
         element: <ProductDetails />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/products/details/${params.id}`),
+        // fetch(`https://ecommerce-server-side.vercel.app/products/details/${params.id}`),
       },
-      {
-        path: "/my-bookmarks",
-        element: <Bookmarks />,
-      },
+
       {
         path: "/compare",
         element: <Compare />,
@@ -189,6 +186,7 @@ const Route = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/products/${params.id}`),
+        // fetch(`https://ecommerce-server-side.vercel.app/products/${params.id}`),
       },
       {
         path: "customer-orders",
@@ -215,6 +213,7 @@ const Route = createBrowserRouter([
         element: <UpdateProduct />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/products/${params.id}`),
+        // fetch(`https://ecommerce-server-side.vercel.app/products/products/${params.id}`),
       },
 
       // admin route start here
