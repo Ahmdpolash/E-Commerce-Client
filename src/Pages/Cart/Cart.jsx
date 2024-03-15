@@ -109,7 +109,7 @@ const Cart = () => {
   const redirectCheckout = () => {
     navigate("/checkout", {
       state: {
-        products: [],
+        products: products,
         price: 500,
         shipping: 450,
         items: 4,
@@ -143,6 +143,8 @@ const Cart = () => {
       <section className="bg-[#eeeeee]">
         <Container>
           <div className="grid grid-cols-1 py-4 lg:grid-cols-4 gap- lg:gap-4">
+
+            
             <div className="col-span-3 bgw w-full ">
               {data?.length > 0 ? (
                 <div>
@@ -282,6 +284,9 @@ const Cart = () => {
                 </div>
               )}
             </div>
+
+
+
 
             <div className="col-span-1 lg:h-[470px] bg-white border shadow-md w-full px-6 py-3">
               <h2 className="font-bold text-slate-700 py-2 text-2xl">
