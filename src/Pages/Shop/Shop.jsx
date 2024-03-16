@@ -73,44 +73,33 @@ const Shop = () => {
     setOpen(false);
   };
 
+  // const location = useLocation();
+  // const category = new URLSearchParams(location.search).get("category");
+
   //!================================================filtering================================================
   const { data, isLoading } = useProducts([]);
   const { data: categoryItem } = useCategory();
 
-  const [products, setProducts] = useState([]);
-
-  const location = useLocation();
-  const category = new URLSearchParams(location.search).get("category");
-  const [cateFilter, setCateFilter] = useState("");
+  const [category, setCategory] = useState("");
+  const [ratings, setRatings] = useState("");
+  const [sortPrice, setSortPrice] = useState("");
+  //! category filtering
+  const queryCategory = (e, value) => {
+    if (e.target.checked) {
+      setCategory(value);
+    } else {
+      setCategory("");
+    }
+  };
 
   useEffect(() => {
-    if (category) {
-      const filterProduct = data?.filter(
-        (product) => product?.category === category
-      );
-      setProducts(filterProduct);
-    } else {
-      setProducts(data);
-    }
-  }, [category, data]);
 
 
-  // useEffect(() => {
-  //   if (cateFilter) {
-  //     const filterProduct = data?.filter(
-  //       (product) => product?.category === cateFilter
-  //     );
-  //     setProducts(...filterProduct);
-  //   } else {
-  //     setProducts(data);
-  //   }
-  // }, [cateFilter, data]);
+    
 
 
 
-
-
-  //! category filtering
+  }, [ratings, category, sortPrice]);
 
   //!color filtering
 
@@ -125,21 +114,6 @@ const Shop = () => {
     "Purple",
     "Gray",
   ];
-
-  const [color, setColor] = useState("");
-  // console.log(color);
-  // useEffect(() => {
-  //   if (color) {
-  //     const filterProduct = data?.filter((product) => product?.color === color);
-  //     setProducts(filterProduct);
-  //   } else {
-  //     setProducts(data);
-  //   }
-  // }, [color, data]);
-
-  const handleClear = () => {
-    setProducts(data);
-  };
 
   useEffect(() => {
     scroll(0, 0);
@@ -179,10 +153,7 @@ const Shop = () => {
               <h1 className="text-xl text-gray-600 font-semibold ">
                 Categories
               </h1>
-              <h2
-                onClick={handleClear}
-                className="cursor-pointer text-gray-600 font-semibold"
-              >
+              <h2 className="cursor-pointer text-gray-600 font-semibold">
                 Clear
               </h2>
             </div>
@@ -193,7 +164,8 @@ const Shop = () => {
                   <div>
                     <label className="container">
                       <input
-                        onChange={(e) => setCateFilter(e.target.value)}
+                        checked={category === cate.category ? true : false}
+                        onChange={(e) => queryCategory(e, cate.category)}
                         value={cate?.category}
                         type="checkbox"
                       />
@@ -217,10 +189,7 @@ const Shop = () => {
 
             <div className="flex justify-between border-b-2 border-gray-200  py-1 items-center">
               <h1 className="text-xl text-gray-600 font-semibold ">Colors</h1>
-              <h2
-                onClick={handleClear}
-                className="text-gray-600 cursor-pointer font-semibold"
-              >
+              <h2 className="text-gray-600 cursor-pointer font-semibold">
                 Clear
               </h2>
             </div>
@@ -293,42 +262,42 @@ const Shop = () => {
               <h1 className="text-xl mb-3 border-b-2 border-gray-200 py-1 text-[#4b5563] font-semibold">
                 Rating
               </h1>
-              <div className="flex gap-3 mb-2">
+              <div onClick={() => setRatings(5)} className="flex gap-3 mb-2">
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div className="flex gap-3 mb-2">
+              <div onClick={() => setRatings(4)} className="flex gap-3 mb-2">
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div className="flex gap-3 mb-2">
+              <div onClick={() => setRatings(3)} className="flex gap-3 mb-2">
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div className="flex gap-3 mb-2">
+              <div onClick={() => setRatings(2)} className="flex gap-3 mb-2">
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div className="flex gap-3 mb-2">
+              <div onClick={() => setRatings(1)} className="flex gap-3 mb-2">
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div className="flex gap-3">
+              <div onClick={() => setRatings(0)} className="flex gap-3">
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
@@ -658,12 +627,13 @@ const Shop = () => {
                 </h2>
                 <div className="flex gap-2 lg:gap-4 items-center">
                   <select
+                    onChange={(e) => setSortPrice(e.target.value)}
                     className="border outline-none py-1 text-center shadow-md border-gray-300"
                     name=""
                   >
                     <option value="">Sort By</option>
-                    <option value="Hight to Low">Price High to Low</option>
-                    <option value="Low to High">Price Low to High</option>
+                    <option value="low-to-high">Low to High Price</option>
+                    <option value="high-to-low">High to Low Price</option>
                   </select>
 
                   <span
@@ -696,7 +666,7 @@ const Shop = () => {
                   : "grid-cols-1 "
               } gap-3   `}
             >
-              {products?.map((product, i) => (
+              {data?.map((product, i) => (
                 <div
                   key={product?._id}
                   className="card lg:h-[365px] bg-white  cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3"

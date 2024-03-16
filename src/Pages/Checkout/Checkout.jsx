@@ -8,7 +8,9 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   const { state } = useLocation();
-  const { products } = state;
+
+  console.log("dd", state);
+  const { products, shipping_fee, items, price } = state;
 
   const [res, setRes] = useState(false);
   const [states, setState] = useState();
@@ -202,13 +204,11 @@ const Checkout = () => {
                         </p>
                       </div>
 
-                    
                       <div className="mt-6">
                         {products?.map((item, idx) => (
                           <div key={item._id} className="w-full ">
                             <div className="flex flex-wrap  gap-2 border-b border-slate-300 py-1 mb-2 justify-between items-center">
                               <div className="flex gap-2 flex-wrap items-center">
-                                
                                 <img
                                   className="w-[70px] h-[70px] rounded-md"
                                   src={item?.images[0]}
@@ -246,8 +246,6 @@ const Checkout = () => {
                                   </p>
                                 </div>
                               </div>
-
-                              
                             </div>
                           </div>
                         ))}
@@ -263,30 +261,25 @@ const Checkout = () => {
                 <div className="bg-white font-medium p-5 text-slate-600 border border-[#F85606] border-dashed flex flex-col gap-3">
                   <h2 className="text-xl font-semibold">Order Summary</h2>
                   <div className="flex justify-between items-center">
-                    <span>Items Total()</span>
-                    <span>$</span>
+                    <span>Total Items</span>
+                    <span>({items})</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span>Discount</span>
-                    <span>$</span>
-                  </div>
+
                   <div className="flex justify-between items-center">
                     <span>Delivery Fee</span>
-                    <span>$</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Shipping Fee</span>
-                    <span>$</span>
+                    <span>${shipping_fee}</span>
                   </div>
 
                   <div className="flex justify-between items-center">
                     <span>Total Payment</span>
-                    <span>$</span>
+                    <span>${price}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Total</span>
-                    <span>$</span>
+                    <span>${price + shipping_fee}</span>
                   </div>
+                  <span className="text-[11px] text-right text-orange-600">(delivery fee + total price)</span>
+
                   <button
                     disabled={res ? false : true}
                     className={`px-5 py-[6px] rounded-sm hover:shadow-orange-500/20 hover:shadow-lg ${

@@ -45,6 +45,8 @@ const Cart = () => {
     return acc;
   }, {});
 
+  console.log(groupedProducts);
+
   //cart quantity increment
 
   const handleIncrease = (productId) => {
@@ -106,13 +108,14 @@ const Cart = () => {
 
   //redirect to checkout page :
   const navigate = useNavigate();
+  const uniqueSeller = Object.keys(groupedProducts).length;
   const redirectCheckout = () => {
     navigate("/checkout", {
       state: {
         products: products,
-        price: 500,
-        shipping: 450,
-        items: 4,
+        price: subTotal,
+        shipping_fee: 70 * uniqueSeller,
+        items: products.length,
       },
     });
   };
@@ -143,8 +146,6 @@ const Cart = () => {
       <section className="bg-[#eeeeee]">
         <Container>
           <div className="grid grid-cols-1 py-4 lg:grid-cols-4 gap- lg:gap-4">
-
-            
             <div className="col-span-3 bgw w-full ">
               {data?.length > 0 ? (
                 <div>
@@ -285,9 +286,6 @@ const Cart = () => {
               )}
             </div>
 
-
-
-
             <div className="col-span-1 lg:h-[470px] bg-white border shadow-md w-full px-6 py-3">
               <h2 className="font-bold text-slate-700 py-2 text-2xl">
                 Cart Totals
@@ -303,13 +301,13 @@ const Cart = () => {
                   <p className="text-[#5F6C72] font-normal text-[18px]">
                     Shipping
                   </p>
-                  <p className="text-[16px] font-semibold">Free</p>
+                  <p className="text-[16px] font-semibold">${70 * uniqueSeller}</p>
                 </div>
                 <div className="flex  justify-between item-center border-b-2 border-slate-200 pt-1 pb-3">
                   <p className="text-[#5F6C72] font-normal text-[18px]">
                     Discount
                   </p>
-                  <p className="text-[16px] font-semibold">${totalDiscount}</p>
+                  <p className="text-[16px] font-semibold">{totalDiscount}%</p>
                 </div>
                 <div className="flex py-1 justify-between item-center">
                   <p className="text-[#5F6C72] font-semibold text-[18px]">
