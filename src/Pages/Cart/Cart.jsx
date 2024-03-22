@@ -108,7 +108,9 @@ const Cart = () => {
 
   //redirect to checkout page :
   const navigate = useNavigate();
-  const uniqueSeller = Object.keys(groupedProducts).length;
+  // const uniqueSeller = Object?.keys(groupedProducts)?.length;
+  const uniqueSeller = groupedProducts ? Object.keys(groupedProducts).length : 0;
+
   const redirectCheckout = () => {
     navigate("/checkout", {
       state: {

@@ -9,7 +9,6 @@ const Checkout = () => {
 
   const { state } = useLocation();
 
-  console.log("dd", state);
   const { products, shipping_fee, items, price } = state;
 
   const [res, setRes] = useState(false);
@@ -20,6 +19,8 @@ const Checkout = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+   console.log(states);
   const save = (e) => {
     e.preventDefault();
     setRes(true);
@@ -84,6 +85,9 @@ const Checkout = () => {
                             />
                           </div>
                         </div>
+
+                        
+                        
                         <div className="flex flex-col lg:flex-row gap-2 md:gap-4 lg:gap-5 w-full text-slate-600">
                           <div className="flex flex-col gap-1 mb-2 w-full">
                             <label htmlFor="phone">Phone</label>
@@ -110,7 +114,7 @@ const Checkout = () => {
                         </div>
                         <div className="flex flex-col lg:flex-row gap-2 md:gap-4 lg:gap-5 w-full text-slate-600">
                           <div className="flex flex-col gap-1 mb-2 w-full">
-                            <label htmlFor="province">Province</label>
+                            <label htmlFor="province">Province/State</label>
                             <input
                               onChange={inputHandle}
                               type="text"
@@ -181,15 +185,15 @@ const Checkout = () => {
                     <>
                       <div className="flex flex-col gap-1">
                         <h2 className="text-slate-600 font-semibold pb-2">
-                          Deliver to {state.name}
+                          Deliver to {states.name}
                         </h2>
                         <p>
                           <span className="bg-blue-200 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
                             Home
                           </span>
                           <span className="text-slate-600 text-sm">
-                            {state.address} {state.province} {state.city}{" "}
-                            {state.area}
+                            {states.address} {states.province} {states.city}{" "}
+                            {states.area}
                           </span>
                           <span
                             onClick={() => setRes(false)}
@@ -200,7 +204,7 @@ const Checkout = () => {
                           </span>
                         </p>
                         <p className="text-slate-600 text-sm">
-                          Email to sheikhfarid@gmail.com
+                          Email to {states.emailc}
                         </p>
                       </div>
 
@@ -278,7 +282,9 @@ const Checkout = () => {
                     <span>Total</span>
                     <span>${price + shipping_fee}</span>
                   </div>
-                  <span className="text-[11px] text-right text-orange-600">(delivery fee + total price)</span>
+                  <span className="text-[11px] text-right text-orange-600">
+                    (delivery fee + total price)
+                  </span>
 
                   <button
                     disabled={res ? false : true}

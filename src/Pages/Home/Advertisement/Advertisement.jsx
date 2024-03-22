@@ -3,6 +3,7 @@ import Container from "../../../Components/Container/Container";
 
 const Advertisement = () => {
   return (
+
     <div className="bg-[#F1F1F1] pb-4">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -24,6 +25,8 @@ const Advertisement = () => {
         </div>
       </Container>
     </div>
+
+
   );
 };
 
