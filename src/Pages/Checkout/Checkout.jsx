@@ -20,7 +20,7 @@ const Checkout = () => {
     });
   };
 
-   console.log(states);
+  console.log(states);
   const save = (e) => {
     e.preventDefault();
     setRes(true);
@@ -86,8 +86,6 @@ const Checkout = () => {
                           </div>
                         </div>
 
-                        
-                        
                         <div className="flex flex-col lg:flex-row gap-2 md:gap-4 lg:gap-5 w-full text-slate-600">
                           <div className="flex flex-col gap-1 mb-2 w-full">
                             <label htmlFor="phone">Phone</label>

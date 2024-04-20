@@ -44,6 +44,7 @@ import AddProduct from "../Dashboard/SellerDashboard/AddProduct";
 import SecureSeller from "./SecureSeller";
 import UpdateProduct from "../Dashboard/SellerDashboard/UpdateProduct";
 import DiscountUpdate from "../Dashboard/SellerDashboard/DiscountUpdate";
+import Payment from "../Pages/Payment/Payment";
 
 const Route = createBrowserRouter([
   {
@@ -103,6 +104,10 @@ const Route = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
       },
     ],
   },

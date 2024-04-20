@@ -26,12 +26,18 @@ import { IoGrid } from "react-icons/io5";
 import { AiFillHeart, AiOutlineShoppingCart } from "react-icons/ai";
 
 import "rc-slider/assets/index.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Pagination from "../../Components/Pagination";
 import { Helmet } from "react-helmet";
 import useProducts from "../../Hooks/useProducts";
 import Ratings from "../../Components/Ratings";
 import useCategory from "../../Hooks/useCategory";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useCart from "../../Hooks/useCart";
+import useWishlist from "../../Hooks/useWishlist";
 
 const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 15500]); // Initial price range
@@ -80,27 +86,6 @@ const Shop = () => {
   const { data, isLoading } = useProducts([]);
   const { data: categoryItem } = useCategory();
 
-  const [category, setCategory] = useState("");
-  const [ratings, setRatings] = useState("");
-  const [sortPrice, setSortPrice] = useState("");
-  //! category filtering
-  const queryCategory = (e, value) => {
-    if (e.target.checked) {
-      setCategory(value);
-    } else {
-      setCategory("");
-    }
-  };
-
-  useEffect(() => {
-
-
-    
-
-
-
-  }, [ratings, category, sortPrice]);
-
   //!color filtering
 
   const colors = [
@@ -118,6 +103,108 @@ const Shop = () => {
   useEffect(() => {
     scroll(0, 0);
   }, []);
+
+  // add to cart and wishlist funciton
+  const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  const { refetch } = useCart();
+  const { refetch: reload } = useWishlist();
+
+  const handleAddToCart = (product) => {
+    console.log(product);
+
+    if (user) {
+      const cartItem = {
+        productId: product?._id,
+        email: user.email,
+        quantity: 1,
+        product_name: product?.product_name,
+        discount: product?.discount,
+        images: product?.images,
+        brand: product?.brand,
+        shop_name: product?.shopName,
+        price: product?.price,
+        stock: product?.stock,
+        shop_logo: product?.shopLogo,
+      };
+
+      axiosPublic
+        .post("/carts", cartItem)
+
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.message === "Product already added") {
+            toast.error(`This Product already in your cart 🙄`);
+          } else {
+            refetch();
+
+            toast.success("Product Added successfully..✅");
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "You are not logged In",
+        text: "Please Login to add to the cart !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
+  const handleAddToWishlist = (product) => {
+    console.log(product);
+
+    if (user) {
+      const cartItem = {
+        productId: product?._id,
+        email: user.email,
+        product_name: product?.product_name,
+        discount: product?.discount,
+
+        images: product?.images,
+        brand: product?.brand,
+        shop_name: product?.shopName,
+        price: product?.price,
+        stock: product?.stock,
+        shop_logo: product?.shopLogo,
+      };
+
+      axiosPublic
+        .post("/wishlists", cartItem)
+
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.message === "Product already added") {
+            toast.error(`This Product already in your Wishlist 🙄`);
+          } else {
+            reload();
+            toast.success("Wishlist Added Successfully 😊");
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "You are not logged In",
+        text: "Please Login to add to the cart !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
 
   return (
     <div className="bg-[#F6F6F5]">
@@ -164,8 +251,7 @@ const Shop = () => {
                   <div>
                     <label className="container">
                       <input
-                        checked={category === cate.category ? true : false}
-                        onChange={(e) => queryCategory(e, cate.category)}
+                       
                         value={cate?.category}
                         type="checkbox"
                       />

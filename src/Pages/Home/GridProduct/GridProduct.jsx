@@ -12,6 +12,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import useProducts from "../../../Hooks/useProducts";
 import { SwiperBtn } from "../../../Components/SwiperBtn";
 import GridSlideSkeleton from "../../../Components/Skeleton/GridSlideSkeleton";
+import { Link } from "react-router-dom";
 
 const GridProduct = () => {
   const { data, isLoading } = useProducts();
@@ -20,7 +21,7 @@ const GridProduct = () => {
     <div className="bg-[#F1F1F1]">
       <div className="py-6 lg:py-7">
         <Container>
-          <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6">
+          <div className="grid cursor-pointer grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6">
             <div className="bg-white px-4 py-2 rounded-md">
               <Swiper
                 spaceBetween={10}
@@ -49,7 +50,7 @@ const GridProduct = () => {
                             src={p?.images[0]}
                             alt=""
                           />
-                          <div>
+                          <Link to={`/details/${p?._id}`}>
                             <h1 className="text-[16px] text-slate-700 font-normal">
                               {p.product_name}
                             </h1>
@@ -57,7 +58,7 @@ const GridProduct = () => {
                             <h1 className="font-medium text-slate-700 text-[18px]">
                               ${p.price}
                             </h1>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </SwiperSlide>
@@ -80,7 +81,7 @@ const GridProduct = () => {
                             src={p?.images[0]}
                             alt=""
                           />
-                          <div>
+                          <Link to={`/details/${p?._id}`}>
                             <h1 className="text-[16px] text-slate-700 font-normal">
                               {p.product_name}
                             </h1>
@@ -88,7 +89,7 @@ const GridProduct = () => {
                             <h1 className="font-medium text-slate-700 text-[18px]">
                               ${p.price}
                             </h1>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </SwiperSlide>
@@ -115,7 +116,7 @@ const GridProduct = () => {
 
                         <SwiperBtn />
                       </div>
-                      <GridSlideSkeleton isLoading={isLoading}/>
+                      <GridSlideSkeleton isLoading={isLoading} />
 
                       {data?.slice(8, 12).map((p, i) => (
                         <div key={i} className="mb-3 flex gap-3 border-b pb-2">
@@ -124,7 +125,7 @@ const GridProduct = () => {
                             src={p?.images[0]}
                             alt=""
                           />
-                          <div>
+                          <Link to={`/details/${p?._id}`}>
                             <h1 className="text-[16px] text-slate-700 font-normal">
                               {p.product_name}
                             </h1>
@@ -132,7 +133,7 @@ const GridProduct = () => {
                             <h1 className="font-medium text-slate-700 text-[18px]">
                               ${p.price}
                             </h1>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </SwiperSlide>
@@ -145,7 +146,7 @@ const GridProduct = () => {
 
                         <SwiperBtn />
                       </div>
-                      <GridSlideSkeleton isLoading={isLoading}/>
+                      <GridSlideSkeleton isLoading={isLoading} />
 
                       {data?.slice(8, 12).map((p, i) => (
                         <div key={i} className="mb-3 flex gap-3 border-b pb-2">
@@ -189,7 +190,7 @@ const GridProduct = () => {
 
                         <SwiperBtn />
                       </div>
-                      <GridSlideSkeleton isLoading={isLoading}/>
+                      <GridSlideSkeleton isLoading={isLoading} />
 
                       {data?.slice(2, 6).map((p, i) => (
                         <div key={i} className="mb-3 flex gap-3 border-b pb-2">
@@ -198,7 +199,7 @@ const GridProduct = () => {
                             src={p?.images[0]}
                             alt=""
                           />
-                          <div>
+                          <Link to={`/details/${p?._id}`}>
                             <h1 className="text-[16px] text-slate-700 font-normal">
                               {p.product_name}
                             </h1>
@@ -206,7 +207,7 @@ const GridProduct = () => {
                             <h1 className="font-medium text-slate-700 text-[18px]">
                               ${p.price}
                             </h1>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </SwiperSlide>
@@ -219,7 +220,7 @@ const GridProduct = () => {
 
                         <SwiperBtn />
                       </div>
-                      <GridSlideSkeleton isLoading={isLoading}/>
+                      <GridSlideSkeleton isLoading={isLoading} />
 
                       {data?.slice(7, 11).map((p, i) => (
                         <div key={i} className="mb-3 flex gap-3 border-b pb-2">
@@ -228,7 +229,7 @@ const GridProduct = () => {
                             src={p?.images[0]}
                             alt=""
                           />
-                          <div>
+                          <Link to={`/details/${p?._id}`}>
                             <h1 className="text-[16px] text-slate-700 font-normal">
                               {p.product_name}
                             </h1>
@@ -236,7 +237,7 @@ const GridProduct = () => {
                             <h1 className="font-medium text-slate-700 text-[18px]">
                               ${p.price}
                             </h1>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </SwiperSlide>

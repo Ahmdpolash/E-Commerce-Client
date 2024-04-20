@@ -34,7 +34,10 @@ const CartSlider = ({ handleClose }) => {
       ) : (
         <div className="z-50 p-4 mt-10 overflow-y-auto">
           {data?.map((item, i) => (
-            <div key={i} className="border-b border-slate-200 py-2 overflow-y-auto">
+            <div
+              key={i}
+              className="border-b border-slate-200 py-2 overflow-y-auto"
+            >
               <div className="flex cursor-pointer items-center justify-between gap-2">
                 <img src={item?.images[0]} className="w-[40px] " alt="" />
                 <div>

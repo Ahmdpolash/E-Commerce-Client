@@ -28,9 +28,10 @@ import useCategory from "../../Hooks/useCategory";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import CategoryMap from "../../Components/CategoryMap";
 import useCart from "../../Hooks/useCart";
-import CartSlider from "../../Components/cartSlider";
 import WishlistSlider from "../../Components/WishlistSlider";
 import useWishlist from "../../Hooks/useWishlist";
+import CartSlider from "../../Components/CartSlider";
+// import CartSlider from "../Components/CartSlider";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
