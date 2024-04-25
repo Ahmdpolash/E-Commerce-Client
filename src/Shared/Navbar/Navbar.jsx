@@ -90,8 +90,8 @@ const Navbar = () => {
       <NavLink to="/service" className="lg:ml-4">
         Services
       </NavLink>
-      <NavLink to="/blog" className="lg:ml-4">
-        Blogs
+      <NavLink to="/gallary" className="lg:ml-4">
+        Gallary
       </NavLink>
     </>
   );

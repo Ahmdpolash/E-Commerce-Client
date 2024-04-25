@@ -68,8 +68,8 @@ const CartSlider = ({ handleClose }) => {
           View Cart
         </Link>
         <Link
-          to="/checkout"
-          className="bg-[#FE2424] text-center text-white w-1/2 rounded-t-md py-3"
+          to="/cart"
+          className="bg-[#FE2424] disabled: text-center text-white w-1/2 rounded-t-md py-3"
         >
           Checkout
         </Link>

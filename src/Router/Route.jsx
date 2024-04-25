@@ -12,7 +12,7 @@ import Compare from "../Pages/Compare/Compare";
 import Cart from "../Pages/Cart/Cart";
 import Checkout from "../Pages/Checkout/Checkout";
 import Contact from "../Pages/Contact/Contact";
-import Blog from "../Pages/Blog/Blog";
+import Gallary from "../Pages/Gallary/Gallary";
 import DashboardLayout from "../Dashboard/DashboardLayout/DashboardLayout";
 import UserDashHome from "../Dashboard/UserDashboard/UserDashHome";
 import UserOrder from "../Dashboard/UserDashboard/UserOrder";
@@ -94,8 +94,8 @@ const Route = createBrowserRouter([
         element: <Service />,
       },
       {
-        path: "/blog",
-        element: <Blog />,
+        path: "/gallary",
+        element: <Gallary />,
       },
       {
         path: "/login",
