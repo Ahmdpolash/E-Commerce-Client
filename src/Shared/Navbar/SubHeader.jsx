@@ -62,10 +62,24 @@ const SubHeader = () => {
           <div className="border-r-2 border-gray-300 h-7 flex justify-center items-center mt-2"></div>
 
           <div className="flex items-center gap-1 lg:gap-2">
-            <TiSocialFacebook className="text-[20px] lg:text-[25px]" />
-            <BsTwitterX className="text-[14px] lg:text-[17px]" />
-            <FaLinkedin className="text-[14px] lg:text-[17px]" />
-            <FaGithub className=" text-[15px] lg:text-[18px]" />
+            <a
+              target="_blank"
+              href="https://www.facebook.com/profile.php?id=61555489764134"
+            >
+              {" "}
+              <TiSocialFacebook className="text-[20px] lg:text-[25px]" />
+            </a>
+            <a target="_blank" href="https://twitter.com/PolashAhme2270">
+              <BsTwitterX className="text-[14px] lg:text-[17px]" />
+            </a>
+
+            <a target="_blank" href="https://linkedin.com/in/polashahmed">
+              <FaLinkedin className="text-[14px] lg:text-[17px]" />
+            </a>
+
+            <a target="_blank" href="https://github.com/Ahmdpolash">
+              <FaGithub className=" text-[15px] lg:text-[18px]" />
+            </a>
           </div>
         </div>
       </div>
