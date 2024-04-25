@@ -5,7 +5,10 @@ const Gallary = () => {
   return (
     <div className="py-5 lg:py-7">
       <Container>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+        <div className="text-center mx-auto mb-5">
+          <h1 className="text-2xl lg:text-4xl font-semibold text-[#F85606]">Our Shop Gallery</h1>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
           <div class="group cursor-pointer relative">
             <img
               src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"

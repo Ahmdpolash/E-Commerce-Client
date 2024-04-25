@@ -8,6 +8,10 @@ import OrderSummary from "./OrderSummary";
 const ShippingForm = () => {
   const navigate = useNavigate();
 
+  const goPaymentPage = () => {
+    navigate("/payment");
+  };
+
   const { state } = useLocation();
 
   const { products, shipping_fee, items, price } = state;
@@ -277,6 +281,7 @@ const ShippingForm = () => {
                   </span>
 
                   <button
+                    onClick={goPaymentPage}
                     disabled={res ? false : true}
                     className={`px-5 py-[6px] rounded-sm hover:shadow-orange-500/20 hover:shadow-lg ${
                       res ? "bg-orange-500" : "bg-orange-300"
