@@ -3,6 +3,7 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { Helmet } from "react-helmet";
 import { FaAngleRight } from "react-icons/fa";
+import OrderSummary from "./OrderSummary";
 
 const ShippingForm = () => {
   const navigate = useNavigate();
@@ -167,7 +168,12 @@ const ShippingForm = () => {
                   )}
                   {res && (
                     <>
-                      <div className="flex flex-col gap-1">
+                      <OrderSummary
+                        states={states}
+                        products={products}
+                        setRes={setRes}
+                      />
+                      {/* <div className="flex flex-col gap-1">
                         <h2 className="text-slate-600 font-semibold pb-2">
                           Deliver to {states.name}
                         </h2>
@@ -237,7 +243,7 @@ const ShippingForm = () => {
                             </div>
                           </div>
                         ))}
-                      </div>
+                      </div> */}
                     </>
                   )}
                 </div>

@@ -4,8 +4,22 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { Helmet } from "react-helmet";
 import { FaAngleRight } from "react-icons/fa";
 import ShippingForm from "./ShippingForm";
+import Step from "./Step";
+import OrderSummary from "./OrderSummary";
 
 const Checkout = () => {
+  const [activeStep, setActiveStep] = useState(1);
+
+  const steps = [
+    { title: "Shipping" },
+    { title: "Order" },
+    { title: "Payment" },
+    { title: "Success" },
+  ];
+
+  const handleStepClick = (step) => {
+    setActiveStep(step);
+  };
   return (
     <div className="bg-[#F6F9FC]">
       <Helmet>
@@ -31,41 +45,25 @@ const Checkout = () => {
 
       {/* stepper */}
 
-      <div className="max-w-2xl px-5  lg:max-w-4xl cursor-pointer mx-auto relative pt-7 pb-3">
+      <div className="max-w-2xl px-5 lg:max-w-4xl cursor-pointer mx-auto relative pt-7 pb-3">
         <div className="max-w-4xl cursor-pointer mx-auto relative pt-7 pb-3">
           <div className="flex flex-row relative justify-between items-center">
-            <div className="relative flex flex-col lg:flex-row items-center justify-center">
-              <div className="rounded-full py-[7px] tracking-wide font-medium text-[16px] w-28 bg-[#F85606] text-white transition duration-500 ease-in-out border-2 border-[#F85606] flex items-center justify-center">
-                Shipping
-              </div>
-              <div className="hidden lg:block h-full w-[150px] right-0 border-t-2 border-[#F85606]"></div>
-            </div>
-
-            <div className="relative flex flex-col lg:flex-row items-center justify-center">
-              <div className="rounded-full py-[7px] tracking-wide font-medium text-[14px] lg:text-[16px] lg:w-40 bg-[#F85606] text-white transition duration-500 ease-in-out border-2 border-[#F85606] flex items-center justify-center">
-                Order Summary
-              </div>
-              <div className="hidden lg:block h-full w-[150px] right-0 border-t-2 border-[#F85606]"></div>
-            </div>
-
-            <div className="relative flex flex-col lg:flex-row items-center justify-center">
-              <div className="rounded-full py-[7px] tracking-wide font-medium text-[16px] lg:w-28 bg-[#F85606] text-white transition duration-500 ease-in-out border-2 border-[#F85606] flex items-center justify-center">
-                Payment
-              </div>
-              <div className="hidden lg:block h-full w-[150px] right-0 border-t-2 border-[#F85606]"></div>
-            </div>
-
-            <div className="relative">
-              <div className="rounded-full py-[7px] w-28 tracking-wide font-medium text-[17px] bg-[#F85606] text-white transition duration-500 ease-in-out border-2 border-[#F85606] flex items-center justify-center">
-                Success
-              </div>
-            </div>
+            {steps.map((step, index) => (
+              <Step
+                key={index}
+                step={index + 1}
+                title={step.title}
+                activeStep={activeStep}
+                handleStepClick={handleStepClick}
+              />
+            ))}
           </div>
         </div>
       </div>
 
       <div>
-        <ShippingForm />
+        {activeStep === 1 && <ShippingForm />}
+        {activeStep === 2 && <OrderSummary />}
       </div>
     </div>
   );
