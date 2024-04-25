@@ -11,7 +11,7 @@ import "../../Responsive/Responsive.css";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="x">
       <div className="bg-[#F3F6Fa] svg mt-5">
         <Container>
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto border-b py-6 lg:py-8 lg:pb-8">
@@ -35,7 +35,7 @@ const Footer = () => {
                         <Link>About Us</Link>
                       </li>
                       <li>
-                        <Link>About our Shop</Link>
+                        <Link to='/faq'>FAQ</Link>
                       </li>
                       <li>
                         <Link>Delivery Information</Link>
@@ -90,7 +90,8 @@ const Footer = () => {
                   <li>
                     <a
                       className="w-[38px] h-[38px] hover:bg-[#7fad39] hover:text-white flex justify-center items-center bg-white rounded-full"
-                      href="#"
+                      href="https://www.facebook.com/profile.php?id=61555489764134"
+                      target="_blank"
                     >
                       <FaFacebookF />
                     </a>
@@ -98,7 +99,8 @@ const Footer = () => {
                   <li>
                     <a
                       className="w-[38px] h-[38px] hover:bg-[#7fad39] hover:text-white flex justify-center items-center bg-white rounded-full"
-                      href="#"
+                      href="https://twitter.com/PolashAhme2270"
+                      target="_blank"
                     >
                       <AiOutlineTwitter />
                     </a>
@@ -106,7 +108,8 @@ const Footer = () => {
                   <li>
                     <a
                       className="w-[38px] h-[38px] hover:bg-[#7fad39] hover:text-white flex justify-center items-center bg-white rounded-full"
-                      href="#"
+                      href="https://linkedin.com/in/polashahmed"
+                      target="_blank"
                     >
                       <FaLinkedin />
                     </a>
@@ -114,7 +117,8 @@ const Footer = () => {
                   <li>
                     <a
                       className="w-[38px] h-[38px] hover:bg-[#7fad39] hover:text-white flex justify-center items-center bg-white rounded-full"
-                      href="#"
+                      href="https://github.com/Ahmdpolash"
+                      target="_blank"
                     >
                       <AiFillGithub />
                     </a>

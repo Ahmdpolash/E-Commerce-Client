@@ -45,6 +45,7 @@ import SecureSeller from "./SecureSeller";
 import UpdateProduct from "../Dashboard/SellerDashboard/UpdateProduct";
 import DiscountUpdate from "../Dashboard/SellerDashboard/DiscountUpdate";
 import Payment from "../Pages/Payment/Payment";
+import Faq from "../Pages/Faq/Faq";
 
 const Route = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const Route = createBrowserRouter([
       {
         path: "/compare",
         element: <Compare />,
+      },
+      {
+        path: "/faq",
+        element: <Faq />,
       },
       {
         path: "/cart",
