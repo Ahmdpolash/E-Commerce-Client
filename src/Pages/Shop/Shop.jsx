@@ -38,6 +38,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useCart from "../../Hooks/useCart";
 import useWishlist from "../../Hooks/useWishlist";
+import ShopLoader from "./ShopLoader";
 
 const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 15500]); // Initial price range
@@ -78,27 +79,6 @@ const Shop = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  // const location = useLocation();
-  // const category = new URLSearchParams(location.search).get("category");
-
-  //!================================================filtering================================================
-  const { data, isLoading } = useProducts([]);
-  const { data: categoryItem } = useCategory();
-
-  //!color filtering
-
-  const colors = [
-    "White",
-    "Black",
-    "Red",
-    "Green",
-    "Blue",
-    "Silver",
-    "Yellow",
-    "Purple",
-    "Gray",
-  ];
 
   useEffect(() => {
     scroll(0, 0);
@@ -206,6 +186,46 @@ const Shop = () => {
     }
   };
 
+  //!================================================filtering================================================
+  const { data, isLoading } = useProducts([]);
+  const { data: categoryItem } = useCategory();
+  const [ratings, setRatings] = useState("");
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [category, ratings]);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      let url = "/product";
+      if (category) {
+        url += `?category=${category}`;
+      }
+      if (ratings !== null) {
+        url += (url.includes("?") ? "&" : "?") + `minReview=${ratings}`;
+      }
+
+      // Fetch all products if no filters are selected
+      if (!category && !ratings) {
+        url = "/product";
+      }
+
+      // Fetch products from the backend
+      const response = await axiosPublic.get(url);
+      setProducts(response.data);
+    } catch (error) {
+      // setError(error.response.data.message || "Something went wrong");
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-[#F6F6F5]">
       <Helmet>
@@ -251,7 +271,12 @@ const Shop = () => {
                   <div>
                     <label className="container">
                       <input
-                       
+                        onChange={() =>
+                          setCategory(
+                            category === cate.category ? null : cate.category
+                          )
+                        }
+                        checked={category === cate.category}
                         value={cate?.category}
                         type="checkbox"
                       />
@@ -280,7 +305,7 @@ const Shop = () => {
               </h2>
             </div>
 
-            <div className="py-3 space-y-2 pl-1">
+            {/* <div className="py-3 space-y-2 pl-1">
               {colors?.map((item, idx) => (
                 <div key={idx} className="flex  items-center gap-2">
                   <div>
@@ -303,7 +328,7 @@ const Shop = () => {
                   <h3 className="text-gray-700 text-[17px]">{item}</h3>
                 </div>
               ))}
-            </div>
+            </div> */}
 
             {/* colors end */}
             {/* price */}
@@ -348,42 +373,60 @@ const Shop = () => {
               <h1 className="text-xl mb-3 border-b-2 border-gray-200 py-1 text-[#4b5563] font-semibold">
                 Rating
               </h1>
-              <div onClick={() => setRatings(5)} className="flex gap-3 mb-2">
+              <div
+                onClick={() => setRatings(5)}
+                className="flex cursor-pointer gap-3 mb-2"
+              >
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div onClick={() => setRatings(4)} className="flex gap-3 mb-2">
+              <div
+                onClick={() => setRatings(4)}
+                className="flex cursor-pointer gap-3 mb-2"
+              >
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div onClick={() => setRatings(3)} className="flex gap-3 mb-2">
+              <div
+                onClick={() => setRatings(3)}
+                className="flex cursor-pointer gap-3 mb-2"
+              >
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div onClick={() => setRatings(2)} className="flex gap-3 mb-2">
+              <div
+                onClick={() => setRatings(2)}
+                className="flex cursor-pointer gap-3 mb-2"
+              >
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div onClick={() => setRatings(1)} className="flex gap-3 mb-2">
+              <div
+                onClick={() => setRatings(1)}
+                className="flex cursor-pointer gap-3 mb-2"
+              >
                 <FaStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
-              <div onClick={() => setRatings(0)} className="flex gap-3">
+              <div
+                onClick={() => setRatings(0)}
+                className="flex cursor-pointer gap-3"
+              >
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
@@ -704,7 +747,9 @@ const Shop = () => {
           </div>
           {/* mobile sidebar end */}
 
-          <div className="col-span-3 ">
+          {/* righ side  contents*/}
+
+          <div className="col-span-3 relative">
             {/* product header */}
             <div className=" lg:h-[60px] w-full border-2 mb-5 bg-white">
               <div className="flex  items-center px-4 py-3 justify-between">
@@ -742,9 +787,14 @@ const Shop = () => {
                 </div>
               </div>
             </div>
-            {/* product header end */}
 
-            {/* products */}
+            {/* products card */}
+
+            {/* Loading */}
+            <div>
+              <ShopLoader loading={loading} />
+            </div>
+
             <div
               className={`grid  w-full ${
                 styles === "grid"
@@ -752,7 +802,7 @@ const Shop = () => {
                   : "grid-cols-1 "
               } gap-3   `}
             >
-              {data?.map((product, i) => (
+              {products?.map((product, i) => (
                 <div
                   key={product?._id}
                   className="card lg:h-[365px] bg-white  cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3"
