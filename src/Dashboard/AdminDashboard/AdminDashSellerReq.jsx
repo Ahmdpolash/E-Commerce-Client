@@ -42,10 +42,10 @@ const AdminDashSellerReq = () => {
       <DashHeaders />
 
       <div className="mt-4">
-        <div className="rounded-md lg:h-[83.8vh] pb-8 bg-white w-full p-4">
+        <div className="rounded-md lg:h-[83.8vh] pb-8 bg-white dark:bg-[#253145] w-full p-4">
           {pendingSeller?.length === 0 ? (
             <div className="flex h-[90%] items-center justify-center">
-              <h1 className="text-2xl lg:text-4xl text-slate-600">
+              <h1 className="text-2xl lg:text-4xl dark:text-white text-slate-600">
                 {" "}
                 No Seller Request Yet ☝️!!
               </h1>{" "}
@@ -54,7 +54,7 @@ const AdminDashSellerReq = () => {
             <div>
               <div className="flex items-center justify-between">
                 <select
-                  className="border outline-none border-slate-300 px-3 py-[5px] bg-slate-100 rounded-md"
+                  className="border outline-none dark:bg-[#121212] border-slate-300 px-3 py-[5px] bg-slate-100 rounded-md"
                   name=""
                 >
                   <option value="5">5</option>
@@ -64,7 +64,7 @@ const AdminDashSellerReq = () => {
 
                 <input
                   id="hiddenSelect"
-                  className="outline-none border border-slate-300 py-[7px] px-4 rounded-md bg-slate-50"
+                  className="outline-none border dark:bg-[#121212] border-slate-300 py-[7px] px-4 rounded-md bg-slate-50"
                   type="text"
                   placeholder="Search.."
                 />
@@ -113,19 +113,19 @@ const AdminDashSellerReq = () => {
                           />
                         </td>
 
-                        <td className="whitespace-nowrap py-1  text-slate-700">
+                        <td className="whitespace-nowrap py-1 dark:text-white  text-slate-700">
                           {p?.first_name + " " + p.last_name}
                         </td>
 
-                        <td className="whitespace-nowrap py-1 pl-10 lg:pr-20 text-slate-700">
+                        <td className="whitespace-nowrap py-1 pl-10 dark:text-white lg:pr-20 text-slate-700">
                           {p?.email}
                         </td>
 
-                        <td className="whitespace-nowrap py-1 lg:pr-20  text-slate-700">
+                        <td className="whitespace-nowrap py-1 lg:pr-20 dark:text-white  text-slate-700">
                           {p?.status}
                         </td>
 
-                        <td className="whitespace-nowrap py-1 lg:pr-2  text-slate-700">
+                        <td className="whitespace-nowrap py-1 lg:pr-2  dark:text-white text-slate-700">
                           <select
                             className="outline-none focus:border-blue-600 border rounded-md border-slate-300 bg-slate-50 py-2 px-4"
                             name="approvalStatus"

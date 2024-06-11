@@ -99,21 +99,8 @@ const SellerChatCustomer = () => {
                     backgroundSize: "cover",
                   }}
                   className="bg-whit bg-blend-darken text-slate-800 h-[calc(100vh-290px)] rounded-md p-3 overflow-y-auto"
-                >
-
-                  
-
-
-
-
-
-
-
-                </div>
+                ></div>
               </div>
-
-
-
 
               <form className="flex gap-3">
                 <input

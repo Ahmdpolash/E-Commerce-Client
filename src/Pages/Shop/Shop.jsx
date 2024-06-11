@@ -2,35 +2,17 @@ import React, { useEffect, useState } from "react";
 import Container from "../../Components/Container/Container";
 
 import "./shop.css";
-import {
-  FaAngleLeft,
-  FaArrowCircleRight,
-  FaArrowRight,
-  FaEye,
-  FaRegHeart,
-  FaRegStar,
-  FaStar,
-} from "react-icons/fa";
-import {
-  FaBangladeshiTakaSign,
-  FaCartShopping,
-  FaCodeCompare,
-  FaHeart,
-  FaListUl,
-  FaStarHalfStroke,
-} from "react-icons/fa6";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaAngleLeft, FaRegStar, FaStar } from "react-icons/fa";
+import { FaListUl } from "react-icons/fa6";
 import Slider from "rc-slider";
 import { FaAngleRight } from "react-icons/fa6";
 import { IoGrid } from "react-icons/io5";
-import { AiFillHeart, AiOutlineShoppingCart } from "react-icons/ai";
 
 import "rc-slider/assets/index.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Pagination from "../../Components/Pagination";
 import { Helmet } from "react-helmet";
 import useProducts from "../../Hooks/useProducts";
-import Ratings from "../../Components/Ratings";
 import useCategory from "../../Hooks/useCategory";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
@@ -39,6 +21,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useCart from "../../Hooks/useCart";
 import useWishlist from "../../Hooks/useWishlist";
 import ShopLoader from "./ShopLoader";
+import ProductCard from "./ProductCard";
 
 const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 15500]); // Initial price range
@@ -188,26 +171,38 @@ const Shop = () => {
 
   //!================================================filtering================================================
   const { data, isLoading } = useProducts([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { data: categoryItem } = useCategory();
   const [ratings, setRatings] = useState("");
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState(null);
   const [category, setCategory] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [sorting, setSortings] = useState(null);
+
+  console.log(sorting);
 
   useEffect(() => {
     fetchProducts();
-  }, [category, ratings]);
+  }, [category, ratings, sorting]);
 
   const fetchProducts = async () => {
     try {
       setLoading(true);
       let url = "/product";
+
+      //category
       if (category) {
         url += `?category=${category}`;
       }
+
+      //ratins
       if (ratings !== null) {
         url += (url.includes("?") ? "&" : "?") + `minReview=${ratings}`;
+      }
+
+      //asc-desc
+      if (sorting) {
+        url += (url.includes("?") ? "&" : "?") + `sort=${sorting}`;
       }
 
       // Fetch all products if no filters are selected
@@ -217,6 +212,7 @@ const Shop = () => {
 
       // Fetch products from the backend
       const response = await axiosPublic.get(url);
+
       setProducts(response.data);
     } catch (error) {
       // setError(error.response.data.message || "Something went wrong");
@@ -224,6 +220,13 @@ const Shop = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleClear = () => {
+    setCategory(null);
+    setRatings(null);
+    setSortings(null);
+    fetchProducts();
   };
 
   return (
@@ -260,7 +263,10 @@ const Shop = () => {
               <h1 className="text-xl text-gray-600 font-semibold ">
                 Categories
               </h1>
-              <h2 className="cursor-pointer text-gray-600 font-semibold">
+              <h2
+                onClick={handleClear}
+                className="cursor-pointer text-gray-600 font-semibold"
+              >
                 Clear
               </h2>
             </div>
@@ -434,8 +440,6 @@ const Shop = () => {
                 <FaRegStar className="text-[#F6BA00] text-[22px]" />
               </div>
             </div>
-
-            {/* rating end */}
           </div>
           {/* desktop sidebar */}
 
@@ -758,13 +762,15 @@ const Shop = () => {
                 </h2>
                 <div className="flex gap-2 lg:gap-4 items-center">
                   <select
-                    onChange={(e) => setSortPrice(e.target.value)}
+                    onChange={(e) => setSortings(e.target.value)}
                     className="border outline-none py-1 text-center shadow-md border-gray-300"
                     name=""
                   >
                     <option value="">Sort By</option>
-                    <option value="low-to-high">Low to High Price</option>
-                    <option value="high-to-low">High to Low Price</option>
+                    <option value="lowToHigh">Low to High Price</option>
+                    <option value="highToLow">High to Low Price</option>
+                    <option value="a-z">Sort by Letter (A-Z)</option>
+                    <option value="z-a">Sort by Letter (Z-A)</option>
                   </select>
 
                   <span
@@ -795,119 +801,53 @@ const Shop = () => {
               <ShopLoader loading={loading} />
             </div>
 
-            <div
-              className={`grid  w-full ${
-                styles === "grid"
-                  ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 "
-                  : "grid-cols-1 "
-              } gap-3   `}
-            >
-              {products?.map((product, i) => (
-                <div
-                  key={product?._id}
-                  className="card lg:h-[365px] bg-white  cursor-pointer group shadow-lg rounded-md border px-3 py-1 lg:py-3"
-                >
-                  <div className="relative overflow-hidden">
-                    {product?.discount ? (
-                      <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2">
-                        -{product?.discount}%
-                      </div>
-                    ) : (
-                      ""
-                    )}
-
-                    <img
-                      className="mx-auto group-hover: w-[160px] h-[140px] md:h-[170px] lg:h-[210px] md:w-full lg:w-full  rounded-md transition-opacity hover:duration-700 ease-in-out"
-                      src={product?.images[0]}
-                      alt="Product image"
-                    />
-
-                    <ul className="flex gap-3 h-[75px] lg:h-[120px] bg-slate-100 bg-opacity-90 opacity-0 group-hover:opacity-100 transition-all duration-700 -bottom-10 justify-center items-center  absolute w-full group-hover:bottom-0">
-                      <li
-                        onClick={() => handleAddToWishlist(product)}
-                        className="w-[38px] shadow-md border h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all"
-                      >
-                        <AiFillHeart className="text-[20px]" />
-                      </li>
-                      <Link
-                        to={`/details/${product?._id}`}
-                        className="w-[38px] shadow-md border h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-500 hover:text-white hover:rotate-[360deg] transition-all"
-                      >
-                        <FaEye className="text-[18px]" />
-                      </Link>
-                      <li
-                        onClick={() => handleAddToCart(product)}
-                        className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center shadow-md border rounded-full hover:bg-violet-500 hover:text-white hover:rotate-[360deg] transition-all"
-                      >
-                        <AiOutlineShoppingCart className="text-[20px]" />
-                      </li>
-                      {/* <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all">
-                   <AiOutlineShoppingCart  className="text-[20px]"/>
-                 </li> */}
-                    </ul>
-                    {/* <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-all duration-700"></div> */}
-                  </div>
-
-                  <div className="">
-                    <Link to={`/details/${product._id}`}>
-                      {" "}
-                      <h3 className="font-medium text-slate-800 my-1 mt-1 hover:text-red-500 duration-500">
-                        {product?.product_name.slice(0, 50)}..
-                      </h3>
-                    </Link>
-
-                    <div className="flex">
-                      <Ratings ratings={product?.review} /> ({product?.review})
-                    </div>
-
-                    <div className="pb-1 flex items-center justify-between">
-                      <p className="font-semibold flex items-center gap-1 text-red-500 pb-2 transition-all duration-500 lg:mt-2">
-                        <FaBangladeshiTakaSign /> {product?.price}
-                      </p>
-                      <button className="block lg:hidden text-red-500 absolute bottom-5 right-4">
-                        {" "}
-                        <FaArrowCircleRight className="text-[21px]" />{" "}
-                      </button>
-
-                      <div
-                        onClick={() => handleAddToCart(product)}
-                        className="bg-gray-50 lg:flex hidden items-center gap-2 text-red-500 border border-slate-300 py-[5px]  hover:border hover:duration-500 hover:border-red-500 rounded-full px-2 lg:px-4 text-[13px] font-semibold"
-                      >
-                        Add To Cart
-                        <span>
-                          <FaArrowRight />
-                        </span>
-                      </div>
-                    </div>
+            <div>
+              {products?.length === 0 && (
+                <div className="h-screen w-full flex justify-center items-center">
+                  <div className="text-center">
+                    <h1 className="text-red-500 text-3xl">Oops!</h1>
+                    <p className="text-2xl">No products found.</p>
                   </div>
                 </div>
-              ))}
+              )}
 
-              {isLoading && (
-                <>
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((j, i) => (
-                    <div
-                      key={i}
-                      className="bg-white shadow-md border h-[240px] w-full p-3 rounded-md"
-                    >
-                      <div className="animate-pulse infinite delay-1000">
-                        <div className="bg-gray-300 h-[120px] w-full rounded-lg"></div>
-                        <div className="h-3 w-full bg-gray-300 my-3  rounded-lg"></div>
-                        <div className="h-3 w-1/2 bg-gray-300 my-3  rounded-lg"></div>
-                        <div className="flex mt-3 items-center gap-3 rounded-lg">
-                          <div className="h-3 bg-gray-300 w-1/2  rounded-lg"></div>
-                          <div className="h-3 bg-gray-300 w-1/2  rounded-lg"></div>
+              <div
+                className={`grid  w-full ${
+                  styles === "grid"
+                    ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 "
+                    : "grid-cols-1 "
+                } gap-3   `}
+              >
+                <ProductCard
+                  products={products}
+                  handleAddToCart={handleAddToCart}
+                  handleAddToWishlist={handleAddToWishlist}
+                />
+
+                {/* {loading && (
+                  <>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((j, i) => (
+                      <div
+                        key={i}
+                        className="bg-white shadow-md border h-[240px] w-full p-3 rounded-md"
+                      >
+                        <div className="animate-pulse infinite delay-1000">
+                          <div className="bg-gray-300 h-[120px] w-full rounded-lg"></div>
+                          <div className="h-3 w-full bg-gray-300 my-3  rounded-lg"></div>
+                          <div className="h-3 w-1/2 bg-gray-300 my-3  rounded-lg"></div>
+                          <div className="flex mt-3 items-center gap-3 rounded-lg">
+                            <div className="h-3 bg-gray-300 w-1/2  rounded-lg"></div>
+                            <div className="h-3 bg-gray-300 w-1/2  rounded-lg"></div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </>
-              )}
+                    ))}
+                  </>
+                )} */}
+              </div>
             </div>
 
             {/* products end */}
-
-            {/* ============================================== */}
 
             {/* pagination */}
 
@@ -920,6 +860,7 @@ const Shop = () => {
                 showItem={Math.floor(20 / 3)}
               />
             </div>
+
             {/* pagination end */}
           </div>
         </div>

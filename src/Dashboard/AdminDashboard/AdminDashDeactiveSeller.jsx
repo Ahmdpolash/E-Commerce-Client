@@ -34,10 +34,10 @@ const AdminDashDeactiveSeller = () => {
       <DashHeaders />
 
       <div className="mt-4">
-        <div className="rounded-md lg:h-[83.8vh] pb-8 bg-white w-full p-4">
+        <div className="rounded-md lg:h-[83.8vh] pb-8 bg-white dark:bg-[#253145] w-full p-4">
           <div className="flex items-center justify-between">
             <select
-              className="border outline-none border-slate-300 px-3 py-[5px] bg-slate-100 rounded-md"
+              className="border outline-none dark:bg-[#121212] border-slate-300 px-3 py-[5px] bg-slate-100 rounded-md"
               name=""
             >
               <option value="5">5</option>
@@ -47,7 +47,7 @@ const AdminDashDeactiveSeller = () => {
 
             <input
               id="hiddenSelect"
-              className="outline-none border border-slate-300 py-[7px] px-4 rounded-md bg-slate-50"
+              className="outline-none border dark:bg-[#121212] border-slate-300 py-[7px] px-4 rounded-md bg-slate-50"
               type="text"
               placeholder="Search.."
             />
@@ -58,7 +58,7 @@ const AdminDashDeactiveSeller = () => {
             className="lg:w-full md:w-[700px] w-[365px] overflow-x-auto"
           >
             <table className="lg:w-full mt-2  overflow-x-auto">
-              <thead className="border-b  overflow-x-auto text-slate-700  border-slate-600 py-2 h-8 rounded-md">
+              <thead className="border-b  overflow-x-auto text-slate-700 dark:text-white  border-slate-600 py-2 h-8 rounded-md">
                 <tr className="">
                   <th className="py-2 lg:px-2 px-4 font-semibold text-[15px] lg:text-[16px]">
                     No
@@ -103,22 +103,22 @@ const AdminDashDeactiveSeller = () => {
                         alt=""
                       />
                     </td>
-                    <td className="whitespace-nowrap py-1  text-slate-700">
+                    <td className="whitespace-nowrap py-1 dark:text-white  text-slate-700">
                       {user?.first_name + " " + user?.last_name}
                     </td>
-                    <td className="whitespace-nowrap py-1 pl-10 lg:pl-0 text-slate-700">
+                    <td className="whitespace-nowrap py-1 dark:text-white pl-10 lg:pl-0 text-slate-700">
                       {user?.email}
                     </td>
-                    <td className="whitespace-nowrap py-1  text-slate-700">
+                    <td className="whitespace-nowrap py-1 dark:text-white  text-slate-700">
                       Pending
                     </td>
-                    <td className="whitespace-nowrap py-1  text-slate-700">
+                    <td className="whitespace-nowrap py-1 dark:text-white  text-slate-700">
                       {user?.status}
                     </td>
 
                     <td className="">
                       <select
-                        className="outline-none focus:border-blue-600 border rounded-md border-slate-300 bg-slate-50 py-2 px-4"
+                        className="outline-none focus:border-blue-600 border rounded-md border-slate-300 bg-slate-50 dark:bg-[#121212] py-2 px-4"
                         name="status"
                         onChange={(e) => handleAction(user._id, e)}
                         id=""

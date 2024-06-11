@@ -90,7 +90,7 @@ const AdminAddBanner = () => {
       <DashHeaders />
 
       <div className="mt-4">
-        <div className="rounded-md lg:h-[83.8vh] pb-8 bg-white w-full p-4">
+        <div className="rounded-md lg:h-[83.8vh] pb-8 bg-white dark:bg-[#253145] w-full p-4">
           <div className="grid lg:grid-cols-4 grid-cols-2 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 xs:gap-4 gap-3 w-full text-[#d0d2d6] mb-4">
             {showImage.map((image, i) => (
               <div key={i} className="lg:h-[120px] relative">

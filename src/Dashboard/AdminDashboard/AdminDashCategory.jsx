@@ -132,15 +132,15 @@ const AdminDashCategory = () => {
   //modal
 
   return (
-    <div className="px-2 md:px-3 lg:px-4">
+    <div className="px-2 md:px-3 lg:px-4 dark:bg-[#131E31]">
       <DashHeaders />
 
       <div className="mt-5">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-3">
-          <div className="col-span-3 rounded-md h-[83.8vh] bg-white w-full p-4">
+          <div className="col-span-3 rounded-md h-[83.8vh] bg-white dark:bg-[#253145] w-full p-4">
             <div className="flex items-center justify-between">
               <select
-                className="border outline-none border-slate-300 px-3 py-[5px] bg-slate-100 rounded-md"
+                className="border outline-none border-slate-300  dark:bg-[#121212] px-3 py-[5px] bg-slate-100 rounded-md"
                 name=""
                 id=""
               >
@@ -150,7 +150,7 @@ const AdminDashCategory = () => {
               </select>
 
               <input
-                className="outline-none border border-slate-300 py-[7px] px-4 rounded-md bg-slate-50"
+                className="outline-none border border-slate-300 dark:bg-[#121212] py-[7px] px-4 rounded-md bg-slate-50"
                 type="text"
                 placeholder="Search.."
               />
@@ -158,7 +158,7 @@ const AdminDashCategory = () => {
 
             <div className="py-1 mt-4">
               <table className="overflow-x-auto w-full">
-                <thead className="w-full text-[15px] font-normal h-8 text-slate-800 rounded-md bg-[#F3F4F6]">
+                <thead className="w-full text-[15px] font-normal h-8 text-slate-800 dark:bg-[#253145] dark:text-white rounded-md bg-[#F3F4F6]">
                   <tr>
                     <th>No</th>
                     <th>Image</th>
@@ -169,7 +169,7 @@ const AdminDashCategory = () => {
                 <tbody className="w-full text-center">
                   {data?.slice(0, 7)?.map((category, i) => (
                     <tr
-                      className="border-b text-slate-600 border-slate-200 "
+                      className="border-b text-slate-600 dark:text-white border-slate-200 "
                       key={category._id}
                     >
                       <td className="py-2">{i + 1}</td>
@@ -212,21 +212,21 @@ const AdminDashCategory = () => {
               </table>
             </div>
           </div>
-          <div className="col-span-2  rounded-md h-[83.8vh] bg-white p-4 w-full">
-            <h1 className="text-center text-slate-700 font-semibold text-xl">
+          <div className="col-span-2  rounded-md h-[83.8vh] bg-white dark:bg-[#253145] p-4 w-full">
+            <h1 className="text-center text-slate-700 dark:text-white font-semibold text-xl">
               Add New Category
             </h1>
 
             <form onSubmit={handleSubmit}>
               <div className="flex flex-col mt-2 ">
                 <label
-                  className="py-2 font-medium text-slate-600"
+                  className="py-2 font-medium dark:text-white text-slate-600"
                   htmlFor="category"
                 >
                   Category Name
                 </label>
                 <input
-                  className="outline-none border rounded-md border-slate-300 bg-slate-50 py-2 px-4"
+                  className="outline-none border dark:bg-[#121212] rounded-md border-slate-300 bg-slate-50 py-2 px-4"
                   type="text"
                   name="category"
                   placeholder="Category name.."

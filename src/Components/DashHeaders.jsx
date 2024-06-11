@@ -21,7 +21,7 @@ const DashHeaders = () => {
       ></div>
 
       {/*--------------------- here header section start here---------------- */}
-      <div className="header bg-white mt-2  w-full rounded-md mb-2">
+      <div className="header bg-white dark:bg-[#253145] mt-2  w-full rounded-md mb-2">
         <div className="flex justify-between items-center p-3">
           <div>
             {/* mobile menu icon */}
@@ -47,12 +47,12 @@ const DashHeaders = () => {
               <div className="sellerInfo">
                 <h1 className="font-semibold">Polash Ahmed</h1>
                 {token?.role === "seller" && (
-                  <p className="text-right text-[14px] font-medium text-slate-700">
+                  <p className="text-right text-[14px] font-medium dark:text-white text-slate-700">
                     Seller
                   </p>
                 )}
                 {token?.role === "admin" && (
-                  <p className="text-right text-[14px] font-medium text-slate-700">
+                  <p className="text-right text-[14px] font-medium dark:text-white text-slate-700">
                     Admin
                   </p>
                 )}
