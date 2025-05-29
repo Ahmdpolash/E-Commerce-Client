@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../public/logo2.png";
+import logo from "/logo.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import useAuth from "../Hooks/useAuth";
@@ -15,6 +15,7 @@ const BottomNavContent = () => {
     logOut().then(() => {
       toast.success("Logged out");
       navigate("/");
+      window.location.reload();
     });
   };
 
@@ -79,10 +80,10 @@ const BottomNavContent = () => {
             alt=""
           />
         </div>
-        <div class="flex items-center py-2 px-5">
+        <div className="flex items-center py-2 px-5">
           <button
             onClick={() => setState("menu")}
-            class={`${
+            className={`${
               state === "menu"
                 ? "border-red-600 text-red-600"
                 : "border-slate-200"
@@ -93,7 +94,7 @@ const BottomNavContent = () => {
 
           <button
             onClick={() => setState("category")}
-            class={`${
+            className={`${
               state === "category" ? "border-red-600" : "border-slate-200"
             } w-full py-2 bg-white text-base border-b text-gray-900  `}
           >

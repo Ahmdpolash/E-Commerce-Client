@@ -31,15 +31,20 @@ const AdminDashSidebar = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Log Out!",
-    });
-    logOut().then((result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Sign Out!",
-          text: "Your are now Sign out from this Account.",
-          icon: "success",
-        });
-        navigate("/");
+        logOut()
+          .then(() => {
+            Swal.fire({
+              title: "Signed Out!",
+              text: "You are now signed out from this account.",
+              icon: "success",
+            });
+            navigate("/");
+          })
+          .catch((error) => {
+            console.error("Logout Error: ", error);
+          });
       }
     });
   };

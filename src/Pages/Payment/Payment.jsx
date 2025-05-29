@@ -5,10 +5,30 @@ import bk from "../../assets/bk.png";
 import nogod from "../../assets/nogod.png";
 import rocket from "../../assets/rocket.png.png.png";
 import upay from "../../assets/upay.png";
+import toast from "react-hot-toast";
+import { Router, useNavigate } from "react-router-dom";
+import { useDeleteAllCart } from "../../Hooks/useCart";
 
 const Payment = () => {
   const [tab, setTab] = useState("stripe");
   const [expand, setExpand] = useState(false);
+  const deleteAllCart = useDeleteAllCart();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // delete all cart
+    deleteAllCart
+      .deleteAllCart()
+      .then((res) => {
+        toast.success("Payment successful!"); // Show success message
+        navigate("/success"); // Redirect to success page
+      })
+      .catch((error) => {
+        console.error("Error deleting all cart items:", error);
+      });
+  };
 
   return (
     <div className="bg-[#F6F6F5]">
@@ -95,7 +115,7 @@ const Payment = () => {
 
           <div>
             {tab === "stripe" && (
-              <div className="bg-white border-b border-x  w-full px-4 py-5  text-white">
+              <div className="bg-white border-b border-x border-gray-400  w-full px-4 py-5  text-white">
                 <button
                   onClick={() => setExpand(true)}
                   className={`${
@@ -107,20 +127,69 @@ const Payment = () => {
 
                 {expand && (
                   <div className="text-black">
-                    <form action="">
+                    <form onSubmit={handleSubmit}>
                       <div className="space-y-2">
-                        <label
-                          className="text-slate-600 font-medium ml-1 text-[17px]"
-                          htmlFor="email"
-                          id="email"
-                        >
-                          <span>Email</span>
-                        </label>
-                        <input
-                          type="email"
-                          className="w-full border rounded-md border-slate-300 focus:outline-blue-500 py-2 px-4"
-                          placeholder="example@gmail.com"
-                        />
+                        <div>
+                          <label
+                            className="text-slate-600 font-medium ml-1 mb-1 text-[17px]"
+                            htmlFor="email"
+                            id="email"
+                          >
+                            <span>Email</span>
+                          </label>
+                          <input
+                            type="email"
+                            className="w-full border rounded-md  border-slate-400 focus:outline-blue-500 py-2 px-4"
+                            placeholder="example@gmail.com"
+                            name="email"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label
+                            className="text-slate-600 font-medium ml-1 pb-2 text-[17px] mt-3"
+                            htmlFor="number"
+                            id="number"
+                          >
+                            <span>Number</span>
+                          </label>
+                          <input
+                            type="number"
+                            className="w-full border rounded-md border-slate-400 focus:outline-blue-500 py-2 px-4"
+                            placeholder="01XXXXXXXXX"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label
+                            className="text-slate-600 font-medium ml-1 pb-2 text-[17px] mt-3"
+                            htmlFor="card"
+                            id="card"
+                          >
+                            <span>Card Number</span>
+                          </label>
+                          <input
+                            type="number"
+                            className="w-full border rounded-md border-slate-400 focus:outline-blue-500 py-2 px-4"
+                            placeholder="1234 5678 9012 3456"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label
+                            className="text-slate-600 font-medium ml-1 pb-2 text-[17px] mt-3"
+                            htmlFor="cvc"
+                            id="cvc"
+                          >
+                            <span>CVC</span>
+                          </label>
+                          <input
+                            type="number"
+                            className="w-full border rounded-md border-slate-400 focus:outline-blue-500 py-2 px-4"
+                            placeholder="123"
+                            required
+                          />
+                        </div>
 
                         <div className="py-3 mt-2">
                           <button

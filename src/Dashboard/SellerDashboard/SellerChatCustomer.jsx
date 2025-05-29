@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FaList } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { ChatItem, MessageBox } from "react-chat-elements";
 
-import { BsEmojiSmile } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import DashHeaders from "../../Components/DashHeaders";
 

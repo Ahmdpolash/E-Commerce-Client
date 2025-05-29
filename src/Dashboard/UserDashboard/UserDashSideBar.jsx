@@ -19,25 +19,29 @@ const UserDashSideBar = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    logOut().then(() => {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Log Out!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: "Sign Out!",
-            text: "Your are now Sign out from this Account.",
-            icon: "success",
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Log Out!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            Swal.fire({
+              title: "Signed Out!",
+              text: "You are now signed out from this account.",
+              icon: "success",
+            });
+            navigate("/");
+          })
+          .catch((error) => {
+            console.error("Logout Error: ", error);
           });
-          navigate("/");
-        }
-      });
+      }
     });
   };
 
@@ -50,7 +54,7 @@ const UserDashSideBar = () => {
         } w-screen h-screen backdrop-blur-sm top-0 left-0 z-10`}
       ></div>
       <Navbar />
-      <div className="bg-slate-200 ">
+      <div className="bg-slate-200 h-full ">
         <div
           onClick={() => setOpen(!open)}
           className="ml-5 px-3 mt-2 text-white rounded-md bg-indigo-500 inline-block lg:hidden py-2 "
@@ -155,7 +159,7 @@ const UserDashSideBar = () => {
         {/* mobile sidebar */}
 
         <div className="flex gap-5 px-4 py-4">
-          <div className="bg-white hidden lg:block h-[56vh]z-40 w-[270px] rounded-md">
+          <div className="bg-white hidden lg:block h-[56vh] z-40 w-[270px] rounded-md">
             <ul className="py-2 text-slate-600 px-4">
               <li className="flex justify-start items-center gap-2 py-2">
                 <span className="text-xl">

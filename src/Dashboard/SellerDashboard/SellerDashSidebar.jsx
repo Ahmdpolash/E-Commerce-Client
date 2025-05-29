@@ -20,25 +20,29 @@ const SellerDashSidebar = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    logOut().then(() => {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Log Out!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: "Sign Out!",
-            text: "Your are now Sign out from this Account.",
-            icon: "success",
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Log Out!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            Swal.fire({
+              title: "Signed Out!",
+              text: "You are now signed out from this account.",
+              icon: "success",
+            });
+            navigate("/");
+          })
+          .catch((error) => {
+            console.error("Logout Error: ", error);
           });
-          navigate("/");
-        }
-      });
+      }
     });
   };
   return (

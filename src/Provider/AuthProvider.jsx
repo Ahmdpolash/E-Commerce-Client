@@ -52,13 +52,13 @@ const AuthProvider = ({ children }) => {
   //!logout account
   const logOut = () => {
     setLoading(true);
+    localStorage.removeItem("access_token");
     return signOut(auth);
   };
 
   //!observer
   useEffect(() => {
     const subscriber = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
 
       if (currentUser) {

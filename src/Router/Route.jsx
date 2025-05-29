@@ -46,6 +46,7 @@ import UpdateProduct from "../Dashboard/SellerDashboard/UpdateProduct";
 import DiscountUpdate from "../Dashboard/SellerDashboard/DiscountUpdate";
 import Payment from "../Pages/Payment/Payment";
 import Faq from "../Pages/Faq/Faq";
+import OrderSuccess from "../Pages/Checkout/Success";
 
 const Route = createBrowserRouter([
   {
@@ -65,10 +66,10 @@ const Route = createBrowserRouter([
         path: "/details/:id",
         element: <ProductDetails />,
         loader: ({ params }) =>
-          // fetch(`http://localhost:5000/products/details/${params.id}`),
-          fetch(
-            `https://ecommerce-server-side.vercel.app/products/details/${params.id}`
-          ),
+          fetch(`http://localhost:5000/products/details/${params.id}`),
+        // fetch(
+        //   `https://ecommerce-server-side.vercel.app/products/details/${params.id}`
+        // ),
       },
 
       {
@@ -115,6 +116,10 @@ const Route = createBrowserRouter([
       {
         path: "/payment",
         element: <Payment />,
+      },
+      {
+        path: "/success",
+        element: <OrderSuccess />,
       },
     ],
   },

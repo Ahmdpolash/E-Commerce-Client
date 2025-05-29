@@ -72,7 +72,7 @@ const ProductDetails = () => {
         product_name: data?.product_name,
         discount: data?.discount,
         quantity: 1,
-
+          
         images: data?.images,
         brand: data?.brand,
         shop_name: data?.shopName,
@@ -85,10 +85,10 @@ const ProductDetails = () => {
         .post("/carts", cartItem)
 
         .then((res) => {
-          console.log(res.data);
           if (res.data.message === "Product already added") {
             toast.error(`This Product already in your cart 🙄`);
           } else {
+            refetch();
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -345,9 +345,11 @@ const ProductDetails = () => {
               </div>
 
               <div className="flex gap-3 pt-5">
-                <button className="px-8 py-2 lg:py-3 cursor-pointer hover:shadow-lg hover:shadow-emerald-500/40 bg-emerald-500 text-white">
-                  Buy Now
-                </button>{" "}
+                <Link to='/cart'>
+                  <button className="px-8 py-2 lg:py-3 cursor-pointer hover:shadow-lg hover:shadow-emerald-500/40 bg-emerald-500 text-white">
+                    Buy Now
+                  </button>
+                </Link>
                 <Link className="px-8 py-2 lg:py-3  cursor-pointer hover:shadow-lg hover:shadow-lime-500/40 bg-lime-500 text-white block">
                   Chat Seller
                 </Link>

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Container from "../../Components/Container/Container";
 import { IoMdMenu } from "react-icons/io";
-import { RxCross1 } from "react-icons/rx";
 import { BsCartCheckFill } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 
@@ -33,18 +32,19 @@ import useWishlist from "../../Hooks/useWishlist";
 import CartSlider from "../../Components/CartSlider";
 // import CartSlider from "../Components/CartSlider";
 
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [mobileCart, setMobileCart] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
-  const { logOut, user } = useAuth();
+  const { user } = useAuth();
 
   const axiosPublic = useAxiosPublic();
   const res = axiosPublic.get("/categories");
 
-  const { data, refetch } = useCategory();
+  // const { data, refetch } = useCategory();
 
   const toggleMenu = () => {
     setOpen(!open);
@@ -66,13 +66,19 @@ const Navbar = () => {
   };
 
   const accessToken = localStorage.getItem("access_token");
+
   let token;
-  try {
-    token = jwtDecode(accessToken);
-  } catch (error) {
-    // Handle invalid token error
-    console.error("Error decoding token:", error);
-    // You can set token to null or handle it based on your application logic
+  if (typeof accessToken === "string" && accessToken.trim()) {
+    try {
+      token = jwtDecode(accessToken);
+    } catch (error) {
+      // Handle invalid token error
+      console.error("Error decoding token:", error);
+      token = null; // Handle the error as needed (e.g., reset user state, redirect to login)
+    }
+  } else {
+    // Handle the case where the access token is not present or invalid
+    console.warn("No access token found or invalid token");
     token = null;
   }
 
@@ -114,6 +120,9 @@ const Navbar = () => {
     (total, item) => total + parseFloat(item.price),
     0
   );
+
+  // input
+  
 
   return (
     <div className="">

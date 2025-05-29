@@ -14,7 +14,7 @@ const ShippingForm = () => {
 
   const { state } = useLocation();
 
-  const { products, shipping_fee, items, price } = state;
+  const { products, shipping_fee, items, price } = state ;
 
   const [res, setRes] = useState(false);
   const [states, setState] = useState();
@@ -137,7 +137,7 @@ const ShippingForm = () => {
                             />
                           </div>
                           <div className="flex flex-col gap-1 mb-2 w-full">
-                            <label htmlFor="area">Area</label>
+                            <label htmlFor="area">Area 2</label>
                             <input
                               onChange={inputHandle}
                               type="text"
